@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://nquo0wq7bl3g"]
+
+[ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://menu.gd" id="1_q688s"]
+[ext_resource type="Texture2D" uid="uid://bcdqaeievvkbx" path="res://assets/png/SC PIXEL STYLE.png" id="2_viijh"]
+[ext_resource type="FontFile" uid="uid://b2qcgv8gx6ngq" path="res://assets/fonts/Scoria-Regular.ttf" id="3_hk8n6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
+texture = ExtResource("2_viijh")
+modulate_color = Color(0.3002041, 0.27346802, 0.31706423, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jovo"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="OPTIONS" type="Control" unique_id=274075327]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q688s")
+
+[node name="Panel" type="Panel" parent="." unique_id=1705056669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1xlpn")
+
+[node name="Label" type="Label" parent="." unique_id=1892060314]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.125
+anchor_right = 0.5
+anchor_bottom = 0.125
+offset_left = -364.0
+offset_top = 54.0
+offset_right = 390.0
+offset_bottom = 211.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.8006706, 0.6053194, 1, 0.9882353)
+theme_override_colors/font_shadow_color = Color(0.68369853, 0.64036834, 1, 0.078)
+theme_override_constants/shadow_offset_y = 20
+theme_override_constants/shadow_outline_size = 30
+theme_override_fonts/font = ExtResource("3_hk8n6")
+theme_override_font_sizes/font_size = 128
+text = "FRAGMENTS"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=315084723]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 371.0
+offset_right = 681.0
+offset_bottom = 551.0
+theme_override_constants/separation = 12
+
+[node name="Start" type="Button" parent="VBoxContainer" unique_id=1917736476]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_hk8n6")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8jovo")
+text = "START"
+
+[node name="Options" type="Button" parent="VBoxContainer" unique_id=1664284005]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_hk8n6")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8jovo")
+text = "OPTIONS"
+
+[node name="Exit" type="Button" parent="VBoxContainer" unique_id=740590499]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_hk8n6")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8jovo")
+text = "BACK"
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

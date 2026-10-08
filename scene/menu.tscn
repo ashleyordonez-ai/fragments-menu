@@ -1,0 +1,225 @@
+[gd_scene format=3 uid="uid://p1ei8j2sq6l8"]
+
+[ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://menu.gd" id="1_bo06a"]
+[ext_resource type="Texture2D" uid="uid://cb7s6w3hldn2g" path="res://assets/png/Background.png" id="2_bo06a"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_bo06a"]
+[ext_resource type="Script" uid="uid://ekb77sav5ix5" path="res://scene/start.gd" id="4_15se8"]
+[ext_resource type="Script" uid="uid://bljt4e32wy0eu" path="res://scene/options.gd" id="5_xs5te"]
+[ext_resource type="Script" uid="uid://b8lwmvk3e3bwf" path="res://scene/exit.gd" id="6_vi6sp"]
+[ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
+texture = ExtResource("2_bo06a")
+
+[sub_resource type="Animation" id="Animation_15se8"]
+resource_name = "BackgroundMotion"
+length = 8.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-5, -3), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.02, 1.02), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xs5te"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vi6sp"]
+_data = {
+&"BackgroundMotion": SubResource("Animation_15se8"),
+&"RESET": SubResource("Animation_xs5te")
+}
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bjqgx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ex8gk"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqv50"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jovo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xxo5k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8p2kq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb3b"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5nte"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mop80"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idxhk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdson"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0clt"]
+bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k66bb"]
+
+[node name="OPTIONS" type="Control" unique_id=274075327]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bo06a")
+
+[node name="Panel" type="Panel" parent="." unique_id=1705056669]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 3.0
+offset_right = 2.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_1xlpn")
+
+[node name="BackgroundMotion" type="AnimationPlayer" parent="Panel" unique_id=105824996]
+libraries/ = SubResource("AnimationLibrary_vi6sp")
+autoplay = &"BackgroundMotion"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=315084723]
+layout_mode = 0
+offset_left = 435.0
+offset_top = 406.0
+offset_right = 735.0
+offset_bottom = 586.0
+theme_override_constants/separation = 12
+
+[node name="StartHolder" type="Control" parent="VBoxContainer" unique_id=726693536]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+
+[node name="Start" type="Button" parent="VBoxContainer/StartHolder" unique_id=1917736476]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 0
+offset_left = 47.0
+offset_top = -39.0
+offset_right = 347.0
+offset_bottom = 6.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bjqgx")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ex8gk")
+theme_override_styles/hover = SubResource("StyleBoxFlat_uqv50")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xxo5k")
+text = "START"
+script = ExtResource("4_15se8")
+
+[node name="OptionHolder" type="Control" parent="VBoxContainer" unique_id=1850257850]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+
+[node name="Options" type="Button" parent="VBoxContainer/OptionHolder" unique_id=1664284005]
+layout_mode = 0
+offset_left = 47.0
+offset_top = -44.0
+offset_right = 347.0
+offset_bottom = 1.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8p2kq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xbb3b")
+theme_override_styles/hover = SubResource("StyleBoxFlat_m5nte")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mop80")
+text = "OPTIONS"
+script = ExtResource("5_xs5te")
+
+[node name="ExitHolder" type="Control" parent="VBoxContainer" unique_id=874980169]
+custom_minimum_size = Vector2(300, 45)
+layout_mode = 2
+
+[node name="Exit" type="Button" parent="VBoxContainer/ExitHolder" unique_id=740590499]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -50.0
+offset_right = 348.0
+offset_bottom = -5.0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(0.86655915, 0.8380468, 0.85990965, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
+theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxEmpty_idxhk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_hdson")
+theme_override_styles/hover = SubResource("StyleBoxFlat_i0clt")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_k66bb")
+text = "EXIT"
+script = ExtResource("6_vi6sp")
+
+[node name="LogoYellow" type="Sprite2D" parent="." unique_id=1344059381]
+position = Vector2(625.00006, 217)
+scale = Vector2(0.51197916, 0.27222222)
+texture = ExtResource("7_1qlln")
+
+[connection signal="pressed" from="VBoxContainer/StartHolder/Start" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionHolder/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitHolder/Exit" to="." method="_on_exit_pressed"]
