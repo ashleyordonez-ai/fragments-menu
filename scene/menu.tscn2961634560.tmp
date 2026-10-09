@@ -166,8 +166,6 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xxo5k")
 text = "start"
 script = ExtResource("4_15se8")
-hover_distance = null
-animation_time = null
 
 [node name="OptionHolder" type="Control" parent="VBoxContainer" unique_id=1850257850]
 custom_minimum_size = Vector2(300, 45)
@@ -224,6 +222,16 @@ texture = ExtResource("7_1qlln")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1744762245]
 stream = ExtResource("8_wd6lm")
+
+[node name="Control" type="Control" parent="." unique_id=241756294]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control" unique_id=1198484213]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [connection signal="pressed" from="VBoxContainer/StartHolder/Start" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionHolder/Options" to="." method="_on_options_pressed"]
