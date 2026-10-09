@@ -7,7 +7,10 @@
 [ext_resource type="Script" uid="uid://bljt4e32wy0eu" path="res://scene/options.gd" id="5_xs5te"]
 [ext_resource type="Script" uid="uid://b8lwmvk3e3bwf" path="res://scene/exit.gd" id="6_vi6sp"]
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
+[ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
+[ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://scene/logo_yellow.gd" id="9_akoio"]
+[ext_resource type="Shader" uid="uid://c7kfgw8633su0" path="res://scene/menuglow.gdshader" id="10_ho73k"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
 texture = ExtResource("2_bo06a")
@@ -106,6 +109,15 @@ bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k66bb"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
+shader = ExtResource("7_6fejx")
+shader_parameter/glitch_amount = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7iefk"]
+shader = ExtResource("10_ho73k")
+shader_parameter/glow_color = Color(0.58, 0.3, 1, 1)
+shader_parameter/glow_strength = 0.6
+
 [node name="OPTIONS" type="Control" unique_id=274075327]
 layout_mode = 3
 anchors_preset = 15
@@ -166,8 +178,6 @@ theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xxo5k")
 text = "start"
 script = ExtResource("4_15se8")
-hover_distance = null
-animation_time = null
 
 [node name="OptionHolder" type="Control" parent="VBoxContainer" unique_id=1850257850]
 custom_minimum_size = Vector2(300, 45)
@@ -175,10 +185,10 @@ layout_mode = 2
 
 [node name="Options" type="Button" parent="VBoxContainer/OptionHolder" unique_id=1664284005]
 layout_mode = 0
-offset_left = -7.0
-offset_top = 1.0
-offset_right = 293.0
-offset_bottom = 46.0
+offset_left = -8.0
+offset_top = -21.0
+offset_right = 292.0
+offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
@@ -199,10 +209,10 @@ layout_mode = 2
 
 [node name="Exit" type="Button" parent="VBoxContainer/ExitHolder" unique_id=740590499]
 layout_mode = 0
-offset_left = -6.0
-offset_top = 21.0
-offset_right = 294.0
-offset_bottom = 66.0
+offset_left = -7.0
+offset_top = -24.0
+offset_right = 293.0
+offset_bottom = 21.0
 mouse_default_cursor_shape = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
@@ -218,6 +228,14 @@ text = "exit"
 script = ExtResource("6_vi6sp")
 
 [node name="LogoYellow" type="Sprite2D" parent="." unique_id=1344059381]
+material = SubResource("ShaderMaterial_lnrt6")
+position = Vector2(577.00006, 216.50002)
+scale = Vector2(0.51197916, 0.4416667)
+texture = ExtResource("7_1qlln")
+script = ExtResource("9_akoio")
+
+[node name="LogoGlow" type="Sprite2D" parent="." unique_id=1716725229]
+material = SubResource("ShaderMaterial_7iefk")
 position = Vector2(577.00006, 216.50002)
 scale = Vector2(0.51197916, 0.4416667)
 texture = ExtResource("7_1qlln")

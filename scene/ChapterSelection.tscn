@@ -1,0 +1,256 @@
+[gd_scene format=3 uid="uid://bc6vykm7k30ml"]
+
+[ext_resource type="Script" uid="uid://wpp6egyhtl1f" path="res://scene/chapter_selection.gd" id="1_3bmuf"]
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/image (1).png" id="1_eyu5q"]
+[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="2_tujl2"]
+[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://scene/frame.gd" id="3_tujl2"]
+[ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://scene/chap_1.gd" id="4_k18ut"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="5_sfyjn"]
+[ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://scene/ChapterSelection.gdshader" id="6_4c7of"]
+[ext_resource type="Shader" uid="uid://v5ej5ydigq5l" path="res://scene/ChapterSelectionText.gdshader" id="7_4c7of"]
+[ext_resource type="Script" uid="uid://nn31p0y8g7g6" path="res://scene/chap_2.gd" id="7_8wk2s"]
+[ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://scene/chap_3.gd" id="9_3cfqi"]
+[ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://scene/chap_4.gd" id="10_3bmuf"]
+[ext_resource type="Script" uid="uid://digw3ixilru76" path="res://scene/chap_5.gd" id="11_0jmnq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("2_tujl2")
+region = Rect2(1689.0752, 2147.4363, 1621.3293, 2253.715)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("2_tujl2")
+region = Rect2(91.489746, 4519.05, 1206.2424, 451.41553)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjqgx"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 3.0
+shader_parameter/fade_amount = 0.410000019475
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wk2s"]
+shader = ExtResource("7_4c7of")
+shader_parameter/blur_strength = 2.2870001086325
+shader_parameter/fade_amount = 0.3010000142975
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tdi24"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 2.1390001016025
+shader_parameter/fade_amount = 0.498000023655
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_44471"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 1.66000007885
+shader_parameter/fade_amount = 0.3830000181925
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3cfqi"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 3.0
+shader_parameter/fade_amount = 0.61200002907
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bmuf"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 1.5490000735775
+shader_parameter/fade_amount = 0.334000015865
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0jmnq"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 3.0
+shader_parameter/fade_amount = 0.7110000337725
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
+shader = ExtResource("6_4c7of")
+shader_parameter/blur_strength = 1.598000075905
+shader_parameter/fade_amount = 0.350000016625
+
+[node name="ChapterSelection" type="Control" unique_id=1404114975]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3bmuf")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1711748238]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_eyu5q")
+expand_mode = 1
+
+[node name="Frame" type="TextureRect" parent="." unique_id=688522730]
+modulate = Color(2.0440404, 1.7379686, 2.8165405, 1)
+layout_mode = 0
+offset_left = 330.0
+offset_top = 36.0
+offset_right = 864.0
+offset_bottom = 621.0
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+script = ExtResource("3_tujl2")
+
+[node name="chap 1" type="TextureRect" parent="." unique_id=1877606175]
+layout_mode = 0
+offset_left = 428.0
+offset_top = 186.0
+offset_right = 774.0
+offset_bottom = 264.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("4_k18ut")
+
+[node name="Label" type="Label" parent="chap 1" unique_id=2074474565]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 20.0
+offset_right = 283.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.27058825, 0.14901961, 0.3647059, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 35
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 44
+text = "CHAPTER ONE"
+
+[node name="chap 2" type="TextureRect" parent="." unique_id=1429643239]
+material = SubResource("ShaderMaterial_bjqgx")
+layout_mode = 0
+offset_left = 428.0
+offset_top = 255.0
+offset_right = 774.0
+offset_bottom = 333.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("7_8wk2s")
+
+[node name="Label" type="Label" parent="chap 2" unique_id=42602857]
+material = SubResource("ShaderMaterial_8wk2s")
+layout_mode = 0
+offset_left = 84.0
+offset_top = 20.0
+offset_right = 287.0
+offset_bottom = 76.0
+theme_override_colors/font_color = Color(0.18094045, 0.012970154, 0.2166799, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 35
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 43
+text = "CHAPTER TWO"
+
+[node name="chap 3" type="TextureRect" parent="." unique_id=817349505]
+material = SubResource("ShaderMaterial_tdi24")
+layout_mode = 0
+offset_left = 429.0
+offset_top = 325.0
+offset_right = 775.0
+offset_bottom = 403.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("9_3cfqi")
+
+[node name="Label" type="Label" parent="chap 3" unique_id=1828769347]
+material = SubResource("ShaderMaterial_44471")
+layout_mode = 0
+offset_left = 71.0
+offset_top = 21.0
+offset_right = 294.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.18094045, 0.012970154, 0.2166799, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 35
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 43
+text = "CHAPTER THREE"
+
+[node name="chap 4" type="TextureRect" parent="." unique_id=1720792136]
+material = SubResource("ShaderMaterial_3cfqi")
+layout_mode = 0
+offset_left = 427.0
+offset_top = 394.0
+offset_right = 773.0
+offset_bottom = 472.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("10_3bmuf")
+
+[node name="Label" type="Label" parent="chap 4" unique_id=969774736]
+material = SubResource("ShaderMaterial_3bmuf")
+layout_mode = 0
+offset_left = 82.0
+offset_top = 21.0
+offset_right = 305.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.18094045, 0.012970154, 0.2166799, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 35
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 43
+text = "CHAPTER FOUR"
+
+[node name="chap 5" type="TextureRect" parent="." unique_id=1859967905]
+material = SubResource("ShaderMaterial_0jmnq")
+layout_mode = 0
+offset_left = 427.0
+offset_top = 464.0
+offset_right = 773.0
+offset_bottom = 542.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("11_0jmnq")
+
+[node name="Label" type="Label" parent="chap 5" unique_id=1872612534]
+material = SubResource("ShaderMaterial_lnrt6")
+layout_mode = 0
+offset_left = 83.0
+offset_top = 21.0
+offset_right = 306.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.18094045, 0.012970154, 0.2166799, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 0)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 35
+theme_override_constants/shadow_offset_y = 25
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 43
+text = "CHAPTER FIVE"
+
+[node name="fragments" type="Label" parent="." unique_id=1083698934]
+layout_mode = 0
+offset_left = 482.0
+offset_top = 99.0
+offset_right = 727.0
+offset_bottom = 124.0
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 24
+text = "FRAGMENTS: TO BE WHOLE AGAIN"
+
+[node name="choose" type="Label" parent="." unique_id=1625115844]
+layout_mode = 0
+offset_left = 432.0
+offset_top = 122.0
+offset_right = 820.0
+offset_bottom = 179.0
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("5_sfyjn")
+theme_override_font_sizes/font_size = 50
+text = "CHOOSE YOUR CHAPTER"
