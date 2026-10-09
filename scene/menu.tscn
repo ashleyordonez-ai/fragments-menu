@@ -114,8 +114,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bo06a")
-metadata/_edit_vertical_guides_ = [576.0]
-metadata/_edit_horizontal_guides_ = [323.0]
+metadata/_edit_vertical_guides_ = [576.0, 49.0, 1104.0]
+metadata/_edit_horizontal_guides_ = [323.0, 48.0, 599.0]
 
 [node name="Panel" type="Panel" parent="." unique_id=1705056669]
 layout_mode = 1
@@ -165,7 +165,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_ex8gk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_uqv50")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_xxo5k")
-text = "START"
+text = "start"
 script = ExtResource("4_15se8")
 
 [node name="OptionHolder" type="Control" parent="VBoxContainer" unique_id=1850257850]
@@ -189,7 +189,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_xbb3b")
 theme_override_styles/hover = SubResource("StyleBoxFlat_m5nte")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_mop80")
-text = "OPTIONS"
+text = "options"
 script = ExtResource("5_xs5te")
 
 [node name="ExitHolder" type="Control" parent="VBoxContainer" unique_id=874980169]
@@ -214,11 +214,11 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_hdson")
 theme_override_styles/hover = SubResource("StyleBoxFlat_i0clt")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_k66bb")
-text = "EXIT"
+text = "exit"
 script = ExtResource("6_vi6sp")
 
 [node name="LogoYellow" type="Sprite2D" parent="." unique_id=1344059381]
-position = Vector2(577.00006, 198.5)
+position = Vector2(577.00006, 216.50002)
 scale = Vector2(0.51197916, 0.4416667)
 texture = ExtResource("7_1qlln")
 
