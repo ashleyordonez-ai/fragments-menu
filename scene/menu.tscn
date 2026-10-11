@@ -3,14 +3,16 @@
 [ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://menu.gd" id="1_bo06a"]
 [ext_resource type="Texture2D" uid="uid://cb7s6w3hldn2g" path="res://assets/png/Background.png" id="2_bo06a"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_bo06a"]
-[ext_resource type="Script" uid="uid://ekb77sav5ix5" path="res://scene/start.gd" id="4_15se8"]
-[ext_resource type="Script" uid="uid://bljt4e32wy0eu" path="res://scene/options.gd" id="5_xs5te"]
-[ext_resource type="Script" uid="uid://b8lwmvk3e3bwf" path="res://scene/exit.gd" id="6_vi6sp"]
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
 [ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
+[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="8_akoio"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
 [ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://scene/logo_yellow.gd" id="9_akoio"]
+[ext_resource type="Script" uid="uid://c0skvg57uug0" path="res://scene/start_frame.gd" id="9_ho73k"]
 [ext_resource type="Shader" uid="uid://c7kfgw8633su0" path="res://scene/menuglow.gdshader" id="10_ho73k"]
+[ext_resource type="Script" uid="uid://c0n3l38c61yy4" path="res://scene/settings_frame.gd" id="11_dyuxe"]
+[ext_resource type="Script" uid="uid://cda31du8m0670" path="res://scene/startbutton.gd" id="11_ho73k"]
+[ext_resource type="Script" uid="uid://byorfy8docol3" path="res://scene/exit_frame.gd" id="12_8of67"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
 texture = ExtResource("2_bo06a")
@@ -77,38 +79,6 @@ _data = {
 &"RESET": SubResource("Animation_xs5te")
 }
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bjqgx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ex8gk"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqv50"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jovo"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xxo5k"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8p2kq"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb3b"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5nte"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mop80"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idxhk"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hdson"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i0clt"]
-bg_color = Color(0.0627451, 0.043137256, 0.09411765, 0.7019608)
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k66bb"]
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
 shader = ExtResource("7_6fejx")
 shader_parameter/glitch_amount = 0.0
@@ -117,6 +87,10 @@ shader_parameter/glitch_amount = 0.0
 shader = ExtResource("10_ho73k")
 shader_parameter/glow_color = Color(0.58, 0.3, 1, 1)
 shader_parameter/glow_strength = 0.6
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
+atlas = ExtResource("8_akoio")
+region = Rect2(91.69092, 4538.371, 1206.1573, 433.70215)
 
 [node name="OPTIONS" type="Control" unique_id=274075327]
 layout_mode = 3
@@ -146,87 +120,6 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_1xlpn")
 libraries/ = SubResource("AnimationLibrary_vi6sp")
 autoplay = &"BackgroundMotion"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=315084723]
-layout_mode = 0
-offset_left = 435.0
-offset_top = 406.0
-offset_right = 735.0
-offset_bottom = 586.0
-theme_override_constants/separation = 12
-
-[node name="StartHolder" type="Control" parent="VBoxContainer" unique_id=726693536]
-custom_minimum_size = Vector2(300, 45)
-layout_mode = 2
-
-[node name="Start" type="Button" parent="VBoxContainer/StartHolder" unique_id=1917736476]
-custom_minimum_size = Vector2(300, 45)
-layout_mode = 0
-offset_left = -7.0
-offset_top = -21.0
-offset_right = 293.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.6666667, 0.5058824, 0.972549, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bjqgx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_ex8gk")
-theme_override_styles/hover = SubResource("StyleBoxFlat_uqv50")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xxo5k")
-text = "start"
-script = ExtResource("4_15se8")
-
-[node name="OptionHolder" type="Control" parent="VBoxContainer" unique_id=1850257850]
-custom_minimum_size = Vector2(300, 45)
-layout_mode = 2
-
-[node name="Options" type="Button" parent="VBoxContainer/OptionHolder" unique_id=1664284005]
-layout_mode = 0
-offset_left = -8.0
-offset_top = -21.0
-offset_right = 292.0
-offset_bottom = 24.0
-mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxEmpty_8p2kq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_xbb3b")
-theme_override_styles/hover = SubResource("StyleBoxFlat_m5nte")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_mop80")
-text = "options"
-script = ExtResource("5_xs5te")
-
-[node name="ExitHolder" type="Control" parent="VBoxContainer" unique_id=874980169]
-custom_minimum_size = Vector2(300, 45)
-layout_mode = 2
-
-[node name="Exit" type="Button" parent="VBoxContainer/ExitHolder" unique_id=740590499]
-layout_mode = 0
-offset_left = -7.0
-offset_top = -24.0
-offset_right = 293.0
-offset_bottom = 21.0
-mouse_default_cursor_shape = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.66640794, 0.5069927, 0.97385865, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.6666667, 0.5058824, 0.972549, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 45
-theme_override_styles/normal = SubResource("StyleBoxEmpty_idxhk")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_hdson")
-theme_override_styles/hover = SubResource("StyleBoxFlat_i0clt")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_8jovo")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_k66bb")
-text = "exit"
-script = ExtResource("6_vi6sp")
-
 [node name="LogoYellow" type="Sprite2D" parent="." unique_id=1344059381]
 material = SubResource("ShaderMaterial_lnrt6")
 position = Vector2(577.00006, 216.50002)
@@ -243,6 +136,70 @@ texture = ExtResource("7_1qlln")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1744762245]
 stream = ExtResource("8_wd6lm")
 
-[connection signal="pressed" from="VBoxContainer/StartHolder/Start" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionHolder/Options" to="." method="_on_options_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitHolder/Exit" to="." method="_on_exit_pressed"]
+[node name="StartFrame" type="TextureRect" parent="." unique_id=927277962]
+modulate = Color(0.2589671, 0.18583512, 1, 0.8352941)
+layout_mode = 0
+offset_left = 472.0
+offset_top = 383.0
+offset_right = 676.0
+offset_bottom = 454.0
+texture = SubResource("AtlasTexture_1xlpn")
+expand_mode = 1
+script = ExtResource("9_ho73k")
+
+[node name="startbutton" type="Label" parent="StartFrame" unique_id=1907613128]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 17.0
+offset_right = 140.0
+offset_bottom = 59.0
+mouse_filter = 0
+theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 38
+text = "start"
+script = ExtResource("11_ho73k")
+
+[node name="SettingsFrame" type="TextureRect" parent="." unique_id=1750347130]
+modulate = Color(0.25882354, 0.18431373, 1, 0.8352941)
+layout_mode = 0
+offset_left = 472.0
+offset_top = 452.0
+offset_right = 677.0
+offset_bottom = 523.0
+texture = SubResource("AtlasTexture_1xlpn")
+expand_mode = 1
+script = ExtResource("11_dyuxe")
+
+[node name="settingsbutton" type="Label" parent="SettingsFrame" unique_id=2109967731]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 17.0
+offset_right = 156.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 38
+text = "settings"
+
+[node name="ExitFrame" type="TextureRect" parent="." unique_id=1085784419]
+modulate = Color(0.25882354, 0.18431373, 1, 0.8352941)
+layout_mode = 0
+offset_left = 472.0
+offset_top = 518.0
+offset_right = 678.0
+offset_bottom = 589.0
+texture = SubResource("AtlasTexture_1xlpn")
+expand_mode = 1
+script = ExtResource("12_8of67")
+
+[node name="exitbutton" type="Label" parent="ExitFrame" unique_id=1647537859]
+layout_mode = 0
+offset_left = 79.0
+offset_top = 17.0
+offset_right = 136.0
+offset_bottom = 59.0
+theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 38
+text = "exit"
