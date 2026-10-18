@@ -135,6 +135,7 @@ texture = ExtResource("7_1qlln")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1744762245]
 stream = ExtResource("8_wd6lm")
+autoplay = true
 
 [node name="StartFrame" type="TextureRect" parent="." unique_id=927277962]
 modulate = Color(0.2589671, 0.18583512, 1, 0.8352941)
