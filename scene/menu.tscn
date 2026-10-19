@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://p1ei8j2sq6l8"]
 
 [ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://menu.gd" id="1_bo06a"]
-[ext_resource type="Texture2D" uid="uid://cb7s6w3hldn2g" path="res://assets/png/Background.png" id="2_bo06a"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_bo06a"]
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
 [ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
@@ -13,71 +12,7 @@
 [ext_resource type="Script" uid="uid://c0n3l38c61yy4" path="res://scene/settings_frame.gd" id="11_dyuxe"]
 [ext_resource type="Script" uid="uid://cda31du8m0670" path="res://scene/startbutton.gd" id="11_ho73k"]
 [ext_resource type="Script" uid="uid://byorfy8docol3" path="res://scene/exit_frame.gd" id="12_8of67"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
-texture = ExtResource("2_bo06a")
-
-[sub_resource type="Animation" id="Animation_15se8"]
-resource_name = "BackgroundMotion"
-length = 8.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(4, 8),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-5, -3), Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 4, 8),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.02, 1.02), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_xs5te"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, 3)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_vi6sp"]
-_data = {
-&"BackgroundMotion": SubResource("Animation_15se8"),
-&"RESET": SubResource("Animation_xs5te")
-}
+[ext_resource type="VideoStream" uid="uid://cqbqobbo3sna7" path="res://assets/Menu_Screen.ogv" id="14_dyuxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
 shader = ExtResource("7_6fejx")
@@ -103,22 +38,14 @@ script = ExtResource("1_bo06a")
 metadata/_edit_vertical_guides_ = [576.0, 49.0, 1104.0]
 metadata/_edit_horizontal_guides_ = [323.0, 48.0, 599.0]
 
-[node name="Panel" type="Panel" parent="." unique_id=1705056669]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = 3.0
-offset_right = 2.0
-offset_bottom = 3.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_1xlpn")
-
-[node name="BackgroundMotion" type="AnimationPlayer" parent="Panel" unique_id=105824996]
-libraries/ = SubResource("AnimationLibrary_vi6sp")
-autoplay = &"BackgroundMotion"
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="." unique_id=1511240215]
+layout_mode = 0
+offset_right = 6720.0
+offset_bottom = 3780.0
+scale = Vector2(0.175, 0.175)
+stream = ExtResource("14_dyuxe")
+autoplay = true
+loop = true
 
 [node name="LogoYellow" type="Sprite2D" parent="." unique_id=1344059381]
 material = SubResource("ShaderMaterial_lnrt6")
