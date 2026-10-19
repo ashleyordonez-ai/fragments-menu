@@ -8,7 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
 [ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://scene/logo_yellow.gd" id="9_akoio"]
 [ext_resource type="Script" uid="uid://c0skvg57uug0" path="res://scene/start_frame.gd" id="9_ho73k"]
-[ext_resource type="Shader" uid="uid://c7kfgw8633su0" path="res://scene/menuglow.gdshader" id="10_ho73k"]
 [ext_resource type="Script" uid="uid://c0n3l38c61yy4" path="res://scene/settings_frame.gd" id="11_dyuxe"]
 [ext_resource type="Script" uid="uid://cda31du8m0670" path="res://scene/startbutton.gd" id="11_ho73k"]
 [ext_resource type="Script" uid="uid://byorfy8docol3" path="res://scene/exit_frame.gd" id="12_8of67"]
@@ -17,11 +16,6 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
 shader = ExtResource("7_6fejx")
 shader_parameter/glitch_amount = 0.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7iefk"]
-shader = ExtResource("10_ho73k")
-shader_parameter/glow_color = Color(0.58, 0.3, 1, 1)
-shader_parameter/glow_strength = 0.6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
 atlas = ExtResource("8_akoio")
@@ -53,12 +47,6 @@ position = Vector2(577.00006, 216.50002)
 scale = Vector2(0.51197916, 0.4416667)
 texture = ExtResource("7_1qlln")
 script = ExtResource("9_akoio")
-
-[node name="LogoGlow" type="Sprite2D" parent="." unique_id=1716725229]
-material = SubResource("ShaderMaterial_7iefk")
-position = Vector2(577.00006, 216.50002)
-scale = Vector2(0.51197916, 0.4416667)
-texture = ExtResource("7_1qlln")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1744762245]
 stream = ExtResource("8_wd6lm")
