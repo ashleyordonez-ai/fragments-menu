@@ -6,7 +6,6 @@ var base_position: Vector2
 var menu_is_idle: bool = false
 var is_glitching: bool = false
 
-
 func _ready() -> void:
 	base_position = position
 	glitch_material = material as ShaderMaterial

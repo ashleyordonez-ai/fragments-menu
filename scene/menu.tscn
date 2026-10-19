@@ -48,7 +48,7 @@ scale = Vector2(0.51197916, 0.4416667)
 texture = ExtResource("7_1qlln")
 script = ExtResource("9_akoio")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1744762245]
+[node name="Main Music" type="AudioStreamPlayer" parent="." unique_id=1744762245]
 stream = ExtResource("8_wd6lm")
 autoplay = true
 
