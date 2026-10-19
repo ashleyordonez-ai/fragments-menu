@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://37hr6cben6ug"]
 
-[ext_resource type="Script" uid="uid://wpp6egyhtl1f" path="res://scene/chapter_selection.gd" id="1_5cxy5"]
+[ext_resource type="Script" uid="uid://wpp6egyhtl1f" path="res://script/chapter_selection.gd" id="1_5cxy5"]
 [ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/image (1).png" id="2_gh7ig"]
 [ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="3_poski"]
-[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://scene/frame.gd" id="4_c3kem"]
-[ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://scene/chap_1.gd" id="5_2jqgm"]
+[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="4_c3kem"]
+[ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://script/chap_1.gd" id="5_2jqgm"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_58oox"]
 [ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://scene/ChapterSelection.gdshader" id="7_3symh"]
-[ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://scene/chap_3.gd" id="10_0p8pn"]
-[ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://scene/chap_4.gd" id="11_lef0k"]
-[ext_resource type="Script" uid="uid://digw3ixilru76" path="res://scene/chap_5.gd" id="12_qa31s"]
+[ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://script/chap_3.gd" id="10_0p8pn"]
+[ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://script/chap_4.gd" id="11_lef0k"]
+[ext_resource type="Script" uid="uid://digw3ixilru76" path="res://script/chap_5.gd" id="12_qa31s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("3_poski")

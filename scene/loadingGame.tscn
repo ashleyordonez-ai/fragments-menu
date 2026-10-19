@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nquo0wq7bl3g"]
 
-[ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://menu.gd" id="1_q688s"]
-[ext_resource type="Texture2D" uid="uid://bcdqaeievvkbx" path="res://assets/png/SC PIXEL STYLE.png" id="2_viijh"]
+[ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://script/menu.gd" id="1_q688s"]
+[ext_resource type="Texture2D" path="res://assets/png/SC PIXEL STYLE.png" id="2_viijh"]
 [ext_resource type="FontFile" uid="uid://b2qcgv8gx6ngq" path="res://assets/fonts/Scoria-Regular.ttf" id="3_hk8n6"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
