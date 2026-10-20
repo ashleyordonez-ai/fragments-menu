@@ -39,12 +39,8 @@ func play_startup_glitch() -> void:
 
 	var tween = create_tween()
 
-	tween.tween_method(
-		set_glitch_amount, 0.0, 1.2, 0.06
-	)
-	tween.tween_method(
-		set_glitch_amount, 1.2, 0.0, 0.11
-	)
+	tween.tween_method(set_glitch_amount, 0.0, 0.5, 0.045)  # peak strength 0.5, ramp-up time
+	tween.tween_method(set_glitch_amount, 0.5, 0.0, 0.085)  # ramp-down time
 
 	await tween.finished
 
