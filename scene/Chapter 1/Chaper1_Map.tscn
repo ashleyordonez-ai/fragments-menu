@@ -1,18 +1,89 @@
 [gd_scene format=3 uid="uid://b10gwws6viqhs"]
 
-[ext_resource type="Texture2D" uid="uid://7k5cnlugwj1j" path="res://assets/maps/MAP_Leonore's Room.png" id="1_f10i2"]
-[ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="2_yxw8d"]
+[ext_resource type="Texture2D" uid="uid://7k5cnlugwj1j" path="res://assets/maps/MAP_Leonore's Room.png" id="1_rp7i4"]
+[ext_resource type="Script" uid="uid://c31p2muotlnfx" path="res://script/leonore_moving.gd" id="2_3guhj"]
+[ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="3_kbm35"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoshd"]
+size = Vector2(742, 575)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rp7i4"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(288, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3guhj"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbm35"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(144, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k6dnn"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(288, 0, 144, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_olicn"]
-atlas = ExtResource("2_yxw8d")
+atlas = ExtResource("3_kbm35")
 region = Rect2(0, 0, 144, 144)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e8loa"]
-atlas = ExtResource("2_yxw8d")
+atlas = ExtResource("3_kbm35")
 region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmlrv"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(288, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qcenw"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(0, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_73kfn"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(144, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvg6u"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(288, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl8ok"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(0, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j076u"]
+atlas = ExtResource("3_kbm35")
+region = Rect2(144, 432, 144, 144)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f10i2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rp7i4")
+}],
+"loop": 1,
+"name": &"back idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_3guhj")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_kbm35")
+}],
+"loop": 1,
+"name": &"back walk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k6dnn")
+}],
+"loop": 1,
+"name": &"front idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 4.0,
 "texture": SubResource("AtlasTexture_olicn")
@@ -21,9 +92,51 @@ animations = [{
 "texture": SubResource("AtlasTexture_e8loa")
 }],
 "loop": 2,
-"name": &"default",
+"name": &"frontWalk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmlrv")
+}],
+"loop": 1,
+"name": &"lside idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_qcenw")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_73kfn")
+}],
+"loop": 1,
+"name": &"lside walk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvg6u")
+}],
+"loop": 1,
+"name": &"rside idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_bl8ok")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_j076u")
+}],
+"loop": 1,
+"name": &"rside walk",
+"speed": 4.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6maq"]
+radius = 34.0
+height = 116.0
 
 [node name="Node2D" type="Node2D" unique_id=1019380719]
 
@@ -33,12 +146,25 @@ offset_top = 1.0
 offset_right = 3639.0
 offset_bottom = 2481.0
 scale = Vector2(0.26, 0.26)
-texture = ExtResource("1_f10i2")
+texture = ExtResource("1_rp7i4")
 
-[node name="Character" type="CharacterBody2D" parent="." unique_id=1774190330]
+[node name="StaticBody2D" type="StaticBody2D" parent="TextureRect" unique_id=2105295284]
+position = Vector2(-503.84616, -3.846154)
+scale = Vector2(3.846154, 3.846154)
 
-[node name="leonore_back" type="AnimatedSprite2D" parent="Character" unique_id=416416317]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/StaticBody2D" unique_id=4706717]
+position = Vector2(582, 343.5)
+shape = SubResource("RectangleShape2D_aoshd")
+
+[node name="Leonore_Moving" type="CharacterBody2D" parent="." unique_id=1774190330]
+script = ExtResource("2_3guhj")
+
+[node name="leonore_back" type="AnimatedSprite2D" parent="Leonore_Moving" unique_id=416416317]
 position = Vector2(594, 486.00003)
 scale = Vector2(0.8194442, 0.8194442)
 sprite_frames = SubResource("SpriteFrames_f10i2")
-frame_progress = 0.7784205
+animation = &"back idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Leonore_Moving" unique_id=1379533099]
+position = Vector2(591, 501)
+shape = SubResource("CapsuleShape2D_d6maq")
