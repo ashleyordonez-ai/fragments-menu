@@ -5,21 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
 [ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
 [ext_resource type="Texture2D" uid="uid://xoitdt283td0" path="res://assets/png/Screen BG Button.png" id="7_akoio"]
-[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="8_akoio"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
 [ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://script/logo_yellow.gd" id="9_akoio"]
-[ext_resource type="Script" uid="uid://c0n3l38c61yy4" path="res://script/settings_frame.gd" id="11_dyuxe"]
-[ext_resource type="Script" uid="uid://byorfy8docol3" path="res://script/exit_frame.gd" id="12_8of67"]
 [ext_resource type="Script" uid="uid://cojgrpgu4t8c" path="res://script/start_button.gd" id="12_ho73k"]
+[ext_resource type="Script" uid="uid://beo0is1ffayo2" path="res://script/settings_button.gd" id="13_ho73k"]
+[ext_resource type="Script" uid="uid://c858sxa37u6je" path="res://script/exti_button.gd" id="14_8of67"]
 [ext_resource type="VideoStream" uid="uid://cqbqobbo3sna7" path="res://assets/Menu_Screen.ogv" id="14_dyuxe"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
 shader = ExtResource("7_6fejx")
 shader_parameter/glitch_amount = 0.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
-atlas = ExtResource("8_akoio")
-region = Rect2(91.69092, 4538.371, 1206.1573, 433.70215)
 
 [node name="OPTIONS" type="Control" unique_id=274075327]
 layout_mode = 3
@@ -54,53 +49,6 @@ script = ExtResource("9_akoio")
 stream = ExtResource("8_wd6lm")
 autoplay = true
 
-[node name="SettingsFrame" type="TextureRect" parent="." unique_id=1750347130]
-visible = false
-modulate = Color(0.25882354, 0.18431373, 1, 0.8352941)
-layout_mode = 0
-offset_left = 472.0
-offset_top = 452.0
-offset_right = 677.0
-offset_bottom = 523.0
-texture = SubResource("AtlasTexture_1xlpn")
-expand_mode = 1
-script = ExtResource("11_dyuxe")
-
-[node name="settingsbutton" type="Label" parent="SettingsFrame" unique_id=2109967731]
-visible = false
-layout_mode = 0
-offset_left = 52.0
-offset_top = 17.0
-offset_right = 156.0
-offset_bottom = 59.0
-theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 38
-text = "settings"
-
-[node name="ExitFrame" type="TextureRect" parent="." unique_id=1085784419]
-visible = false
-modulate = Color(0.25882354, 0.18431373, 1, 0.8352941)
-layout_mode = 0
-offset_left = 472.0
-offset_top = 518.0
-offset_right = 678.0
-offset_bottom = 589.0
-texture = SubResource("AtlasTexture_1xlpn")
-expand_mode = 1
-script = ExtResource("12_8of67")
-
-[node name="exitbutton" type="Label" parent="ExitFrame" unique_id=1647537859]
-layout_mode = 0
-offset_left = 79.0
-offset_top = 17.0
-offset_right = 136.0
-offset_bottom = 59.0
-theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 38
-text = "exit"
-
 [node name="StartButton" type="Button" parent="." unique_id=1028153791]
 layout_mode = 0
 offset_left = 526.0
@@ -131,7 +79,56 @@ expand_mode = 3
 
 [node name="settingsButton" type="Button" parent="." unique_id=991468746]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 505.0
+offset_top = 479.0
+offset_right = 650.0
+offset_bottom = 537.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 50
 text = "settings"
 flat = true
+script = ExtResource("13_ho73k")
+
+[node name="HoverEffect" type="TextureRect" parent="settingsButton" unique_id=678603970]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -95.0
+offset_top = -29.0
+offset_right = 85.0
+offset_bottom = 26.599998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_akoio")
+expand_mode = 3
+
+[node name="extiButton" type="Button" parent="." unique_id=1507174424]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 554.0
+offset_right = 609.0
+offset_bottom = 612.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_bo06a")
+theme_override_font_sizes/font_size = 50
+text = "exit"
+flat = true
+script = ExtResource("14_8of67")
+
+[node name="HoverEffect" type="TextureRect" parent="extiButton" unique_id=1931786350]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -108.0
+offset_top = -30.0
+offset_right = 104.0
+offset_bottom = 25.599998
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("7_akoio")
+expand_mode = 3
