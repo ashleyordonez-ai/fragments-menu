@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b0bcuvd3h0xrr"]
 
 [ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_mjk4c"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="2_gvvuf"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3
@@ -9,6 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_vertical_guides_ = [626.0]
+metadata/_edit_horizontal_guides_ = [318.0]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=45018871]
 layout_mode = 0
@@ -16,3 +19,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.173, 0.173)
 texture = ExtResource("1_mjk4c")
+
+[node name="Label" type="Label" parent="." unique_id=1683196603]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 184.0
+offset_right = 1080.0
+offset_bottom = 401.0
+theme_override_fonts/font = ExtResource("2_gvvuf")
+theme_override_font_sizes/font_size = 216
+text = "CHAPTER ONE:"
