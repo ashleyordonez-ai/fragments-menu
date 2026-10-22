@@ -3,6 +3,7 @@ extends TextureRect
 
 @export var hover_distance: float = 8.0
 @export var animation_time: float = 0.15
+@export_file("*.tscn") var target_scene: String = "res://scene/Chapter 1/Chapter1_Opening Scene.tscn"
 
 var original_position: Vector2
 var tween: Tween
@@ -10,8 +11,10 @@ var tween: Tween
 func _ready() -> void:
 	original_position = position
 	mouse_filter = Control.MOUSE_FILTER_STOP
+
 	mouse_entered.connect(_on_mouse_entered)
 	mouse_exited.connect(_on_mouse_exited)
+	gui_input.connect(_on_gui_input)
 
 
 func _on_mouse_entered() -> void:
@@ -32,8 +35,12 @@ func _animate_button(target_position: Vector2) -> void:
 	tween.tween_property(self, "position", target_position, animation_time)
 
 
-func _gui_input(event: InputEvent) -> void:
+func _on_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			get_viewport().set_input_as_handled()
-			get_tree().change_scene_to_file("res://scene/Chapter1.tscn")
+
+			if ResourceLoader.exists(target_scene):
+				get_tree().change_scene_to_file(target_scene)
+			else:
+				push_error("Scene not found: " + target_scene)

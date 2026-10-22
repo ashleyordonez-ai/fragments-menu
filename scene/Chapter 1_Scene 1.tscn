@@ -14,5 +14,5 @@ grow_vertical = 2
 layout_mode = 0
 offset_right = 6720.0
 offset_bottom = 3780.0
-scale = Vector2(0.175, 0.175)
+scale = Vector2(0.172, 0.172)
 texture = ExtResource("1_1n3jd")
