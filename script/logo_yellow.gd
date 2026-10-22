@@ -51,9 +51,9 @@ func play_startup_glitch() -> void:
 
 func start_idle_glitch_loop() -> void:
 	while is_inside_tree():
-		# Random delay between 3 and 5 seconds
+		# Random delay between 1 and 2.5 seconds
 		await get_tree().create_timer(
-			randf_range(3.0, 5.0)
+			randf_range(1.0, 2.5)
 		).timeout
 
 		if not is_inside_tree():

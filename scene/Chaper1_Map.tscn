@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b10gwws6viqhs"]
+
+[ext_resource type="Texture2D" uid="uid://7k5cnlugwj1j" path="res://assets/maps/MAP_Leonore's Room.png" id="1_f10i2"]
+[ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="2_yxw8d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olicn"]
+atlas = ExtResource("2_yxw8d")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8loa"]
+atlas = ExtResource("2_yxw8d")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f10i2"]
+animations = [{
+"frames": [{
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_olicn")
+}, {
+"duration": 4.0,
+"texture": SubResource("AtlasTexture_e8loa")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=1019380719]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1559948475]
+offset_left = 131.0
+offset_top = 1.0
+offset_right = 3639.0
+offset_bottom = 2481.0
+scale = Vector2(0.26, 0.26)
+texture = ExtResource("1_f10i2")
+
+[node name="Character" type="CharacterBody2D" parent="." unique_id=1774190330]
+
+[node name="leonore_back" type="AnimatedSprite2D" parent="Character" unique_id=416416317]
+position = Vector2(594, 486.00003)
+scale = Vector2(0.8194442, 0.8194442)
+sprite_frames = SubResource("SpriteFrames_f10i2")
+frame_progress = 0.7784205

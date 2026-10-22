@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://mbb8jyparyol"]
+
+[ext_resource type="Texture2D" uid="uid://dh8upoishaaj0" path="res://assets/Illustrations/Leonore's Room - Day.png" id="1_1n3jd"]
+
+[node name="Control" type="Control" unique_id=749907097]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=451829107]
+layout_mode = 0
+offset_right = 6720.0
+offset_bottom = 3780.0
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("1_1n3jd")
