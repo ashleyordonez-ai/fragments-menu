@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_bo06a"]
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
 [ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
+[ext_resource type="Texture2D" uid="uid://cjvc7tadx0wu1" path="res://assets/png/Screen BG Button.png" id="7_akoio"]
 [ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="8_akoio"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
 [ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://script/logo_yellow.gd" id="9_akoio"]
@@ -16,11 +17,11 @@
 shader = ExtResource("7_6fejx")
 shader_parameter/glitch_amount = 0.0
 
+[sub_resource type="GDScript" id="GDScript_6fejx"]
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
 atlas = ExtResource("8_akoio")
 region = Rect2(91.69092, 4538.371, 1206.1573, 433.70215)
-
-[sub_resource type="GDScript" id="GDScript_6fejx"]
 
 [node name="OPTIONS" type="Control" unique_id=274075327]
 layout_mode = 3
@@ -54,14 +55,12 @@ stream = ExtResource("8_wd6lm")
 autoplay = true
 
 [node name="StartFrame" type="TextureRect" parent="." unique_id=927277962]
-visible = false
-modulate = Color(0.2589671, 0.18583512, 1, 0.8352941)
 layout_mode = 0
 offset_left = 472.0
 offset_top = 383.0
 offset_right = 676.0
 offset_bottom = 454.0
-texture = SubResource("AtlasTexture_1xlpn")
+texture = ExtResource("7_akoio")
 expand_mode = 1
 script = ExtResource("9_ho73k")
 
@@ -124,57 +123,3 @@ theme_override_colors/font_color = Color(6.602062, 6.27337, 7.2183623, 1)
 theme_override_fonts/font = ExtResource("3_bo06a")
 theme_override_font_sizes/font_size = 38
 text = "exit"
-
-[node name="StartButton" type="Button" parent="." unique_id=1977485953]
-layout_mode = 0
-offset_left = 482.0
-offset_top = 396.0
-offset_right = 669.0
-offset_bottom = 467.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.65882355, 0.6431373, 0.57254905, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.65882355, 0.6431373, 0.57254905, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 0)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 40
-action_mode = 0
-text = "start"
-flat = true
-
-[node name="settings" type="Button" parent="." unique_id=1419795249]
-layout_mode = 0
-offset_left = 518.0
-offset_top = 453.0
-offset_right = 635.0
-offset_bottom = 501.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.65882355, 0.6431373, 0.57254905, 1)
-theme_override_colors/font_hover_pressed_color = Color(0.65882355, 0.6431373, 0.57254905, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 40
-text = "settings"
-flat = true
-
-[node name="credits" type="Button" parent="." unique_id=273506450]
-layout_mode = 0
-offset_left = 525.0
-offset_top = 508.0
-offset_right = 629.0
-offset_bottom = 556.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 40
-text = "credits"
-flat = true
-
-[node name="Button" type="Button" parent="." unique_id=2068529082]
-layout_mode = 0
-offset_left = 545.0
-offset_top = 558.0
-offset_right = 604.0
-offset_bottom = 606.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_bo06a")
-theme_override_font_sizes/font_size = 40
-text = "exit"
-flat = true
