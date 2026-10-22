@@ -10,6 +10,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_vertical_guides_ = [40.0, 1110.0, 576.0]
+metadata/_edit_horizontal_guides_ = [40.0, 608.0, 324.0]
 
 [node name="Leonore\'s Room - DAY" type="TextureRect" parent="." unique_id=451829107]
 layout_mode = 0
@@ -21,16 +23,16 @@ expand_mode = 1
 
 [node name="Panel" type="Panel" parent="." unique_id=302871039]
 layout_mode = 0
-offset_left = 343.0
-offset_top = 219.0
-offset_right = 783.0001
-offset_bottom = 443.0
+offset_left = 389.0
+offset_top = 265.0
+offset_right = 970.0
+offset_bottom = 451.0
 
 [node name="Leonore" type="TextureRect" parent="." unique_id=371691215]
 layout_mode = 0
-offset_left = 111.0
-offset_top = -14.0
-offset_right = 495.7075
-offset_bottom = 786.13306
+offset_left = 128.0
+offset_top = 11.0
+offset_right = 512.7075
+offset_bottom = 811.13306
 texture = ExtResource("2_34u1i")
 expand_mode = 1
