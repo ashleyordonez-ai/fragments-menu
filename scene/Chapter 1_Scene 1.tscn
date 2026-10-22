@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://mbb8jyparyol"]
 
 [ext_resource type="Texture2D" uid="uid://dh8upoishaaj0" path="res://assets/Illustrations/Leonore's Room - Day.png" id="1_1n3jd"]
+[ext_resource type="Texture2D" uid="uid://d1ackgxptyhas" path="res://assets/sprites/characters/Leonore/L_Scared.png" id="2_34u1i"]
 
 [node name="Control" type="Control" unique_id=749907097]
 layout_mode = 3
@@ -10,9 +11,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=451829107]
+[node name="Leonore\'s Room - DAY" type="TextureRect" parent="." unique_id=451829107]
 layout_mode = 0
 offset_right = 6720.0
 offset_bottom = 3780.0
 scale = Vector2(0.172, 0.172)
 texture = ExtResource("1_1n3jd")
+expand_mode = 1
+
+[node name="Panel" type="Panel" parent="." unique_id=302871039]
+layout_mode = 0
+offset_left = 343.0
+offset_top = 219.0
+offset_right = 783.0001
+offset_bottom = 443.0
+
+[node name="Leonore" type="TextureRect" parent="." unique_id=371691215]
+layout_mode = 0
+offset_left = 111.0
+offset_top = -14.0
+offset_right = 495.7075
+offset_bottom = 786.13306
+texture = ExtResource("2_34u1i")
+expand_mode = 1

@@ -3,7 +3,7 @@ extends TextureRect
 
 @export var hover_distance: float = 8.0
 @export var animation_time: float = 0.15
-@export_file("*.tscn") var target_scene: String = "res://scene/Chapter 1/Chapter1_Opening Scene.tscn"
+@export_file("*.tscn") var target_scene: String = "res://scene/Chapter 1/Chapter1_Scene 1.1.tscn"
 
 var original_position: Vector2
 var tween: Tween
