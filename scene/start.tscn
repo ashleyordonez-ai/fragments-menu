@@ -1,0 +1,108 @@
+[gd_scene format=3 uid="uid://ycu86kdrc0kc"]
+
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/image (1).png" id="1_bnuxd"]
+[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="2_srnb1"]
+[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="3_7xr4q"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="4_w484r"]
+[ext_resource type="Script" uid="uid://dvee4pjhtykib" path="res://scene/continue.gd" id="5_pb375"]
+[ext_resource type="Script" uid="uid://cqejar0spdlb6" path="res://scene/new_game.gd" id="6_srnb1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pum5v"]
+atlas = ExtResource("2_srnb1")
+region = Rect2(1689.0752, 2147.4363, 1621.3293, 2253.715)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("2_srnb1")
+region = Rect2(75.86743, 4523.906, 1210.6255, 437.00098)
+
+[node name="Start" type="Control" unique_id=571670396]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1686976892]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bnuxd")
+expand_mode = 1
+
+[node name="Frame" type="TextureRect" parent="TextureRect" unique_id=1310701811]
+modulate = Color(2.0440404, 1.7379686, 2.8165405, 1)
+layout_mode = 0
+offset_left = 335.0
+offset_top = 102.0
+offset_right = 800.0
+offset_bottom = 556.0
+texture = SubResource("AtlasTexture_pum5v")
+expand_mode = 1
+script = ExtResource("3_7xr4q")
+
+[node name="Label" type="Label" parent="TextureRect/Frame" unique_id=1296380583]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 83.0
+offset_right = 380.0
+offset_bottom = 131.0
+theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.8666667, 1)
+theme_override_fonts/font = ExtResource("4_w484r")
+theme_override_font_sizes/font_size = 47
+text = "BEGIN YOUR JOURNEY"
+
+[node name="Label2" type="Label" parent="TextureRect/Frame" unique_id=1340883502]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 127.0
+offset_right = 393.0
+offset_bottom = 151.0
+theme_override_fonts/font = ExtResource("4_w484r")
+theme_override_font_sizes/font_size = 23
+text = "HOW WOULD YOU LIKE TO PROCEED?"
+
+[node name="continue" type="TextureRect" parent="." unique_id=1270993006]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 269.0
+offset_right = 739.0
+offset_bottom = 366.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("5_pb375")
+
+[node name="Label" type="Label" parent="continue" unique_id=1861468744]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 29.0
+offset_right = 403.0
+offset_bottom = 77.0
+theme_override_colors/font_color = Color(0.5208105, 0.24588339, 0, 0.8666667)
+theme_override_fonts/font = ExtResource("4_w484r")
+theme_override_font_sizes/font_size = 47
+text = "CONTINUE"
+
+[node name="new game" type="TextureRect" parent="." unique_id=10317032]
+layout_mode = 0
+offset_left = 384.0
+offset_top = 365.0
+offset_right = 739.0
+offset_bottom = 462.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+script = ExtResource("6_srnb1")
+
+[node name="Label" type="Label" parent="new game" unique_id=1563778505]
+layout_mode = 0
+offset_left = 103.0
+offset_top = 30.0
+offset_right = 395.0
+offset_bottom = 78.0
+theme_override_colors/font_color = Color(0.52156866, 0.24705882, 0, 0.8666667)
+theme_override_fonts/font = ExtResource("4_w484r")
+theme_override_font_sizes/font_size = 47
+text = "NEW GAME"

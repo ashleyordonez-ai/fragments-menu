@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="48" viewBox="0 0 160 48">
+  <title>Button, disabled state, tab shape, stylised, 16px corners</title>
+  <path d="M 0 48 L 0 16 Q 0 0 16 0 L 144 0 Q 160 0 160 16 L 160 48 Z" fill="#473321"/><path d="M 0 48 L 0 16 Q 0 0 16 0 L 144 0 Q 160 0 160 16 L 160 48 Z" fill="none" stroke="#3c2b1c" stroke-width="3"/><rect x="0" y="45" width="160" height="3" fill="#6f542b"/>
+</svg>

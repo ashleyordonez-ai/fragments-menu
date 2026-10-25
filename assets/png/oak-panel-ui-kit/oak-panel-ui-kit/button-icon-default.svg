@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+  <title>Icon button, default state, stylised</title>
+  <path d="M 0 48 L 0 16 Q 0 0 16 0 L 32 0 Q 48 0 48 16 L 48 48 Z" fill="#5a4029"/><path d="M 0 48 L 0 16 Q 0 0 16 0 L 32 0 Q 48 0 48 16 L 48 48 Z" fill="none" stroke="#20150e" stroke-width="3"/><rect x="6" y="5" width="36" height="5.76" rx="2.88" fill="#916e44" opacity="0.8"/><rect x="0" y="45" width="48" height="3" fill="#f2c14e"/>
+</svg>

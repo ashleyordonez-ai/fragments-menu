@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="48" viewBox="0 0 256 48">
+  <title>Panel header bar, stylised</title>
+  <defs><clipPath id="clip1kb5hbq"><path d="M 5.7 0 L 250.3 0 L 250.3 3 L 256 3 L 256 45 L 250.3 45 L 250.3 48 L 5.7 48 L 5.7 45 L 0 45 L 0 3 L 5.7 3 Z"/></clipPath><linearGradient id="gradk8ff0a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#715535"/><stop offset="0.55" stop-color="#553f28"/><stop offset="1" stop-color="#3b2c1c"/></linearGradient></defs>
+  <path d="M 5.7 0 L 250.3 0 L 250.3 3 L 256 3 L 256 45 L 250.3 45 L 250.3 48 L 5.7 48 L 5.7 45 L 0 45 L 0 3 L 5.7 3 Z" fill="#553f28"/><g clip-path="url(#clip1kb5hbq)"><rect x="0" y="0" width="256" height="48" fill="url(#gradk8ff0a)"/></g><path d="M 5.7 0 L 250.3 0 L 250.3 3 L 256 3 L 256 45 L 250.3 45 L 250.3 48 L 5.7 48 L 5.7 45 L 0 45 L 0 3 L 5.7 3 Z" fill="none" stroke="#20150e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="5" y="44" width="246" height="3" fill="#f2c14e"/>
+</svg>

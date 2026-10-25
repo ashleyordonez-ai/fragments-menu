@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="83" height="30" viewBox="0 0 83 30">
+  <title>Label chip, stylised</title>
+  <defs><clipPath id="clip1j11mko"><path d="M 5.7 0 L 77.3 0 L 77.3 3 L 83 3 L 83 27 L 77.3 27 L 77.3 30 L 5.7 30 L 5.7 27 L 0 27 L 0 3 L 5.7 3 Z"/></clipPath><linearGradient id="grad1mexvgj" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5f472d"/><stop offset="0.55" stop-color="#3a291b"/><stop offset="1" stop-color="#291d13"/></linearGradient></defs>
+  <path d="M 5.7 0 L 77.3 0 L 77.3 3 L 83 3 L 83 27 L 77.3 27 L 77.3 30 L 5.7 30 L 5.7 27 L 0 27 L 0 3 L 5.7 3 Z" fill="#3a291b"/><g clip-path="url(#clip1j11mko)"><rect x="0" y="0" width="83" height="30" fill="url(#grad1mexvgj)"/></g><path d="M 5.7 0 L 77.3 0 L 77.3 3 L 83 3 L 83 27 L 77.3 27 L 77.3 30 L 5.7 30 L 5.7 27 L 0 27 L 0 3 L 5.7 3 Z" fill="none" stroke="#20150e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="13.2" width="10.2" height="3.6" fill="#f2c14e"/>
+</svg>

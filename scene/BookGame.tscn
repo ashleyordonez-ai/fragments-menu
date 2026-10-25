@@ -1,0 +1,630 @@
+[gd_scene format=3 uid="uid://7gak6fbmfypr"]
+
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/image (1).png" id="1_3ce5t"]
+[ext_resource type="Script" uid="uid://b0quv8wrmn5r3" path="res://scene/book_game.gd" id="1_421t7"]
+[ext_resource type="Texture2D" uid="uid://dxg0oq5dnt6j5" path="res://assets/png/BOOK.png" id="2_syipi"]
+[ext_resource type="FontFile" uid="uid://bfpvyio8j6hk3" path="res://assets/fonts/Secret Diary.ttf" id="3_syipi"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_3bdjy"]
+[ext_resource type="Texture2D" uid="uid://blakiw64hufed" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/png/panel-header@4x.png" id="5_421t7"]
+[ext_resource type="FontFile" uid="uid://b1yyye02dunnf" path="res://assets/fonts/I-pixel-u.ttf" id="6_0dg85"]
+[ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scene/code.gd" id="8_0dg85"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("5_421t7")
+region = Rect2(165, 37.5, 713, 54)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb3b"]
+bg_color = Color(0.9019608, 0.7607843, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.8509804, 0.6509804, 0.36078432, 1)
+corner_detail = 6
+shadow_color = Color(0.9490196, 0.6509804, 0.3529412, 0.21568628)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjqgx"]
+bg_color = Color(0.90588236, 0.77254903, 0.64705884, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.60784316, 0.41960785, 0.3137255, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8jovo"]
+bg_color = Color(0.94509804, 0.83137256, 0.7176471, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6431373, 0.46666667, 0.36078432, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1xlpn"]
+bg_color = Color(0.59607846, 0.3254902, 0.2784314, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqv50"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jre5i"]
+bg_color = Color(0.4745098, 0.25490198, 0.21568628, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxo5k"]
+bg_color = Color(0.9019608, 0.7607843, 0.627451, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5019608, 0.3254902, 0.23921569, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ex8gk"]
+bg_color = Color(0.59607846, 0.3254902, 0.2784314, 1)
+border_color = Color(0.5019608, 0.3254902, 0.23921569, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m5nte"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8p2kq"]
+bg_color = Color(0.4745098, 0.25490198, 0.21568628, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mop80"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.72156864, 0.8509804, 0.65882355, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.9490196, 0.6509804, 0.3529412, 1)
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_size = 8
+
+[node name="BookGame" type="Control" unique_id=835959537]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_421t7")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=950897125]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3ce5t")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=1154259098]
+layout_mode = 0
+offset_left = -59.0
+offset_right = 1188.0114
+offset_bottom = 764.8789
+rotation = -0.08726646
+texture = ExtResource("2_syipi")
+expand_mode = 1
+
+[node name="diary" type="Label" parent="." unique_id=307435571]
+layout_mode = 0
+offset_left = 149.0
+offset_top = 172.0
+offset_right = 510.98383
+offset_bottom = 565.0
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_syipi")
+theme_override_font_sizes/font_size = 20
+text = "Dear diary,
+
+I used to think that the bad 
+things would last forever.
+
+But maybe life isn't only about 
+the things that hurt us.
+
+Sometimes, the darkest 
+days are followed by 
+ones.
+"
+
+[node name="decode" type="Label" parent="." unique_id=181975737]
+layout_mode = 0
+offset_left = 776.0
+offset_top = 75.000015
+offset_right = 981.0
+offset_bottom = 115.0072
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 19
+text = "DECODE "
+
+[node name="missing line" type="TextureRect" parent="." unique_id=2059410737]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 367.21347
+offset_top = 414.08176
+offset_right = 469.0685
+offset_bottom = 415.10345
+rotation = -0.08028515
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="line under dec" type="TextureRect" parent="." unique_id=5071150]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 622.2638
+offset_top = 130.27881
+offset_right = 1004.7936
+offset_bottom = 132.54837
+rotation = -0.08726646
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="BinaryGlowBorder" type="Panel" parent="." unique_id=681882766]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 144.99998
+offset_right = 1025.5586
+offset_bottom = 240.11267
+rotation = -0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_xbb3b")
+
+[node name="code" type="Label" parent="." unique_id=1315683733]
+layout_mode = 0
+offset_left = 647.00006
+offset_top = 151.0
+offset_right = 752.00006
+offset_bottom = 176.0
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01100001"
+script = ExtResource("8_0dg85")
+
+[node name="Label" type="Label" parent="code" unique_id=993903696]
+layout_mode = 0
+offset_left = 128.47162
+offset_top = 0.19777018
+offset_right = 238.47162
+offset_bottom = 51.19777
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01110010 
+"
+
+[node name="Label" type="Label" parent="code/Label" unique_id=1004697144]
+layout_mode = 0
+offset_left = 130.55116
+offset_top = -0.62409765
+offset_right = 240.55116
+offset_bottom = 24.375902
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01101001 "
+
+[node name="Label" type="Label" parent="code/Label/Label" unique_id=943567272]
+layout_mode = 0
+offset_left = -256.1336
+offset_top = 24.770758
+offset_right = -151.1336
+offset_bottom = 49.77076
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01100111 "
+
+[node name="code" type="Label" parent="code" unique_id=2084956838]
+layout_mode = 0
+offset_left = 123.21698
+offset_top = 25.837372
+offset_right = 228.21698
+offset_bottom = 49.83737
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01101000"
+
+[node name="Label2" type="Label" parent="code/code" unique_id=1320127693]
+layout_mode = 0
+offset_left = 137.43738
+offset_top = 0.98220825
+offset_right = 242.43738
+offset_bottom = 25.982208
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01110100 "
+
+[node name="Label" type="Label" parent="code/code/Label2" unique_id=47749350]
+layout_mode = 0
+offset_left = -197.0966
+offset_top = 26.924356
+offset_right = -92.0966
+offset_bottom = 51.924355
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01100101 "
+
+[node name="Label" type="Label" parent="code/code/Label2/Label" unique_id=1879620625]
+layout_mode = 0
+offset_left = 132.63072
+offset_top = -1.4459791
+offset_right = 237.63072
+offset_bottom = 23.55402
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 19
+text = "01110010 "
+
+[node name="ASCII Guide Box" type="PanelContainer" parent="." unique_id=741626140]
+custom_minimum_size = Vector2(290, 135)
+layout_mode = 0
+offset_left = 695.00006
+offset_top = 250.00005
+offset_right = 985.00006
+offset_bottom = 419.1321
+rotation = -0.08726646
+theme_override_styles/panel = SubResource("StyleBoxFlat_bjqgx")
+
+[node name="ASCII guide" type="Label" parent="." unique_id=1762372273]
+layout_mode = 0
+offset_left = 797.00006
+offset_top = 254.0
+offset_right = 901.31354
+offset_bottom = 276.99997
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 13
+text = "ASCII Guide"
+
+[node name="line under ascii guide" type="TextureRect" parent="." unique_id=319694631]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 720.7158
+offset_top = 285.18146
+offset_right = 960.3002
+offset_bottom = 286.08163
+rotation = -0.08726646
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="titles" type="Label" parent="." unique_id=1862916070]
+layout_mode = 0
+offset_left = 768.00006
+offset_top = 292.0
+offset_right = 968.00006
+offset_bottom = 333.0
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 10
+text = "letter                        binary
+"
+
+[node name="letter" type="Label" parent="." unique_id=777644691]
+layout_mode = 0
+offset_left = 785.99994
+offset_top = 308.0
+offset_right = 801.0949
+offset_bottom = 383.2946
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 13
+text = "a
+b
+c
+"
+
+[node name="binary" type="Label" parent="." unique_id=1831792481]
+layout_mode = 0
+offset_left = 857.00006
+offset_top = 298.00003
+offset_right = 965.0907
+offset_bottom = 415.90274
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 14
+text = "01100001
+01100010
+01100011"
+
+[node name="AnswerInput" type="LineEdit" parent="." unique_id=1955497217]
+custom_minimum_size = Vector2(210, 36)
+layout_mode = 0
+offset_left = 757.0
+offset_top = 427.0
+offset_right = 967.0
+offset_bottom = 463.0
+rotation = -0.08726646
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_8jovo")
+text = "Type decoded word..."
+alignment = 1
+
+[node name="DecodeButton" type="Button" parent="." unique_id=343591775]
+layout_mode = 0
+offset_left = 804.0
+offset_top = 464.00003
+offset_right = 934.0
+offset_bottom = 500.00003
+rotation = -0.08726646
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_styles/normal = SubResource("StyleBoxFlat_1xlpn")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_uqv50")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jre5i")
+text = "DECODE"
+
+[node name="ResultLabel" type="Label" parent="." unique_id=1481609717]
+layout_mode = 0
+offset_left = -6.1035156e-05
+offset_top = -3.0517578e-05
+offset_right = 39.99994
+offset_bottom = 22.99997
+theme_override_colors/font_color = Color(0.84705883, 0.36078432, 0.3137255, 1)
+theme_override_font_sizes/font_size = 14
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ViewMoreButton" type="Button" parent="." unique_id=481405325]
+layout_mode = 0
+offset_left = 772.00006
+offset_top = 378.0
+offset_right = 940.2105
+offset_bottom = 399.0
+rotation = -0.08726646
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 9
+text = "VIEW MORE →"
+
+[node name="Label" type="Label" parent="ViewMoreButton" unique_id=533889486]
+layout_mode = 0
+offset_left = 103.47955
+offset_top = -0.9848633
+offset_right = 143.47955
+offset_bottom = 22.015137
+rotation = -0.017453292
+theme_override_font_sizes/font_size = 14
+text = " →"
+
+[node name="PopOut Guide" type="Panel" parent="." unique_id=2115596015]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 91.0
+offset_right = 540.0
+offset_bottom = 531.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xxo5k")
+
+[node name="popout title" type="Label" parent="PopOut Guide" unique_id=1847528639]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 33.0
+offset_right = 340.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 18
+text = "ASCII GUIDE"
+horizontal_alignment = 1
+
+[node name="FullGuide Content" type="Label" parent="PopOut Guide" unique_id=2034613851]
+visible = false
+layout_mode = 0
+offset_left = -246.0
+offset_top = 74.0
+offset_right = 226.0
+offset_bottom = 401.0
+theme_override_colors/font_color = Color(0.20784314, 0.14509805, 0.11372549, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 14
+text = "
+a         	01100001                   n          01101110
+b         01100010                  o          01101111
+c         01100011                   p          01110000
+d         01100100                  q           01110001
+e         01100101                  r           01110010
+f         01100110                  s           01110011
+g         01100111                  t            01110100
+h         01101000                 u            01110101
+i         01101001                  v           01110110
+j         01101010                  w            01110111
+k        01101011                  x            01111000
+l         01101100                  y            01111001
+m        01101101                  z           01111010
+"
+
+[node name="line2" type="TextureRect" parent="PopOut Guide" unique_id=1567166261]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 29.0
+offset_top = 73.0
+offset_right = 335.0
+offset_bottom = 75.26956
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="CloseButton" type="Button" parent="PopOut Guide" unique_id=635373665]
+layout_mode = 0
+offset_left = 131.0
+offset_top = 398.0
+offset_right = 231.0
+offset_bottom = 429.0
+theme_override_colors/font_color = Color(1, 0.9411765, 0.8745098, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 14
+theme_override_styles/normal = SubResource("StyleBoxFlat_ex8gk")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_m5nte")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8p2kq")
+text = "CLOSE"
+
+[node name="letters a-m" type="Label" parent="PopOut Guide" unique_id=1371590830]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 92.0
+offset_right = 164.0
+offset_bottom = 427.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 17
+text = "a
+b
+c
+d
+e
+f
+g
+h
+i
+j
+k
+l
+m"
+
+[node name="code a-m" type="Label" parent="PopOut Guide/letters a-m" unique_id=48519029]
+layout_mode = 0
+offset_left = 42.0
+offset_top = -1.0
+offset_right = 177.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 16
+text = "01100001
+01100010
+01100011
+01100100
+01100101
+01100110
+01100111
+01101000
+01101001
+01101010
+01101011
+01101100
+01101101
+
+
+"
+
+[node name="letters n-z" type="Label" parent="PopOut Guide" unique_id=383813404]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 90.0
+offset_right = 255.0
+offset_bottom = 425.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 17
+text = "n
+o
+p
+q
+r
+s
+t
+u
+v
+w
+x
+y
+z"
+
+[node name="code n-z" type="Label" parent="PopOut Guide/letters n-z" unique_id=272290905]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -1.0
+offset_right = 174.0
+offset_bottom = 364.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_font_sizes/font_size = 16
+text = "01101110
+01101111
+01110000
+01110001
+01110010
+01110011
+01110100
+01110101
+01110110
+01110111
+01111000
+01111001
+01111010
+"
+
+[node name="FocusOverlay" type="ColorRect" parent="." unique_id=1377698891]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.14117648, 0.08627451, 0.050980393, 0.4509804)
+
+[node name="HintPanel" type="PanelContainer" parent="." unique_id=231411449]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 0
+offset_left = 563.0
+offset_top = 285.0
+offset_right = 956.0
+offset_bottom = 350.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mop80")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HintPanel" unique_id=873253086]
+layout_mode = 2
+
+[node name="HintTitle" type="Label" parent="HintPanel/VBoxContainer" unique_id=1052442298]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 16
+text = "HINT: "
+
+[node name="HintLabel" type="Label" parent="HintPanel/VBoxContainer" unique_id=1229551549]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_font_sizes/font_size = 14
+text = "Every 8 binary digits represent one letter"
+autowrap_mode = 2
+
+[connection signal="gui_input" from="AnswerInput" to="." method="_on_answer_input_gui_input"]
+[connection signal="pressed" from="ViewMoreButton" to="." method="_on_view_more_button_pressed"]
