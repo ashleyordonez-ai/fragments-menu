@@ -5,7 +5,6 @@ extends CharacterBody2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
-
 func _ready() -> void:
 	sprite.play("front idle")
 
@@ -37,10 +36,13 @@ func _physics_process(_delta: float) -> void:
 	# Prevent faster diagonal movement
 	direction = direction.normalized()
 
-	# Move the character
+	# Move the character and handle collisions
 	velocity = direction * speed
 	move_and_slide()
 
 	# Play the correct animation
 	if sprite.animation != animation_name:
 		sprite.play(animation_name)
+		
+	if get_slide_collision_count() > 0:
+		print("Wall collision detected!")	

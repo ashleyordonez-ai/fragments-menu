@@ -132,8 +132,8 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6maq"]
-radius = 34.0
-height = 116.0
+radius = 25.0
+height = 84.0
 
 [node name="Node2D" type="Node2D" unique_id=1019380719]
 
@@ -152,8 +152,16 @@ script = ExtResource("2_3guhj")
 position = Vector2(594, 486.00003)
 scale = Vector2(0.8194442, 0.8194442)
 sprite_frames = SubResource("SpriteFrames_f10i2")
-animation = &"back idle"
+animation = &"frontWalk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leonore_Moving" unique_id=1379533099]
-position = Vector2(591, 501)
+position = Vector2(596, 505)
 shape = SubResource("CapsuleShape2D_d6maq")
+
+[node name="Walls" type="StaticBody2D" parent="." unique_id=469682434]
+
+[node name="Right Wall" type="CollisionPolygon2D" parent="Walls" unique_id=863918117]
+polygon = PackedVector2Array(890, 52, 879, 64, 850, 182, 744, 178, 748, 204, 735, 375, 743, 404, 742, 426, 826, 424, 832, 516, 712, 516, 713, 554, 645, 553, 644, 577, 642, 628, 652, 626, 656, 605, 724, 606, 725, 567, 725, 567, 935, 576, 948, 532)
+
+[node name="Back Wall" type="CollisionPolygon2D" parent="Walls" unique_id=791714824]
+polygon = PackedVector2Array(282, 52, 891, 54, 879, 66, 850, 180, 743, 177, 747, 213, 333, 212, 295, 64)

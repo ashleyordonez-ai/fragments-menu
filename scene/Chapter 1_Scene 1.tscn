@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://mbb8jyparyol"]
 
 [ext_resource type="Texture2D" uid="uid://dh8upoishaaj0" path="res://assets/Illustrations/Leonore's Room - Day.png" id="1_1n3jd"]
-[ext_resource type="Texture2D" uid="uid://d1ackgxptyhas" path="res://assets/sprites/characters/Leonore/L_Scared.png" id="2_34u1i"]
+[ext_resource type="Texture2D" uid="uid://d1ackgxptyhas" path="res://assets/sprites/characters/Leonore/Scared.png" id="2_34u1i"]
 
 [node name="Control" type="Control" unique_id=749907097]
 layout_mode = 3

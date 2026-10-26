@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1ackgxptyhas"
-path="res://.godot/imported/L_Scared.png-4b4d46745bb4caf8fd07c2e0bad0c952.ctex"
+path="res://.godot/imported/Scared.png-4ee3f488c211712bd3f8576975484d4e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Leonore/L_Scared.png"
-dest_files=["res://.godot/imported/L_Scared.png-4b4d46745bb4caf8fd07c2e0bad0c952.ctex"]
+source_file="res://assets/sprites/characters/Leonore/Scared.png"
+dest_files=["res://.godot/imported/Scared.png-4ee3f488c211712bd3f8576975484d4e.ctex"]
 
 [params]
 
