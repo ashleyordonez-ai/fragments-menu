@@ -4,9 +4,6 @@
 [ext_resource type="Script" uid="uid://c31p2muotlnfx" path="res://script/leonore_moving.gd" id="2_3guhj"]
 [ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="3_kbm35"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aoshd"]
-size = Vector2(742, 575)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_rp7i4"]
 atlas = ExtResource("3_kbm35")
 region = Rect2(288, 144, 144, 144)
@@ -148,18 +145,10 @@ offset_bottom = 2481.0
 scale = Vector2(0.26, 0.26)
 texture = ExtResource("1_rp7i4")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="TextureRect" unique_id=2105295284]
-position = Vector2(-503.84616, -3.846154)
-scale = Vector2(3.846154, 3.846154)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TextureRect/StaticBody2D" unique_id=4706717]
-position = Vector2(582, 343.5)
-shape = SubResource("RectangleShape2D_aoshd")
-
 [node name="Leonore_Moving" type="CharacterBody2D" parent="." unique_id=1774190330]
 script = ExtResource("2_3guhj")
 
-[node name="leonore_back" type="AnimatedSprite2D" parent="Leonore_Moving" unique_id=416416317]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Leonore_Moving" unique_id=416416317]
 position = Vector2(594, 486.00003)
 scale = Vector2(0.8194442, 0.8194442)
 sprite_frames = SubResource("SpriteFrames_f10i2")
