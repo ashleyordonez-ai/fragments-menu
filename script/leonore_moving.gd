@@ -44,5 +44,3 @@ func _physics_process(_delta: float) -> void:
 	if sprite.animation != animation_name:
 		sprite.play(animation_name)
 		
-	if get_slide_collision_count() > 0:
-		print("Wall collision detected!")	

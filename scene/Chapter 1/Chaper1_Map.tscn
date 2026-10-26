@@ -63,10 +63,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_3guhj")
 }, {
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kbm35")
 }],
 "loop": 1,
@@ -82,10 +82,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_olicn")
 }, {
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_e8loa")
 }],
 "loop": 2,
@@ -101,10 +101,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qcenw")
 }, {
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_73kfn")
 }],
 "loop": 1,
@@ -120,10 +120,10 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_bl8ok")
 }, {
-"duration": 4.0,
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_j076u")
 }],
 "loop": 1,
@@ -152,7 +152,7 @@ script = ExtResource("2_3guhj")
 position = Vector2(594, 486.00003)
 scale = Vector2(0.8194442, 0.8194442)
 sprite_frames = SubResource("SpriteFrames_f10i2")
-animation = &"frontWalk"
+animation = &"rside walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leonore_Moving" unique_id=1379533099]
 position = Vector2(596, 505)
@@ -165,3 +165,6 @@ polygon = PackedVector2Array(890, 52, 879, 64, 850, 182, 744, 178, 748, 204, 735
 
 [node name="Back Wall" type="CollisionPolygon2D" parent="Walls" unique_id=791714824]
 polygon = PackedVector2Array(282, 52, 891, 54, 879, 66, 850, 180, 743, 177, 747, 213, 333, 212, 295, 64)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls" unique_id=153010397]
+polygon = PackedVector2Array(282, 51, 225, 530, 238, 577, 447, 575, 450, 606, 519, 607, 521, 628, 532, 628, 530, 580, 527, 555, 462, 555, 461, 518, 361, 518, 362, 430, 375, 429, 374, 399, 380, 402, 383, 379, 398, 378, 402, 401, 407, 400, 404, 382, 408, 380, 406, 365, 411, 352, 413, 341, 411, 329, 406, 313, 400, 308, 397, 311, 394, 321, 392, 337, 383, 337, 384, 316, 385, 324, 388, 324, 386, 305, 388, 291, 382, 278, 340, 275, 336, 269, 332, 270, 328, 267, 325, 269, 322, 275, 314, 275, 328, 258, 333, 213, 295, 64)
