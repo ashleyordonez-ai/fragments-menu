@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cn1ioqrypkk5f"]
+
+[sub_resource type="GDScript" id="GDScript_nh4yo"]
+script/source = "extends Area2D
+
+signal placed(piece)
+
+var correct_pos := Vector2.ZERO
+var dragging := false
+var locked := false
+var grab_offset := Vector2.ZERO
+const SNAP_DISTANCE := 35.0
+
+func _input_event(_viewport, event, _shape_idx):
+	if locked:
+		return
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		dragging = true
+		grab_offset = global_position - get_global_mouse_position()
+		z_index = 100
+		create_tween().tween_property(self, \"rotation_degrees\", 0.0, 0.1)
+
+func _input(event):
+	if dragging and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+		dragging = false
+		z_index = 1
+		if global_position.distance_to(correct_pos) <= SNAP_DISTANCE:
+			_snap()
+
+func _process(_delta):
+	if dragging:
+		global_position = get_global_mouse_position() + grab_offset
+
+func _snap():
+	locked = true
+	z_index = 0
+	var tw = create_tween()
+	tw.tween_property(self, \"global_position\", correct_pos, 0.1)
+	tw.parallel().tween_property(self, \"modulate\", Color(1.6, 1.6, 1.6), 0.1)
+	tw.tween_property(self, \"modulate\", Color.WHITE, 0.2)
+	await tw.finished
+	placed.emit(self)
+"
+
+[node name="Piece" type="Area2D" unique_id=182019815]
+script = SubResource("GDScript_nh4yo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1548063263]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438833202]

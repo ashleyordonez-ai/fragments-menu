@@ -1,0 +1,229 @@
+[gd_scene format=3 uid="uid://c4kwc8j46cfv"]
+
+[ext_resource type="Script" uid="uid://do3tlu64omr4t" path="res://scene/gear_repair.gd" id="1_bwtbg"]
+[ext_resource type="Texture2D" uid="uid://b5d3wgjccfxw5" path="res://assets/png/missing_gears.jpg" id="2_e057g"]
+[ext_resource type="Texture2D" uid="uid://2m342u5g6kht" path="res://assets/png/missin gear.png" id="3_ohhhn"]
+[ext_resource type="Script" uid="uid://c2fyir8qxm6vt" path="res://scene/gear_1.gd" id="4_x8c75"]
+[ext_resource type="Script" uid="uid://dneqoyur1hnix" path="res://scene/gear_3.gd" id="5_qjehg"]
+[ext_resource type="Script" uid="uid://dyfh4a4j6rxi1" path="res://scene/gear_2.gd" id="6_02wwq"]
+[ext_resource type="Shader" uid="uid://c3o4titwostwj" path="res://scene/missing_gear_glow.gdshader" id="7_yrhe4"]
+[ext_resource type="Shader" uid="uid://bqvkf7nm62uim" path="res://scene/missing_gear_ring.gdshader" id="8_tn35o"]
+[ext_resource type="Texture2D" uid="uid://ch2xw4i7ymd2c" path="res://assets/png/musicboxasset.png" id="10_nsvoo"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="11_b0qtj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jre5i"]
+shader = ExtResource("7_yrhe4")
+shader_parameter/glow_color = Color(1, 0.65, 0.22, 1)
+shader_parameter/glow_strength = 0.85
+shader_parameter/pulse_speed = 2.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uqv50"]
+shader = ExtResource("8_tn35o")
+shader_parameter/ring_color = Color(1, 0.72, 0.35, 0.85)
+shader_parameter/ring_radius = 0.32
+shader_parameter/ring_thickness = 0.001
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("10_nsvoo")
+region = Rect2(0, 55.0925, 1015.3877, 258.22998)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bjqgx"]
+texture = SubResource("AtlasTexture_8jovo")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jre5i"]
+atlas = ExtResource("10_nsvoo")
+region = Rect2(534.78613, 324.02353, 489.21387, 664.5625)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1xlpn"]
+texture = SubResource("AtlasTexture_jre5i")
+
+[node name="GearRepair" type="Control" unique_id=9218916]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bwtbg")
+
+[node name="background" type="TextureRect" parent="." unique_id=1701383245]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_e057g")
+expand_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="gear1" type="TextureRect" parent="." unique_id=405378967]
+layout_mode = 0
+offset_left = -39.0
+offset_top = 173.0
+offset_right = 609.0
+offset_bottom = 526.0
+texture = ExtResource("3_ohhhn")
+expand_mode = 1
+script = ExtResource("4_x8c75")
+
+[node name="gear3" type="TextureRect" parent="." unique_id=2038480674]
+layout_mode = 0
+offset_left = 394.0
+offset_top = 39.0
+offset_right = 1032.0
+offset_bottom = 351.0
+texture = ExtResource("3_ohhhn")
+expand_mode = 1
+script = ExtResource("5_qjehg")
+
+[node name="gear2" type="TextureRect" parent="." unique_id=807712687]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 155.0
+offset_right = 891.0
+offset_bottom = 508.0
+texture = ExtResource("3_ohhhn")
+expand_mode = 1
+script = ExtResource("6_02wwq")
+
+[node name="RecoveredGear" type="TextureRect" parent="." unique_id=2143806234]
+layout_mode = 0
+offset_left = 576.00006
+offset_top = 367.0
+offset_right = 1214.5276
+offset_bottom = 646.09393
+scale = Vector2(1.035194, 1.0605749)
+texture = ExtResource("3_ohhhn")
+expand_mode = 1
+
+[node name="MissingGearGlow" type="ColorRect" parent="." unique_id=1433422142]
+material = SubResource("ShaderMaterial_jre5i")
+layout_mode = 0
+offset_left = 305.0
+offset_top = 423.0
+offset_right = 505.0
+offset_bottom = 623.0
+mouse_filter = 2
+
+[node name="MissingGearRing" type="ColorRect" parent="MissingGearGlow" unique_id=488526879]
+material = SubResource("ShaderMaterial_uqv50")
+layout_mode = 0
+offset_left = -18.0
+offset_top = 21.0
+offset_right = 210.0
+offset_bottom = 221.0
+mouse_filter = 2
+
+[node name="DialogueLayer" type="CanvasLayer" parent="." unique_id=48158349]
+
+[node name="DialogueUI" type="Control" parent="DialogueLayer" unique_id=1249022914]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DialogueDim" type="ColorRect" parent="DialogueLayer/DialogueUI" unique_id=1244766349]
+modulate = Color(0.03529412, 0.023529412, 0.06666667, 0.13725491)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="DialoguePanel" type="Panel" parent="DialogueLayer/DialogueUI" unique_id=1798023783]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 22.999998
+offset_right = 991.45764
+offset_bottom = 70.60091
+scale = Vector2(1.0409533, 1.7436641)
+theme_override_styles/panel = SubResource("StyleBoxTexture_bjqgx")
+
+[node name="DialogueLabel" type="Label" parent="DialogueLayer/DialogueUI/DialoguePanel" unique_id=578691688]
+layout_mode = 0
+offset_left = 115.278946
+offset_top = 16.05814
+offset_right = 595.41925
+offset_bottom = 39.05814
+scale = Vector2(1.2759014, 0.688599)
+theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
+theme_override_fonts/font = ExtResource("11_b0qtj")
+theme_override_font_sizes/font_size = 16
+text = "This must be the missing piece..... It belongs here."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InstructionLayer" type="CanvasLayer" parent="." unique_id=1726916570]
+
+[node name="InstructionUI" type="Control" parent="InstructionLayer" unique_id=1246964728]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InstructionDim" type="ColorRect" parent="InstructionLayer/InstructionUI" unique_id=431790171]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.03529412, 0.023529412, 0.06666667, 0.30588236)
+
+[node name="InstructionPanel" type="Panel" parent="InstructionLayer/InstructionUI" unique_id=1264737231]
+layout_mode = 0
+offset_left = 619.0
+offset_top = 271.0
+offset_right = 937.8593
+offset_bottom = 401.38135
+scale = Vector2(1.6935371, 0.9280469)
+theme_override_styles/panel = SubResource("StyleBoxTexture_1xlpn")
+
+[node name="InstructionTitle" type="Label" parent="InstructionLayer/InstructionUI/InstructionPanel" unique_id=1670914543]
+layout_mode = 0
+offset_left = 94.4768
+offset_top = 26.938295
+offset_right = 562.3952
+offset_bottom = 56.334934
+scale = Vector2(0.73311925, 1.0716033)
+theme_override_colors/font_color = Color(0.20392157, 0.039215688, 0.023529412, 1)
+theme_override_fonts/font = ExtResource("11_b0qtj")
+theme_override_font_sizes/font_size = 16
+text = "DRAG THE MISSING GEAR"
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InstructionText" type="Label" parent="InstructionLayer/InstructionUI/InstructionPanel" unique_id=138022772]
+layout_mode = 0
+offset_left = 60.819458
+offset_top = 64.65191
+offset_right = 394.40076
+offset_bottom = 105.65191
+scale = Vector2(0.64078474, 0.848982)
+theme_override_colors/font_color = Color(0.20392157, 0.039215688, 0.023529412, 1)
+theme_override_fonts/font = ExtResource("11_b0qtj")
+theme_override_font_sizes/font_size = 16
+text = "Place the recovered gear into the empty space."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BrightTransition" type="CanvasLayer" parent="." unique_id=827962433]
+layer = 10
+
+[node name="BrightOverlay" type="ColorRect" parent="BrightTransition" unique_id=70351415]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
