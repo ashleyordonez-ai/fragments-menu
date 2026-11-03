@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1ackgxptyhas"
-path="res://.godot/imported/Scared.png-4ee3f488c211712bd3f8576975484d4e.ctex"
+uid="uid://bn37m368y2cbj"
+path="res://.godot/imported/Leonore-Right_Defult.png-f9da6a84bdf2adb762ebfd3c11973722.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Leonore/Scared.png"
-dest_files=["res://.godot/imported/Scared.png-4ee3f488c211712bd3f8576975484d4e.ctex"]
+source_file="res://assets/sprites/characters/Leonore/Leonore-Right_Defult.png"
+dest_files=["res://.godot/imported/Leonore-Right_Defult.png-f9da6a84bdf2adb762ebfd3c11973722.ctex"]
 
 [params]
 
