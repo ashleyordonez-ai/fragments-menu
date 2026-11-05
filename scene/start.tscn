@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://ycu86kdrc0kc"]
 
-[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/image (1).png" id="1_bnuxd"]
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_bnuxd"]
 [ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="2_srnb1"]
 [ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="3_7xr4q"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="4_w484r"]
 [ext_resource type="Script" uid="uid://dvee4pjhtykib" path="res://scene/continue.gd" id="5_pb375"]
-[ext_resource type="Script" uid="uid://cqejar0spdlb6" path="res://scene/new_game.gd" id="6_srnb1"]
+[ext_resource type="Script" uid="uid://cqejar0spdlb6" path="res://script/new_game.gd" id="6_srnb1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pum5v"]
 atlas = ExtResource("2_srnb1")

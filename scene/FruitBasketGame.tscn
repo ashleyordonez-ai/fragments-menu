@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="6_gxpki"]
 [ext_resource type="Texture2D" uid="uid://61su3kpxiqhc" path="res://assets/png/fruit_panel.png" id="6_rgwhw"]
 [ext_resource type="Shader" uid="uid://r0x8ql48b8lm" path="res://scene/FruitBasketGame.gdshader" id="7_ssuay"]
-[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://scene/scratch_cover.gd" id="8_cfeg7"]
+[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="8_cfeg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpki"]
 shader = ExtResource("4_ssuay")

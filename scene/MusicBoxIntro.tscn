@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ck2g7wp5psm6e"]
 
 [ext_resource type="Texture2D" uid="uid://b5d3wgjccfxw5" path="res://assets/png/missing_gears.jpg" id="1_0rdb6"]
-[ext_resource type="Script" uid="uid://vv5wj57qrno5" path="res://scene/music_box_intro.gd" id="1_uno1s"]
+[ext_resource type="Script" uid="uid://vv5wj57qrno5" path="res://script/music_box_intro.gd" id="1_uno1s"]
 [ext_resource type="Texture2D" uid="uid://2m342u5g6kht" path="res://assets/png/missin gear.png" id="2_fplff"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_fplff"]
 [ext_resource type="Shader" uid="uid://c3o4titwostwj" path="res://scene/missing_gear_glow.gdshader" id="3_hfw1t"]
