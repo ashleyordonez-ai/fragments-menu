@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b10gwws6viqhs"]
+[gd_scene format=3 uid="uid://jnmxoi1x7oly"]
 
 [ext_resource type="Texture2D" uid="uid://7k5cnlugwj1j" path="res://assets/maps/MAP_Leonore's Room.png" id="1_rp7i4"]
 [ext_resource type="Script" uid="uid://c31p2muotlnfx" path="res://script/leonore_moving.gd" id="2_3guhj"]
@@ -152,7 +152,7 @@ script = ExtResource("2_3guhj")
 position = Vector2(594, 486.00003)
 scale = Vector2(0.8194442, 0.8194442)
 sprite_frames = SubResource("SpriteFrames_f10i2")
-animation = &"rside walk"
+animation = &"lside idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leonore_Moving" unique_id=1379533099]
 position = Vector2(596, 505)
