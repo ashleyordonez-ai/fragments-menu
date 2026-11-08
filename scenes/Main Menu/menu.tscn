@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d3tidmtaycc7e" path="res://script/menu.gd" id="1_bo06a"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_bo06a"]
 [ext_resource type="Texture2D" uid="uid://bbd5rjc436808" path="res://assets/png/Logo_Yellow.png" id="7_1qlln"]
-[ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scene/menu.gdshader" id="7_6fejx"]
+[ext_resource type="Shader" uid="uid://db5nflgx85ike" path="res://scenes/menu.gdshader" id="7_6fejx"]
 [ext_resource type="Texture2D" uid="uid://xoitdt283td0" path="res://assets/png/Screen BG Button.png" id="7_akoio"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="8_wd6lm"]
 [ext_resource type="Script" uid="uid://b2rf7rtq4h03d" path="res://script/logo_yellow.gd" id="9_akoio"]

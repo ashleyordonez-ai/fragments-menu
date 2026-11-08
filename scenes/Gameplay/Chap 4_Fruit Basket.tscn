@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://otm3m6hqqs0"]
 
-[ext_resource type="Script" uid="uid://cffpbchpf8tsl" path="res://scene/fruit_basket_game.gd" id="1_s6hl6"]
-[ext_resource type="Texture2D" uid="uid://dyn4woo2chvi0" path="res://assets/png/chap4background.jpg" id="2_gxpki"]
-[ext_resource type="Texture2D" uid="uid://be34t1spcunjr" path="res://assets/png/fruit basket.png" id="3_m5s30"]
-[ext_resource type="Texture2D" uid="uid://rca3ufb4w2er" path="res://assets/png/seperated fruits.png" id="4_alblt"]
-[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_cfeg7"]
-[ext_resource type="Texture2D" uid="uid://dcpgg1nuu7t3t" path="res://assets/png/panels.png" id="4_gxpki"]
-[ext_resource type="Shader" uid="uid://b288gqsvadouy" path="res://scene/instruction_glow.gdshader" id="4_ssuay"]
-[ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="6_gxpki"]
-[ext_resource type="Texture2D" uid="uid://61su3kpxiqhc" path="res://assets/png/fruit_panel.png" id="6_rgwhw"]
-[ext_resource type="Shader" uid="uid://r0x8ql48b8lm" path="res://scene/FruitBasketGame.gdshader" id="7_ssuay"]
-[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="8_cfeg7"]
+[ext_resource type="Script" uid="uid://cffpbchpf8tsl" path="res://scenes/fruit_basket_game.gd" id="1_ctas2"]
+[ext_resource type="Texture2D" uid="uid://dyn4woo2chvi0" path="res://assets/png/chap4background.jpg" id="2_3mysl"]
+[ext_resource type="Texture2D" uid="uid://be34t1spcunjr" path="res://assets/png/fruit basket.png" id="3_loprb"]
+[ext_resource type="Shader" uid="uid://b288gqsvadouy" path="res://scenes/instruction_glow.gdshader" id="4_v4jch"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="5_yr8p6"]
+[ext_resource type="Texture2D" uid="uid://61su3kpxiqhc" path="res://assets/png/fruit_panel.png" id="6_wwvr8"]
+[ext_resource type="Shader" uid="uid://r0x8ql48b8lm" path="res://scenes/FruitBasketGame.gdshader" id="7_5gxco"]
+[ext_resource type="Texture2D" uid="uid://rca3ufb4w2er" path="res://assets/png/seperated fruits.png" id="8_bnhkw"]
+[ext_resource type="Texture2D" uid="uid://dcpgg1nuu7t3t" path="res://assets/png/panels.png" id="9_j2xhh"]
+[ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="10_k7r00"]
+[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="11_ha2cr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpki"]
-shader = ExtResource("4_ssuay")
+shader = ExtResource("4_v4jch")
 shader_parameter/glow_color = Color(0.84, 0.71, 0.43, 1)
 shader_parameter/glow_strength = 1.200000057
 shader_parameter/glow_radius = 10.0000004275
@@ -42,74 +42,74 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3yqw"]
-atlas = ExtResource("6_rgwhw")
+atlas = ExtResource("6_wwvr8")
 region = Rect2(0, 166.07724, 1013.18384, 693.90674)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_0t1jc"]
 texture = SubResource("AtlasTexture_f3yqw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f3yqw"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.055
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(47.051514, 75.61543, 327.3847, 376.10272)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4xme5"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.07
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(381.13983, 85.159, 290.02783, 358.40836)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ca66q"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.07
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(670.2481, 76.95848, 318.05762, 384.34583)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_syirb"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.07
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jre5i"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(380.54077, 526.87006, 275.2699, 408.73346)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5w0ru"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.07
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uqv50"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(60.40442, 520.0616, 282.71838, 426.12598)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ll4y"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.07
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxo5k"]
-atlas = ExtResource("4_alblt")
+atlas = ExtResource("8_bnhkw")
 region = Rect2(677.36633, 510.57318, 296.83948, 427.21637)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0t1jc"]
-atlas = ExtResource("4_gxpki")
+atlas = ExtResource("9_j2xhh")
 region = Rect2(648.9962, 16.724396, 345.22754, 676.1892)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lrfax"]
@@ -132,14 +132,14 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lrfax"]
-atlas = ExtResource("4_gxpki")
+atlas = ExtResource("9_j2xhh")
 region = Rect2(21.263489, 325.12082, 604.86127, 362.34616)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rgwhw"]
 texture = SubResource("AtlasTexture_lrfax")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bjqgx"]
-shader = ExtResource("7_ssuay")
+shader = ExtResource("7_5gxco")
 shader_parameter/scratch_points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/point_count = 0
 shader_parameter/brush_radius = 0.055
@@ -177,7 +177,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_s6hl6")
+script = ExtResource("1_ctas2")
 metadata/_edit_horizontal_guides_ = [-485.0]
 
 [node name="Background" type="TextureRect" parent="." unique_id=1755222639]
@@ -188,7 +188,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0025238)
-texture = ExtResource("2_gxpki")
+texture = ExtResource("2_3mysl")
 expand_mode = 1
 
 [node name="BasketIntro" type="Control" parent="." unique_id=1577291216]
@@ -205,7 +205,7 @@ offset_left = 326.0
 offset_top = 99.0
 offset_right = 826.0
 offset_bottom = 549.0
-texture = ExtResource("3_m5s30")
+texture = ExtResource("3_loprb")
 expand_mode = 1
 stretch_mode = 5
 
@@ -243,7 +243,7 @@ offset_top = 47.0
 offset_right = 925.0
 offset_bottom = 97.0
 theme_override_colors/font_color = Color(0.9529412, 0.9137255, 0.8352941, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 18
 text = "Choose a fruit to reveal what's hidden!"
 horizontal_alignment = 1
@@ -349,7 +349,7 @@ offset_top = 47.03854
 offset_right = 206.92337
 offset_bottom = 86.03854
 theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 18
 text = "RIDDLE NO. 01"
 
@@ -360,7 +360,7 @@ offset_top = 80.52359
 offset_right = 378.28223
 offset_bottom = 269.52362
 theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 14
 text = "Six fruits rest where 
 secrets sleep,
@@ -386,7 +386,7 @@ offset_top = 11.0
 offset_right = 170.0
 offset_bottom = 36.0
 theme_override_colors/font_color = Color(0.94509804, 0.9098039, 0.8352941, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 16
 text = "Attempts: 3"
 
@@ -417,7 +417,7 @@ offset_top = 125.0
 offset_right = 1150.9114
 offset_bottom = 1438.6501
 scale = Vector2(0.16189995, 0.13778402)
-texture = ExtResource("6_gxpki")
+texture = ExtResource("10_k7r00")
 expand_mode = 1
 stretch_mode = 5
 
@@ -428,7 +428,7 @@ offset_top = 140.0
 offset_right = 426.0
 offset_bottom = 447.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 15
 text = "NO GEAR 
 HERE !"
@@ -455,7 +455,7 @@ offset_top = 90.0
 offset_right = 449.0
 offset_bottom = 340.0
 color = Color(0.60784316, 0.5019608, 0.72156864, 1)
-script = ExtResource("8_cfeg7")
+script = ExtResource("11_ha2cr")
 
 [node name="ScratchTitle" type="Label" parent="ScratchPopup" unique_id=171307578]
 layout_mode = 0
@@ -465,7 +465,7 @@ offset_right = 374.50922
 offset_bottom = 111.51437
 scale = Vector2(1.0546013, 0.7863872)
 theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 24
 text = "SCRATCH TO REVEAL
 "
@@ -483,7 +483,7 @@ offset_left = 162.00002
 offset_top = 394.99997
 offset_right = 354.0
 offset_bottom = 434.99997
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 20
 theme_override_styles/normal = SubResource("StyleBoxFlat_rgwhw")
 theme_override_styles/hover = SubResource("StyleBoxFlat_lrfax")
@@ -504,7 +504,7 @@ offset_top = 5.0
 offset_right = 570.0
 offset_bottom = 40.0
 theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
-theme_override_fonts/font = ExtResource("4_cfeg7")
+theme_override_fonts/font = ExtResource("5_yr8p6")
 theme_override_font_sizes/font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 1

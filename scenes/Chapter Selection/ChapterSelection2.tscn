@@ -1,51 +1,51 @@
 [gd_scene format=3 uid="uid://37hr6cben6ug"]
 
-[ext_resource type="Script" uid="uid://wpp6egyhtl1f" path="res://script/chapter_selection.gd" id="1_5cxy5"]
-[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="2_gh7ig"]
-[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="3_poski"]
-[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="4_c3kem"]
-[ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://script/chap_1.gd" id="5_2jqgm"]
-[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_58oox"]
-[ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://scene/ChapterSelection.gdshader" id="7_3symh"]
-[ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://script/chap_3.gd" id="10_0p8pn"]
-[ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://script/chap_4.gd" id="11_lef0k"]
-[ext_resource type="Script" uid="uid://digw3ixilru76" path="res://script/chap_5.gd" id="12_qa31s"]
+[ext_resource type="Script" uid="uid://wpp6egyhtl1f" path="res://script/chapter_selection.gd" id="1_rd1jj"]
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="2_3uo1q"]
+[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="3_o3v0m"]
+[ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="4_21f2t"]
+[ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://script/chap_1.gd" id="5_cf8w4"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_36qro"]
+[ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://scenes/ChapterSelection.gdshader" id="7_dv2fe"]
+[ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://script/chap_3.gd" id="8_7b1c8"]
+[ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://script/chap_4.gd" id="9_wtw1e"]
+[ext_resource type="Script" uid="uid://digw3ixilru76" path="res://script/chap_5.gd" id="10_hkla6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
-atlas = ExtResource("3_poski")
+atlas = ExtResource("3_o3v0m")
 region = Rect2(1689.0752, 2147.4363, 1621.3293, 2253.715)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
-atlas = ExtResource("3_poski")
+atlas = ExtResource("3_o3v0m")
 region = Rect2(91.489746, 4519.05, 1206.2424, 451.41553)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tdi24"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 2.1390001016025
 shader_parameter/fade_amount = 0.498000023655
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_44471"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 1.66000007885
 shader_parameter/fade_amount = 0.3830000181925
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3cfqi"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 3.0
 shader_parameter/fade_amount = 0.61200002907
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bmuf"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 1.5490000735775
 shader_parameter/fade_amount = 0.334000015865
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0jmnq"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 3.0
 shader_parameter/fade_amount = 0.7110000337725
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lnrt6"]
-shader = ExtResource("7_3symh")
+shader = ExtResource("7_dv2fe")
 shader_parameter/blur_strength = 1.598000075905
 shader_parameter/fade_amount = 0.350000016625
 
@@ -56,7 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_5cxy5")
+script = ExtResource("1_rd1jj")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1711748238]
 layout_mode = 1
@@ -65,7 +65,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_gh7ig")
+texture = ExtResource("2_3uo1q")
 expand_mode = 1
 
 [node name="Frame" type="TextureRect" parent="." unique_id=688522730]
@@ -77,7 +77,7 @@ offset_right = 864.0
 offset_bottom = 621.0
 texture = SubResource("AtlasTexture_bjqgx")
 expand_mode = 1
-script = ExtResource("4_c3kem")
+script = ExtResource("4_21f2t")
 
 [node name="chap 1" type="TextureRect" parent="." unique_id=1877606175]
 layout_mode = 0
@@ -87,7 +87,7 @@ offset_right = 774.0
 offset_bottom = 264.0
 texture = SubResource("AtlasTexture_8jovo")
 expand_mode = 1
-script = ExtResource("5_2jqgm")
+script = ExtResource("5_cf8w4")
 
 [node name="Label" type="Label" parent="chap 1" unique_id=2074474565]
 layout_mode = 0
@@ -102,7 +102,7 @@ theme_override_constants/shadow_offset_x = 35
 theme_override_constants/shadow_offset_y = 25
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 44
 text = "CHAPTER ONE"
 
@@ -114,7 +114,7 @@ offset_right = 774.0
 offset_bottom = 333.0
 texture = SubResource("AtlasTexture_8jovo")
 expand_mode = 1
-script = ExtResource("5_2jqgm")
+script = ExtResource("5_cf8w4")
 
 [node name="Label" type="Label" parent="chap 2" unique_id=42602857]
 layout_mode = 0
@@ -129,7 +129,7 @@ theme_override_constants/shadow_offset_x = 35
 theme_override_constants/shadow_offset_y = 25
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 43
 text = "CHAPTER TWO"
 
@@ -142,7 +142,7 @@ offset_right = 775.0
 offset_bottom = 403.0
 texture = SubResource("AtlasTexture_8jovo")
 expand_mode = 1
-script = ExtResource("10_0p8pn")
+script = ExtResource("8_7b1c8")
 
 [node name="Label" type="Label" parent="chap 3" unique_id=1828769347]
 material = SubResource("ShaderMaterial_44471")
@@ -158,7 +158,7 @@ theme_override_constants/shadow_offset_x = 35
 theme_override_constants/shadow_offset_y = 25
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 43
 text = "CHAPTER THREE"
 
@@ -171,7 +171,7 @@ offset_right = 773.0
 offset_bottom = 472.0
 texture = SubResource("AtlasTexture_8jovo")
 expand_mode = 1
-script = ExtResource("11_lef0k")
+script = ExtResource("9_wtw1e")
 
 [node name="Label" type="Label" parent="chap 4" unique_id=969774736]
 material = SubResource("ShaderMaterial_3bmuf")
@@ -187,7 +187,7 @@ theme_override_constants/shadow_offset_x = 35
 theme_override_constants/shadow_offset_y = 25
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 43
 text = "CHAPTER FOUR"
 
@@ -200,7 +200,7 @@ offset_right = 773.0
 offset_bottom = 542.0
 texture = SubResource("AtlasTexture_8jovo")
 expand_mode = 1
-script = ExtResource("12_qa31s")
+script = ExtResource("10_hkla6")
 
 [node name="Label" type="Label" parent="chap 5" unique_id=1872612534]
 material = SubResource("ShaderMaterial_lnrt6")
@@ -216,7 +216,7 @@ theme_override_constants/shadow_offset_x = 35
 theme_override_constants/shadow_offset_y = 25
 theme_override_constants/outline_size = 1
 theme_override_constants/shadow_outline_size = 6
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 43
 text = "CHAPTER FIVE"
 
@@ -226,7 +226,7 @@ offset_left = 482.0
 offset_top = 99.0
 offset_right = 727.0
 offset_bottom = 124.0
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 24
 text = "FRAGMENTS: TO BE WHOLE AGAIN"
 
@@ -237,6 +237,6 @@ offset_top = 122.0
 offset_right = 820.0
 offset_bottom = 179.0
 theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.8666667, 1)
-theme_override_fonts/font = ExtResource("6_58oox")
+theme_override_fonts/font = ExtResource("6_36qro")
 theme_override_font_sizes/font_size = 50
 text = "CHOOSE YOUR CHAPTER"

@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://7gak6fbmfypr"]
 
-[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_3ce5t"]
-[ext_resource type="Script" uid="uid://b0quv8wrmn5r3" path="res://scene/book_game.gd" id="1_421t7"]
-[ext_resource type="Texture2D" uid="uid://dxg0oq5dnt6j5" path="res://assets/png/BOOK.png" id="2_syipi"]
-[ext_resource type="FontFile" uid="uid://bfpvyio8j6hk3" path="res://assets/fonts/Secret Diary.ttf" id="3_syipi"]
-[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_3bdjy"]
-[ext_resource type="Texture2D" uid="uid://blakiw64hufed" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/png/panel-header@4x.png" id="5_421t7"]
-[ext_resource type="FontFile" uid="uid://5nmkywavqsxs" path="res://assets/fonts/I-pixel-u.ttf" id="6_0dg85"]
-[ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scene/code.gd" id="8_0dg85"]
+[ext_resource type="Script" uid="uid://b0quv8wrmn5r3" path="res://script/book_game.gd" id="1_cbguj"]
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="2_2sgb2"]
+[ext_resource type="Texture2D" uid="uid://dxg0oq5dnt6j5" path="res://assets/png/BOOK.png" id="3_a0mjj"]
+[ext_resource type="FontFile" uid="uid://bfpvyio8j6hk3" path="res://assets/fonts/Secret Diary.ttf" id="4_d4qvb"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="5_clolr"]
+[ext_resource type="Texture2D" uid="uid://blakiw64hufed" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/png/panel-header@4x.png" id="6_rlmxo"]
+[ext_resource type="FontFile" uid="uid://5nmkywavqsxs" path="res://assets/fonts/I-pixel-u.ttf" id="7_okgkm"]
+[ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scenes/code.gd" id="8_gylf3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
-atlas = ExtResource("5_421t7")
+atlas = ExtResource("6_rlmxo")
 region = Rect2(165, 37.5, 713, 54)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbb3b"]
@@ -109,7 +109,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_421t7")
+script = ExtResource("1_cbguj")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=950897125]
 layout_mode = 1
@@ -118,7 +118,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_3ce5t")
+texture = ExtResource("2_2sgb2")
 expand_mode = 1
 
 [node name="TextureRect2" type="TextureRect" parent="." unique_id=1154259098]
@@ -127,7 +127,7 @@ offset_left = -59.0
 offset_right = 1188.0114
 offset_bottom = 764.8789
 rotation = -0.08726646
-texture = ExtResource("2_syipi")
+texture = ExtResource("3_a0mjj")
 expand_mode = 1
 
 [node name="diary" type="Label" parent="." unique_id=307435571]
@@ -138,7 +138,7 @@ offset_right = 510.98383
 offset_bottom = 565.0
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_syipi")
+theme_override_fonts/font = ExtResource("4_d4qvb")
 theme_override_font_sizes/font_size = 20
 text = "Dear diary,
 
@@ -161,7 +161,7 @@ offset_right = 981.0
 offset_bottom = 115.0072
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 19
 text = "DECODE "
 
@@ -204,10 +204,10 @@ offset_right = 752.00006
 offset_bottom = 176.0
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01100010"
-script = ExtResource("8_0dg85")
+script = ExtResource("8_gylf3")
 
 [node name="Label" type="Label" parent="code" unique_id=993903696]
 layout_mode = 0
@@ -216,7 +216,7 @@ offset_top = 0.19777018
 offset_right = 238.47162
 offset_bottom = 51.19777
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01110010 
 "
@@ -228,7 +228,7 @@ offset_top = -0.62409765
 offset_right = 240.55116
 offset_bottom = 24.375902
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01101001 "
 
@@ -239,7 +239,7 @@ offset_top = 24.770758
 offset_right = -151.1336
 offset_bottom = 49.77076
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01100111 "
 
@@ -250,7 +250,7 @@ offset_top = 25.837372
 offset_right = 228.21698
 offset_bottom = 49.83737
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01101000"
 
@@ -261,7 +261,7 @@ offset_top = 0.98220825
 offset_right = 242.43738
 offset_bottom = 25.982208
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01110100 "
 
@@ -272,7 +272,7 @@ offset_top = 26.924356
 offset_right = -92.0966
 offset_bottom = 51.924355
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01100101 "
 
@@ -283,7 +283,7 @@ offset_top = -1.4459791
 offset_right = 237.63072
 offset_bottom = 23.55402
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 19
 text = "01110010 "
 
@@ -305,7 +305,7 @@ offset_right = 901.31354
 offset_bottom = 276.99997
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 13
 text = "ASCII Guide"
 
@@ -328,7 +328,7 @@ offset_right = 968.00006
 offset_bottom = 333.0
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 10
 text = "letter                        binary
 "
@@ -341,7 +341,7 @@ offset_right = 801.0949
 offset_bottom = 383.2946
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 13
 text = "a
 b
@@ -356,7 +356,7 @@ offset_right = 965.0907
 offset_bottom = 415.90274
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 14
 text = "01100001
 01100010
@@ -371,7 +371,7 @@ offset_right = 967.0
 offset_bottom = 463.0
 rotation = -0.08726646
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 11
 theme_override_styles/normal = SubResource("StyleBoxFlat_8jovo")
 text = "Type decoded word..."
@@ -384,7 +384,7 @@ offset_top = 464.00003
 offset_right = 934.0
 offset_bottom = 500.00003
 rotation = -0.08726646
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_styles/normal = SubResource("StyleBoxFlat_1xlpn")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_uqv50")
 theme_override_styles/hover = SubResource("StyleBoxFlat_jre5i")
@@ -408,7 +408,7 @@ offset_top = 378.0
 offset_right = 940.2105
 offset_bottom = 399.0
 rotation = -0.08726646
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 9
 text = "VIEW MORE →"
 
@@ -437,7 +437,7 @@ offset_top = 33.0
 offset_right = 340.0
 offset_bottom = 63.0
 theme_override_colors/font_color = Color(0.31764707, 0.20784314, 0.14901961, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 18
 text = "ASCII GUIDE"
 horizontal_alignment = 1
@@ -484,7 +484,7 @@ offset_top = 398.0
 offset_right = 231.0
 offset_bottom = 429.0
 theme_override_colors/font_color = Color(1, 0.9411765, 0.8745098, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 14
 theme_override_styles/normal = SubResource("StyleBoxFlat_ex8gk")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_m5nte")
@@ -498,7 +498,7 @@ offset_top = 92.0
 offset_right = 164.0
 offset_bottom = 427.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 17
 text = "a
 b
@@ -521,7 +521,7 @@ offset_top = -1.0
 offset_right = 177.0
 offset_bottom = 364.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 16
 text = "01100001
 01100010
@@ -547,7 +547,7 @@ offset_top = 90.0
 offset_right = 255.0
 offset_bottom = 425.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 17
 text = "n
 o
@@ -570,7 +570,7 @@ offset_top = -1.0
 offset_right = 174.0
 offset_bottom = 364.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_0dg85")
+theme_override_fonts/font = ExtResource("7_okgkm")
 theme_override_font_sizes/font_size = 16
 text = "01101110
 01101111
@@ -613,14 +613,14 @@ layout_mode = 2
 [node name="HintTitle" type="Label" parent="HintPanel/VBoxContainer" unique_id=1052442298]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 16
 text = "HINT: "
 
 [node name="HintLabel" type="Label" parent="HintPanel/VBoxContainer" unique_id=1229551549]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_3bdjy")
+theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 14
 text = "Every 8 binary digits represent one letter"
 autowrap_mode = 2
