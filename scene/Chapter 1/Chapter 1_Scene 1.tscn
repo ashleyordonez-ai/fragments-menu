@@ -1,8 +1,5 @@
 [gd_scene format=3 uid="uid://mbb8jyparyol"]
 
-[ext_resource type="Texture2D" uid="uid://dh8upoishaaj0" path="res://assets/Illustrations/Leonore's Room - Day.png" id="1_ery5b"]
-[ext_resource type="Texture2D" uid="uid://drd3u8jjn436w" path="res://assets/sprites/characters/Leonore/Leonore-Left_Defult.png" id="2_otsow"]
-[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_1co2g"]
 [ext_resource type="Texture2D" uid="uid://cbgthat3cll3p" path="res://assets/fonts/f2de68d5-1428-475f-9192-715f29093b07.png" id="4_y11kk"]
 
 [node name="Control" type="Control" unique_id=749907097]
@@ -14,51 +11,6 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_vertical_guides_ = [40.0, 1110.0, 576.0]
 metadata/_edit_horizontal_guides_ = [40.0, 608.0, 324.0]
-
-[node name="Leonore\'s Room - DAY" type="TextureRect" parent="." unique_id=451829107]
-layout_mode = 0
-offset_right = 6720.0
-offset_bottom = 3780.0
-scale = Vector2(0.172, 0.172)
-texture = ExtResource("1_ery5b")
-expand_mode = 1
-
-[node name="Panel" type="Panel" parent="." unique_id=302871039]
-layout_mode = 0
-offset_left = 239.0
-offset_top = 276.0
-offset_right = 1068.0
-offset_bottom = 516.0
-
-[node name="Leonore" type="TextureRect" parent="." unique_id=371691215]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 6.0
-offset_right = 440.70752
-offset_bottom = 806.13306
-texture = ExtResource("2_otsow")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="." unique_id=1018219441]
-layout_mode = 0
-offset_left = 348.0
-offset_top = 250.0
-offset_right = 413.0
-offset_bottom = 275.0
-theme_override_fonts/font = ExtResource("3_1co2g")
-theme_override_font_sizes/font_size = 30
-text = "Leonore"
-
-[node name="Label2" type="Label" parent="." unique_id=1074664548]
-layout_mode = 0
-offset_left = 380.0
-offset_top = 302.0
-offset_right = 525.0
-offset_bottom = 355.0
-theme_override_fonts/font = ExtResource("3_1co2g")
-theme_override_font_sizes/font_size = 25
-text = "Huh? Where am I?
-"
 
 [node name="Button" type="Button" parent="." unique_id=1980080795]
 layout_mode = 0
