@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bbgqhfuj1000i"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_5pwl6"]
+load_path = "res://.godot/imported/Leonore-Left_Defult.png-eb0fe5610a037ebabf45843147ce581f.ctex"
+
+[node name="CharacterPortrait" type="Control" unique_id=1370236031]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Portrait" type="TextureRect" parent="." unique_id=1429019605]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 17.0
+offset_right = 329.92505
+offset_bottom = 620.0
+texture = SubResource("CompressedTexture2D_5pwl6")

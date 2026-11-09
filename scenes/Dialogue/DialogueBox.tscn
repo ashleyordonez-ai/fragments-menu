@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://mbb8jyparyol"]
+
+[ext_resource type="Script" uid="uid://o25huiey17so" path="res://script/dialogue_box.gd" id="1_pobk3"]
+[ext_resource type="Texture2D" uid="uid://dj8m07tmb3pvj" path="res://assets/png/Dialogue Box.png" id="2_bdrcx"]
+[ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="3_k7478"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="4_c73q0"]
+[ext_resource type="Texture2D" uid="uid://cbgthat3cll3p" path="res://assets/fonts/f2de68d5-1428-475f-9192-715f29093b07.png" id="5_1wwox"]
+[ext_resource type="PackedScene" uid="uid://bbgqhfuj1000i" path="res://scenes/Dialogue/character_portrait.tscn" id="6_bdrcx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_gg2yw"]
+font_size = 35
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.5294118)
+shadow_offset = Vector2(2, 0)
+
+[node name="DialogueBox" type="Control" unique_id=749907097]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pobk3")
+metadata/_edit_vertical_guides_ = [40.0, 1110.0, 576.0, 245.0, 890.0]
+metadata/_edit_horizontal_guides_ = [40.0, 608.0, 324.0]
+
+[node name="Background" type="TextureRect" parent="." unique_id=1403275726]
+layout_mode = 0
+offset_left = 165.0
+offset_top = 440.0
+offset_right = 990.0
+offset_bottom = 632.0
+texture = ExtResource("2_bdrcx")
+
+[node name="DialogueText" type="Label" parent="Background" unique_id=42992459]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 52.0
+offset_right = 178.0
+offset_bottom = 75.0
+theme_override_fonts/font = ExtResource("3_k7478")
+text = "sample text"
+
+[node name="NameLabel" type="Label" parent="Background" unique_id=1265604017]
+layout_mode = 0
+offset_left = 84.0
+offset_top = -9.0
+offset_right = 175.0
+offset_bottom = 26.0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_constants/shadow_offset_x = 1
+theme_override_fonts/font = ExtResource("4_c73q0")
+theme_override_font_sizes/font_size = 40
+text = "character name"
+label_settings = SubResource("LabelSettings_gg2yw")
+
+[node name="NextButton" type="Button" parent="Background" unique_id=1980080795]
+modulate = Color(0.92941177, 0.43529412, 1, 1)
+layout_mode = 0
+offset_left = 709.0
+offset_top = 90.99999
+offset_right = 3969.17
+offset_bottom = 3595.0
+scale = Vector2(0.03, 0.03)
+icon = ExtResource("5_1wwox")
+flat = true
+
+[node name="CharacterPortrait" parent="." unique_id=1370236031 instance=ExtResource("6_bdrcx")]
+layout_mode = 0

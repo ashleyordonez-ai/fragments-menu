@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dlsk31scu42hl"]
 
 [ext_resource type="Texture2D" uid="uid://eeuvg3e4lg3x" path="res://assets/maps/Map 1 - Room/MAP 1 with F and C.png" id="1_w16ud"]
-[ext_resource type="Script" uid="uid://c31p2muotlnfx" path="res://script/Leonore_Moving.gd" id="2_kfxkm"]
+[ext_resource type="Script" uid="uid://cvstmd7lcsog" path="res://script/Leonore_Moving.gd" id="2_kfxkm"]
 [ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="2_wc7n0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w16ud"]
@@ -171,5 +171,5 @@ polygon = PackedVector2Array(179, 535, 184, 447, 184, 394, 175, 396, 173, 435, 1
 polygon = PackedVector2Array(43, 21, 40, 384, 82, 379, 85, 369, 118, 367, 121, 373, 150, 368, 279, 367, 282, 378, 295, 378, 366, 377, 374, 354, 376, 319, 453, 320, 454, 180, 454, 154, 440, 152, 445, 99, 445, 17)
 
 [node name="Bottom Line (Wall)" type="CollisionShape2D" parent="StaticBody2D" unique_id=795091223]
-position = Vector2(289, 532)
+position = Vector2(289, 519)
 shape = SubResource("SegmentShape2D_aoshd")
