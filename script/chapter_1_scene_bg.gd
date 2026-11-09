@@ -5,7 +5,6 @@ extends Control
 
 func _ready():
 	dialogue_box.background_changed.connect(change_background)
-
 	dialogue_box.call_deferred("show_dialogue")
 
 func change_background(path: String):

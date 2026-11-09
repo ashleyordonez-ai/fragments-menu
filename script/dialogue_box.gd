@@ -1,6 +1,8 @@
 
 extends Control
 
+signal background_changed(path: String)
+
 @onready var name_label: Label = $Background/NameLabel
 @onready var dialogue_text: Label = $Background/DialogueText
 @onready var next_button: Button = $Background/NextButton
@@ -10,17 +12,18 @@ var dialogues = [
 	{
 		"speaker": "Leonore",
 		"text": "Oh! You're finally here.",
-		"expression": "Leonore-Left_Defult.png"
+		"expression": "Leonore-Left_Default.png",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 	{
 		"speaker": "Leonore",
 		"text": "I was beginning to think you wouldn't come.",
-		"expression": "Leonore-Left_Happy.png"
+		"expression": "Leonore-Left_Default.png"
 	},
 	{
 		"speaker": "Leonore",
 		"text": "Anyway, welcome to my room!",
-		"expression": "Leonore-Left_Defult.png"
+		"expression": "Leonore-Left_Default.png"
 	}
 ]
 
@@ -41,11 +44,17 @@ func show_dialogue():
 	dialogue_text.text = dialogue["text"]
 
 	show_character(dialogue["expression"])
+	
+	var background_path = dialogue.get("background", "")
 
+	if background_path != "":
+		background_changed.emit(background_path)
+	
 func show_character(expression: String):
-	var path = "res://assets/sprites/characters/Leonore/Leonore-Left_Defult"
+	var path = "res://assets/sprites/characters/Leonore/" + expression
+	
 	var texture = load(path)
-
+	
 	if texture:
 		portrait.texture = texture
 	else:
