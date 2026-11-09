@@ -139,7 +139,7 @@ height = 104.0
 a = Vector2(824, 7)
 b = Vector2(0, 7)
 
-[node name="Node2D" type="Node2D" unique_id=2045826129]
+[node name="Map 1" type="Node2D" unique_id=2045826129]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=925395373]
 offset_left = 11.0
@@ -152,6 +152,7 @@ texture = ExtResource("1_w16ud")
 script = ExtResource("2_kfxkm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=350539633]
+z_index = 10
 position = Vector2(548, 421)
 scale = Vector2(1.2916666, 1.2916666)
 sprite_frames = SubResource("SpriteFrames_d6maq")
@@ -161,13 +162,22 @@ animation = &"front idle"
 position = Vector2(548, 450)
 shape = SubResource("CapsuleShape2D_d6maq")
 
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=2032822941]
+limit_enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 1140
+limit_bottom = 648
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=124298214]
 
 [node name="Wall + Door and table" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1331112264]
 polygon = PackedVector2Array(445, 15, 1005, 15, 1121, 233, 1116, 536, 1104, 538, 1090, 477, 1078, 462, 1069, 453, 1089, 297, 1034, 246, 1017, 255, 816, 257, 784, 252, 789, 305, 767, 303, 729, 307, 690, 306, 653, 304, 634, 305, 616, 305, 597, 304, 466, 302, 456, 180, 456, 150, 441, 149, 447, 98)
 
 [node name="Table" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=490066440]
-polygon = PackedVector2Array(155, 535, 161, 454, 156, 413, 145, 398, 138, 381, 147, 435, 147, 384, 53, 388, 47, 487, 51, 523, 60, 531)
+polygon = PackedVector2Array(155, 535, 196, 452, 197, 387, 145, 398, 138, 381, 147, 435, 147, 384, 53, 388, 47, 487, 51, 523, 60, 531)
 
 [node name="Bed + Wall" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=823006725]
 polygon = PackedVector2Array(43, 21, 40, 384, 82, 379, 82, 335, 130, 334, 176, 338, 221, 339, 294, 334, 329, 334, 343, 333, 359, 332, 371, 329, 376, 319, 453, 320, 454, 180, 454, 154, 440, 152, 445, 99, 445, 17)
