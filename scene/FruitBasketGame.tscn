@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://otm3m6hqqs0"]
 
-[ext_resource type="Script" uid="uid://cffpbchpf8tsl" path="res://scene/fruit_basket_game.gd" id="1_s6hl6"]
+[ext_resource type="Script" uid="uid://cffpbchpf8tsl" path="res://script/fruit_basket_game.gd" id="1_s6hl6"]
 [ext_resource type="Texture2D" uid="uid://dyn4woo2chvi0" path="res://assets/png/chap4background.jpg" id="2_gxpki"]
 [ext_resource type="Texture2D" uid="uid://be34t1spcunjr" path="res://assets/png/fruit basket.png" id="3_m5s30"]
 [ext_resource type="Texture2D" uid="uid://rca3ufb4w2er" path="res://assets/png/seperated fruits.png" id="4_alblt"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_cfeg7"]
 [ext_resource type="Texture2D" uid="uid://dcpgg1nuu7t3t" path="res://assets/png/panels.png" id="4_gxpki"]
-[ext_resource type="Shader" uid="uid://b288gqsvadouy" path="res://scene/instruction_glow.gdshader" id="4_ssuay"]
+[ext_resource type="Shader" uid="uid://b288gqsvadouy" path="res://gdshader/instruction_glow.gdshader" id="4_ssuay"]
 [ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="6_gxpki"]
 [ext_resource type="Texture2D" uid="uid://61su3kpxiqhc" path="res://assets/png/fruit_panel.png" id="6_rgwhw"]
-[ext_resource type="Shader" uid="uid://r0x8ql48b8lm" path="res://scene/FruitBasketGame.gdshader" id="7_ssuay"]
-[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://scene/scratch_cover.gd" id="8_cfeg7"]
+[ext_resource type="Shader" uid="uid://r0x8ql48b8lm" path="res://gdshader/FruitBasketGame.gdshader" id="7_ssuay"]
+[ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="8_cfeg7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpki"]
 shader = ExtResource("4_ssuay")

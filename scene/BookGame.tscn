@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://7gak6fbmfypr"]
 
 [ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_3ce5t"]
-[ext_resource type="Script" uid="uid://b0quv8wrmn5r3" path="res://scene/book_game.gd" id="1_421t7"]
+[ext_resource type="Script" uid="uid://b0quv8wrmn5r3" path="res://script/book_game.gd" id="1_421t7"]
 [ext_resource type="Texture2D" uid="uid://dxg0oq5dnt6j5" path="res://assets/png/BOOK.png" id="2_syipi"]
 [ext_resource type="FontFile" uid="uid://bfpvyio8j6hk3" path="res://assets/fonts/Secret Diary.ttf" id="3_syipi"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_3bdjy"]
 [ext_resource type="Texture2D" uid="uid://blakiw64hufed" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/png/panel-header@4x.png" id="5_421t7"]
 [ext_resource type="FontFile" uid="uid://5nmkywavqsxs" path="res://assets/fonts/I-pixel-u.ttf" id="6_0dg85"]
-[ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scene/code.gd" id="8_0dg85"]
+[ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://script/code.gd" id="8_0dg85"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("5_421t7")

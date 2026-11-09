@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2j5dbc7xb6sj"
-path="res://.godot/imported/panel-tooltip@4x.png-add24bf30a1c98ac076ba5704c354633.ctex"
+uid="uid://dnkd1hx6p4ouh"
+path="res://.godot/imported/frame.png-39cfba7917803ba50f8107b827e9d058.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/png/panel-tooltip@4x.png"
-dest_files=["res://.godot/imported/panel-tooltip@4x.png-add24bf30a1c98ac076ba5704c354633.ctex"]
+source_file="res://assets/png/frame.png"
+dest_files=["res://.godot/imported/frame.png-39cfba7917803ba50f8107b827e9d058.ctex"]
 
 [params]
 

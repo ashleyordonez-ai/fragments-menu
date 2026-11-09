@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://brhuxk16l2hjg" path="res://script/frame.gd" id="4_euach"]
 [ext_resource type="Script" uid="uid://by0u5q7j8gtow" path="res://script/chap_1.gd" id="5_3olfj"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_n0bnu"]
-[ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://scene/ChapterSelection.gdshader" id="7_plxvt"]
+[ext_resource type="Shader" uid="uid://cdeuqloeamq3a" path="res://gdshader/ChapterSelection.gdshader" id="7_plxvt"]
 [ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://script/chap_4.gd" id="9_0wxr0"]
 [ext_resource type="Script" uid="uid://digw3ixilru76" path="res://script/chap_5.gd" id="10_lf0ex"]
 

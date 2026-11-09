@@ -22,10 +22,10 @@ texture = ExtResource("1_mjk4c")
 
 [node name="Label" type="Label" parent="." unique_id=1683196603]
 layout_mode = 0
-offset_left = 165.0
-offset_top = 184.0
-offset_right = 1080.0
-offset_bottom = 401.0
+offset_left = 194.0
+offset_top = 237.0
+offset_right = 1109.0
+offset_bottom = 454.0
 theme_override_fonts/font = ExtResource("2_gvvuf")
-theme_override_font_sizes/font_size = 216
+theme_override_font_sizes/font_size = 190
 text = "CHAPTER ONE:"
