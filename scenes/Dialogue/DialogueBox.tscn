@@ -65,5 +65,16 @@ scale = Vector2(0.03, 0.03)
 icon = ExtResource("5_1wwox")
 flat = true
 
+[node name="SkipButton" type="Button" parent="Background" unique_id=748994367]
+layout_mode = 0
+offset_left = 880.0
+offset_top = -395.0
+offset_right = 944.0
+offset_bottom = -370.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_c73q0")
+text = "skip"
+flat = true
+
 [node name="CharacterPortrait" parent="." unique_id=1370236031 instance=ExtResource("6_bdrcx")]
 layout_mode = 0

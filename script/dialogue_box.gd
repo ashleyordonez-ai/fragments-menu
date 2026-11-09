@@ -7,6 +7,7 @@ signal background_changed(path: String)
 @onready var dialogue_text: Label = $Background/DialogueText
 @onready var next_button: Button = $Background/NextButton
 @onready var portrait: TextureRect = $CharacterPortrait/Portrait
+@onready var skip_button: Button = $Background/SkipButton
 
 var dialogues = [
 	{
@@ -31,6 +32,7 @@ var current_dialogue = 0
 
 func _ready():
 	next_button.pressed.connect(_on_next_button_pressed)
+	skip_button.pressed.connect(_on_skip_button_pressed)
 	show_dialogue()
 
 func show_dialogue():
@@ -43,23 +45,29 @@ func show_dialogue():
 	name_label.text = dialogue["speaker"]
 	dialogue_text.text = dialogue["text"]
 
-	show_character(dialogue["expression"])
+	show_character(dialogue["character"], dialogue["expression"])
 	
 	var background_path = dialogue.get("background", "")
 
 	if background_path != "":
 		background_changed.emit(background_path)
 	
-func show_character(expression: String):
-	var path = "res://assets/sprites/characters/Leonore/" + expression
+func show_character(character: String, expression: String):
+	
+	var path = "res://assets/sprites/characters/" + character + "/" + expression
 	
 	var texture = load(path)
-	
+
 	if texture:
 		portrait.texture = texture
+		portrait.visible = true
 	else:
 		print("Portrait not found: ", path)
 
 func _on_next_button_pressed():
 	current_dialogue += 1
+	show_dialogue()
+	
+func _on_skip_button_pressed():
+	current_dialogue = dialogues.size()
 	show_dialogue()
