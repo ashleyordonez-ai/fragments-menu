@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dj8m07tmb3pvj" path="res://assets/png/Dialogue Box.png" id="2_bdrcx"]
 [ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="3_k7478"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="4_c73q0"]
-[ext_resource type="Texture2D" uid="uid://cbgthat3cll3p" path="res://assets/fonts/f2de68d5-1428-475f-9192-715f29093b07.png" id="5_1wwox"]
+[ext_resource type="Texture2D" uid="uid://cbgthat3cll3p" path="res://assets/png/f2de68d5-1428-475f-9192-715f29093b07.png" id="5_1wwox"]
 [ext_resource type="PackedScene" uid="uid://bbgqhfuj1000i" path="res://scenes/Dialogue/character_portrait.tscn" id="6_bdrcx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_gg2yw"]

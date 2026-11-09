@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dqabqivxtdwfg"]
+
+[ext_resource type="Texture2D" uid="uid://beoxfya67jkvb" path="res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png" id="1_7cho6"]
+[ext_resource type="Script" uid="uid://clvi5nad080v5" path="res://script/chapter_1_scene_bg.gd" id="1_e7wi3"]
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="3_uv8yp"]
+
+[node name="Main" type="Control" unique_id=966722108]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e7wi3")
+
+[node name="Background" type="TextureRect" parent="." unique_id=466860612]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_7cho6")
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("3_uv8yp")]
+layout_mode = 1
+offset_left = 35.0
+offset_right = 35.0

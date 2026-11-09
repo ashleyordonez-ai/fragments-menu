@@ -142,8 +142,10 @@ b = Vector2(0, 7)
 [node name="Node2D" type="Node2D" unique_id=2045826129]
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=925395373]
-offset_right = 1162.0
-offset_bottom = 648.0
+offset_left = 11.0
+offset_top = -8.0
+offset_right = 1173.0
+offset_bottom = 640.0
 texture = ExtResource("1_w16ud")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1058174012]
@@ -162,13 +164,13 @@ shape = SubResource("CapsuleShape2D_d6maq")
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=124298214]
 
 [node name="Wall + Door and table" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1331112264]
-polygon = PackedVector2Array(445, 15, 1005, 15, 1121, 233, 1116, 536, 1104, 538, 1079, 483, 1069, 481, 1057, 466, 1014, 403, 1017, 353, 1002, 320, 778, 321, 763, 374, 757, 372, 762, 331, 639, 332, 639, 368, 633, 371, 629, 330, 615, 339, 582, 359, 455, 358, 456, 180, 456, 150, 441, 149, 447, 98)
+polygon = PackedVector2Array(445, 15, 1005, 15, 1121, 233, 1116, 536, 1104, 538, 1090, 477, 1078, 462, 1069, 453, 1089, 297, 1034, 246, 1017, 255, 816, 257, 784, 252, 789, 305, 767, 303, 729, 307, 690, 306, 653, 304, 634, 305, 616, 305, 597, 304, 466, 302, 456, 180, 456, 150, 441, 149, 447, 98)
 
 [node name="Table" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=490066440]
-polygon = PackedVector2Array(179, 535, 184, 447, 184, 394, 175, 396, 173, 435, 147, 435, 147, 384, 53, 388, 47, 487, 51, 523, 60, 531)
+polygon = PackedVector2Array(155, 535, 161, 454, 156, 413, 145, 398, 138, 381, 147, 435, 147, 384, 53, 388, 47, 487, 51, 523, 60, 531)
 
 [node name="Bed + Wall" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=823006725]
-polygon = PackedVector2Array(43, 21, 40, 384, 82, 379, 85, 369, 118, 367, 121, 373, 150, 368, 279, 367, 282, 378, 295, 378, 366, 377, 374, 354, 376, 319, 453, 320, 454, 180, 454, 154, 440, 152, 445, 99, 445, 17)
+polygon = PackedVector2Array(43, 21, 40, 384, 82, 379, 82, 335, 130, 334, 176, 338, 221, 339, 294, 334, 329, 334, 343, 333, 359, 332, 371, 329, 376, 319, 453, 320, 454, 180, 454, 154, 440, 152, 445, 99, 445, 17)
 
 [node name="Bottom Line (Wall)" type="CollisionShape2D" parent="StaticBody2D" unique_id=795091223]
 position = Vector2(289, 519)
