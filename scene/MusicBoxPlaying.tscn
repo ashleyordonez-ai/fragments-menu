@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cnj3ixsk15hep"]
+
+[ext_resource type="Script" uid="uid://d0lyy36alb84p" path="res://script/music_box_playing.gd" id="1_2wei6"]
+[ext_resource type="Texture2D" uid="uid://btuabh0rxhoh3" path="res://assets/png/background4MB.jpg" id="1_keiwh"]
+[ext_resource type="Texture2D" uid="uid://b11fn4ia0oes8" path="res://assets/png/MusicBox.png" id="2_q851q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("1_keiwh")
+region = Rect2(289.11212, 172.15564, 1054.5127, 323.2583)
+
+[node name="MusicBoxPlaying" type="Control" unique_id=1893995751]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2wei6")
+
+[node name="background" type="TextureRect" parent="." unique_id=376377884]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 0.99999976
+offset_top = -14.0
+offset_right = 10.0
+offset_bottom = -55.35327
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.99678534, 1.0978384)
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="MusicBox" type="TextureRect" parent="." unique_id=1527064196]
+layout_mode = 0
+offset_left = -64.99997
+offset_top = 29.999985
+offset_right = 1196.7594
+offset_bottom = 659.5022
+scale = Vector2(1.0247595, 0.9670799)
+texture = ExtResource("2_q851q")
+expand_mode = 1
