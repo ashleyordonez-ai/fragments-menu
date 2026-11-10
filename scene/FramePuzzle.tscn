@@ -1,0 +1,206 @@
+[gd_scene format=3 uid="uid://phbjonen8fvq"]
+
+[ext_resource type="Texture2D" uid="uid://c2reqsj6hgmpf" path="res://assets/png/white_wall.jpg" id="1_gq0hs"]
+[ext_resource type="Texture2D" uid="uid://bda3x132tioey" path="res://assets/png/assets4chap3.png" id="2_0bol1"]
+[ext_resource type="Texture2D" uid="uid://blx1v1i2why33" path="res://assets/png/puzzlebacking.jpg" id="3_0bol1"]
+[ext_resource type="Texture2D" uid="uid://dnkd1hx6p4ouh" path="res://assets/png/frame.png" id="3_pop71"]
+[ext_resource type="Script" uid="uid://kgj2l4k3gdd3" path="res://script/ShatteredPuzzle.gd" id="4_pop71"]
+[ext_resource type="Texture2D" uid="uid://xrepqv1pmd67" path="res://assets/png/PhotoInFrame.png" id="4_qrprd"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="6_qrprd"]
+[ext_resource type="Script" uid="uid://dkeb5rj2mnutn" path="res://script/diaologue_panel.gd" id="7_i6c4f"]
+[ext_resource type="Script" uid="uid://bjm7oes4k67a5" path="res://script/instruction_ui.gd" id="9_i6c4f"]
+[ext_resource type="Shader" uid="uid://db1ginytqvslp" path="res://gdshader/FramePuzzle.gdshader" id="10_4csnn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("1_gq0hs")
+region = Rect2(186.96967, 2.59375, 866.31024, 533.14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jre5i"]
+atlas = ExtResource("3_0bol1")
+region = Rect2(181.54657, 102.22539, 1009.20233, 568.2658)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bjqgx"]
+bg_color = Color(0, 0, 0, 0)
+shadow_color = Color(1, 0.827451, 0.41568628, 0.29411766)
+shadow_size = 24
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("4_qrprd")
+region = Rect2(29.175049, 298.73035, 1946.5985, 1056.5718)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
+atlas = ExtResource("2_0bol1")
+region = Rect2(16.505615, 128.16284, 900.72107, 108.46567)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8jovo"]
+texture = SubResource("AtlasTexture_1xlpn")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqv50"]
+atlas = ExtResource("2_0bol1")
+region = Rect2(18.848083, 396.96902, 570.6237, 346.61862)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bjqgx"]
+shader = ExtResource("10_4csnn")
+shader_parameter/rect_top_left = Vector2(0.3, 0.3)
+shader_parameter/rect_bottom_right = Vector2(0.7, 0.7)
+shader_parameter/progress = 0.0
+shader_parameter/screen_aspect = 1.0
+
+[node name="FramePuzzle" type="Control" unique_id=248370024]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WoodenWall" type="TextureRect" parent="." unique_id=473662003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="frame" type="TextureRect" parent="." unique_id=1194802528]
+layout_mode = 0
+offset_left = 118.0
+offset_top = 70.0
+offset_right = 1013.0
+offset_bottom = 524.0
+texture = ExtResource("3_pop71")
+expand_mode = 1
+
+[node name="PuzzleBacking" type="TextureRect" parent="." unique_id=945083066]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 161.0
+offset_right = 816.0
+offset_bottom = 431.0
+texture = SubResource("AtlasTexture_jre5i")
+expand_mode = 1
+
+[node name="PuzzlePieces" type="Control" parent="." unique_id=2008739756]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_pop71")
+
+[node name="PortraitGlow" type="Panel" parent="." unique_id=1993243628]
+visible = false
+layout_mode = 0
+offset_left = 316.0
+offset_top = 162.0
+offset_right = 816.0
+offset_bottom = 431.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_bjqgx")
+
+[node name="PortraitPicture" type="TextureRect" parent="." unique_id=854831301]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 162.0
+offset_right = 816.0
+offset_bottom = 431.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+
+[node name="DialoguePanel" type="Panel" parent="." unique_id=1640124370]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 544.0
+offset_right = 1036.0
+offset_bottom = 599.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8jovo")
+script = ExtResource("7_i6c4f")
+
+[node name="DialogueText" type="Label" parent="DialoguePanel" unique_id=1491240638]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 13.0
+offset_right = 872.22705
+offset_bottom = 54.0
+scale = Vector2(0.9322143, 1)
+theme_override_colors/font_color = Color(0.34901962, 0.29411766, 0.2509804, 1)
+theme_override_fonts/font = ExtResource("6_qrprd")
+theme_override_font_sizes/font_size = 25
+text = "Huh...? Is this my picture.....? Why is it torn apart?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="InstructionUI" type="Control" parent="." unique_id=99392355]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("9_i6c4f")
+
+[node name="DimOverlay" type="ColorRect" parent="InstructionUI" unique_id=1447814611]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1113.0
+offset_bottom = 604.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.39607844)
+
+[node name="InstructionPanel" type="TextureRect" parent="InstructionUI" unique_id=98864466]
+visible = false
+layout_mode = 0
+offset_left = 119.0
+offset_top = 31.0
+offset_right = 1048.0
+offset_bottom = 566.0
+texture = SubResource("AtlasTexture_uqv50")
+expand_mode = 1
+
+[node name="InstructionLabel" type="Label" parent="InstructionUI/InstructionPanel" unique_id=1878190213]
+layout_mode = 0
+offset_left = 258.00003
+offset_top = 116.0
+offset_right = 683.0
+offset_bottom = 373.0
+scale = Vector2(1.0637119, 1.0347441)
+theme_override_colors/font_color = Color(0.31775582, 0.22541422, 0.09183667, 1)
+theme_override_fonts/font = ExtResource("6_qrprd")
+theme_override_font_sizes/font_size = 19
+text = "
+The picture has been torn apart. 
+
+Drag each scattered piece back into the frame to restore the photograph.
+
+Take your time and put the pieces in their correct places.
+
+Can you bring the memory back?"
+autowrap_mode = 2
+
+[node name="GotItButton" type="Button" parent="InstructionUI/InstructionPanel" unique_id=1220043390]
+layout_mode = 0
+offset_left = 403.0
+offset_top = 395.0
+offset_right = 549.0
+offset_bottom = 432.0
+theme_override_fonts/font = ExtResource("6_qrprd")
+theme_override_font_sizes/font_size = 17
+text = "Got it !"
+
+[node name="GoldenTransition" type="ColorRect" parent="." unique_id=368798995]
+visible = false
+z_index = 100
+material = SubResource("ShaderMaterial_bjqgx")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
