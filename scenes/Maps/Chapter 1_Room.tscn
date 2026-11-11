@@ -149,20 +149,21 @@ offset_bottom = 640.0
 texture = ExtResource("1_w16ud")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1058174012]
+position = Vector2(548, 421)
 script = ExtResource("2_kfxkm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=350539633]
 z_index = 10
-position = Vector2(548, 421)
 scale = Vector2(1.2916666, 1.2916666)
 sprite_frames = SubResource("SpriteFrames_d6maq")
 animation = &"front idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=906802028]
-position = Vector2(548, 450)
+position = Vector2(0, 29)
 shape = SubResource("CapsuleShape2D_d6maq")
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D" unique_id=2032822941]
+zoom = Vector2(1.5, 1.5)
 limit_enabled = false
 limit_left = 0
 limit_top = 0
