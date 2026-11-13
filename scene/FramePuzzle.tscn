@@ -93,7 +93,6 @@ mouse_filter = 2
 script = ExtResource("4_pop71")
 
 [node name="PortraitGlow" type="Panel" parent="." unique_id=1993243628]
-visible = false
 layout_mode = 0
 offset_left = 316.0
 offset_top = 162.0

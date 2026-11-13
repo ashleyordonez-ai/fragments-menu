@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://cfy3x6o1nhgvu"]
+
+[ext_resource type="Texture2D" uid="uid://dvs3pmvi3qa6" path="res://assets/png/greenbr_blurred.jpg" id="1_8wthp"]
+[ext_resource type="Script" uid="uid://bgfjnyb6js3r8" path="res://scenes/gameplay_intro/chap_4_fruitbasket_intro.gd" id="1_ejea8"]
+[ext_resource type="Texture2D" uid="uid://61su3kpxiqhc" path="res://assets/png/fruit_panel.png" id="2_ejea8"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_mj5og"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("2_ejea8")
+
+[node name="Chap4FruitbasketIntro" type="Control" unique_id=437189949]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ejea8")
+gameplay_scene_path = "uid://otm3m6hqqs0"
+
+[node name="background" type="TextureRect" parent="." unique_id=1487609112]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8wthp")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1878943956]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 102.0
+offset_right = 891.0
+offset_bottom = 545.0
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="title" type="Label" parent="." unique_id=184777606]
+layout_mode = 0
+offset_left = 360.00003
+offset_top = 282.0
+offset_right = 832.0
+offset_bottom = 350.0
+scale = Vector2(1.0788456, 1.0343496)
+theme_override_colors/font_color = Color(0.3474857, 0.16502488, 0.08305044, 1)
+theme_override_fonts/font = ExtResource("3_mj5og")
+theme_override_font_sizes/font_size = 40
+text = "Scratch and Seek"
+
+[node name="description" type="Label" parent="." unique_id=1824820198]
+layout_mode = 0
+offset_left = 326.0
+offset_top = 335.0
+offset_right = 678.4795
+offset_bottom = 387.7289
+scale = Vector2(1.3646185, 0.81549174)
+theme_override_colors/font_color = Color(0.34901962, 0.16470589, 0.08235294, 1)
+theme_override_fonts/font = ExtResource("3_mj5og")
+theme_override_font_sizes/font_size = 17
+text = "Choose and scratch the fruits to reveal the hidden gear."
+horizontal_alignment = 1
+autowrap_mode = 2

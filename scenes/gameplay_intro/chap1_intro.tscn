@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://blxg400qhjwoo"]
+
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_6fduf"]
+[ext_resource type="Script" uid="uid://4xpp7q75yw0h" path="res://scenes/gameplay_intro/chap_1_intro.gd" id="1_8dbv5"]
+[ext_resource type="Texture2D" uid="uid://dl4bmfmu7r15t" path="res://assets/png/chap1other-assets.png" id="2_8dbv5"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_jo5wm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("1_6fduf")
+region = Rect2(232.81201, 617.8473, 1470.6405, 837.86835)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("2_8dbv5")
+region = Rect2(45.75757, 16.425934, 462.4447, 307.5975)
+
+[node name="Chap1Intro" type="Control" unique_id=365530409]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8dbv5")
+gameplay_scene_path = "uid://qvc6gsclhe32"
+
+[node name="background" type="TextureRect" parent="." unique_id=1889675397]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="panel" type="TextureRect" parent="." unique_id=40336088]
+layout_mode = 0
+offset_left = 158.0
+offset_top = 100.999985
+offset_right = 1002.0
+offset_bottom = 457.0
+scale = Vector2(1.0287619, 1.2293024)
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+
+[node name="title" type="Label" parent="." unique_id=1879701556]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 255.0
+offset_right = 756.0
+offset_bottom = 323.0
+scale = Vector2(1.0990402, 1.1140872)
+theme_override_colors/font_color = Color(0.91114986, 0.8174672, 0.66451955, 1)
+theme_override_fonts/font = ExtResource("3_jo5wm")
+theme_override_font_sizes/font_size = 60
+text = "Flora Quest"
+
+[node name="description" type="Label" parent="." unique_id=1696830706]
+layout_mode = 0
+offset_left = 278.0
+offset_top = 342.0
+offset_right = 728.6754
+offset_bottom = 394.7289
+scale = Vector2(1.3646185, 0.81549174)
+theme_override_colors/font_color = Color(0.9098039, 0.8156863, 0.6627451, 1)
+theme_override_fonts/font = ExtResource("3_jo5wm")
+theme_override_font_sizes/font_size = 16
+text = "Solve the flower riddle and discover which flower belongs on the parchment."
+horizontal_alignment = 1
+autowrap_mode = 2

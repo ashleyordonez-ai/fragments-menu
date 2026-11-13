@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dfxjkqqgqrvow"]
+
+[ext_resource type="Texture2D" uid="uid://cn45np8h2abfp" path="res://assets/png/book_blurred.jpg" id="1_3huv2"]
+[ext_resource type="Script" uid="uid://cmtowyi3suduo" path="res://scenes/gameplay_intro/chap_2_intro.gd" id="1_iggmt"]
+[ext_resource type="Texture2D" uid="uid://dl4bmfmu7r15t" path="res://assets/png/chap1other-assets.png" id="2_iggmt"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_g1il4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4bga"]
+atlas = ExtResource("1_3huv2")
+region = Rect2(-3.7974854, 49.367493, 737.05774, 483.7735)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("2_iggmt")
+region = Rect2(580.35474, 631.621, 383.5476, 379.75)
+
+[node name="Chap2Intro" type="Control" unique_id=233094953]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iggmt")
+gameplay_scene_path = "uid://7gak6fbmfypr"
+
+[node name="background" type="TextureRect" parent="." unique_id=321380467]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_p4bga")
+
+[node name="paper" type="TextureRect" parent="." unique_id=1633193181]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 141.0
+offset_right = 966.0
+offset_bottom = 526.0
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+
+[node name="title" type="Label" parent="." unique_id=159134997]
+layout_mode = 0
+offset_left = 345.0
+offset_top = 280.0
+offset_right = 767.0
+offset_bottom = 348.0
+scale = Vector2(1.0990402, 1.3309351)
+theme_override_colors/font_color = Color(0.47669554, 0.38068178, 0.21634427, 1)
+theme_override_fonts/font = ExtResource("3_g1il4")
+theme_override_font_sizes/font_size = 60
+text = "Codebreaker"
+
+[node name="description" type="Label" parent="." unique_id=1821735019]
+layout_mode = 0
+offset_left = 271.0
+offset_top = 370.0
+offset_right = 721.6754
+offset_bottom = 422.7289
+scale = Vector2(1.3646185, 0.81549174)
+theme_override_colors/font_color = Color(0.47843137, 0.38039216, 0.21568628, 1)
+theme_override_fonts/font = ExtResource("3_g1il4")
+theme_override_font_sizes/font_size = 16
+text = "Decode the hidden message and uncover the missing word."
+horizontal_alignment = 1
+autowrap_mode = 2

@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://barmfo2mr518w"]
+
+[ext_resource type="Script" uid="uid://bfvymxn3y0rrw" path="res://scenes/gameplay_intro/chap_3_intro.gd" id="1_3lppw"]
+[ext_resource type="Texture2D" uid="uid://j1vlvb2fvobr" path="res://assets/png/wall_blurred.jpg" id="1_11hwm"]
+[ext_resource type="Texture2D" uid="uid://blx1v1i2why33" path="res://assets/png/puzzlebacking.jpg" id="2_3lppw"]
+[ext_resource type="Texture2D" uid="uid://dnkd1hx6p4ouh" path="res://assets/png/frame.png" id="3_fw0mh"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="4_8r805"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("2_3lppw")
+
+[node name="Chap3Intro" type="Control" unique_id=1355624389]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3lppw")
+gameplay_scene_path = "uid://phbjonen8fvq"
+
+[node name="background" type="TextureRect" parent="." unique_id=471467824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_11hwm")
+
+[node name="frame2" type="TextureRect" parent="." unique_id=909544260]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 200.0
+offset_right = 858.0
+offset_bottom = 461.0
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="frame" type="TextureRect" parent="." unique_id=1963159679]
+layout_mode = 0
+offset_left = 126.0
+offset_top = 161.0
+offset_right = 1008.0
+offset_bottom = 498.0
+texture = ExtResource("3_fw0mh")
+expand_mode = 1
+
+[node name="title" type="Label" parent="." unique_id=1195271030]
+layout_mode = 0
+offset_left = 346.00003
+offset_top = 288.0
+offset_right = 768.0
+offset_bottom = 356.0
+scale = Vector2(1.0788456, 1.0343496)
+theme_override_colors/font_color = Color(0.3474857, 0.16502488, 0.08305044, 1)
+theme_override_fonts/font = ExtResource("4_8r805")
+theme_override_font_sizes/font_size = 47
+text = "Picture Perfect"
+
+[node name="description" type="Label" parent="." unique_id=670883183]
+layout_mode = 0
+offset_left = 334.00003
+offset_top = 348.0
+offset_right = 684.281
+offset_bottom = 400.7289
+scale = Vector2(1.3646185, 0.81549174)
+theme_override_colors/font_color = Color(0.34901962, 0.16470589, 0.08235294, 1)
+theme_override_fonts/font = ExtResource("4_8r805")
+theme_override_font_sizes/font_size = 15
+text = "Piece together the shattered photograph and restore the missing image."
+horizontal_alignment = 1
+autowrap_mode = 2

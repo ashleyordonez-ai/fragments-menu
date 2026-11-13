@@ -1,3 +1,4 @@
+
 extends Control
 
 
@@ -19,10 +20,12 @@ const INSTRUCTION_HOLD_TIME := 3.0
 
 const SUCCESS_DIM_TIME := 0.5
 const SUCCESS_GLOW_TIME := 0.8
-const BRIGHT_FADE_TIME := 1.0
 
 # Recovered gear pulse
 const GEAR_PULSE_TIME := 1.2
+
+# Scene fade-in
+const SCENE_FADE_IN_TIME := 1.5
 
 
 # =====================================================
@@ -41,8 +44,6 @@ const GEAR_PULSE_TIME := 1.2
 @onready var instruction_panel: Control = $InstructionLayer/InstructionUI/InstructionPanel
 @onready var instruction_title: Label = $InstructionLayer/InstructionUI/InstructionPanel/InstructionTitle
 @onready var instruction_text: Label = $InstructionLayer/InstructionUI/InstructionPanel/InstructionText
-
-@onready var bright_overlay: ColorRect = $BrightTransition/BrightOverlay
 
 
 # =====================================================
@@ -75,10 +76,27 @@ func _ready():
 	# Store the gear's starting position
 	gear_start_position = recovered_gear.global_position
 
-	# Initialize the bright transition overlay
-	bright_overlay.show()
-	bright_overlay.color = Color.WHITE
-	bright_overlay.modulate.a = 0.0
+	# Fade in the scene from black
+	var scene_fade := ColorRect.new()
+	scene_fade.name = "SceneFadeIn"
+	scene_fade.color = Color.BLACK
+	scene_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	scene_fade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scene_fade.z_as_relative = false
+	scene_fade.z_index = 200
+
+	add_child(scene_fade)
+
+	var scene_fade_tween := create_tween()
+	scene_fade_tween.tween_property(
+		scene_fade,
+		"modulate:a",
+		0.0,
+		SCENE_FADE_IN_TIME
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await scene_fade_tween.finished
+	scene_fade.queue_free()
 
 	# Start the sequence
 	start_gear_repair_sequence()
@@ -414,22 +432,12 @@ func check_gear_placement():
 # SUCCESSFUL GEAR PLACEMENT
 # =====================================================
 
+
 func play_gear_success_sequence():
 
 	# Prevent further dragging
 	is_dragging = false
 	(recovered_gear as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE
-
-	# Dim the gameplay
-	var dim_tween = create_tween()
-
-	dim_tween.tween_property(
-		self,
-		"modulate",
-	Color(2.5, 1.8, 0.35, 0.0),		SUCCESS_DIM_TIME
-	)
-
-	await dim_tween.finished
 
 	# Bright gold glow on the recovered gear
 	var glow_tween = create_tween()
@@ -447,22 +455,37 @@ func play_gear_success_sequence():
 
 	await glow_tween.finished
 
-	# Fade the screen to white
-	var bright_tween = create_tween()
+	# Create a black transition overlay
+	var transition_overlay := ColorRect.new()
+	transition_overlay.name = "SceneTransitionOverlay"
+	transition_overlay.color = Color(0, 0, 0, 0)
+	transition_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	transition_overlay.z_index = 200
+	transition_overlay.z_as_relative = false
+	transition_overlay.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
 
-	bright_tween.tween_property(
-		bright_overlay,
-		"modulate:a",
+	add_child(transition_overlay)
+	transition_overlay.move_to_front()
+
+	# Fade to black before changing scenes
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		transition_overlay,
+		"color:a",
 		1.0,
-		BRIGHT_FADE_TIME
-	)
+		0.75
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-	await bright_tween.finished
+	await fade_tween.finished
 
-	# Transition to the music box playing scene
+	# Change to MusicBoxPlaying while the screen is black
 	get_tree().change_scene_to_file(
-		"res://MusicBoxPlaying.tscn"
+		"res://scene/MusicBoxPlaying.tscn"
 	)
+
 
 
 # =====================================================

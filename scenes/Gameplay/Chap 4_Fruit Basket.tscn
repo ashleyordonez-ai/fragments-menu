@@ -200,6 +200,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="BasketImage" type="TextureRect" parent="BasketIntro" unique_id=1366932290]
+visible = false
 layout_mode = 0
 offset_left = 326.0
 offset_top = 99.0
@@ -490,6 +491,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_lrfax")
 text = "CLOSE"
 
 [node name="ResultNotification" type="Panel" parent="." unique_id=23845313]
+visible = false
 layout_mode = 0
 offset_left = 233.0
 offset_top = 16.0

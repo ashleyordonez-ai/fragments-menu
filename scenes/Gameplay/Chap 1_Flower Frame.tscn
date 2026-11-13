@@ -1,138 +1,2146 @@
 [gd_scene format=3 uid="uid://qvc6gsclhe32"]
 
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_hbk2s"]
+[ext_resource type="Texture2D" uid="uid://1uqpv86lrrno" path="res://assets/png/FRAME (1).png" id="2_hsux1"]
+[ext_resource type="Texture2D" uid="uid://dl4bmfmu7r15t" path="res://assets/png/chap1other-assets.png" id="3_rrpd5"]
+[ext_resource type="Texture2D" uid="uid://dwwjn6c4qcoxn" path="res://assets/png/LILY.png" id="4_hbk2s"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="5_alb8v"]
+[ext_resource type="Texture2D" uid="uid://c2o6amrupi3eo" path="res://assets/png/EDELWEISS1.png" id="6_lfiq3"]
+[ext_resource type="Texture2D" uid="uid://bht1uwvwvcfux" path="res://assets/png/ORCHID1.png" id="7_sr3l1"]
+[ext_resource type="Texture2D" uid="uid://mvold1gu7e3e" path="res://assets/png/NARCICUSS.png" id="8_uthwc"]
+[ext_resource type="Texture2D" uid="uid://5bcy2k47ccxk" path="res://assets/png/ORCHID2.png" id="9_gddph"]
+[ext_resource type="Texture2D" uid="uid://1477fkchp0yx" path="res://assets/png/ROSE.png" id="10_qiesj"]
+[ext_resource type="Texture2D" uid="uid://dspbv7p42qv8h" path="res://assets/png/EDELWEISS2.png" id="11_0nta3"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="12_3k0p1"]
+
 [sub_resource type="GDScript" id="GDScript_2k86a"]
-script/source = "extends Node2D
+script/source = "extends Control
 
-signal puzzle_completed
+# ==========================================
+# NODE REFERENCES
+# ==========================================
 
-@export var picture: Texture2D
-@export var piece_scene: PackedScene
-@export var cols := 4
-@export var rows := 4
-@export var board_max_size := Vector2(560, 560)
+@onready var background = $background
 
-@onready var pieces_root = $Pieces
-@onready var frame = $Frame
-@onready var win_label = $UI/WinLabel
+# Main panels
+@onready var paper = $paper
+@onready var frame = $frame
+@onready var wood_panel = $wood_panel
+@onready var riddle_label = $wood_panel/RiddleLabel
 
-var pieces: Array = []
-var placed_count := 0
-var board_rect: Rect2
-var piece_scale := 1.0
+# Final word label
+@onready var final_word_label = $FinalWordLabel
+
+# Instruction popup
+@onready var instruction_panel = $InstructionPanel
+@onready var title_label = $InstructionPanel/TitleLabel
+@onready var instruction_label = $InstructionPanel/InstructionLabel
+@onready var continue_button = $InstructionPanel/ContinueButton
+
+# Instructions button
+@onready var instruction_button = $InstructionButton
+@onready var instruction_button_text = $InstructionButton/ButtonText
+
+# All seven flowers
+@onready var flowers = [
+	$lily,
+	$edelweiss1,
+	$orchid1,
+	$narcicuss,
+	$orchid2,
+	$rose,
+	$edelweiss2
+]
+
+# Seven flower slots
+@onready var slots = [
+	$frame/Slot1,
+	$frame/Slot2,
+	$frame/Slot3,
+	$frame/Slot4,
+	$frame/Slot5,
+	$frame/Slot6,
+	$frame/Slot7
+]
+
+var game_started = false
+var button_tween: Tween
+
+# DIM OVERLAY
+var dim_overlay: ColorRect
+
+# WOODEN PANEL GLOW
+var wood_glow_tween: Tween
+var wood_original_modulate: Color
+
+# FRAME TRAVELING GLOW
+var frame_travel_line: Line2D
+var frame_glow_line: Line2D
+var frame_core_line: Line2D
+var frame_light_active = false
+var frame_light_progress = 0.0
+
+# RIDDLE SYSTEM
+var current_riddle = 0
+
+var riddles = [
+	\"I'm often found in white, with big petals that bloom like a trumpet. I am also a popular flower in gardens. Who am I?\",
+	\"I am a tiny white flower that looks like a star. I grow high up in cold mountains. Who am I?\",
+	\"I come in many colors and have petals that look like butterfly wings. I am often used as decoration. Who am I?\",
+	\"I have a small trumpet in the middle of my flower. I am usually yellow and bloom in spring. Who am I?\",
+	\"I am a beautiful flower with unusual petals. Some of my kind look like little dancing ladies. Who am I?\",
+	\"I am a flower often given on Valentine's Day. I have soft petals and sharp thorns. Who am I?\",
+	\"I am a mountain flower with white, fuzzy petals. My name is also associated with the snowy Alps. Who am I?\"
+]
+
+# FLOWER HOVER AND DRAG
+var flower_scales = {}
+var flower_tweens = {}
+var dragging_flower: Control
+var drag_offset = Vector2.ZERO
+
+# FLOWER PLACEMENT
+var flower_original_positions = {}
+var flower_letters = {}
+var flower_name_labels = {}
+var slot_letter_labels = []
+
+var is_advancing = false
+
+# TRUE WHEN THE PLAYER REOPENS INSTRUCTIONS DURING GAMEPLAY
+var is_instruction_replay = false
+
+
+# ==========================================
+# READY
+# ==========================================
+
 
 func _ready():
-	randomize()
-	_build_board()
-	_create_pieces()
-	await get_tree().create_timer(1.0).timeout  # player sees the whole picture first
-	await _shatter()
-	for p in pieces:
-		p.input_pickable = true
 
-func _build_board():
-	var pic_size = picture.get_size()
-	piece_scale = min(board_max_size.x / pic_size.x, board_max_size.y / pic_size.y)
-	var board_size = pic_size * piece_scale
-	var screen = get_viewport_rect().size
-	board_rect = Rect2((screen - board_size) / 2.0, board_size)
+	# Hide/show elements immediately before the first frame is rendered.
+	background.visible = true
 
-	var margin := 24.0
-	frame.position = board_rect.position - Vector2(margin, margin)
-	frame.size = board_size + Vector2(margin * 2, margin * 2)
+	paper.visible = false
+	frame.visible = false
+	wood_panel.visible = false
 
-func _create_pieces():
-	var pw = board_rect.size.x / cols
-	var ph = board_rect.size.y / rows
-	var src_w = picture.get_width() / float(cols)
-	var src_h = picture.get_height() / float(rows)
+	final_word_label.visible = false
 
-	for y in rows:
-		for x in cols:
-			var p = piece_scene.instantiate()
-			pieces_root.add_child(p)
+	# Hide Instructions button until the game is ready
+	instruction_button.visible = false
 
-			var spr: Sprite2D = p.get_node(\"Sprite2D\")
-			spr.texture = picture
-			spr.region_enabled = true
-			spr.region_rect = Rect2(x * src_w, y * src_h, src_w, src_h)
-			spr.scale = Vector2(piece_scale, piece_scale)
+	for flower in flowers:
+		flower.visible = false
 
-			var shape = RectangleShape2D.new()
-			shape.size = Vector2(pw, ph)
-			p.get_node(\"CollisionShape2D\").shape = shape
+	instruction_panel.visible = false
+	title_label.visible = false
+	instruction_label.visible = false
 
-			# thin outline so pieces look like shards
-			var line = Line2D.new()
-			line.points = PackedVector2Array([
-				Vector2(-pw/2, -ph/2), Vector2(pw/2, -ph/2),
-				Vector2(pw/2, ph/2), Vector2(-pw/2, ph/2), Vector2(-pw/2, -ph/2)])
-			line.width = 2
-			line.default_color = Color(0, 0, 0, 0.5)
-			p.add_child(line)
+	riddle_label.visible = false
 
-			p.correct_pos = board_rect.position + Vector2((x + 0.5) * pw, (y + 0.5) * ph)
-			p.global_position = p.correct_pos
-			p.input_pickable = false  # locked until the shatter finishes
-			p.placed.connect(_on_piece_placed)
-			pieces.append(p)
+	riddle_label.add_theme_color_override(
+		\"font_color\",
+		Color(\"#F7E7C6\")
+	)
 
-func _shatter():
-	# screen shake
-	var shake = create_tween()
-	for i in 6:
-		shake.tween_property(self, \"position\", Vector2(randf_range(-8, 8), randf_range(-8, 8)), 0.04)
-	shake.tween_property(self, \"position\", Vector2.ZERO, 0.04)
-	await shake.finished
+	wood_original_modulate = wood_panel.modulate
 
-	# burst apart
-	var last_tween: Tween
-	for p in pieces:
-		p.z_index = 1
-		var tw = create_tween().set_parallel(true)
-		tw.tween_property(p, \"global_position\", _random_scatter_point(), 0.7) \\
-			.set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tw.tween_property(p, \"rotation_degrees\", randf_range(-30, 30), 0.7)
-		last_tween = tw
-	await last_tween.finished
+	create_dim_overlay()
 
-func _random_scatter_point() -> Vector2:
-	var screen = get_viewport_rect().size
-	var keep_out = board_rect.grow(40)
-	for i in 50:
-		var pt = Vector2(randf_range(80, screen.x - 80), randf_range(80, screen.y - 80))
-		if not keep_out.has_point(pt):
-			return pt
-	return Vector2(100, 100)
+	setup_continue_button()
+	setup_instruction_button()
 
-func _on_piece_placed(_piece):
-	placed_count += 1
-	if placed_count == pieces.size():
-		_on_complete()
+	setup_flower_interactions()
+	setup_flower_slots()
 
-func _on_complete():
-	var tw = create_tween()
-	tw.tween_property(frame, \"modulate\", Color(1, 0.9, 0.5), 0.3)
-	tw.tween_property(frame, \"modulate\", Color.WHITE, 0.6)
-	win_label.visible = true
-	puzzle_completed.emit()  # your story scene can listen to this
+	await play_intro()
+
+
+
+# ==========================================
+# CREATE DIM OVERLAY
+# ==========================================
+
+func create_dim_overlay():
+
+	dim_overlay = ColorRect.new()
+	dim_overlay.name = \"DimOverlay\"
+
+	dim_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+
+	dim_overlay.color = Color(0, 0, 0, 0.0)
+
+	dim_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	dim_overlay.z_index = 10
+
+	add_child(dim_overlay)
+
+	move_child(dim_overlay, instruction_panel.get_index())
+
+	instruction_panel.z_index = 12
+
+	dim_overlay.visible = false
+
+
+# ==========================================
+# INTRO ANIMATION
+# ==========================================
+
+func play_intro():
+
+	await pop_in_fixed(paper, 0.55)
+
+	await get_tree().create_timer(0.2).timeout
+
+	for flower in flowers:
+
+		await pop_in(
+			flower,
+			Vector2(0, 25),
+			0.35
+		)
+
+		await get_tree().create_timer(0.12).timeout
+
+	await get_tree().create_timer(0.3).timeout
+
+	frame.visible = true
+	frame.modulate.a = 0.0
+
+	var frame_tween = create_tween()
+
+	frame_tween.tween_property(
+		frame,
+		\"modulate:a\",
+		1.0,
+		0.55
+	)
+
+	await frame_tween.finished
+
+	await get_tree().create_timer(0.2).timeout
+
+	await pop_in(
+		wood_panel,
+		Vector2(0, -45),
+		0.45
+	)
+
+	await get_tree().create_timer(0.4).timeout
+
+	dim_overlay.visible = true
+
+	var dim_tween = create_tween()
+
+	dim_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.65,
+		0.4
+	)
+
+	await dim_tween.finished
+
+	await pop_in(
+		instruction_panel,
+		Vector2(0, 35),
+		0.5
+	)
+
+	await get_tree().create_timer(0.2).timeout
+
+	await pop_in_fixed(
+		title_label,
+		0.35
+	)
+
+	await get_tree().create_timer(0.2).timeout
+
+	await pop_in_fixed(
+		instruction_label,
+		0.4
+	)
+
+
+# ==========================================
+# POP-IN ANIMATION
+# ==========================================
+
+func pop_in(node: Control, start_offset: Vector2, duration: float):
+
+	node.visible = true
+
+	node.pivot_offset = node.size / 2
+
+	var original_position = node.position
+	var original_scale = node.scale
+	var original_modulate = node.modulate
+
+	node.position = original_position + start_offset
+	node.scale = original_scale * 0.75
+
+	node.modulate = Color(
+		original_modulate.r,
+		original_modulate.g,
+		original_modulate.b,
+		0.0
+	)
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		node,
+		\"modulate\",
+		original_modulate,
+		duration
+	)
+
+	tween.tween_property(
+		node,
+		\"scale\",
+		original_scale,
+		duration
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(
+		node,
+		\"position\",
+		original_position,
+		duration
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	await tween.finished
+
+
+# ==========================================
+# FIXED POSITION POP-IN
+# ==========================================
+
+func pop_in_fixed(node: Control, duration: float):
+
+	node.visible = true
+
+	node.pivot_offset = node.size / 2
+
+	var original_scale = node.scale
+	var original_modulate = node.modulate
+
+	node.scale = original_scale * 0.75
+
+	node.modulate = Color(
+		original_modulate.r,
+		original_modulate.g,
+		original_modulate.b,
+		0.0
+	)
+
+	var tween = create_tween()
+	tween.set_parallel(true)
+
+	tween.tween_property(
+		node,
+		\"modulate\",
+		original_modulate,
+		duration
+	)
+
+	tween.tween_property(
+		node,
+		\"scale\",
+		original_scale,
+		duration
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	await tween.finished
+
+
+# ==========================================
+# RIDDLE DISPLAY
+# ==========================================
+
+func show_current_riddle():
+
+	if current_riddle >= riddles.size():
+		return
+
+	riddle_label.text = riddles[current_riddle]
+	riddle_label.visible = true
+
+	await pop_in_fixed(
+		riddle_label,
+		0.4
+	)
+
+
+# ==========================================
+# WOODEN PANEL GLOW EFFECT
+# ==========================================
+
+func start_wood_glow():
+
+	if wood_glow_tween and wood_glow_tween.is_running():
+		wood_glow_tween.kill()
+
+	wood_original_modulate = wood_panel.modulate
+
+	var glow_color = Color(
+		1.15,
+		1.08,
+		0.85,
+		wood_original_modulate.a
+	)
+
+	wood_glow_tween = create_tween()
+	wood_glow_tween.set_loops()
+
+	wood_glow_tween.tween_property(
+		wood_panel,
+		\"modulate\",
+		glow_color,
+		0.6
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	wood_glow_tween.tween_property(
+		wood_panel,
+		\"modulate\",
+		wood_original_modulate,
+		0.6
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+
+func stop_wood_glow():
+
+	if wood_glow_tween and wood_glow_tween.is_running():
+		wood_glow_tween.kill()
+
+	wood_panel.modulate = wood_original_modulate
+
+
+# ==========================================
+# FRAME TRAVELING GOLDEN GLOW
+# ==========================================
+
+func start_frame_traveling_glow():
+
+	frame_light_active = true
+	frame_light_progress = 0.0
+
+	# WIDEST SOFT GOLDEN HALO
+	frame_glow_line = Line2D.new()
+	frame_glow_line.name = \"FrameOuterGlow\"
+	frame_glow_line.width = 24.0
+	frame_glow_line.antialiased = true
+	frame_glow_line.z_index = 12
+
+	# BRIGHT GOLDEN TRAIL
+	frame_travel_line = Line2D.new()
+	frame_travel_line.name = \"FrameTravelingLight\"
+	frame_travel_line.width = 10.0
+	frame_travel_line.antialiased = true
+	frame_travel_line.z_index = 13
+
+	# THIN WHITE-GOLD CORE
+	frame_core_line = Line2D.new()
+	frame_core_line.name = \"FrameLightCore\"
+	frame_core_line.width = 4.0
+	frame_core_line.antialiased = true
+	frame_core_line.z_index = 14
+
+	# OUTER HALO GRADIENT
+	var outer_gradient = Gradient.new()
+
+	outer_gradient.set_color(
+		0,
+		Color(1.0, 0.45, 0.05, 0.0)
+	)
+
+	outer_gradient.set_color(
+		1,
+		Color(1.0, 0.45, 0.05, 0.0)
+	)
+
+	outer_gradient.add_point(
+		0.5,
+		Color(1.0, 0.55, 0.12, 0.65)
+	)
+
+	# MIDDLE GOLDEN GLOW GRADIENT
+	var middle_gradient = Gradient.new()
+
+	middle_gradient.set_color(
+		0,
+		Color(1.0, 0.55, 0.1, 0.0)
+	)
+
+	middle_gradient.set_color(
+		1,
+		Color(1.0, 0.55, 0.1, 0.0)
+	)
+
+	middle_gradient.add_point(
+		0.5,
+		Color(1.0, 0.78, 0.25, 0.95)
+	)
+
+	# BRIGHT INNER CORE GRADIENT
+	var core_gradient = Gradient.new()
+
+	core_gradient.set_color(
+		0,
+		Color(1.0, 0.8, 0.35, 0.0)
+	)
+
+	core_gradient.set_color(
+		1,
+		Color(1.0, 0.8, 0.35, 0.0)
+	)
+
+	core_gradient.add_point(
+		0.5,
+		Color(1.0, 0.98, 0.78, 1.0)
+	)
+
+	frame_glow_line.gradient = outer_gradient
+	frame_travel_line.gradient = middle_gradient
+	frame_core_line.gradient = core_gradient
+
+	add_child(frame_glow_line)
+	add_child(frame_travel_line)
+	add_child(frame_core_line)
+
+	frame_glow_line.z_as_relative = true
+	frame_travel_line.z_as_relative = true
+	frame_core_line.z_as_relative = true
+
+	update_frame_traveling_glow()
+
+
+func update_frame_traveling_glow():
+
+	if not frame_light_active:
+		return
+
+	if not is_instance_valid(frame):
+		return
+
+	if not is_instance_valid(frame_travel_line):
+		return
+
+	if not is_instance_valid(frame_glow_line):
+		return
+
+	if not is_instance_valid(frame_core_line):
+		return
+
+	var frame_rect = frame.get_global_rect()
+
+	# Keep the traveling light very close to the frame border.
+	var inset = 2.0
+
+	# Convert the frame's global canvas coordinates
+	# into FrameGamePlay's local coordinate space.
+	var root_transform = get_global_transform_with_canvas().affine_inverse()
+
+	var top_left = root_transform * (
+		frame_rect.position + Vector2(inset, inset)
+	)
+
+	var top_right = root_transform * (
+		frame_rect.position + Vector2(frame_rect.size.x - inset, inset)
+	)
+
+	var bottom_right = root_transform * (
+		frame_rect.position + frame_rect.size - Vector2(inset, inset)
+	)
+
+	var bottom_left = root_transform * (
+		frame_rect.position + Vector2(inset, frame_rect.size.y - inset)
+	)
+
+	var perimeter_width = top_right.x - top_left.x
+	var perimeter_height = bottom_left.y - top_left.y
+
+	var perimeter = (perimeter_width + perimeter_height) * 2.0
+
+	if perimeter <= 0.0:
+		return
+
+	# The light occupies a short section of the border.
+	var trail_length = 0.18
+
+	var glow_points = PackedVector2Array()
+	var light_points = PackedVector2Array()
+	var core_points = PackedVector2Array()
+
+	var sample_count = 40
+
+	for i in range(sample_count + 1):
+
+		var sample_offset = float(i) / float(sample_count)
+
+		var path_progress = fposmod(
+			frame_light_progress + sample_offset * trail_length,
+			1.0
+		)
+
+		var point = get_frame_perimeter_point(
+			path_progress,
+			top_left,
+			top_right,
+			bottom_right,
+			bottom_left,
+			perimeter_width,
+			perimeter_height,
+			perimeter
+		)
+
+		glow_points.append(point)
+		light_points.append(point)
+		core_points.append(point)
+
+	frame_glow_line.points = glow_points
+	frame_travel_line.points = light_points
+	frame_core_line.points = core_points
+
+
+func get_frame_perimeter_point(
+	progress: float,
+	top_left: Vector2,
+	top_right: Vector2,
+	bottom_right: Vector2,
+	bottom_left: Vector2,
+	perimeter_width: float,
+	perimeter_height: float,
+	perimeter: float
+) -> Vector2:
+
+	var distance = progress * perimeter
+
+	# Top edge
+	if distance <= perimeter_width:
+		return top_left.lerp(
+			top_right,
+			distance / perimeter_width
+		)
+
+	distance -= perimeter_width
+
+	# Right edge
+	if distance <= perimeter_height:
+		return top_right.lerp(
+			bottom_right,
+			distance / perimeter_height
+		)
+
+	distance -= perimeter_height
+
+	# Bottom edge
+	if distance <= perimeter_width:
+		return bottom_right.lerp(
+			bottom_left,
+			distance / perimeter_width
+		)
+
+	distance -= perimeter_width
+
+	# Left edge
+	return bottom_left.lerp(
+		top_left,
+		distance / perimeter_height
+	)
+
+
+func stop_frame_traveling_glow():
+
+	frame_light_active = false
+
+	if is_instance_valid(frame_core_line):
+		frame_core_line.queue_free()
+
+	if is_instance_valid(frame_travel_line):
+		frame_travel_line.queue_free()
+
+	if is_instance_valid(frame_glow_line):
+		frame_glow_line.queue_free()
+
+	frame_core_line = null
+	frame_travel_line = null
+	frame_glow_line = null
+
+
+func _process(delta):
+
+	if not frame_light_active:
+		return
+
+	# One complete lap takes approximately 5.5 seconds.
+	frame_light_progress = fposmod(
+		frame_light_progress + delta * 0.18,
+		1.0
+	)
+
+	update_frame_traveling_glow()
+
+
+# ==========================================
+# FLOWER INTERACTIONS SETUP
+# ==========================================
+
+func setup_flower_interactions():
+
+	var letters = [
+		\"L\",
+		\"E\",
+		\"O\",
+		\"N\",
+		\"O\",
+		\"R\",
+		\"E\"
+	]
+
+	for i in range(flowers.size()):
+
+		var flower = flowers[i]
+
+		flower_scales[flower] = flower.scale
+
+		flower_original_positions[flower] = flower.global_position
+
+		flower_letters[flower] = letters[i]
+
+		flower.mouse_filter = Control.MOUSE_FILTER_STOP
+
+		for child in flower.get_children():
+
+			if child is Label:
+				flower_name_labels[flower] = child
+
+			set_child_mouse_ignore(child)
+
+		flower.mouse_entered.connect(
+			_on_flower_hover.bind(flower)
+		)
+
+		flower.mouse_exited.connect(
+			_on_flower_exit.bind(flower)
+		)
+
+		flower.gui_input.connect(
+			_on_flower_gui_input.bind(flower)
+		)
+
+
+# ==========================================
+# SETUP FLOWER SLOTS
+# ==========================================
+
+func setup_flower_slots():
+
+	var letters = [
+		\"L\",
+		\"E\",
+		\"O\",
+		\"N\",
+		\"O\",
+		\"R\",
+		\"E\"
+	]
+
+	slot_letter_labels.clear()
+
+	for i in range(slots.size()):
+
+		var slot = slots[i]
+
+		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+		var letter_label = Label.new()
+
+		letter_label.name = \"LetterLabel\"
+		letter_label.text = letters[i]
+
+		letter_label.position = slot.position
+		letter_label.size = slot.size
+
+		letter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		letter_label.vertical_alignment = VERTICAL_ALIGNMENT_BOTTOM
+
+		letter_label.add_theme_color_override(
+			\"font_color\",
+			Color(\"#F7E7C6\")
+		)
+
+		letter_label.add_theme_color_override(
+			\"font_outline_color\",
+			Color(\"#3C3025\")
+		)
+
+		letter_label.add_theme_constant_override(
+			\"outline_size\",
+			3
+		)
+
+		letter_label.add_theme_font_size_override(
+			\"font_size\",
+			22
+		)
+
+		letter_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		letter_label.visible = false
+
+		frame.add_child(letter_label)
+
+		letter_label.z_index = 20
+
+		slot_letter_labels.append(letter_label)
+
+
+# ==========================================
+# CHILD LABEL MOUSE FILTER
+# ==========================================
+
+func set_child_mouse_ignore(node: Node):
+
+	if node is Control:
+		node.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	for child in node.get_children():
+		set_child_mouse_ignore(child)
+
+
+# ==========================================
+# FLOWER HOVER EFFECT
+# ==========================================
+
+func _on_flower_hover(flower: Control):
+
+	if not game_started:
+		return
+
+	if dragging_flower == flower:
+		return
+
+	if flower_tweens.has(flower):
+		if flower_tweens[flower].is_running():
+			flower_tweens[flower].kill()
+
+	var original_scale = flower_scales[flower]
+
+	var hover_tween = create_tween()
+
+	flower_tweens[flower] = hover_tween
+
+	hover_tween.set_parallel(true)
+
+	hover_tween.tween_property(
+		flower,
+		\"scale\",
+		original_scale * 1.1,
+		0.15
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	hover_tween.tween_property(
+		flower,
+		\"modulate\",
+		Color(1.15, 1.15, 1.15, 1.0),
+		0.15
+	)
+
+
+func _on_flower_exit(flower: Control):
+
+	if dragging_flower == flower:
+		return
+
+	if flower_tweens.has(flower):
+		if flower_tweens[flower].is_running():
+			flower_tweens[flower].kill()
+
+	var original_scale = flower_scales[flower]
+
+	var exit_tween = create_tween()
+
+	flower_tweens[flower] = exit_tween
+
+	exit_tween.set_parallel(true)
+
+	exit_tween.tween_property(
+		flower,
+		\"scale\",
+		original_scale,
+		0.15
+	)
+
+	exit_tween.tween_property(
+		flower,
+		\"modulate\",
+		Color.WHITE,
+		0.15
+	)
+
+
+# ==========================================
+# FLOWER DRAGGING
+# ==========================================
+
+func _on_flower_gui_input(event: InputEvent, flower: Control):
+
+	if not game_started:
+		return
+
+	if event is InputEventMouseButton:
+
+		if event.button_index == MOUSE_BUTTON_LEFT:
+
+			if event.pressed:
+
+				dragging_flower = flower
+
+				drag_offset = (
+					flower.global_position -
+					get_global_mouse_position()
+				)
+
+				if flower_tweens.has(flower):
+					if flower_tweens[flower].is_running():
+						flower_tweens[flower].kill()
+
+				flower.scale = flower_scales[flower] * 1.05
+
+
+# ==========================================
+# UPDATE DRAGGED FLOWER POSITION
+# ==========================================
+
+func _input(event: InputEvent):
+
+	if dragging_flower == null:
+		return
+
+	if event is InputEventMouseMotion:
+
+		dragging_flower.global_position = (
+			get_global_mouse_position() +
+			drag_offset
+		)
+
+	elif event is InputEventMouseButton:
+
+		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
+
+			var dropped_flower = dragging_flower
+
+			dragging_flower = null
+
+			handle_flower_drop(dropped_flower)
+
+
+# ==========================================
+# HANDLE FLOWER DROP
+# ==========================================
+
+func handle_flower_drop(flower: Control):
+
+	if flower == null:
+		return
+
+	flower.scale = flower_scales[flower]
+
+	if not game_started or is_advancing:
+		return_flower(flower)
+		return
+
+	var mouse_position = get_global_mouse_position()
+
+	var board_rect = get_board_drop_rect()
+
+	if not board_rect.has_point(mouse_position):
+		return_flower(flower)
+		return
+
+	var required_letter = [
+		\"L\",
+		\"E\",
+		\"O\",
+		\"N\",
+		\"O\",
+		\"R\",
+		\"E\"
+	][current_riddle]
+
+	if flower_letters[flower] != required_letter:
+		return_flower(flower)
+		return
+
+	lock_flower_in_slot(
+		flower,
+		slots[current_riddle],
+		current_riddle
+	)
+
+
+# ==========================================
+# GREEN BOARD DROP AREA
+# ==========================================
+
+func get_board_drop_rect() -> Rect2:
+
+	var board_rect = slots[0].get_global_rect()
+
+	for slot in slots:
+
+		board_rect = board_rect.merge(
+			slot.get_global_rect()
+		)
+
+	var margin = max(
+		slots[0].size.x,
+		slots[0].size.y
+	) * 0.5
+
+	return board_rect.grow(margin)
+
+
+# ==========================================
+# RETURN INCORRECT FLOWER
+# ==========================================
+
+func return_flower(flower: Control):
+
+	if flower_tweens.has(flower):
+		if flower_tweens[flower].is_running():
+			flower_tweens[flower].kill()
+
+	var return_tween = create_tween()
+
+	return_tween.set_parallel(true)
+
+	return_tween.tween_property(
+		flower,
+		\"global_position\",
+		flower_original_positions[flower],
+		0.3
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	return_tween.tween_property(
+		flower,
+		\"scale\",
+		flower_scales[flower],
+		0.3
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	return_tween.tween_property(
+		flower,
+		\"modulate\",
+		Color.WHITE,
+		0.3
+	)
+
+
+# ==========================================
+# LOCK CORRECT FLOWER IN SLOT
+# ==========================================
+
+func lock_flower_in_slot(
+	flower: Control,
+	slot: Control,
+	slot_index: int
+):
+
+	is_advancing = true
+	game_started = false
+
+	if flower_name_labels.has(flower):
+		flower_name_labels[flower].visible = false
+
+	flower.scale = flower_scales[flower]
+
+	var slot_center = (
+		slot.global_position +
+		slot.size / 2
+	)
+
+	var displayed_size = flower.size * flower.scale
+
+	flower.global_position = (
+		slot_center -
+		displayed_size / 2
+	)
+
+	slot_letter_labels[slot_index].visible = true
+
+	flower.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	flower.modulate = Color.WHITE
+
+	print(\"Correct flower placed! Letter revealed: \", flower_letters[flower])
+
+	current_riddle += 1
+
+	await get_tree().create_timer(0.4).timeout
+
+	if current_riddle < riddles.size():
+
+		await show_current_riddle()
+
+		game_started = true
+		is_advancing = false
+
+	else:
+
+		riddle_label.text = \"You did it! You spelled LEONORE!\"
+
+		await pop_in_fixed(
+			riddle_label,
+			0.4
+		)
+
+		print(\"Puzzle completed! LEONORE!\")
+
+		await play_completion_animation()
+
+		game_started = false
+		is_advancing = false
+
+
+# ==========================================
+# FINAL COMPLETION ANIMATION
+# ==========================================
+
+func play_completion_animation():
+
+	await get_tree().create_timer(1.5).timeout
+
+	stop_wood_glow()
+
+	frame.z_index = 11
+
+	for flower in flowers:
+		flower.z_index = 11
+
+	final_word_label.z_index = 11
+
+	dim_overlay.visible = true
+	dim_overlay.color = Color(0, 0, 0, 0.0)
+
+	var ending_tween = create_tween()
+	ending_tween.set_parallel(true)
+
+	ending_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.65,
+		0.7
+	)
+
+	ending_tween.tween_property(
+		wood_panel,
+		\"modulate:a\",
+		0.0,
+		0.7
+	)
+
+	ending_tween.tween_property(
+		paper,
+		\"modulate:a\",
+		0.0,
+		0.7
+	)
+
+	ending_tween.tween_property(
+		paper,
+		\"scale\",
+		paper.scale * 0.9,
+		0.7
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	ending_tween.tween_property(
+		instruction_button,
+		\"modulate:a\",
+		0.0,
+		0.7
+	)
+
+	await ending_tween.finished
+
+	wood_panel.visible = false
+	paper.visible = false
+	instruction_button.visible = false
+
+	# START THE TRAVELING FRAME GLOW WHILE THE LETTERS APPEAR
+	start_frame_traveling_glow()
+
+	for letter_label in slot_letter_labels:
+
+		letter_label.pivot_offset = letter_label.size / 2
+
+		var original_scale = letter_label.scale
+
+		var glow_tween = create_tween()
+		glow_tween.set_parallel(true)
+
+		glow_tween.tween_property(
+			letter_label,
+			\"modulate\",
+			Color(2.0, 1.7, 0.9, 1.0),
+			0.35
+		)
+
+		glow_tween.tween_property(
+			letter_label,
+			\"scale\",
+			original_scale * 1.2,
+			0.2
+		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+		await glow_tween.finished
+
+		var settle_tween = create_tween()
+
+		settle_tween.tween_property(
+			letter_label,
+			\"scale\",
+			original_scale,
+			0.2
+		).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+		await settle_tween.finished
+
+		await get_tree().create_timer(0.2).timeout
+
+	final_word_label.text = \"LEONORE\"
+	final_word_label.visible = true
+
+	await pop_in_fixed(
+		final_word_label,
+		0.7
+	)
+
+	# FAST GOLDEN PULSE GLOW ON THE FINAL WORD
+	var word_glow_tween = create_tween()
+	word_glow_tween.set_loops(2)
+	word_glow_tween.set_parallel(true)
+
+	word_glow_tween.tween_property(
+		final_word_label,
+		\"modulate\",
+		Color(2.5, 2.1, 1.2, 1.0),
+		0.18
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	word_glow_tween.tween_property(
+		final_word_label,
+		\"scale\",
+		Vector2(1.12, 1.12),
+		0.18
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	word_glow_tween.chain().tween_property(
+		final_word_label,
+		\"modulate\",
+		Color.WHITE,
+		0.18
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	word_glow_tween.parallel().tween_property(
+		final_word_label,
+		\"scale\",
+		Vector2.ONE,
+		0.18
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await word_glow_tween.finished
+
+	# QUICK FADE OUT OF LEONORE
+	var word_fade_tween = create_tween()
+	word_fade_tween.set_parallel(true)
+
+	word_fade_tween.tween_property(
+		final_word_label,
+		\"modulate:a\",
+		0.0,
+		0.12
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	word_fade_tween.tween_property(
+		final_word_label,
+		\"scale\",
+		Vector2(0.85, 0.85),
+		0.12
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await word_fade_tween.finished
+
+	# STOP THE FRAME LIGHT BEFORE THE FINAL SCREEN FADE
+	stop_frame_traveling_glow()
+
+	# FADE THE ENTIRE SCREEN INTO WARM GOLD
+	var gold_overlay = ColorRect.new()
+	gold_overlay.name = \"GoldFadeOverlay\"
+	gold_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	gold_overlay.color = Color(1.0, 0.82, 0.48, 0.0)
+	gold_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	gold_overlay.z_index = 100
+	add_child(gold_overlay)
+
+	var gold_bloom_tween = create_tween()
+	gold_bloom_tween.tween_property(
+		gold_overlay,
+		\"color:a\",
+		0.35,
+		0.8
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await gold_bloom_tween.finished
+
+	await get_tree().create_timer(0.35).timeout
+
+	var gold_fade_tween = create_tween()
+	gold_fade_tween.tween_property(
+		gold_overlay,
+		\"color:a\",
+		1.0,
+		0.2
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await gold_fade_tween.finished
+
+	print(\"Final word displayed: LEONORE!\")
+
+
+# ==========================================
+# INSTRUCTIONS BUTTON SETUP
+# ==========================================
+
+func setup_instruction_button():
+
+	instruction_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	instruction_button.pivot_offset = instruction_button.size / 2
+
+	instruction_button_text.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	instruction_button.z_index = 0
+
+	instruction_button.mouse_entered.connect(
+		_on_instruction_button_hover
+	)
+
+	instruction_button.mouse_exited.connect(
+		_on_instruction_button_exit
+	)
+
+	# CONNECT BUTTON CLICK
+	instruction_button.pressed.connect(
+		_on_instruction_button_pressed
+	)
+
+
+# ==========================================
+# INSTRUCTIONS BUTTON CLICK ACTION
+# ==========================================
+
+func _on_instruction_button_pressed():
+
+	# Do not open if the game is not ready
+	if not game_started:
+		return
+
+	if is_advancing:
+		return
+
+	if is_instruction_replay:
+		return
+
+	# Stop gameplay interactions temporarily
+	game_started = false
+
+	is_instruction_replay = true
+
+	# Reset Continue button appearance
+	continue_button.disabled = false
+	continue_button.scale = Vector2.ONE
+	continue_button.modulate = Color.WHITE
+
+	# Show instruction popup
+	instruction_panel.visible = true
+	title_label.visible = true
+	instruction_label.visible = true
+
+	# Reset popup appearance
+	instruction_panel.modulate = Color.WHITE
+	instruction_panel.scale = Vector2.ONE
+
+	title_label.modulate = Color.WHITE
+	instruction_label.modulate = Color.WHITE
+
+	# Show dim overlay and block clicks behind popup
+	dim_overlay.visible = true
+	dim_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	# Dim the scene
+	var open_tween = create_tween()
+
+	open_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.65,
+		0.3
+	)
+
+	# Popup appears above the overlay
+	instruction_panel.z_index = 12
+
+	print(\"Instructions reopened!\")
+
+
+# ==========================================
+# INSTRUCTIONS BUTTON HOVER EFFECT
+# ==========================================
+
+func _on_instruction_button_hover():
+
+	if not instruction_button.visible:
+		return
+
+	if button_tween and button_tween.is_running():
+		button_tween.kill()
+
+	button_tween = create_tween()
+	button_tween.set_parallel(true)
+
+	button_tween.tween_property(
+		instruction_button,
+		\"scale\",
+		Vector2(1.08, 1.08),
+		0.15
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	button_tween.tween_property(
+		instruction_button,
+		\"modulate\",
+		Color(1.2, 1.2, 1.2, 1.0),
+		0.15
+	)
+
+
+func _on_instruction_button_exit():
+
+	if button_tween and button_tween.is_running():
+		button_tween.kill()
+
+	button_tween = create_tween()
+	button_tween.set_parallel(true)
+
+	button_tween.tween_property(
+		instruction_button,
+		\"scale\",
+		Vector2.ONE,
+		0.15
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	button_tween.tween_property(
+		instruction_button,
+		\"modulate\",
+		Color.WHITE,
+		0.15
+	)
+
+
+# ==========================================
+# CONTINUE BUTTON SETUP
+# ==========================================
+
+func setup_continue_button():
+
+	continue_button.text = \"CONTINUE\"
+
+	continue_button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+	continue_button.pivot_offset = continue_button.size / 2
+
+	continue_button.add_theme_stylebox_override(
+		\"normal\",
+		create_button_style(
+			Color(\"#765039\"),
+			Color(\"#B78B60\")
+		)
+	)
+
+	continue_button.add_theme_stylebox_override(
+		\"hover\",
+		create_button_style(
+			Color(\"#617A58\"),
+			Color(\"#A9B98B\")
+		)
+	)
+
+	continue_button.add_theme_stylebox_override(
+		\"pressed\",
+		create_button_style(
+			Color(\"#465D42\"),
+			Color(\"#A9B98B\")
+		)
+	)
+
+	continue_button.add_theme_color_override(
+		\"font_color\",
+		Color(\"#FFF1D9\")
+	)
+
+	continue_button.add_theme_color_override(
+		\"font_hover_color\",
+		Color.WHITE
+	)
+
+	continue_button.add_theme_color_override(
+		\"font_pressed_color\",
+		Color.WHITE
+	)
+
+	continue_button.mouse_entered.connect(_on_button_hover)
+	continue_button.mouse_exited.connect(_on_button_exit)
+	continue_button.pressed.connect(_on_continue_pressed)
+
+
+# ==========================================
+# BUTTON STYLE
+# ==========================================
+
+func create_button_style(bg_color: Color, border_color: Color):
+
+	var style = StyleBoxFlat.new()
+
+	style.bg_color = bg_color
+	style.border_color = border_color
+
+	style.set_border_width_all(2)
+	style.set_corner_radius_all(7)
+
+	style.content_margin_left = 20
+	style.content_margin_right = 20
+	style.content_margin_top = 8
+	style.content_margin_bottom = 8
+
+	return style
+
+
+# ==========================================
+# CONTINUE BUTTON HOVER EFFECT
+# ==========================================
+
+func _on_button_hover():
+
+	if button_tween and button_tween.is_running():
+		button_tween.kill()
+
+	button_tween = create_tween()
+
+	button_tween.tween_property(
+		continue_button,
+		\"scale\",
+		Vector2(1.07, 1.07),
+		0.15
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func _on_button_exit():
+
+	if button_tween and button_tween.is_running():
+		button_tween.kill()
+
+	button_tween = create_tween()
+
+	button_tween.tween_property(
+		continue_button,
+		\"scale\",
+		Vector2.ONE,
+		0.15
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+# ==========================================
+# CONTINUE BUTTON ACTION
+# ==========================================
+
+func _on_continue_pressed():
+
+	continue_button.disabled = true
+
+	var click_tween = create_tween()
+
+	click_tween.tween_property(
+		continue_button,
+		\"scale\",
+		Vector2(0.93, 0.93),
+		0.08
+	)
+
+	await click_tween.finished
+
+	# ======================================
+	# REPLAY INSTRUCTIONS MODE
+	# ======================================
+
+	if is_instruction_replay:
+
+		# Close the popup
+		var replay_close_tween = create_tween()
+		replay_close_tween.set_parallel(true)
+
+		replay_close_tween.tween_property(
+			instruction_panel,
+			\"modulate:a\",
+			0.0,
+			0.25
+		)
+
+		replay_close_tween.tween_property(
+			instruction_panel,
+			\"scale\",
+			Vector2(0.9, 0.9),
+			0.25
+		).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+		await replay_close_tween.finished
+
+		instruction_panel.visible = false
+		title_label.visible = false
+		instruction_label.visible = false
+
+		# Restore popup appearance for next time
+		instruction_panel.modulate = Color.WHITE
+		instruction_panel.scale = Vector2.ONE
+
+		title_label.modulate = Color.WHITE
+		instruction_label.modulate = Color.WHITE
+
+		# Remove dim overlay
+		var replay_dim_tween = create_tween()
+
+		replay_dim_tween.tween_property(
+			dim_overlay,
+			\"color:a\",
+			0.0,
+			0.35
+		)
+
+		await replay_dim_tween.finished
+
+		dim_overlay.visible = false
+		dim_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+		# Restore Continue button
+		continue_button.disabled = false
+		continue_button.scale = Vector2.ONE
+		continue_button.modulate = Color.WHITE
+
+		# End replay mode
+		is_instruction_replay = false
+
+		# Return to gameplay without resetting anything
+		game_started = true
+
+		print(\"Returned to gameplay. Puzzle progress preserved!\")
+
+		return
+
+
+	# ======================================
+	# INITIAL INSTRUCTIONS MODE
+	# ======================================
+
+	var close_tween = create_tween()
+	close_tween.set_parallel(true)
+
+	close_tween.tween_property(
+		instruction_panel,
+		\"modulate:a\",
+		0.0,
+		0.25
+	)
+
+	close_tween.tween_property(
+		instruction_panel,
+		\"scale\",
+		Vector2(0.9, 0.9),
+		0.25
+	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+
+	await close_tween.finished
+
+	instruction_panel.visible = false
+
+	# Restore popup appearance
+	instruction_panel.modulate = Color.WHITE
+	instruction_panel.scale = Vector2.ONE
+
+	var normal_tween = create_tween()
+
+	normal_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.0,
+		0.35
+	)
+
+	await normal_tween.finished
+
+	dim_overlay.visible = false
+	dim_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	await get_tree().create_timer(0.5).timeout
+
+	# Dim everything again except wooden panel
+	dim_overlay.visible = true
+
+	wood_panel.z_index = 11
+
+	var riddle_dim_tween = create_tween()
+
+	riddle_dim_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.65,
+		0.4
+	)
+
+	await riddle_dim_tween.finished
+
+	await show_current_riddle()
+
+	start_wood_glow()
+
+	await get_tree().create_timer(4.0).timeout
+
+	var final_tween = create_tween()
+
+	final_tween.tween_property(
+		dim_overlay,
+		\"color:a\",
+		0.0,
+		0.4
+	)
+
+	await final_tween.finished
+
+	dim_overlay.visible = false
+
+	wood_panel.z_index = 0
+
+	# Show Instructions button when gameplay becomes available
+	instruction_button.visible = true
+	instruction_button.modulate = Color.WHITE
+	instruction_button.scale = Vector2.ONE
+
+	game_started = true
+
+	print(\"Flower puzzle is ready!\")
 "
 
-[node name="FrameGamePlay" type="Node2D" unique_id=1742083811]
-position = Vector2(0, 7)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("1_hbk2s")
+region = Rect2(344.17935, 154.7692, 660.61536, 374.15378)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbk2s"]
+atlas = ExtResource("2_hsux1")
+region = Rect2(180.39282, 500.21844, 3956.177, 4160.657)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8jovo"]
+atlas = ExtResource("3_rrpd5")
+region = Rect2(32.713623, 327.02722, 504.03174, 652.4795)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
+atlas = ExtResource("3_rrpd5")
+region = Rect2(566.2949, 345.44772, 402.33057, 280.54507)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jre5i"]
+atlas = ExtResource("4_hbk2s")
+region = Rect2(602.2988, 1133.5774, 1669.9102, 1804.2703)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqv50"]
+atlas = ExtResource("6_lfiq3")
+region = Rect2(833.1719, 2810.0952, 1919.4365, 1247.6338)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xxo5k"]
+atlas = ExtResource("7_sr3l1")
+region = Rect2(430.09033, 2023.1261, 1727.4927, 1861.8534)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex8gk"]
+atlas = ExtResource("8_uthwc")
+region = Rect2(1888.8623, 1312.9347, 1900.2412, 1842.659)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p2kq"]
+atlas = ExtResource("9_gddph")
+region = Rect2(1620.1406, 2848.484, 1900.2422, 1036.4956)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5nte"]
+atlas = ExtResource("10_qiesj")
+region = Rect2(1293.8369, 1850.3768, 1708.2979, 1497.1608)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mop80"]
+atlas = ExtResource("11_0nta3")
+region = Rect2(2253.5547, 1255.3517, 1286.0225, 1458.7719)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xbb3b"]
+atlas = ExtResource("3_rrpd5")
+region = Rect2(584.7785, 645.8423, 386.31445, 344.7032)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idxhk"]
+atlas = ExtResource("3_rrpd5")
+region = Rect2(619.90485, 170.92227, 273.3756, 51.87491)
+
+[node name="FrameGamePlay" type="Control" unique_id=652942515]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = SubResource("GDScript_2k86a")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1440050186]
-offset_left = 2.0
-offset_top = -5.0
-offset_right = 1154.0
-offset_bottom = 643.0
-mouse_filter = 2
-color = Color(0.07058824, 0.050980393, 0.09411765, 1)
+[node name="background" type="TextureRect" parent="." unique_id=849401403]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
 
-[node name="Pieces" type="Node2D" parent="." unique_id=422461649]
+[node name="frame" type="TextureRect" parent="." unique_id=959179401]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 41.0
+offset_top = 156.0
+offset_right = -242.96259
+offset_bottom = -47.506226
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.64398146, 0.9651429)
+texture = SubResource("AtlasTexture_hbk2s")
+expand_mode = 1
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=635014277]
+[node name="Slot1" type="Panel" parent="frame" unique_id=1724648539]
+visible = false
+layout_mode = 0
+offset_left = 122.67433
+offset_top = 83.9254
+offset_right = 285.7225
+offset_bottom = 203.07874
 
-[node name="WinLabel" type="Label" parent="UI" unique_id=1932272531]
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Slot2" type="Panel" parent="frame" unique_id=1620420381]
+visible = false
+layout_mode = 0
+offset_left = 104.04025
+offset_top = 209.29544
+offset_right = 288.8282
+offset_bottom = 338.80994
+
+[node name="Slot3" type="Panel" parent="frame" unique_id=1469629900]
+visible = false
+layout_mode = 0
+offset_left = 277.9583
+offset_top = 83.9254
+offset_right = 450.32352
+offset_bottom = 211.36768
+
+[node name="Slot4" type="Panel" parent="frame" unique_id=2127442943]
+visible = false
+layout_mode = 0
+offset_left = 324.5435
+offset_top = 226.9094
+offset_right = 490.69733
+offset_bottom = 346.06277
+
+[node name="Slot5" type="Panel" parent="frame" unique_id=2045173689]
+visible = false
+layout_mode = 0
+offset_left = 472.06326
+offset_top = 82.889275
+offset_right = 630.4529
+offset_bottom = 211.36765
+
+[node name="Slot6" type="Panel" parent="frame" unique_id=198413525]
+visible = false
+layout_mode = 0
+offset_left = 475.16895
+offset_top = 219.6566
+offset_right = 636.6643
+offset_bottom = 342.9544
+
+[node name="Slot7" type="Panel" parent="frame" unique_id=1953151331]
+visible = false
+layout_mode = 0
+offset_left = 565.2337
+offset_top = 162.67021
+offset_right = 737.59894
+offset_bottom = 285.96802
+
+[node name="paper" type="TextureRect" parent="." unique_id=1991046434]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 609.0
+offset_top = 48.0
+offset_right = -24.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_8jovo")
+expand_mode = 1
+
+[node name="wood_panel" type="TextureRect" parent="." unique_id=133087554]
+layout_mode = 0
+offset_left = -50.0
+offset_top = 17.0
+offset_right = 688.0
+offset_bottom = 196.0
+texture = SubResource("AtlasTexture_1xlpn")
+expand_mode = 1
+
+[node name="RiddleLabel" type="Label" parent="wood_panel" unique_id=1336483184]
+layout_mode = 0
+offset_left = 135.0
+offset_top = 53.0
+offset_right = 600.0
+offset_bottom = 132.0
+theme_override_fonts/font = ExtResource("5_alb8v")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="lily" type="TextureRect" parent="." unique_id=1158510963]
+layout_mode = 0
+offset_left = 974.0
+offset_top = 151.0
+offset_right = 1123.0
+offset_bottom = 272.0
+texture = SubResource("AtlasTexture_jre5i")
+expand_mode = 1
+
+[node name="LilyLabel" type="Label" parent="lily" unique_id=869525210]
+layout_mode = 0
+offset_left = -4.0
+offset_top = 119.0
+offset_right = 67.0
+offset_bottom = 153.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "LILY"
+
+[node name="edelweiss1" type="TextureRect" parent="." unique_id=762739032]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 254.0
+offset_right = 1000.0
+offset_bottom = 372.0
+texture = SubResource("AtlasTexture_uqv50")
+expand_mode = 1
+
+[node name="Edelweiss1Label" type="Label" parent="edelweiss1" unique_id=680490984]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 105.0
+offset_right = 155.0
+offset_bottom = 130.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "EDELWEISS"
+
+[node name="orchid1" type="TextureRect" parent="." unique_id=1718954832]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 377.0
+offset_right = 1090.0
+offset_bottom = 502.0
+texture = SubResource("AtlasTexture_xxo5k")
+expand_mode = 1
+
+[node name="Orchid1Label" type="Label" parent="orchid1" unique_id=463119067]
+layout_mode = 0
+offset_left = 29.0
+offset_top = 123.0
+offset_right = 112.0
+offset_bottom = 148.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "ORCHID"
+
+[node name="narcicuss" type="TextureRect" parent="." unique_id=800090873]
+layout_mode = 0
+offset_left = 822.0
+offset_top = 78.0
+offset_right = 970.0
+offset_bottom = 202.0
+texture = SubResource("AtlasTexture_ex8gk")
+expand_mode = 1
+
+[node name="NarcicussLabel" type="Label" parent="narcicuss" unique_id=523046903]
+layout_mode = 0
+offset_left = 17.0
+offset_top = 118.0
+offset_right = 142.0
+offset_bottom = 143.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "NARCICUSS"
+
+[node name="orchid2" type="TextureRect" parent="." unique_id=1062786926]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 437.0
+offset_right = 921.0
+offset_bottom = 542.0
+texture = SubResource("AtlasTexture_8p2kq")
+expand_mode = 1
+
+[node name="Orchid2Label" type="Label" parent="orchid2" unique_id=1354459314]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 100.0
+offset_right = 138.0
+offset_bottom = 125.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "ORCHID"
+
+[node name="rose" type="TextureRect" parent="." unique_id=1084911338]
+layout_mode = 0
+offset_left = 683.0
+offset_top = 306.0
+offset_right = 821.0
+offset_bottom = 429.0
+texture = SubResource("AtlasTexture_m5nte")
+expand_mode = 1
+
+[node name="RoseLabel" type="Label" parent="rose" unique_id=871468046]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 113.0
+offset_right = 106.0
+offset_bottom = 138.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "ROSE"
+
+[node name="edelweiss2" type="TextureRect" parent="." unique_id=904306492]
+layout_mode = 0
+offset_left = 685.0
+offset_top = 131.0
+offset_right = 817.0
+offset_bottom = 251.0
+texture = SubResource("AtlasTexture_mop80")
+expand_mode = 1
+
+[node name="Edelweiss2Label" type="Label" parent="edelweiss2" unique_id=2122264945]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 112.0
+offset_right = 139.0
+offset_bottom = 137.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 22
+text = "EDELWEISS"
+
+[node name="InstructionPanel" type="TextureRect" parent="." unique_id=302185309]
+visible = false
+layout_mode = 0
+offset_left = 43.0
+offset_top = 25.0
+offset_right = 1108.0
+offset_bottom = 591.0
+texture = SubResource("AtlasTexture_xbb3b")
+expand_mode = 1
+
+[node name="TitleLabel" type="Label" parent="InstructionPanel" unique_id=1970130284]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 105.0
+offset_right = 664.0
+offset_bottom = 152.0
+theme_override_colors/font_color = Color(0.3153404, 0.19541584, 0.15772802, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 41
+text = "HOW TO PLAY"
+
+[node name="InstructionLabel" type="Label" parent="InstructionPanel" unique_id=1621981377]
+layout_mode = 0
+offset_left = 184.00002
+offset_top = 157.0
+offset_right = 903.0383
+offset_bottom = 532.182
+scale = Vector2(1.0402783, 1.0688146)
+theme_override_colors/font_color = Color(0.3137255, 0.19607843, 0.15686275, 1)
+theme_override_fonts/font = ExtResource("12_3k0p1")
+theme_override_font_sizes/font_size = 25
+text = "I. Read the Riddle
+       Read the clue displayed on the wooden board to identify the correct flower.
+II. Drag the Flower
+       Find the flower that matches the clue. Drag it from the parchment and drop it  
+       onto the correct letter on the left board.
+III. Place it Correctly
+        If your answer is correct, the flower will stay in place. If not, it will return to 
+        its original position.
+IV. Complete the Board
+        Solve all seven riddles and place every flower to complete the name LEONORE!"
+autowrap_mode = 2
+
+[node name="ContinueButton" type="Button" parent="InstructionPanel" unique_id=1257203984]
+layout_mode = 0
+offset_left = 442.0
+offset_top = 501.0
+offset_right = 643.0
+offset_bottom = 548.0
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 20
+text = "CONTINUE"
+
+[node name="FinalWordLabel" type="Label" parent="." unique_id=557179287]
+layout_mode = 0
+offset_left = 679.0
+offset_top = 314.0
+offset_right = 1083.0
+offset_bottom = 374.0
+theme_override_colors/font_color = Color(0.9981155, 0.76795673, 0.43291748, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionButton" type="TextureButton" parent="." unique_id=907326260]
+layout_mode = 0
+offset_left = 195.0
+offset_top = 554.0
+offset_right = 468.0
+offset_bottom = 605.0
+scale = Vector2(0.84626234, 0.7024714)
+texture_normal = SubResource("AtlasTexture_idxhk")
+
+[node name="ButtonText" type="Label" parent="InstructionButton" unique_id=1916245058]
+layout_mode = 0
+offset_left = 3.545
+offset_top = 5.6941833
+offset_right = 274.7375
+offset_bottom = 52.594692
+theme_override_colors/font_color = Color(0.9868987, 0.79385704, 0.44476604, 1)
+theme_override_fonts/font = ExtResource("5_alb8v")
+theme_override_font_sizes/font_size = 20
+text = "Instructions"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

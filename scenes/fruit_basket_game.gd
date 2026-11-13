@@ -1,4 +1,3 @@
-
 extends Control
 
 const STARTING_ATTEMPTS: int = 3
@@ -44,6 +43,8 @@ var result_original_label_modulate: Color = Color.WHITE
 # Green flash effect only.
 var green_flash: ColorRect
 var green_flash_tween: Tween
+
+var transition_fade_duration: float = 0.8
 
 
 # ==========================================
@@ -127,7 +128,6 @@ func _ready() -> void:
 	green_flash.modulate = Color.WHITE
 	green_flash.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	green_flash.z_index = 90
-
 
 	add_child(green_flash)
 
@@ -889,53 +889,58 @@ func _on_scratch_completed() -> void:
 	if fruit_name == "Grapes":
 		game_won = true
 
-		scratch_title.text = "YOU FOUND THE GEAR!"
+	scratch_title.text = "YOU FOUND THE GEAR!"
 
-		# Keep the gear visible at its original size.
-		gear_image.show()
+	gear_image.show()
 
-		# Start continuous green flashing only after
-		# the Grapes scratch completion signal is received.
-		play_green_screen_flash()
+	play_green_screen_flash()
 
-		notification_label.text = "Correct! You found the hidden gear!"
+	notification_label.text = "Correct! You found the hidden gear!"
 
-		show_result_effect(true)
-		disable_all_fruits()
+	show_result_effect(true)
+	disable_all_fruits()
 
-	else:
-		scratch_title.text = "NOT THIS FRUIT!"
+	# Keep the green flash for 3 seconds.
+	await get_tree().create_timer(3.0).timeout
 
-		if not selected_fruits.has(fruit_name):
-			selected_fruits.append(fruit_name)
-			attempts_left -= 1
+	if not is_inside_tree():
+		return
 
-		selected_fruit.disabled = true
-		selected_fruit.modulate = Color(1.0, 1.0, 1.0, 0.4)
+	# Stop the green flashing.
+	if green_flash_tween and green_flash_tween.is_running():
+		green_flash_tween.kill()
 
-		if attempts_left <= 0:
-			notification_label.text = (
-				"Game over! You couldn't find the gear."
-			)
-			disable_all_fruits()
-		else:
-			notification_label.text = (
-				"No gear here! Close this window and try another fruit."
-			)
+	# Create a black overlay for the transition.
+	var fade_overlay := ColorRect.new()
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color.BLACK
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	fade_overlay.set_anchors_and_offsets_preset(
+		Control.PRESET_FULL_RECT
+	)
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 200
 
-		hidden_message.show()
+	add_child(fade_overlay)
+	fade_overlay.modulate.a = 0.0
 
-		update_attempts_label()
+	# Fade smoothly to black.
+	var fade_tween := create_tween()
+	fade_tween.tween_property(
+		fade_overlay,
+		"modulate:a",
+		1.0,
+		transition_fade_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-		await get_tree().create_timer(1.2).timeout
+	await fade_tween.finished
 
-		if not is_inside_tree():
-			return
+	if not is_inside_tree():
+		return
 
-		if selected_fruit == null or not scratch_popup.visible:
-			return
-
-		show_result_effect(false)
+	get_tree().change_scene_to_file(
+		"res://scenes/Gameplay/Chap 4_Gear Repair.tscn"
+	)
 
 
 # ==========================================

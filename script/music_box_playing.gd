@@ -17,6 +17,9 @@ func _ready() -> void:
 	_create_mechanism_glow()
 	_create_fade_overlay()
 
+	# Reveal MusicBoxPlaying from black.
+	await _fade_from_black()
+
 	# Let the scene appear and the glow pulse for a few seconds.
 	await get_tree().create_timer(hold_duration).timeout
 
@@ -166,9 +169,11 @@ func _create_fade_overlay() -> void:
 	fade_overlay = ColorRect.new()
 	fade_overlay.name = "FadeOverlay"
 
-	fade_overlay.color = Color(0, 0, 0, 0)
+	# Start completely black.
+	fade_overlay.color = Color(0, 0, 0, 1)
 	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fade_overlay.z_index = 100
+	fade_overlay.z_as_relative = false
 
 	# Make the overlay cover the full screen.
 	fade_overlay.set_anchors_and_offsets_preset(
@@ -176,6 +181,20 @@ func _create_fade_overlay() -> void:
 	)
 
 	add_child(fade_overlay)
+	fade_overlay.move_to_front()
+
+
+func _fade_from_black() -> void:
+	var tween := create_tween()
+
+	tween.tween_property(
+		fade_overlay,
+		"color:a",
+		0.0,
+		fade_duration
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
+	await tween.finished
 
 
 func _fade_to_black() -> void:

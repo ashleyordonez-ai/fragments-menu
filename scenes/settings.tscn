@@ -1,18 +1,432 @@
 [gd_scene format=3 uid="uid://decjkbcbd0eb"]
 
+[ext_resource type="Script" uid="uid://vuo2sl3gmrw6" path="res://scenes/settings.gd" id="1_gjs24"]
 [ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_likc5"]
+[ext_resource type="Texture2D" uid="uid://bo4bhl2kh38mh" path="res://assets/png/Game menus-01.png" id="2_6wm04"]
+[ext_resource type="Texture2D" uid="uid://o80dypg2fs0g" path="res://assets/png/asshits.png" id="4_gjs24"]
+[ext_resource type="Texture2D" uid="uid://cw84is4yvxv3l" path="res://assets/png/asshits2.png" id="5_am25x"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_4ppmf"]
+[ext_resource type="Script" uid="uid://bxseaquyhh0qb" path="res://scenes/slider_area.gd" id="7_uhhto"]
+[ext_resource type="Texture2D" uid="uid://cc4tcua8dmrid" path="res://assets/png/musicvolume.png" id="8_1g033"]
 
-[node name="Control" type="Control" unique_id=997125293]
+[sub_resource type="AtlasTexture" id="AtlasTexture_es4n0"]
+atlas = ExtResource("2_6wm04")
+region = Rect2(1689.0752, 2147.4363, 1621.3293, 2253.715)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xlpn"]
+atlas = ExtResource("4_gjs24")
+region = Rect2(626.0823, 544.96356, 615.2103, 77.16925)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jre5i"]
+atlas = ExtResource("5_am25x")
+region = Rect2(794.18427, 432.23053, 454.44098, 124.328186)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8p2kq"]
+atlas = ExtResource("8_1g033")
+region = Rect2(25.709839, 27.492828, 1278.1967, 122.68405)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idxhk"]
+atlas = ExtResource("8_1g033")
+region = Rect2(1095.5148, 147.6588, 203.15308, 179.06499)
+
+[node name="settings" type="Control" unique_id=997125293]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_gjs24")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1164518313]
-layout_mode = 0
-offset_right = 6720.0
-offset_bottom = 3780.0
-scale = Vector2(0.175, 0.175)
+[node name="background" type="TextureRect" parent="." unique_id=121198182]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 texture = ExtResource("1_likc5")
+expand_mode = 1
+flip_h = true
+
+[node name="Frame" type="TextureRect" parent="." unique_id=1150249350]
+modulate = Color(2.0440404, 1.7379686, 2.8165405, 1)
+layout_mode = 0
+offset_left = 33.0
+offset_top = 23.0
+offset_right = 1133.0
+offset_bottom = 633.0
+texture = SubResource("AtlasTexture_es4n0")
+expand_mode = 1
+
+[node name="separatorline" type="TextureRect" parent="." unique_id=598760350]
+modulate = Color(0.9950581, 0.8067036, 0.3916109, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 233.0
+offset_top = 198.0
+offset_right = -216.0
+offset_bottom = -388.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_1xlpn")
+expand_mode = 1
+
+[node name="audio" type="TextureRect" parent="." unique_id=838134968]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 111.0
+offset_right = 442.0
+offset_bottom = 173.0
+mouse_filter = 0
+texture = SubResource("AtlasTexture_jre5i")
+expand_mode = 1
+
+[node name="AudioLabel" type="Label" parent="audio" unique_id=1325590017]
+layout_mode = 0
+offset_left = 37.0
+offset_top = 9.0
+offset_right = 156.03839
+offset_bottom = 62.0
+scale = Vector2(1.8565437, 1)
+theme_override_colors/font_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "AUDIO"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="controls" type="TextureRect" parent="." unique_id=1954572337]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 113.0
+offset_right = 738.0
+offset_bottom = 175.0
+mouse_filter = 0
+texture = SubResource("AtlasTexture_jre5i")
+expand_mode = 1
+
+[node name="ControlsLabel" type="Label" parent="controls" unique_id=444893713]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 7.0
+offset_right = 154.03839
+offset_bottom = 60.0
+scale = Vector2(1.8565437, 1)
+theme_override_colors/font_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 30
+text = "CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="about" type="TextureRect" parent="." unique_id=1390734974]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 113.0
+offset_right = 1033.0
+offset_bottom = 175.0
+mouse_filter = 0
+texture = SubResource("AtlasTexture_jre5i")
+expand_mode = 1
+
+[node name="AboutLabel" type="Label" parent="about" unique_id=1982520087]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 6.0
+offset_right = 155.03839
+offset_bottom = 59.0
+scale = Vector2(1.8565437, 1)
+theme_override_colors/font_color = Color(0.10747976, 0.10747973, 0.10747973, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 30
+text = "ABOUT"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AudioContent" type="Control" parent="." unique_id=684152615]
+visible = false
+anchors_preset = 0
+offset_left = 116.0
+offset_top = 292.0
+offset_right = 1053.0
+offset_bottom = 559.0
+
+[node name="MusicVolumeLabel" type="Label" parent="AudioContent" unique_id=697555873]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 30.0
+offset_right = 186.51416
+offset_bottom = 63.90393
+scale = Vector2(1.9638765, 1.3567748)
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 24
+text = "Music Volume"
+
+[node name="SliderArea" type="Control" parent="AudioContent" unique_id=32613185]
+anchors_preset = 0
+offset_left = 69.0
+offset_top = 89.00003
+offset_right = 149.18335
+offset_bottom = 184.4758
+scale = Vector2(8.729993, 1.4453925)
+mouse_filter = 1
+script = ExtResource("7_uhhto")
+
+[node name="SliderTrack" type="TextureRect" parent="AudioContent/SliderArea" unique_id=271959696]
+layout_mode = 0
+offset_right = 70.10315
+offset_bottom = 33.900818
+mouse_filter = 2
+texture = SubResource("AtlasTexture_8p2kq")
+expand_mode = 1
+
+[node name="SliderKnob" type="Control" parent="AudioContent/SliderArea" unique_id=1891412956]
+anchors_preset = 0
+offset_left = 3.8946178
+offset_top = 8.302222
+offset_right = 91.26144
+offset_bottom = 70.74229
+scale = Vector2(0.048511136, 0.22160527)
+
+[node name="KnobImage" type="TextureRect" parent="AudioContent/SliderArea/SliderKnob" unique_id=835103154]
+layout_mode = 0
+offset_left = -28.335142
+offset_top = -40.58612
+offset_right = 121.664856
+offset_bottom = 109.41388
+mouse_filter = 2
+texture = SubResource("AtlasTexture_idxhk")
+expand_mode = 1
+
+[node name="ControlsContent" type="Control" parent="." unique_id=338931301]
+visible = false
+anchors_preset = 0
+offset_left = 222.0
+offset_top = 275.0
+offset_right = 942.0
+offset_bottom = 558.0
+
+[node name="headers" type="Label" parent="ControlsContent" unique_id=295968167]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 2.0
+offset_right = 640.0
+offset_bottom = 50.0
+scale = Vector2(1.2355151, 0.7918651)
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 40
+text = "ACTION                    CONTROL"
+
+[node name="actions" type="Label" parent="ControlsContent" unique_id=1239332708]
+layout_mode = 0
+offset_left = 93.0
+offset_top = 58.0
+offset_right = 348.0
+offset_bottom = 283.0
+scale = Vector2(1.0854592, 1)
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.627451, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 35
+text = "Move/Navigate
+Select
+Scratch Objects
+Puzzle
+Decode/Enter Answer
+"
+
+[node name="controls" type="Label" parent="ControlsContent" unique_id=109356053]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 60.0
+offset_right = 722.0
+offset_bottom = 285.0
+scale = Vector2(1.0784049, 0.9976773)
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.627451, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 35
+text = "W A S D
+Left Mouse Click
+Hold and Drag
+Click and Drag
+Keyboard"
+
+[node name="AboutContent" type="Control" parent="." unique_id=1206976372]
+visible = false
+anchors_preset = 0
+offset_left = 152.0
+offset_top = 279.0
+offset_right = 1022.0
+offset_bottom = 556.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AboutContent" unique_id=1619596887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+horizontal_scroll_mode = 0
+
+[node name="AboutVBox" type="VBoxContainer" parent="AboutContent/ScrollContainer" unique_id=745665429]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+
+[node name="AboutTitle" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=2053699928]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 40
+text = "ABOUT FRAGMENTS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AboutDescription1" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=1060351834]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "FRAGMENTS is a story-driven puzzle and adventure game that takes players through a journey of memories, emotions, and self-discovery. Through riddles, puzzles, and mini-games, players uncover fragments of the main character's past and gradually understand the experiences behind them."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AboutDescription2" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=1264055996]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "The game is inspired by Sustainable Development Goal 3 (SDG 3): Good Health and Well-being, which promotes healthy lives and mental well-being for everyone. By exploring themes of emotional struggles, personal experiences, and self-understanding, FRAGMENTS aims to raise awareness about the importance of mental health, especially among young people."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ObjectivesTitle" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=124607036]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 40
+text = "GAME OBJECTIVES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Objectives1" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=552478424]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Explore and Discover
+   Uncover fragments of the main character's memories by progressing through the story."
+
+[node name="Objectives2" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=20960968]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Solve Puzzles
+   Complete riddles, decoding challenges, and mini-games to unlock new memories."
+
+[node name="Objectives3" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=375014246]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Understand Emotions
+   Learn about the character's experiences and emotional struggles throughout the journey."
+
+[node name="Objectives4" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=1848501496]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Promote Mental Health Awareness
+   Encourage players to recognize the importance of mental and emotional well-being."
+
+[node name="Objectives5" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=617209662]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Develop Problem-Solving Skills
+   Use observation, logic, and critical thinking to overcome challenges."
+
+[node name="DevelopmentTeam" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=228767091]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 40
+text = "DEVELOPMENT TEAM"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=671051220]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Ashley Nicole S. Ordonez"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name2" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=742171434]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Unah Jemima E. Limon"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name3" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=304397512]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Kreanne C. Astillero"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name4" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=1074489887]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Ma. Loraine P. Alminario"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=948139838]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.90588236, 0.7411765, 0.4117647, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 40
+text = "CREDITS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name5" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=930729695]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Angeila Beliber"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Name6" type="Label" parent="AboutContent/ScrollContainer/AboutVBox" unique_id=1339545886]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.84705883, 0.8156863, 0.9098039, 1)
+theme_override_fonts/font = ExtResource("6_4ppmf")
+theme_override_font_sizes/font_size = 31
+text = "Dan Carlo Nequinto"
+horizontal_alignment = 1
+vertical_alignment = 1
