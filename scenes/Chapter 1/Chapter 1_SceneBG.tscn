@@ -23,3 +23,5 @@ texture = ExtResource("1_7cho6")
 layout_mode = 1
 offset_left = 35.0
 offset_right = 35.0
+
+[editable path="DialogueBox"]
