@@ -15,34 +15,18 @@ extends Control
 var dialogues = [
 	{
 		"character": "Leonore",
-		"text": "Hello! Welcome to our town.",
-		"expression": "default",
+		"text": "Huh? Where am I?",
+		"expression": "default-left",
 		"position": "left",
-		"background": "res://assets/backgrounds/town.png"
+		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
 	{
 		"character": "Leonore",
-		"text": "It's a beautiful day today!",
-		"expression": "blush",
+		"text": "Why am I here?",
+		"expression": "default-left",
 		"position": "left",
-		"background": ""
-	},
-
-	{
-		"character": "Teresa",
-		"text": "Yes! I'm glad you're here.",
-		"expression": "happy",
-		"position": "right",
-		"background": ""
-	},
-
-	{
-		"character": "Leonore",
-		"text": "Let's start our adventure!",
-		"expression": "shy",
-		"position": "left",
-		"background": "res://assets/backgrounds/forest.png"
+		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	}
 ]
 
@@ -92,8 +76,7 @@ func show_current_dialogue() -> void:
 
 		print("ALL DIALOGUES COMPLETED")
 
-		next_button.disabled = true
-		skip_button.disabled = true
+		go_to_map()
 
 		return
 
@@ -127,9 +110,18 @@ func show_next_dialogue() -> void:
 
 func skip_dialogue() -> void:
 
-	dialogue_index = dialogues.size()
+	print("DIALOGUE SKIPPED")
 
-	dialogue_box.hide()
+	go_to_map()
+
+
+# =====================================
+# GO TO MAP SCENE
+# =====================================
+
+func go_to_map() -> void:
+
+	get_tree().change_scene_to_file("res://scenes/Maps/Chapter 1_Room.tscn")
 
 
 # =====================================
