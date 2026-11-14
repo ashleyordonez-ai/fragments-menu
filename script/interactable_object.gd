@@ -10,53 +10,37 @@ var player_in_range: bool = false
 
 
 func _ready() -> void:
-	print("TEST: OBJECT SCRIPT IS RUNNING")
+	# Assign the object texture if one is provided
+	if object_texture:
+		object_sprite.texture = object_texture
 
-	object_sprite.texture = object_texture
+	# Enable mouse detection
+	input_pickable = true
 
+	# Connect proximity detection signals
 	interaction_range.body_entered.connect(_on_body_entered)
 	interaction_range.body_exited.connect(_on_body_exited)
 
-	input_pickable = true
-
-	print("InteractionRange monitoring: ", interaction_range.monitoring)
-	print("InteractionRange mask: ", interaction_range.collision_mask)
-
 
 func _on_body_entered(body: Node2D) -> void:
-	print("Something entered InteractionRange: ", body.name)
-	print("Is player group: ", body.is_in_group("player"))
-
 	if body.is_in_group("player"):
 		player_in_range = true
-		print("PLAYER IS NEAR THE OBJECT!")
+		print("PLAYER ENTERED INTERACTION RANGE")
 
 
 func _on_body_exited(body: Node2D) -> void:
-	print("Something exited InteractionRange: ", body.name)
-
 	if body.is_in_group("player"):
 		player_in_range = false
-		print("PLAYER LEFT THE OBJECT!")
+		print("PLAYER LEFT INTERACTION RANGE")
 
 
-func _input_event(
-	_viewport: Viewport,
-	event: InputEvent,
-	_shape_idx: int
-) -> void:
-
+func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 
-			print("MOUSE CLICK DETECTED!")
+			print("MOUSE CLICK DETECTED")
 
-			if not player_in_range:
-				print("Player is too far away!")
-				return
-
-			interact()
-
-
-func interact() -> void:
-	print("OBJECT CLICKED! INTERACTION STARTED!")
+			if player_in_range:
+				print("OBJECT INTERACTION SUCCESSFUL!")
+			else:
+				print("PLAYER IS TOO FAR AWAY")

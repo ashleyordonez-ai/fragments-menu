@@ -6,7 +6,7 @@
 radius = 19.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6maq"]
-radius = 58.00862
+radius = 82.02438
 
 [node name="InteractableObject" type="Area2D" unique_id=1942715826]
 collision_layer = 4
@@ -22,6 +22,5 @@ shape = SubResource("CircleShape2D_dpcbn")
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange" unique_id=957297124]
-visible = false
 position = Vector2(132, 397)
 shape = SubResource("CircleShape2D_d6maq")
