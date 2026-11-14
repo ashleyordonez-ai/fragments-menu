@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqkw54imiwfar"
-path="res://.godot/imported/Teresa-Right_Angry].png-194438bba0211234fde847bbf5ba0885.ctex"
+uid="uid://p2rk8v7cdqqb"
+path="res://.godot/imported/Arthur-Right_Tired.png-2ce189e0eec72a436461114aeef8d414.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Teresa/Teresa-Right_Angry].png"
-dest_files=["res://.godot/imported/Teresa-Right_Angry].png-194438bba0211234fde847bbf5ba0885.ctex"]
+source_file="res://assets/sprites/characters/Arthur/Arthur-Right_Tired.png"
+dest_files=["res://.godot/imported/Arthur-Right_Tired.png-2ce189e0eec72a436461114aeef8d414.ctex"]
 
 [params]
 
