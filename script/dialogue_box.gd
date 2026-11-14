@@ -20,11 +20,6 @@ var dialogues = [
 		"speaker": "Leonore",
 		"text": "Why am I here?",
 		"expression": "Leonore-Left_Default.png"
-	},
-	{
-		"speaker": "Leonore",
-		"text": "Anyway, welcome to my room!",
-		"expression": "Leonore-Left_Default.png"
 	}
 ]
 
