@@ -2,12 +2,26 @@
 
 [ext_resource type="Script" uid="uid://c0aht7t732jof" path="res://script/interactable_object.gd" id="1_r83lh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d6maq"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dpcbn"]
+radius = 19.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6maq"]
+radius = 58.00862
 
 [node name="InteractableObject" type="Area2D" unique_id=1942715826]
+collision_layer = 4
 script = ExtResource("1_r83lh")
 
 [node name="ObjectSprite" type="Sprite2D" parent="." unique_id=2009882107]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1575614360]
-shape = SubResource("RectangleShape2D_d6maq")
+position = Vector2(132, 397)
+shape = SubResource("CircleShape2D_dpcbn")
+
+[node name="InteractionRange" type="Area2D" parent="." unique_id=846547108]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionRange" unique_id=957297124]
+visible = false
+position = Vector2(132, 397)
+shape = SubResource("CircleShape2D_d6maq")

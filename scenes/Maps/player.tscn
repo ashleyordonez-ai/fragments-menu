@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://4beaovfu0odk"]
+
+[ext_resource type="Script" uid="uid://cvstmd7lcsog" path="res://script/Leonore_Moving.gd" id="1_o0cr5"]
+[ext_resource type="Texture2D" uid="uid://ckjl4s0t3nmc5" path="res://assets/sprites/moving character/Moving-character-animation.png" id="2_ys8cj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d6maq"]
+radius = 33.0
+height = 118.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w16ud"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(288, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc7n0"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(0, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex3bw"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(144, 144, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpcbn"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(288, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfxkm"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(0, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sx00"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(144, 0, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gyyy"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(288, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dkfe"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(0, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_511ic"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(144, 288, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tcgf0"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(288, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bprgf"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(0, 432, 144, 144)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gbsu"]
+atlas = ExtResource("2_ys8cj")
+region = Rect2(144, 432, 144, 144)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_d6maq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w16ud")
+}],
+"loop": 1,
+"name": &"back idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc7n0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ex3bw")
+}],
+"loop": 1,
+"name": &"back walk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpcbn")
+}],
+"loop": 1,
+"name": &"front idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfxkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sx00")
+}],
+"loop": 1,
+"name": &"frontWalk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gyyy")
+}],
+"loop": 1,
+"name": &"lside idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dkfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_511ic")
+}],
+"loop": 1,
+"name": &"lside walk",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tcgf0")
+}],
+"loop": 1,
+"name": &"rside idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bprgf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gbsu")
+}],
+"loop": 1,
+"name": &"rside walk",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d6maq"]
+radius = 65.03076
+
+[node name="Player" type="CharacterBody2D" unique_id=1922194131 groups=["player"]]
+collision_mask = 2
+motion_mode = 1
+script = ExtResource("1_o0cr5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1066797162]
+position = Vector2(0, 29)
+shape = SubResource("CapsuleShape2D_d6maq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=163005916]
+z_index = 10
+scale = Vector2(1.2916666, 1.2916666)
+sprite_frames = SubResource("SpriteFrames_d6maq")
+animation = &"front idle"
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=800779146]
+zoom = Vector2(1.5, 1.5)
+limit_enabled = false
+limit_left = 0
+limit_top = 0
+limit_right = 1140
+limit_bottom = 648
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=1777857991]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=816411407]
+position = Vector2(-2, 26)
+shape = SubResource("CircleShape2D_d6maq")
