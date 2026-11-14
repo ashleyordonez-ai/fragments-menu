@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cwg0yv1ousxgb"]
+
+[ext_resource type="Script" uid="uid://b2bid6s8tb7p3" path="res://scene/sanity.gd" id="1_afqbd"]
+[ext_resource type="Texture2D" uid="uid://di2okuac4140h" path="res://assets/png/Golden Fantasy Sanity UI Assets.png" id="2_afqbd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aanw2"]
+atlas = ExtResource("2_afqbd")
+region = Rect2(239.80316, 109.80994, 169.16138, 901.0431)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_227fx"]
+atlas = ExtResource("2_afqbd")
+region = Rect2(540.1508, 161.59402, 162.25684, 821.64087)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5flgc"]
+atlas = ExtResource("2_afqbd")
+region = Rect2(823.23724, 0, 217.49323, 1017.75757)
+
+[node name="SanityUI" type="Control" unique_id=1586766642]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_afqbd")
+
+[node name="SanityTrack" type="TextureRect" parent="." unique_id=963008698]
+layout_mode = 0
+offset_left = 509.0
+offset_top = 129.0
+offset_right = 657.0
+offset_bottom = 595.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_aanw2")
+expand_mode = 1
+
+[node name="FillClip" type="Control" parent="." unique_id=1999959013]
+clip_contents = true
+anchors_preset = 0
+offset_left = 512.0
+offset_top = 74.0
+offset_right = 646.0
+offset_bottom = 595.0
+
+[node name="SanityFill" type="TextureRect" parent="FillClip" unique_id=1376296373]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 58.0
+offset_right = 128.0
+offset_bottom = 511.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_227fx")
+expand_mode = 1
+
+[node name="SanityFrame" type="TextureRect" parent="." unique_id=617413875]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 50.0
+offset_right = 678.0
+offset_bottom = 598.0
+mouse_filter = 2
+texture = SubResource("AtlasTexture_5flgc")
+expand_mode = 1

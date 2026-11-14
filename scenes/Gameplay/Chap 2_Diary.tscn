@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://blakiw64hufed" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/png/panel-header@4x.png" id="6_rlmxo"]
 [ext_resource type="FontFile" uid="uid://5nmkywavqsxs" path="res://assets/fonts/I-pixel-u.ttf" id="7_okgkm"]
 [ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scenes/code.gd" id="8_gylf3"]
+[ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="9_2sgb2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("6_rlmxo")
@@ -623,6 +624,14 @@ theme_override_fonts/font = ExtResource("5_clolr")
 theme_override_font_sizes/font_size = 14
 text = "Every 8 binary digits represent one letter"
 autowrap_mode = 2
+
+[node name="SanityUI" parent="." unique_id=1586766642 instance=ExtResource("9_2sgb2")]
+layout_mode = 1
+offset_left = -177.0
+offset_top = 135.0
+offset_right = -177.0
+offset_bottom = 135.0
+scale = Vector2(0.40085968, 0.5574321)
 
 [connection signal="gui_input" from="AnswerInput" to="." method="_on_answer_input_gui_input"]
 [connection signal="pressed" from="ViewMoreButton" to="." method="_on_view_more_button_pressed"]

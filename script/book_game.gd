@@ -1,4 +1,3 @@
-
 extends Control
 
 # ==================================================
@@ -28,6 +27,9 @@ extends Control
 @onready var guide_popup: Control = $"PopOut Guide"
 @onready var close_guide_button: Button = $"PopOut Guide/CloseButton"
 @onready var focus_overlay: ColorRect = $FocusOverlay
+
+# SANITY UI
+@onready var sanity_ui: Control = $SanityUI
 
 # GREEN HINT POP-UP
 @onready var hint_panel: PanelContainer = $HintPanel
@@ -131,6 +133,7 @@ func _ready() -> void:
 	guide_popup.hide()
 	focus_overlay.hide()
 	hint_panel.hide()
+	sanity_ui.hide()
 
 	focus_overlay.color = OVERLAY_COLOR
 	focus_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -206,6 +209,10 @@ func keep_ui_bright() -> void:
 
 	hint_panel.z_as_relative = false
 	hint_panel.z_index = 101
+
+	# Keep the sanity bar above the dim overlay.
+	sanity_ui.z_as_relative = false
+	sanity_ui.z_index = 101
 
 
 # ==================================================
@@ -383,6 +390,9 @@ func _on_view_more_button_pressed() -> void:
 	focus_overlay.color = OVERLAY_COLOR
 	focus_overlay.show()
 
+	# Show the sanity bar together with the highlighted elements.
+	sanity_ui.show()
+
 	focus_overlay.z_as_relative = false
 	focus_overlay.z_index = 100
 
@@ -426,6 +436,9 @@ func _on_view_more_button_pressed() -> void:
 func _on_close_guide_button_pressed() -> void:
 	guide_popup.hide()
 	guide_popup.modulate.a = 1.0
+
+	# Hide the sanity bar when the guide closes.
+	sanity_ui.hide()
 
 	hint_panel.hide()
 	hint_glow_active = false
@@ -686,10 +699,9 @@ func check_answer() -> void:
 	if submitted_answer == CORRECT_ANSWER:
 		show_correct_answer()
 	else:
-		show_result(
-			"Not quite. Try decoding the binary again.",
-			ERROR_COLOR
-		)
+		SanityManager.decrease_sanity(10)
+
+		result_label.hide()
 
 		shake_answer_input()
 		show_next_hint()
@@ -788,11 +800,8 @@ func show_correct_answer() -> void:
 
 	answer_input.editable = false
 	decode_button.disabled = true
-
-	show_result(
-		"Correct! You found the word.",
-		SUCCESS_COLOR
-	)
+	
+	result_label.hide()
 
 	play_answer_flash()
 
@@ -805,7 +814,7 @@ func show_correct_answer() -> void:
 	).timeout
 
 	reveal_diary_answer()
-	
+
 	set_right_page_visible(false)
 
 	answer_input.hide()
@@ -817,6 +826,9 @@ func show_correct_answer() -> void:
 	hint_panel.hide()
 	hint_glow_active = false
 	hint_glow_time = 0.0
+
+	# Hide the sanity bar when the puzzle is completed.
+	sanity_ui.hide()
 
 	if hint_panel_style != null:
 		hint_panel_style.border_color = HINT_GREEN_BORDER

@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://1477fkchp0yx" path="res://assets/png/ROSE.png" id="10_qiesj"]
 [ext_resource type="Texture2D" uid="uid://dspbv7p42qv8h" path="res://assets/png/EDELWEISS2.png" id="11_0nta3"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="12_3k0p1"]
+[ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="13_alb8v"]
 
 [sub_resource type="GDScript" id="GDScript_2k86a"]
 script/source = "extends Control
@@ -40,6 +41,9 @@ script/source = "extends Control
 # Instructions button
 @onready var instruction_button = $InstructionButton
 @onready var instruction_button_text = $InstructionButton/ButtonText
+
+# SANITY BAR
+@onready var sanity_ui: Control = $SanityUI
 
 # All seven flowers
 @onready var flowers = [
@@ -135,6 +139,9 @@ func _ready():
 
 	instruction_panel.visible = false
 	title_label.visible = false
+
+	# Keep the sanity bar hidden until flower gameplay begins.
+	sanity_ui.hide()
 	instruction_label.visible = false
 
 	riddle_label.visible = false
@@ -972,6 +979,7 @@ func handle_flower_drop(flower: Control):
 	][current_riddle]
 
 	if flower_letters[flower] != required_letter:
+		SanityManager.decrease_sanity(10)
 		return_flower(flower)
 		return
 
@@ -1090,6 +1098,9 @@ func lock_flower_in_slot(
 		is_advancing = false
 
 	else:
+
+		# All flowers are correct, so hide the sanity bar.
+		sanity_ui.hide()
 
 		riddle_label.text = \"You did it! You spelled LEONORE!\"
 
@@ -1736,6 +1747,9 @@ func _on_continue_pressed():
 	instruction_button.modulate = Color.WHITE
 	instruction_button.scale = Vector2.ONE
 
+	# Show the sanity bar when the player can start picking flowers.
+	sanity_ui.show()
+
 	game_started = true
 
 	print(\"Flower puzzle is ready!\")
@@ -2144,3 +2158,11 @@ text = "Instructions"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="SanityUI" parent="." unique_id=1586766642 instance=ExtResource("13_alb8v")]
+layout_mode = 1
+offset_left = -212.0
+offset_top = 147.0
+offset_right = -252.0
+offset_bottom = 51.0
+scale = Vector2(0.42693368, 0.6206979)

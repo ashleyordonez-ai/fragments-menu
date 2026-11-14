@@ -44,8 +44,6 @@ var result_original_label_modulate: Color = Color.WHITE
 var green_flash: ColorRect
 var green_flash_tween: Tween
 
-var transition_fade_duration: float = 0.8
-
 
 # ==========================================
 # MAIN NODES
@@ -56,6 +54,9 @@ var transition_fade_duration: float = 0.8
 
 @onready var attempts_panel: Panel = $AttemptsPanel
 @onready var attempts_label: Label = $AttemptsPanel/AttemptsLabel
+
+# SANITY UI
+@onready var sanity_ui: Control = $SanityUI
 
 @onready var instruction_label: Label = $PuzzleArea/InstructionLabel
 @onready var instruction_glow: Control = $PuzzleArea/InstructionGlow
@@ -117,6 +118,9 @@ func _ready() -> void:
 	result_label.hide()
 	result_notification.hide()
 	attempts_panel.hide()
+
+	# Keep the sanity bar hidden until a fruit is selected.
+	sanity_ui.hide()
 
 	style_close_button()
 
@@ -848,6 +852,14 @@ func _on_fruit_pressed(fruit: TextureButton) -> void:
 	notification_label.text = ""
 	reset_result_notification()
 
+	# Show the sanity bar above the dimming overlay, at full brightness.
+	sanity_ui.show()
+	sanity_ui.top_level = true
+	sanity_ui.modulate = Color.WHITE
+	sanity_ui.self_modulate = Color.WHITE
+	sanity_ui.z_index = 200
+	sanity_ui.move_to_front()
+
 	# Show the correct hidden content underneath the fruit.
 	if fruit_name == "Grapes":
 		hidden_message.hide()
@@ -889,58 +901,69 @@ func _on_scratch_completed() -> void:
 	if fruit_name == "Grapes":
 		game_won = true
 
-	scratch_title.text = "YOU FOUND THE GEAR!"
+		scratch_title.text = "YOU FOUND THE GEAR!"
 
-	gear_image.show()
+		# Keep the gear visible at its original size.
+		gear_image.show()
 
-	play_green_screen_flash()
+		# Start continuous green flashing only after
+		# the Grapes scratch completion signal is received.
+		play_green_screen_flash()
 
-	notification_label.text = "Correct! You found the hidden gear!"
+		notification_label.text = "Correct! You found the hidden gear!"
 
-	show_result_effect(true)
-	disable_all_fruits()
+		show_result_effect(true)
+		disable_all_fruits()
 
-	# Keep the green flash for 3 seconds.
-	await get_tree().create_timer(3.0).timeout
+		# Keep the green success flash for 3 seconds, then load Gear Repair.
+		await get_tree().create_timer(3.0).timeout
 
-	if not is_inside_tree():
-		return
+		if not is_inside_tree():
+			return
 
-	# Stop the green flashing.
-	if green_flash_tween and green_flash_tween.is_running():
-		green_flash_tween.kill()
+		if green_flash_tween and green_flash_tween.is_running():
+			green_flash_tween.kill()
 
-	# Create a black overlay for the transition.
-	var fade_overlay := ColorRect.new()
-	fade_overlay.name = "TransitionFade"
-	fade_overlay.color = Color.BLACK
-	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	fade_overlay.set_anchors_and_offsets_preset(
-		Control.PRESET_FULL_RECT
-	)
-	fade_overlay.z_as_relative = false
-	fade_overlay.z_index = 200
+		get_tree().change_scene_to_file(
+			"res://scenes/Gameplay/Chap 4_Gear Repair.tscn"
+		)
 
-	add_child(fade_overlay)
-	fade_overlay.modulate.a = 0.0
+	else:
+		# Deduct sanity only after the player finishes scratching a wrong fruit.
+		SanityManager.decrease_sanity(10)
 
-	# Fade smoothly to black.
-	var fade_tween := create_tween()
-	fade_tween.tween_property(
-		fade_overlay,
-		"modulate:a",
-		1.0,
-		transition_fade_duration
-	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		scratch_title.text = "NOT THIS FRUIT!"
 
-	await fade_tween.finished
+		if not selected_fruits.has(fruit_name):
+			selected_fruits.append(fruit_name)
+			attempts_left -= 1
 
-	if not is_inside_tree():
-		return
+		selected_fruit.disabled = true
+		selected_fruit.modulate = Color(1.0, 1.0, 1.0, 0.4)
 
-	get_tree().change_scene_to_file(
-		"res://scenes/Gameplay/Chap 4_Gear Repair.tscn"
-	)
+		if attempts_left <= 0:
+			notification_label.text = (
+				"Game over! You couldn't find the gear."
+			)
+			disable_all_fruits()
+		else:
+			notification_label.text = (
+				"No gear here! Close this window and try another fruit."
+			)
+
+		hidden_message.show()
+
+		update_attempts_label()
+
+		await get_tree().create_timer(1.2).timeout
+
+		if not is_inside_tree():
+			return
+
+		if selected_fruit == null or not scratch_popup.visible:
+			return
+
+		show_result_effect(false)
 
 
 # ==========================================
@@ -961,6 +984,9 @@ func _on_close_button_pressed() -> void:
 
 	scratch_popup.hide()
 	background_dimmer.hide()
+
+	# Hide the sanity bar when the player closes the scratch popup.
+	sanity_ui.hide()
 
 	# Hide the gear when leaving the scratch popup.
 	gear_image.hide()
