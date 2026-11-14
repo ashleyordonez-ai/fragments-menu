@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dvjy4kkf5jlo5"]
+
+[ext_resource type="Texture2D" uid="uid://6nvbc78wxm2i" path="res://assets/maps/Map 3 - Strairs/MAP WITH FRAME.png" id="1_y2qc3"]
+[ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_bwkvv"]
+[ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="3_y0rxn"]
+[ext_resource type="Texture2D" uid="uid://cdgkf4408y36w" path="res://assets/maps/Map 3 - Strairs/PIC FRAME.png" id="4_75h57"]
+
+[node name="Map 3" type="Node2D" unique_id=1560438035]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1612169049]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_y2qc3")
+
+[node name="Player" parent="." unique_id=1922194131 instance=ExtResource("2_bwkvv")]
+position = Vector2(1037, 118)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=376864455]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Bound 1" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1610695538]
+polygon = PackedVector2Array(1154, 79, 938, 79, 602, 368, -3, 370, 2, -1, 1165, 5)
+
+[node name="Bound 2" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1608873209]
+polygon = PackedVector2Array(1158, 237, 917, 242, 619, 554, 0, 551, 2, 647, 1157, 648)
+
+[node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("3_y0rxn")]
+object_texture = ExtResource("4_75h57")
+
+[node name="CollisionShape2D" parent="InteractableObject" index="1" unique_id=1575614360]
+position = Vector2(329, 339)
+
+[node name="CollisionShape2D" parent="InteractableObject/InteractionRange" parent_id_path=PackedInt32Array(1942715826, 846547108) index="0" unique_id=957297124]
+position = Vector2(330, 340)
+
+[editable path="InteractableObject"]
