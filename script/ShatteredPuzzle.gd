@@ -1,4 +1,3 @@
-
 extends Control
 
 @export var portrait_path: NodePath = "../PortraitPicture"
@@ -34,10 +33,15 @@ var completion_glow_tween: Tween
 @export var instruction_ui_path: NodePath = "../InstructionUI"
 @onready var instruction_ui = get_node_or_null(instruction_ui_path)
 
+# SANITY UI
+@onready var sanity_ui: Control = $"../SanityUI"
 
 func _ready() -> void:
 	rng.randomize()
 	create_shattered_picture()
+
+	# Keep the sanity bar hidden until the player starts building.
+	sanity_ui.hide()
 
 	if dialogue_panel == null:
 		push_error("Cannot find DialoguePanel!")
@@ -440,6 +444,9 @@ func start_drag() -> void:
 			selected_piece = piece
 			drag_offset = piece.global_position - mouse_position
 
+			# Show the sanity bar when the player starts building.
+			sanity_ui.show()
+
 			# Bring selected piece to the front
 			selected_piece.z_index = 100
 
@@ -457,6 +464,9 @@ func stop_drag() -> void:
 	if selected_piece.position.distance_to(correct_position) <= SNAP_DISTANCE:
 		snap_piece_into_place(selected_piece)
 	else:
+		# Deduct 5 sanity points for an incorrect placement.
+		SanityManager.decrease_sanity(4)
+
 		selected_piece.z_index = 0
 
 	selected_piece = null

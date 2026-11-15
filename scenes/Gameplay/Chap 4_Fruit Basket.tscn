@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dcpgg1nuu7t3t" path="res://assets/png/panels.png" id="9_j2xhh"]
 [ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="10_k7r00"]
 [ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="11_ha2cr"]
+[ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="12_3mysl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpki"]
 shader = ExtResource("4_v4jch")
@@ -525,6 +526,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0.25882354, 1, 0.5137255, 1)
+
+[node name="SanityUI" parent="." unique_id=1586766642 instance=ExtResource("12_3mysl")]
+layout_mode = 1
+offset_left = -173.0
+offset_top = 106.0
+offset_right = -173.0
+offset_bottom = 106.0
+scale = Vector2(0.37788793, 0.61547494)
 
 [connection signal="mouse_entered" from="PuzzleArea/FruitContainer/Apple" to="." method="_on_apple_mouse_entered"]
 [connection signal="mouse_exited" from="PuzzleArea/FruitContainer/Apple" to="." method="_on_apple_mouse_exited"]

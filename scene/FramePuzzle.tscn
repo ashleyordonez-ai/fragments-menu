@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dkeb5rj2mnutn" path="res://script/diaologue_panel.gd" id="7_i6c4f"]
 [ext_resource type="Script" uid="uid://bjm7oes4k67a5" path="res://script/instruction_ui.gd" id="9_i6c4f"]
 [ext_resource type="Shader" uid="uid://db1ginytqvslp" path="res://gdshader/FramePuzzle.gdshader" id="10_4csnn"]
+[ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="11_5flgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("1_gq0hs")
@@ -203,3 +204,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="SanityUI" parent="." unique_id=1586766642 instance=ExtResource("11_5flgc")]
+layout_mode = 1
+offset_left = -200.0
+offset_top = 100.0
+offset_right = -200.0
+offset_bottom = 100.0
+scale = Vector2(0.41088194, 0.6895525)
