@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="4_ex3bw"]
 [ext_resource type="Texture2D" uid="uid://ck4t27fd4s2u4" path="res://assets/maps/Map 1 - Room/C (CLOCK).png" id="5_dpcbn"]
 [ext_resource type="Texture2D" uid="uid://r8eat1j263ld" path="res://assets/maps/Map 1 - Room/F (FRAME).png" id="6_3gyyy"]
+[ext_resource type="Texture2D" uid="uid://lcr3s30qh8b3" path="res://assets/png/oak-panel-ui-kit/oak-panel-ui-kit/panel-inset.svg" id="7_3gyyy"]
+[ext_resource type="Script" uid="uid://drlx26wknb504" path="res://script/tutorial_popup.gd" id="7_8dkfe"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="8_8dkfe"]
+[ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="9_511ic"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_aoshd"]
 a = Vector2(824, 7)
@@ -55,28 +59,48 @@ position = Vector2(705, 284)
 [node name="CollisionShape2D" parent="InteractableObject2/InteractionRange" parent_id_path=PackedInt32Array(1462997316, 846547108) index="0" unique_id=957297124]
 position = Vector2(707, 283)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1430079621]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1244516228]
 
-[node name="TutorialPanel" type="Control" parent="CanvasLayer" unique_id=1320589263]
+[node name="TutorialPopup" type="Control" parent="CanvasLayer" unique_id=1048904411]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 600.0
-offset_bottom = 400.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_8dkfe")
 
-[node name="TutorialTitle" type="Label" parent="CanvasLayer/TutorialPanel" unique_id=389136017]
+[node name="InstructionPanel" type="TextureRect" parent="CanvasLayer/TutorialPopup" unique_id=1414295216]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 406.0
+offset_top = 120.0
+offset_right = 720.0
+offset_bottom = 434.0
+texture = ExtResource("7_3gyyy")
 
-[node name="TutorialDescription" type="RichTextLabel" parent="CanvasLayer/TutorialPanel" unique_id=1429985161]
+[node name="TutorialText" type="Label" parent="CanvasLayer/TutorialPopup" unique_id=761890871]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 438.0
+offset_top = 164.0
+offset_right = 691.0
+offset_bottom = 381.0
+theme_override_fonts/font = ExtResource("9_511ic")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
-[node name="StartButton" type="Button" parent="CanvasLayer/TutorialPanel" unique_id=432198883]
+[node name="OkayButton" type="Button" parent="CanvasLayer/TutorialPopup" unique_id=1954387991]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 545.0
+offset_top = 380.0
+offset_right = 584.0
+offset_bottom = 415.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("8_8dkfe")
+theme_override_font_sizes/font_size = 18
+text = "okay!
+"
+flat = true
 
 [editable path="InteractableObject"]
 [editable path="InteractableObject2"]
