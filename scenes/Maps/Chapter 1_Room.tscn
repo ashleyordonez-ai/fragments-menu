@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dlsk31scu42hl"]
 
+[ext_resource type="Script" uid="uid://cngkabcrombim" path="res://script/chapter_1_room.gd" id="1_ex3bw"]
 [ext_resource type="Texture2D" uid="uid://eeuvg3e4lg3x" path="res://assets/maps/Map 1 - Room/MAP 1 with F and C.png" id="1_w16ud"]
 [ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_4sx00"]
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="4_ex3bw"]
@@ -11,6 +12,7 @@ a = Vector2(824, 7)
 b = Vector2(0, 7)
 
 [node name="Map 1" type="Node2D" unique_id=2045826129]
+script = ExtResource("1_ex3bw")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=925395373]
 offset_left = 11.0
@@ -52,6 +54,29 @@ position = Vector2(705, 284)
 
 [node name="CollisionShape2D" parent="InteractableObject2/InteractionRange" parent_id_path=PackedInt32Array(1462997316, 846547108) index="0" unique_id=957297124]
 position = Vector2(707, 283)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1430079621]
+
+[node name="TutorialPanel" type="Control" parent="CanvasLayer" unique_id=1320589263]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 600.0
+offset_bottom = 400.0
+
+[node name="TutorialTitle" type="Label" parent="CanvasLayer/TutorialPanel" unique_id=389136017]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="TutorialDescription" type="RichTextLabel" parent="CanvasLayer/TutorialPanel" unique_id=1429985161]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="StartButton" type="Button" parent="CanvasLayer/TutorialPanel" unique_id=432198883]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
 
 [editable path="InteractableObject"]
 [editable path="InteractableObject2"]
