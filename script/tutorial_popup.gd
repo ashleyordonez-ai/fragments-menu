@@ -4,7 +4,6 @@ extends Control
 @onready var okay_button: Button = $OkayButton
 @onready var tutorial_text: Label = $TutorialText
 
-
 var typing_speed: float = 0.04
 
 
@@ -38,4 +37,4 @@ Explore the map and discover what awaits you!"
 
 func _on_okay_button_pressed() -> void:
 
-	hide()
+	get_tree().change_scene_to_file("res://scenes/Chapter 1/Chapter 1_Time.tscn")

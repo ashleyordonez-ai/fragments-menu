@@ -20,7 +20,7 @@ var dialogues = [
 		"position": "left",
 		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
-
+	
 	{
 		"character": "Leonore",
 		"text": "Why am I here?",
