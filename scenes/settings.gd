@@ -4,6 +4,7 @@ extends Control
 # MAIN SETTINGS ELEMENTS
 @onready var frame: Control = $Frame
 @onready var separator_line: Control = $separatorline
+@onready var back: Control = $back
 
 # NAVIGATION TABS
 @onready var audio_tab: Control = $audio
@@ -39,9 +40,15 @@ func _ready() -> void:
 	_setup_hover(controls_tab)
 	_setup_hover(about_tab)
 
+	# Prepare BACK text.
+	back.mouse_filter = Control.MOUSE_FILTER_STOP
+	back.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	back.gui_input.connect(_on_back_gui_input)
+
 	# Hide navigation elements before their animation.
 	# Their editor positions and sizes are preserved.
 	_prepare_hidden(separator_line)
+	_prepare_hidden(back)
 	_prepare_hidden(audio_tab)
 	_prepare_hidden(controls_tab)
 	_prepare_hidden(about_tab)
@@ -49,12 +56,30 @@ func _ready() -> void:
 	# Animate the main decorative frame first.
 	await _play_frame_animation()
 
-	# Reveal separator and navigation tabs simultaneously.
+	# Reveal separator, BACK, and navigation tabs simultaneously.
 	_play_reveal_animation(separator_line, 0.0, 0.65)
+	_play_reveal_animation(back, 0.0, 0.65)
 
 	_play_reveal_animation(audio_tab, 0.0, 0.65)
 	_play_reveal_animation(controls_tab, 0.0, 0.65)
 	_play_reveal_animation(about_tab, 0.0, 0.65)
+
+
+# ==========================================
+# BACK NAVIGATION
+# ==========================================
+
+func _on_back_gui_input(event: InputEvent) -> void:
+
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+			# Handle the click before changing scenes.
+			get_viewport().set_input_as_handled()
+
+			get_tree().change_scene_to_file(
+				"res://scenes/Main Menu/menu.tscn"
+			)
 
 
 # ==========================================

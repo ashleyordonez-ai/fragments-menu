@@ -8,6 +8,7 @@
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="6_4ppmf"]
 [ext_resource type="Script" uid="uid://bxseaquyhh0qb" path="res://scenes/slider_area.gd" id="7_uhhto"]
 [ext_resource type="Texture2D" uid="uid://cc4tcua8dmrid" path="res://assets/png/musicvolume.png" id="8_1g033"]
+[ext_resource type="Texture2D" uid="uid://beytlwkj4rrsf" path="res://assets/png/back.png" id="9_am25x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_es4n0"]
 atlas = ExtResource("2_6wm04")
@@ -28,6 +29,10 @@ region = Rect2(25.709839, 27.492828, 1278.1967, 122.68405)
 [sub_resource type="AtlasTexture" id="AtlasTexture_idxhk"]
 atlas = ExtResource("8_1g033")
 region = Rect2(1095.5148, 147.6588, 203.15308, 179.06499)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("9_am25x")
+region = Rect2(0, 271.67148, 1024, 458.21072)
 
 [node name="settings" type="Control" unique_id=997125293]
 layout_mode = 3
@@ -430,3 +435,17 @@ theme_override_font_sizes/font_size = 31
 text = "Dan Carlo Nequinto"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="back" type="TextureRect" parent="." unique_id=1092855308]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 951.0
+offset_top = 567.0
+offset_right = -29.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
