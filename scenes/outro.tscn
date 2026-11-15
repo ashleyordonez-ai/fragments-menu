@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://cewl1glv4ev4t"]
+
+[ext_resource type="Script" uid="uid://cur8edk3qal7n" path="res://scenes/outro.gd" id="1_a6ogt"]
+[ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_r6h2c"]
+[ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_vmn6f"]
+[ext_resource type="Shader" uid="uid://bwhecssxna16c" path="res://scenes/outro.gdshader" id="4_vmn6f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
+atlas = ExtResource("1_r6h2c")
+region = Rect2(565.96326, 68.30405, 3026.8481, 1539.6348)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a6ogt"]
+shader = ExtResource("4_vmn6f")
+shader_parameter/melt_amount = 0.0
+shader_parameter/melt_strength = 0.3
+
+[node name="Outro" type="Control" unique_id=1121294425]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a6ogt")
+
+[node name="background" type="TextureRect" parent="." unique_id=1026693501]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_bjqgx")
+expand_mode = 1
+
+[node name="quote" type="Label" parent="." unique_id=1590919454]
+visible = false
+layout_mode = 0
+offset_left = 139.0
+offset_top = 212.99998
+offset_right = 1071.4297
+offset_bottom = 525.0
+scale = Vector2(0.94549656, 0.7151893)
+theme_override_colors/font_color = Color(0.9607843, 0.93333334, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.09019608, 0.20784314, 1)
+theme_override_fonts/font = ExtResource("3_vmn6f")
+theme_override_font_sizes/font_size = 53
+text = "We may never know the weight someone carries,
+ but we can choose to make the world a little gentler for them."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="quote2" type="Label" parent="." unique_id=1210345934]
+visible = false
+layout_mode = 0
+offset_left = 56.0
+offset_top = 175.0
+offset_right = 840.2412
+offset_bottom = 403.0
+scale = Vector2(1.3439742, 1.3106135)
+theme_override_colors/font_color = Color(0.9607843, 0.93333334, 1, 1)
+theme_override_fonts/font = ExtResource("3_vmn6f")
+theme_override_font_sizes/font_size = 22
+text = "Not every wound is visible, and not every silence means someone is okay.
+
+Choose compassion over judgment. 
+Be gentle with others, and be gentle with yourself."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="quote3" type="Label" parent="." unique_id=2145580098]
+material = SubResource("ShaderMaterial_a6ogt")
+layout_mode = 0
+offset_left = 109.0
+offset_top = 272.0
+offset_right = 894.1001
+offset_bottom = 373.60855
+scale = Vector2(1.1989105, 1.0129043)
+theme_override_colors/font_shadow_color = Color(0.16078432, 0.09019608, 0.20784314, 1)
+theme_override_fonts/font = ExtResource("3_vmn6f")
+theme_override_font_sizes/font_size = 42
+text = "HEALING TAKES TIME, 
+BUT HOPE IS NEVER OUT OF REACH."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

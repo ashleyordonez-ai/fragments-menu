@@ -38,4 +38,4 @@ func animate_button(target_position: Vector2):
 	tween.tween_property(self, "position", target_position, 0.15)
 
 func _on_startbutton_pressed():
-	get_tree().change_scene_to_file("res://scene/settings.tscn")
+	get_tree().change_scene_to_file("res://scenes/settings.tscn")

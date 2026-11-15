@@ -42,5 +42,6 @@ func _input_event(_viewport: Viewport, event: InputEvent, _shape_idx: int) -> vo
 
 			if player_in_range:
 				print("OBJECT INTERACTION SUCCESSFUL!")
+				get_tree().change_scene_to_file("res://scenes/gameplay_intro/chap3_intro.tscn")			
 			else:
 				print("PLAYER IS TOO FAR AWAY")
