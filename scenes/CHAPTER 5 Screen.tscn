@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://duia33r7bfbd3"]
+[gd_scene format=3 uid="uid://cov16rjyd1yq3"]
 
 [ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_gdtbn"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_bdcu2"]
@@ -25,7 +25,7 @@ grow_vertical = 2
 texture = ExtResource("2_bdcu2")
 expand_mode = 1
 
-[node name="chap4" type="Label" parent="." unique_id=1683196603]
+[node name="chap5" type="Label" parent="." unique_id=1683196603]
 layout_mode = 0
 offset_left = 198.0
 offset_top = 306.00003
@@ -35,4 +35,4 @@ scale = Vector2(0.86760676, 0.39381862)
 theme_override_colors/font_color = Color(0.7501647, 0.6424119, 0.92748904, 1)
 theme_override_fonts/font = ExtResource("3_6ujdm")
 theme_override_font_sizes/font_size = 197
-text = "CHAPTER FOUR"
+text = "CHAPTER FIVE"
