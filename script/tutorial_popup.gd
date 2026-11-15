@@ -2,6 +2,7 @@
 extends Control
 
 @onready var okay_button: Button = $OkayButton
+@onready var welcome_text: Label = $WelcomeText
 @onready var tutorial_text: Label = $TutorialText
 
 var typing_speed: float = 0.04
@@ -18,9 +19,18 @@ func _ready() -> void:
 
 func start_typing() -> void:
 
-	tutorial_text.text = "WELCOME TO THE GAME!
+	# Type the welcome heading first
+	welcome_text.text = "WELCOME TO THE GAME!"
+	welcome_text.visible_characters = 0
 
-Use the WASD keys to move your character.
+	for i in range(welcome_text.text.length()):
+
+		welcome_text.visible_characters = i + 1
+
+		await get_tree().create_timer(typing_speed).timeout
+
+	# Type the tutorial instructions next
+	tutorial_text.text = "Use the WASD keys to move your character.
 
 Approach an object and click on it to interact.
 
