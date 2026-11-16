@@ -1,11 +1,15 @@
+
 extends Node2D
 
-@onready var tutorial_popup: Control = $CanvasLayer/TutorialPopup
-@onready var okay_button: Button = $CanvasLayer/TutorialPopup/OkayButton
+@onready var tutorial_popup = get_node_or_null("CanvasLayer/TutorialPopup")
+
 
 func _ready() -> void:
-	tutorial_popup.show()
-	okay_button.pressed.connect(_on_okay_button_pressed)
+	print("MAIN SCENE: ", get_path())
+	print("TUTORIAL POPUP: ", tutorial_popup)
 
-func _on_okay_button_pressed() -> void:
-	tutorial_popup.hide()
+	if tutorial_popup == null:
+		print("ERROR: TutorialPopup reference is missing!")
+		return
+
+	print("TutorialPopup successfully found!")
