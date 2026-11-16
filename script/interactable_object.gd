@@ -138,10 +138,10 @@ func _input_event(
 
 				print("OBJECT INTERACTION SUCCESSFUL!")
 
-				# Change scene to flashback
-				#get_tree().change_scene_to_file(
-					#"res://scenes/gameplay_intro/chap2_intro.tscn"
-				#)
+				
+				get_tree().change_scene_to_file(
+					"res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn"
+				)
 
 			else:
 
