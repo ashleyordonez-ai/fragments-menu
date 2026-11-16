@@ -12,7 +12,6 @@ extends Control
 	"SkipButton", true, false
 ) as Button
 
-
 # =====================================
 # DIALOGUE ENTRIES
 # =====================================
@@ -78,13 +77,11 @@ var dialogues = [
 
 ]
 
-
 # =====================================
 # DIALOGUE INDEX
 # =====================================
 
 var dialogue_index: int = 0
-
 
 # =====================================
 # INITIALIZE
@@ -115,7 +112,6 @@ func _ready() -> void:
 
 	show_current_dialogue()
 
-
 # =====================================
 # DISPLAY CURRENT DIALOGUE
 # =====================================
@@ -145,7 +141,6 @@ func show_current_dialogue() -> void:
 		current["background"]
 	)
 
-
 # =====================================
 # NEXT BUTTON
 # =====================================
@@ -155,7 +150,6 @@ func show_next_dialogue() -> void:
 	dialogue_index += 1
 
 	show_current_dialogue()
-
 
 # =====================================
 # SKIP BUTTON
@@ -179,7 +173,6 @@ func go_to_map() -> void:
 	get_tree().change_scene_to_file(
 		"res://scenes/Maps/Chapter 1_Room.tscn"
 	)
-
 
 # =====================================
 # CHANGE BACKGROUND
