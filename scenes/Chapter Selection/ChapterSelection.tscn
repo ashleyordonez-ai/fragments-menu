@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://c3vokjgb7xoe7" path="res://script/chap_3.gd" id="9_3cfqi"]
 [ext_resource type="Script" uid="uid://tqkwcex560tl" path="res://script/chap_4.gd" id="10_3bmuf"]
 [ext_resource type="Script" uid="uid://digw3ixilru76" path="res://script/chap_5.gd" id="11_0jmnq"]
+[ext_resource type="AudioStream" uid="uid://5d52ywntp1ft" path="res://assets/music/Bundle of Joy.mp3" id="13_a120l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("2_tujl2")
@@ -254,3 +255,7 @@ theme_override_colors/font_color = Color(0.9607843, 0.92156863, 0.8666667, 1)
 theme_override_fonts/font = ExtResource("5_sfyjn")
 theme_override_font_sizes/font_size = 50
 text = "CHOOSE YOUR CHAPTER"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=877181560]
+stream = ExtResource("13_a120l")
+autoplay = true

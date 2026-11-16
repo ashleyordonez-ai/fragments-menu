@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_22lce"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_5g12g"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="2_gvvuf"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="4_5g12g"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3
@@ -12,8 +13,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_22lce")
-metadata/_edit_vertical_guides_ = [-38.0]
-metadata/_edit_horizontal_guides_ = [727.0]
+metadata/_edit_vertical_guides_ = [-38.0, 575.0]
+metadata/_edit_horizontal_guides_ = [727.0, 325.0]
 
 [node name="background" type="TextureRect" parent="." unique_id=2132083076]
 layout_mode = 1
@@ -25,14 +26,41 @@ grow_vertical = 2
 texture = ExtResource("2_5g12g")
 expand_mode = 1
 
-[node name="chap1" type="Label" parent="." unique_id=1683196603]
+[node name="chap1" type="Label" parent="." unique_id=1269097426]
 layout_mode = 0
-offset_left = 224.99998
-offset_top = 296.0
-offset_right = 1047.9535
-offset_bottom = 494.0
-scale = Vector2(0.86760676, 0.39381862)
-theme_override_colors/font_color = Color(0.7501647, 0.6424119, 0.92748904, 1)
+offset_left = 144.0
+offset_top = 182.0
+offset_right = 1005.0
+offset_bottom = 386.0
 theme_override_fonts/font = ExtResource("2_gvvuf")
-theme_override_font_sizes/font_size = 197
-text = "CHAPTER ONE"
+theme_override_font_sizes/font_size = 203
+text = "CHAPTER ONE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=783652140]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 365.0
+offset_right = 830.0
+offset_bottom = 470.0
+theme_override_fonts/font = ExtResource("2_gvvuf")
+theme_override_font_sizes/font_size = 100
+text = "Where am I?"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2138758785]
+stream = ExtResource("4_5g12g")
+autoplay = true
+
+[node name="ContinueButton" type="Button" parent="." unique_id=1596284289]
+layout_mode = 0
+offset_left = 538.0
+offset_top = 504.0
+offset_right = 615.0
+offset_bottom = 537.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_gvvuf")
+theme_override_font_sizes/font_size = 25
+text = "continue"
+flat = true
