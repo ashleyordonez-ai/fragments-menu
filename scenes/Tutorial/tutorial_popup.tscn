@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://drlx26wknb504" path="res://script/tutorial_popup.gd" id="1_hhc2x"]
 [ext_resource type="Texture2D" uid="uid://cbkp8h0w4bldw" path="res://assets/png/Tutorial-Panel.png" id="2_83npt"]
+[ext_resource type="PackedScene" uid="uid://c0i1s7lo24pfn" path="res://scenes/Chapter 1/Chapter 1_Time.tscn" id="2_h0ex1"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_h0ex1"]
+[ext_resource type="PackedScene" uid="uid://cub7nwv2t2vex" path="res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn" id="3_rmcnd"]
 [ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="4_rmcnd"]
 
 [node name="TutorialPopup" type="Control" unique_id=1593059378]
@@ -13,6 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hhc2x")
+movement_next_scene = ExtResource("2_h0ex1")
+interaction_next_scene = ExtResource("3_rmcnd")
 
 [node name="InstructionPanel" type="TextureRect" parent="." unique_id=269932963]
 layout_mode = 0
@@ -53,5 +57,5 @@ offset_bottom = 554.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_h0ex1")
 theme_override_font_sizes/font_size = 30
-text = "got it!"
+text = "okay!"
 flat = true
