@@ -1,69 +1,73 @@
 
 extends Control
 
-@onready var okay_button: Button = $OkayButton
-@onready var welcome_text: Label = $WelcomeText
-@onready var tutorial_text: Label = $TutorialText
-
-var typing_speed: float = 0.04
+@onready var title_label: Label = get_node_or_null("Title") as Label
+@onready var description_label: Label = get_node_or_null("Description") as Label
+@onready var okay_button: Button = get_node_or_null("OkayButton") as Button
 
 
 func _ready() -> void:
+	hide()
 
-	# Check if the tutorial was already completed
-	if get_tree().root.get_meta("tutorial_completed", false):
-
-		print("Tutorial already completed. Hiding tutorial.")
-
-		# Hide the entire CanvasLayer
-		get_parent().visible = false
-
+	# Check required nodes
+	if title_label == null:
+		push_error("Title Label not found!")
 		return
 
-	# Show tutorial for first-time players
-	visible = true
+	if description_label == null:
+		push_error("Description Label not found!")
+		return
 
-	okay_button.pressed.connect(_on_okay_button_pressed)
+	if okay_button == null:
+		push_error("OkayButton not found!")
+		return
 
-	start_typing()
+	# Connect Okay button
+	if not okay_button.pressed.is_connected(hide_tutorial):
+		okay_button.pressed.connect(hide_tutorial)
+
+	# Get selected tutorial
+	var tutorial_id = get_tree().root.get_meta(
+		"current_tutorial",
+		""
+	)
+
+	print("CURRENT TUTORIAL: ", tutorial_id)
+
+	# Display the appropriate tutorial
+	match tutorial_id:
+
+		"movement":
+			show_tutorial(
+				"Movement Tutorial",
+				"Use the WASD keys to move your character around."
+			)
+
+		"interaction":
+			show_tutorial(
+				"Interaction Tutorial",
+				"Approach an object and click on it to interact."
+			)
+
+		"inspection":
+			show_tutorial(
+				"Inspection Tutorial",
+				"Click on objects to discover more about them."
+			)
+
+		_:
+			hide_tutorial()
+
+	# Clear tutorial ID
+	if get_tree().root.has_meta("current_tutorial"):
+		get_tree().root.remove_meta("current_tutorial")
 
 
-func start_typing() -> void:
-
-	# Type the welcome heading first
-	welcome_text.text = "WELCOME TO THE GAME!"
-	welcome_text.visible_characters = 0
-
-	for i in range(welcome_text.text.length()):
-
-		welcome_text.visible_characters = i + 1
-
-		await get_tree().create_timer(typing_speed).timeout
-
-	# Type the tutorial instructions next
-	tutorial_text.text = "Use the WASD keys to move your character.
-
-The game has 2 objects per chapter and clues are found on the dialogues.
-
-Approach an object and click on it to interact.
-
-Explore the map and discover what awaits you. Enjoy the game!"
-
-	tutorial_text.visible_characters = 0
-
-	for i in range(tutorial_text.text.length()):
-
-		tutorial_text.visible_characters = i + 1
-
-		await get_tree().create_timer(typing_speed).timeout
+func show_tutorial(title: String, description: String) -> void:
+	title_label.text = title
+	description_label.text = description
+	show()
 
 
-func _on_okay_button_pressed() -> void:
-
-	# Remember that the tutorial has been completed
-	get_tree().root.set_meta("tutorial_completed", true)
-
-	print("Tutorial completed!")
-
-	# Proceed to the next dialogue scene
-	get_tree().change_scene_to_file("res://scenes/Chapter 1/Chapter 1_Time.tscn")
+func hide_tutorial() -> void:
+	hide()

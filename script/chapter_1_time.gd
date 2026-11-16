@@ -110,11 +110,12 @@ func skip_dialogue() -> void:
 # =====================================
 
 func go_to_map() -> void:
-	get_tree().root.set_meta("chapter1_dialogue_completed", true)
 
-	print("CHAPTER 1 DIALOGUE COMPLETED!")
+	get_tree().root.set_meta("current_tutorial", "interaction")
 
-	get_tree().change_scene_to_file("res://scenes/Maps/Chapter 1_Room.tscn")
+	get_tree().change_scene_to_file(
+		"res://scenes/Maps/Chapter 1_Room.tscn"
+	)
 
 
 # =====================================
