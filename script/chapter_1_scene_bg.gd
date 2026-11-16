@@ -124,10 +124,16 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
+	print("GOING TO MAP")
+
 	get_tree().root.set_meta("current_tutorial", "movement")
 
+	print("TUTORIAL ID SET: ",
+		get_tree().root.get_meta("current_tutorial", "")
+	)
+
 	get_tree().change_scene_to_file(
-		"res://scenes/Maps/Chapter 1_Room.tscn"
+        "res://scenes/Maps/Chapter 1_Room.tscn"
 	)
 
 

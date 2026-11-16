@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cbm8og4cptek6"]
+
+[ext_resource type="Script" uid="uid://drlx26wknb504" path="res://script/tutorial_popup.gd" id="1_hhc2x"]
+[ext_resource type="Texture2D" uid="uid://cbkp8h0w4bldw" path="res://assets/png/Tutorial-Panel.png" id="2_83npt"]
+[ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_h0ex1"]
+[ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="4_rmcnd"]
+
+[node name="TutorialPopup" type="Control" unique_id=1593059378]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hhc2x")
+
+[node name="InstructionPanel" type="TextureRect" parent="." unique_id=269932963]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_83npt")
+
+[node name="WelcomeText" type="Label" parent="." unique_id=384048627]
+layout_mode = 0
+offset_left = 407.0
+offset_top = 98.0
+offset_right = 714.0
+offset_bottom = 138.0
+theme_override_fonts/font = ExtResource("3_h0ex1")
+theme_override_font_sizes/font_size = 40
+text = "WELCOME TO THE GAME!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TutorialText" type="Label" parent="." unique_id=914382010]
+layout_mode = 0
+offset_left = 150.0
+offset_top = 176.0
+offset_right = 1003.0
+offset_bottom = 498.0
+theme_override_fonts/font = ExtResource("4_rmcnd")
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="OkayButton" type="Button" parent="." unique_id=539886786]
+layout_mode = 0
+offset_left = 543.0
+offset_top = 516.0
+offset_right = 607.0
+offset_bottom = 554.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_h0ex1")
+theme_override_font_sizes/font_size = 30
+text = "got it!"
+flat = true

@@ -1,21 +1,22 @@
 
 extends Control
 
-@onready var title_label: Label = get_node_or_null("Title") as Label
-@onready var description_label: Label = get_node_or_null("Description") as Label
+@onready var title_label: Label = get_node_or_null("WelcomeText") as Label
+@onready var description_label: Label = get_node_or_null("TutorialText") as Label
 @onready var okay_button: Button = get_node_or_null("OkayButton") as Button
 
 
 func _ready() -> void:
+
 	hide()
 
 	# Check required nodes
 	if title_label == null:
-		push_error("Title Label not found!")
+		push_error("WelcomeText Label not found!")
 		return
 
 	if description_label == null:
-		push_error("Description Label not found!")
+		push_error("TutorialText Label not found!")
 		return
 
 	if okay_button == null:
@@ -29,30 +30,30 @@ func _ready() -> void:
 	# Get selected tutorial
 	var tutorial_id = get_tree().root.get_meta(
 		"current_tutorial",
-		""
+        ""
 	)
 
 	print("CURRENT TUTORIAL: ", tutorial_id)
 
-	# Display the appropriate tutorial
+	# Display appropriate tutorial
 	match tutorial_id:
 
 		"movement":
 			show_tutorial(
 				"Movement Tutorial",
-				"Use the WASD keys to move your character around."
+                "Use the WASD keys to move your character around."
 			)
 
 		"interaction":
 			show_tutorial(
 				"Interaction Tutorial",
-				"Approach an object and click on it to interact."
+                "Approach an object and click on it to interact."
 			)
 
 		"inspection":
 			show_tutorial(
 				"Inspection Tutorial",
-				"Click on objects to discover more about them."
+                "Click on objects to discover more about them."
 			)
 
 		_:
@@ -64,8 +65,10 @@ func _ready() -> void:
 
 
 func show_tutorial(title: String, description: String) -> void:
+
 	title_label.text = title
 	description_label.text = description
+
 	show()
 
 

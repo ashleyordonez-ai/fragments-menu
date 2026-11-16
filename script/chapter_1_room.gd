@@ -1,15 +1,22 @@
-
 extends Node2D
 
-@onready var tutorial_popup = get_node_or_null("CanvasLayer/TutorialPopup")
+@onready var tutorial_popup = get_node_or_null(
+    "CanvasLayer/TutorialPopup"
+)
 
 
 func _ready() -> void:
-	print("MAIN SCENE: ", get_path())
+
+	print("========== CHAPTER 1 ROOM ==========")
+
 	print("TUTORIAL POPUP: ", tutorial_popup)
 
+	print("CURRENT TUTORIAL: ",
+		get_tree().root.get_meta("current_tutorial", "")
+	)
+
 	if tutorial_popup == null:
-		print("ERROR: TutorialPopup reference is missing!")
+		push_error("TutorialPopup reference is missing!")
 		return
 
 	print("TutorialPopup successfully found!")
