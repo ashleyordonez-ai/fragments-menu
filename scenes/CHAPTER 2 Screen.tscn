@@ -25,7 +25,7 @@ grow_vertical = 2
 texture = ExtResource("2_6lgee")
 expand_mode = 1
 
-[node name="chap2" type="Label" parent="." unique_id=1683196603]
+[node name="chap1" type="Label" parent="." unique_id=1683196603]
 layout_mode = 0
 offset_left = 192.99998
 offset_top = 300.0

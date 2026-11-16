@@ -1,7 +1,7 @@
 
 extends Control
 
-@onready var chapter_label: Label = $chap5
+@onready var chapter_label: Label = $chap1
 
 #const NEXT_SCENE := "res://scenes/gameplay_intro/chap1_intro.tscn"
 

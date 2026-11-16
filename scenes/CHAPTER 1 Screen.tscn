@@ -27,10 +27,10 @@ expand_mode = 1
 
 [node name="chap1" type="Label" parent="." unique_id=1683196603]
 layout_mode = 0
-offset_left = 209.99998
-offset_top = 300.00003
-offset_right = 1032.9535
-offset_bottom = 498.00003
+offset_left = 224.99998
+offset_top = 296.0
+offset_right = 1047.9535
+offset_bottom = 494.0
 scale = Vector2(0.86760676, 0.39381862)
 theme_override_colors/font_color = Color(0.7501647, 0.6424119, 0.92748904, 1)
 theme_override_fonts/font = ExtResource("2_gvvuf")
