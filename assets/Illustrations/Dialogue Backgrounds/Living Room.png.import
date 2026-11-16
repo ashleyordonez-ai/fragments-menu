@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://crobcskvhl3ys"
-path="res://.godot/imported/Arthut-Right_Default.png-bf2ce268fb962942c07297f55c4a508d.ctex"
+uid="uid://cg7yqdogg5b6r"
+path="res://.godot/imported/Living Room.png-cd3c4e22b79027a970d70ec38d868165.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Arthur/Arthut-Right_Default.png"
-dest_files=["res://.godot/imported/Arthut-Right_Default.png-bf2ce268fb962942c07297f55c4a508d.ctex"]
+source_file="res://assets/Illustrations/Dialogue Backgrounds/Living Room.png"
+dest_files=["res://.godot/imported/Living Room.png-cd3c4e22b79027a970d70ec38d868165.ctex"]
 
 [params]
 

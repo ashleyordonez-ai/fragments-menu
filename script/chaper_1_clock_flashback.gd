@@ -1,11 +1,16 @@
 
 extends Control
 
-@onready var background: TextureRect = get_node_or_null("Background")
+@onready var background: TextureRect = $Background
 @onready var dialogue_box = $DialogueBox
 
-@onready var next_button: Button = dialogue_box.find_child("NextButton", true, false) as Button
-@onready var skip_button: Button = dialogue_box.find_child("SkipButton", true, false) as Button
+@onready var next_button: Button = dialogue_box.find_child(
+	"NextButton", true, false
+) as Button
+
+@onready var skip_button: Button = dialogue_box.find_child(
+	"SkipButton", true, false
+) as Button
 
 
 # =====================================
@@ -13,24 +18,64 @@ extends Control
 # =====================================
 
 var dialogues = [
+
+	# DIALOGUE 1
 	{
 		"character": "Leonore",
 		"text": "God, if you're listening, can you please tell me why I need to suffer? 
 		What did I do to deserve this?",
-		"expression": "crying-left",
+		"expression": "crying",
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - NIGHT (Dialogue BG).png"
 	},
-	
+
+	# DIALOGUE 2
 	{
 		"character": "Leonore",
-		"text": "I can't bear this pain anymore. You know that I have no one to run to; why do they need to 
-		do these things to me. I really don't know how to hold on anymore.",
-		"expression": "crying-left",
+		"text": "I can't bear this pain anymore. You know that I have no one to run to; 
+		why do they need to do these things to me? I really don't know 
+		how to hold on anymore.",
+		"expression": "crying",
 		"position": "left",
-		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - NIGHT (Dialogue BG).png"
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - NIGHT (Dialogue BG).png"
+	},
+
+	# DIALOGUE 3 - OFF-SCREEN VOICE
+	{
+		"character": "",
+		"text": "Leonore!!!",
+		"expression": "",
+		"position": "",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/BlackBG.png"
+	},
+
+	# DIALOGUE 4
+	{
+		"character": "Leonore",
+		"text": "Huh? Someone is calling my name.",
+		"expression": "default",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/BlackBG.png"
+	},
+
+	# DIALOGUE 5 - OFF-SCREEN VOICE
+	{
+		"character": "",
+		"text": "Leonore, please, hold on. I'm begging you.",
+		"expression": "",
+		"position": "",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/BlackBG.png"
+	},
+
+	# DIALOGUE 6
+	{
+		"character": "Leonore",
+		"text": "Was that Mom? I miss her so much.",
+		"expression": "default",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	}
-	
+
 ]
 
 
@@ -48,9 +93,14 @@ var dialogue_index: int = 0
 func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
+	print("Background: ", background)
 	print("DialogueBox: ", dialogue_box)
 	print("NextButton: ", next_button)
 	print("SkipButton: ", skip_button)
+
+	if background == null:
+		push_error("Background node could not be found!")
+		return
 
 	if next_button == null:
 		push_error("NextButton could not be found!")
@@ -60,12 +110,9 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
-	dialogue_box.background_changed.connect(change_background)
-
 	next_button.pressed.connect(show_next_dialogue)
 	skip_button.pressed.connect(skip_dialogue)
 
-	# Display the first dialogue
 	show_current_dialogue()
 
 
@@ -80,18 +127,21 @@ func show_current_dialogue() -> void:
 		print("ALL DIALOGUES COMPLETED")
 
 		go_to_map()
-
 		return
 
 	var current = dialogues[dialogue_index]
 
 	print("SHOWING DIALOGUE: ", current["text"])
 
+	# CHANGE BACKGROUND
+	change_background(current["background"])
+
+	# DISPLAY DIALOGUE
 	dialogue_box.show_dialogue(
-		current["character"],
+		current.get("character", ""),
 		current["text"],
-		current["expression"],
-		current["position"],
+		current.get("expression", ""),
+		current.get("position", ""),
 		current["background"]
 	)
 
@@ -123,11 +173,17 @@ func skip_dialogue() -> void:
 # =====================================
 
 func go_to_map() -> void:
-	get_tree().root.set_meta("chapter1_dialogue_completed", true)
+
+	get_tree().root.set_meta(
+		"chapter1_dialogue_completed",
+		true
+	)
 
 	print("CHAPTER 1 DIALOGUE COMPLETED!")
 
-	get_tree().change_scene_to_file("res://scenes/Maps/Chapter 1_Room.tscn")
+	get_tree().change_scene_to_file(
+		"res://scenes/Maps/Chapter 1_Room.tscn"
+	)
 
 
 # =====================================
@@ -137,16 +193,17 @@ func go_to_map() -> void:
 func change_background(path: String) -> void:
 
 	print("CHANGING BACKGROUND: ", path)
-	print("BACKGROUND NODE: ", background)
 
-	if background == null:
-		push_error("Background node could not be found! Check its node path.")
+	if not ResourceLoader.exists(path):
+		push_error("Background file does not exist: " + path)
 		return
 
-	var texture = load(path)
+	var texture = load(path) as Texture2D
 
-	if texture:
-		background.texture = texture
-		print("BACKGROUND CHANGED SUCCESSFULLY!")
-	else:
-		push_error("Background not found: " + path)
+	if texture == null:
+		push_error("Could not load background: " + path)
+		return
+
+	background.texture = texture
+
+	print("BACKGROUND CHANGED SUCCESSFULLY!")

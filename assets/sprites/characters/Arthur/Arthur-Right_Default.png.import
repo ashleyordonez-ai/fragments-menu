@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drd3u8jjn436w"
-path="res://.godot/imported/Leonore-Left_Defult.png-eb0fe5610a037ebabf45843147ce581f.ctex"
+uid="uid://crobcskvhl3ys"
+path="res://.godot/imported/Arthur-Right_Default.png-16b2b245fa4d7fd7a441be76acfa3460.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Leonore/Leonore-Left_Defult.png"
-dest_files=["res://.godot/imported/Leonore-Left_Defult.png-eb0fe5610a037ebabf45843147ce581f.ctex"]
+source_file="res://assets/sprites/characters/Arthur/Arthur-Right_Default.png"
+dest_files=["res://.godot/imported/Arthur-Right_Default.png-16b2b245fa4d7fd7a441be76acfa3460.ctex"]
 
 [params]
 

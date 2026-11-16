@@ -16,15 +16,15 @@ var dialogues = [
 	{
 		"character": "Leonore",
 		"text": "Huh? Where am I?",
-		"expression": "default-left",
+		"expression": "default",
 		"position": "left",
 		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
-	
+
 	{
 		"character": "Leonore",
 		"text": "Why am I here?",
-		"expression": "default-left",
+		"expression": "default",
 		"position": "left",
 		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	}
@@ -49,6 +49,10 @@ func _ready() -> void:
 	print("NextButton: ", next_button)
 	print("SkipButton: ", skip_button)
 
+	if dialogue_box == null:
+		push_error("DialogueBox could not be found!")
+		return
+
 	if next_button == null:
 		push_error("NextButton could not be found!")
 		return
@@ -57,12 +61,9 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
-	dialogue_box.background_changed.connect(change_background)
-
 	next_button.pressed.connect(show_next_dialogue)
 	skip_button.pressed.connect(skip_dialogue)
 
-	# Display the first dialogue
 	show_current_dialogue()
 
 
@@ -77,19 +78,21 @@ func show_current_dialogue() -> void:
 		print("ALL DIALOGUES COMPLETED")
 
 		go_to_map()
-
 		return
 
 	var current = dialogues[dialogue_index]
 
 	print("SHOWING DIALOGUE: ", current["text"])
 
+	# Change background directly
+	change_background(current["background"])
+
+	# Display character portrait and dialogue
 	dialogue_box.show_dialogue(
 		current["character"],
 		current["text"],
 		current["expression"],
-		current["position"],
-		current["background"]
+		current["position"]
 	)
 
 
@@ -121,7 +124,9 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
-	get_tree().change_scene_to_file("res://scenes/Maps/Chapter 1_Room.tscn")
+	get_tree().change_scene_to_file(
+		"res://scenes/Maps/Chapter 1_Room.tscn"
+	)
 
 
 # =====================================
@@ -130,9 +135,12 @@ func go_to_map() -> void:
 
 func change_background(path: String) -> void:
 
-	var texture = load(path)
+	if path.is_empty():
+		return
+
+	var texture = load(path) as Texture2D
 
 	if texture:
 		background.texture = texture
 	else:
-		print("Background not found: ", path)
+		push_error("Background not found: " + path)

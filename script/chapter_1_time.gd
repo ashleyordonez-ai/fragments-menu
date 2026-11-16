@@ -16,7 +16,7 @@ var dialogues = [
 	{
 		"character": "Leonore",
 		"text": "I wonder what time it is.",
-		"expression": "default-left",
+		"expression": "default",
 		"position": "left",
 		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
 	}
@@ -48,8 +48,6 @@ func _ready() -> void:
 	if skip_button == null:
 		push_error("SkipButton could not be found!")
 		return
-
-	dialogue_box.background_changed.connect(change_background)
 
 	next_button.pressed.connect(show_next_dialogue)
 	skip_button.pressed.connect(skip_dialogue)

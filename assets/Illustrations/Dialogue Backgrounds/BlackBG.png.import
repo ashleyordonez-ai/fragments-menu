@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7xi3yhvvm5sy"
-path="res://.godot/imported/Teresa-Left_Defult.png-c1e2105ecfed892677a7b1705f7114a6.ctex"
+uid="uid://ysbtw0mtbhew"
+path="res://.godot/imported/BlackBG.png-6dd9818290027c3f94685d3a45fe4ff8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/characters/Teresa/Teresa-Left_Defult.png"
-dest_files=["res://.godot/imported/Teresa-Left_Defult.png-c1e2105ecfed892677a7b1705f7114a6.ctex"]
+source_file="res://assets/Illustrations/Dialogue Backgrounds/BlackBG.png"
+dest_files=["res://.godot/imported/BlackBG.png-6dd9818290027c3f94685d3a45fe4ff8.ctex"]
 
 [params]
 

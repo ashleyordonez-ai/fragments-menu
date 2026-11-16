@@ -1,6 +1,5 @@
 [gd_scene format=3 uid="uid://cub7nwv2t2vex"]
 
-[ext_resource type="Texture2D" uid="uid://dwyxu7niya1my" path="res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - NIGHT (Dialogue BG).png" id="1_h1k0v"]
 [ext_resource type="Script" uid="uid://c3ndsg5xlchy2" path="res://script/chaper_1_clock_flashback.gd" id="1_smps5"]
 [ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="2_fjj3c"]
 [ext_resource type="AudioStream" uid="uid://xe2xbfidk3v4" path="res://assets/sound effects/Crying SFX.mp3" id="4_r68s1"]
@@ -14,14 +13,15 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_smps5")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=669493968]
+[node name="Background" type="TextureRect" parent="." unique_id=669493968]
+z_index = -1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_h1k0v")
 
 [node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("2_fjj3c")]
 layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1558185507]
 stream = ExtResource("4_r68s1")
+autoplay = true

@@ -39,6 +39,7 @@ offset_top = 52.0
 offset_right = 178.0
 offset_bottom = 75.0
 theme_override_fonts/font = ExtResource("3_k7478")
+theme_override_font_sizes/font_size = 20
 text = "sample text"
 
 [node name="NameLabel" type="Label" parent="Background" unique_id=1265604017]
