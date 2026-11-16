@@ -12,6 +12,9 @@ radius = 82.02438
 collision_layer = 4
 script = ExtResource("1_r83lh")
 
+[node name="GlowSprite" type="Sprite2D" parent="." unique_id=1404664171]
+z_index = 1
+
 [node name="ObjectSprite" type="Sprite2D" parent="." unique_id=2009882107]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1575614360]
