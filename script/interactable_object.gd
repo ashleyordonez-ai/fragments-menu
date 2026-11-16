@@ -1,7 +1,12 @@
 
 extends Area2D
 
+# =====================================
+# OBJECT SETTINGS
+# =====================================
+
 @export var object_texture: Texture2D
+@export var interaction_scene: PackedScene
 
 @onready var object_sprite: Sprite2D = $ObjectSprite
 @onready var interaction_range: Area2D = $InteractionRange
@@ -19,13 +24,11 @@ func _ready() -> void:
 	if object_texture:
 		object_sprite.texture = object_texture
 
-	# Copy ObjectSprite texture to GlowSprite
 	glow_sprite.texture = object_sprite.texture
 
 	print("OBJECT TEXTURE: ", object_sprite.texture)
 	print("GLOW TEXTURE: ", glow_sprite.texture)
 
-	# Enable mouse detection
 	input_pickable = true
 
 	# =====================================
@@ -51,7 +54,7 @@ func _ready() -> void:
 	interaction_range.body_exited.connect(_on_body_exited)
 
 	# =====================================
-	# CHECK IF CHAPTER 1 DIALOGUE IS COMPLETED
+	# CHECK DIALOGUE COMPLETION
 	# =====================================
 
 	var dialogue_completed = get_tree().root.get_meta(
@@ -59,41 +62,6 @@ func _ready() -> void:
 	)
 
 	print("CHAPTER 1 COMPLETED: ", dialogue_completed)
-
-	if dialogue_completed:
-		start_glow()
-
-
-# =====================================
-# OBJECT GLOW - TEMPORARY VISUAL TEST
-# =====================================
-
-
-func start_glow() -> void:
-
-	print("STARTING OBJECT GLOW!")
-
-	# Match ObjectSprite's local position
-	glow_sprite.position = object_sprite.position
-	glow_sprite.rotation = object_sprite.rotation
-	glow_sprite.offset = object_sprite.offset
-	glow_sprite.centered = object_sprite.centered
-
-	# Assign texture again
-	glow_sprite.texture = object_sprite.texture
-
-	# Force the sprite to render in front
-	glow_sprite.visible = true
-	glow_sprite.modulate = Color.RED
-	glow_sprite.scale = object_sprite.scale * 1.5
-	glow_sprite.z_index = object_sprite.z_index + 1
-
-	print("GLOW VISIBLE: ", glow_sprite.visible)
-	print("GLOW POSITION: ", glow_sprite.position)
-	print("GLOW GLOBAL POSITION: ", glow_sprite.global_position)
-	print("GLOW TEXTURE: ", glow_sprite.texture)
-	print("GLOW TOP LEVEL: ", glow_sprite.is_set_as_top_level())
-
 
 
 # =====================================
@@ -138,10 +106,11 @@ func _input_event(
 
 				print("OBJECT INTERACTION SUCCESSFUL!")
 
-				
-				get_tree().change_scene_to_file(
-					"res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn"
-				)
+				if interaction_scene == null:
+					push_error("No interaction scene assigned to this object!")
+					return
+
+				get_tree().change_scene_to_packed(interaction_scene)
 
 			else:
 

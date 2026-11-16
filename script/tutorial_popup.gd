@@ -1,17 +1,20 @@
 
 extends Control
 
+# =====================================
+# NODE REFERENCES
+# =====================================
+
 @onready var title_label: Label = get_node_or_null("WelcomeText") as Label
 @onready var description_label: Label = get_node_or_null("TutorialText") as Label
 @onready var okay_button: Button = get_node_or_null("OkayButton") as Button
 
 
 # =====================================
-# NEXT DIALOGUE SCENES
+# NEXT SCENES
 # =====================================
 
 @export var movement_next_scene: PackedScene
-@export var interaction_next_scene: PackedScene
 
 
 # =====================================
@@ -84,6 +87,14 @@ Enjoy the game!"
 				"Inspection Tutorial",
 				"Click on objects to discover more about them."
 			)
+		
+		"game play":
+			show_tutorial(
+				"Game Play Tutorial",
+				"In each of the chapter, there are 2 objects that you need to find.
+				
+				Proceed to the next fragment to unlock another part of the story."
+			)
 
 		_:
 			hide_tutorial()
@@ -145,42 +156,44 @@ func _on_okay_button_pressed() -> void:
 	match current_tutorial_id:
 
 		"movement":
+			# Load Chapter 1_Time
 			load_next_scene(movement_next_scene)
 
 		"interaction":
-			load_next_scene(interaction_next_scene)
+			# Hide popup after Chapter 1_Time
+			hide_tutorial()
 
 		"inspection":
+			hide_tutorial()
+		
+		"game play":
 			hide_tutorial()
 
 
 # =====================================
-# LOAD NEXT DIALOGUE SCENE
+# LOAD NEXT SCENE
 # =====================================
 
 func load_next_scene(scene: PackedScene) -> void:
 
 	print("ATTEMPTING TO LOAD NEXT SCENE...")
 
-	# Check if a scene is assigned
 	if scene == null:
-		push_error("Next dialogue scene has not been assigned!")
+		push_error("Movement Next Scene has not been assigned!")
 		return
 
 	print("SCENE TO LOAD: ", scene.resource_path)
 
-	# Prevent multiple transitions
 	is_transitioning = true
 	okay_button.disabled = true
 
-	# Change scene
 	var error = get_tree().change_scene_to_packed(scene)
 
 	print("SCENE CHANGE RESULT: ", error)
 
 	if error != OK:
 
-		push_error("Failed to load the next dialogue scene!")
+		push_error("Failed to load the next scene!")
 
 		is_transitioning = false
 		okay_button.disabled = false

@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://cbkp8h0w4bldw" path="res://assets/png/Tutorial-Panel.png" id="2_83npt"]
 [ext_resource type="PackedScene" uid="uid://c0i1s7lo24pfn" path="res://scenes/Chapter 1/Chapter 1_Time.tscn" id="2_h0ex1"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_h0ex1"]
-[ext_resource type="PackedScene" uid="uid://cub7nwv2t2vex" path="res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn" id="3_rmcnd"]
 [ext_resource type="FontFile" uid="uid://jimlel412hrm" path="res://assets/fonts/Tox Typewriter.ttf" id="4_rmcnd"]
 
 [node name="TutorialPopup" type="Control" unique_id=1593059378]
@@ -16,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hhc2x")
 movement_next_scene = ExtResource("2_h0ex1")
-interaction_next_scene = ExtResource("3_rmcnd")
+metadata/_edit_vertical_guides_ = [575.0]
 
 [node name="InstructionPanel" type="TextureRect" parent="." unique_id=269932963]
 layout_mode = 0
@@ -26,9 +25,9 @@ texture = ExtResource("2_83npt")
 
 [node name="WelcomeText" type="Label" parent="." unique_id=384048627]
 layout_mode = 0
-offset_left = 407.0
+offset_left = 422.0
 offset_top = 98.0
-offset_right = 714.0
+offset_right = 729.0
 offset_bottom = 138.0
 theme_override_fonts/font = ExtResource("3_h0ex1")
 theme_override_font_sizes/font_size = 40

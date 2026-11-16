@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://ck4t27fd4s2u4" path="res://assets/maps/Map 1 - Room/C (CLOCK).png" id="5_dpcbn"]
 [ext_resource type="Shader" uid="uid://b0o7iab3a5xsk" path="res://gdshader/object_glow.gdshader" id="5_tcgf0"]
 [ext_resource type="Texture2D" uid="uid://r8eat1j263ld" path="res://assets/maps/Map 1 - Room/F (FRAME).png" id="6_3gyyy"]
+[ext_resource type="PackedScene" uid="uid://cub7nwv2t2vex" path="res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn" id="7_511ic"]
 [ext_resource type="PackedScene" uid="uid://cbm8og4cptek6" path="res://scenes/Tutorial/tutorial_popup.tscn" id="8_8dkfe"]
+[ext_resource type="PackedScene" uid="uid://qvc6gsclhe32" path="res://scenes/Gameplay/Chap 1_Flower Frame.tscn" id="9_tcgf0"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="12_bprgf"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_aoshd"]
@@ -57,9 +59,11 @@ shape = SubResource("SegmentShape2D_aoshd")
 [node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("4_ex3bw")]
 material = SubResource("ShaderMaterial_bprgf")
 object_texture = ExtResource("5_dpcbn")
+interaction_scene = ExtResource("7_511ic")
 
 [node name="InteractableObject2" parent="." unique_id=1462997316 instance=ExtResource("4_ex3bw")]
 object_texture = ExtResource("6_3gyyy")
+interaction_scene = ExtResource("9_tcgf0")
 
 [node name="CollisionShape2D" parent="InteractableObject2" index="2" unique_id=1575614360]
 position = Vector2(705, 284)
