@@ -5,7 +5,7 @@ extends Control
 # SCENE SETTINGS
 # ==================================================
 
-@export_file("*.tscn") var gameplay_scene_path: String
+const GAMEPLAY_SCENE_PATH := "res://scenes/MusicBoxIntro.tscn"
 
 
 # ==================================================
@@ -66,7 +66,7 @@ func _ready() -> void:
 	# Reading pause.
 	await get_tree().create_timer(reading_duration).timeout
 
-	# Fade out and load gameplay.
+	# Fade out and load MusicBoxIntro.
 	await _play_exit_animation()
 
 
@@ -218,8 +218,11 @@ func _play_exit_animation() -> void:
 
 	await exit_tween.finished
 
-	# Load gameplay scene.
-	if gameplay_scene_path != "":
-		get_tree().change_scene_to_file(gameplay_scene_path)
+	# Load MusicBoxIntro scene.
+	if ResourceLoader.exists(GAMEPLAY_SCENE_PATH):
+		var error := get_tree().change_scene_to_file(GAMEPLAY_SCENE_PATH)
+
+		if error != OK:
+			push_error("FAILED TO LOAD MUSIC BOX INTRO. ERROR: " + str(error))
 	else:
-		push_warning("Gameplay scene path has not been assigned!")
+		push_error("MUSIC BOX INTRO SCENE NOT FOUND: " + GAMEPLAY_SCENE_PATH)
