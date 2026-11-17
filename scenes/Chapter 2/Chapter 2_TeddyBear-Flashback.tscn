@@ -29,6 +29,7 @@ autoplay = true
 
 [node name="Angry" type="AudioStreamPlayer" parent="." unique_id=1930481379]
 stream = ExtResource("4_wlf03")
+volume_db = -5.85
 autoplay = true
 
 [node name="Crying" type="AudioStreamPlayer" parent="." unique_id=1583081592]
