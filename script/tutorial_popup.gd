@@ -15,6 +15,7 @@ extends Control
 # =====================================
 
 @export var movement_next_scene: PackedScene
+@export var chapter_completed_next_scene: PackedScene
 
 
 # =====================================
@@ -36,7 +37,6 @@ func _ready() -> void:
 
 	hide()
 
-	# Check required nodes
 	if title_label == null:
 		push_error("WelcomeText Label not found!")
 		return
@@ -49,11 +49,9 @@ func _ready() -> void:
 		push_error("OkayButton not found!")
 		return
 
-	# Connect Okay button
 	if not okay_button.pressed.is_connected(_on_okay_button_pressed):
 		okay_button.pressed.connect(_on_okay_button_pressed)
 
-	# Get selected tutorial
 	current_tutorial_id = get_tree().root.get_meta(
 		"current_tutorial",
 		""
@@ -61,7 +59,6 @@ func _ready() -> void:
 
 	print("CURRENT TUTORIAL: ", current_tutorial_id)
 
-	# Display appropriate tutorial
 	match current_tutorial_id:
 
 		"movement":
@@ -87,19 +84,26 @@ Enjoy the game!"
 				"Inspection Tutorial",
 				"Click on objects to discover more about them."
 			)
-		
+
 		"game play":
 			show_tutorial(
 				"Game Play Tutorial",
 				"In each of the chapter, there are 2 objects that you need to find.
-				
-				Proceed to the next fragment to unlock another part of the story."
+
+Proceed to the next fragment to unlock another part of the story."
+			)
+
+		"chapter completed":
+			show_tutorial(
+				"Chapter 1 Completed",
+				"Congratulations on completing chapter 1!
+
+You can now proceed to the next chapter."
 			)
 
 		_:
 			hide_tutorial()
 
-	# Clear tutorial ID
 	if get_tree().root.has_meta("current_tutorial"):
 		get_tree().root.remove_meta("current_tutorial")
 
@@ -134,7 +138,6 @@ func type_description(description: String) -> void:
 
 		await get_tree().create_timer(typing_speed).timeout
 
-		# Stop if popup is closed
 		if not is_visible_in_tree():
 			return
 
@@ -156,18 +159,19 @@ func _on_okay_button_pressed() -> void:
 	match current_tutorial_id:
 
 		"movement":
-			# Load Chapter 1_Time
 			load_next_scene(movement_next_scene)
 
 		"interaction":
-			# Hide popup after Chapter 1_Time
 			hide_tutorial()
 
 		"inspection":
 			hide_tutorial()
-		
+
 		"game play":
 			hide_tutorial()
+
+		"chapter completed":
+			load_next_scene(chapter_completed_next_scene)
 
 
 # =====================================
@@ -179,7 +183,7 @@ func load_next_scene(scene: PackedScene) -> void:
 	print("ATTEMPTING TO LOAD NEXT SCENE...")
 
 	if scene == null:
-		push_error("Movement Next Scene has not been assigned!")
+		push_error("Next Scene has not been assigned!")
 		return
 
 	print("SCENE TO LOAD: ", scene.resource_path)

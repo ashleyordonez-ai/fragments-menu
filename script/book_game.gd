@@ -43,6 +43,10 @@ extends Control
 
 const CORRECT_ANSWER := "BRIGHTER"
 
+# CHAPTER 2 FLASHBACK TRANSITION
+const FLASHBACK_SCENE := "res://scenes/Chapter 2/Chapter 2_Diary-Flashback.tscn"
+const FLASHBACK_DELAY := 2.0
+
 const TEXT_COLOR := Color("#4A2D22")
 const PLACEHOLDER_COLOR := Color("#92745F")
 const AMBER_COLOR := Color("#F2A65A")
@@ -800,7 +804,6 @@ func show_correct_answer() -> void:
 
 	answer_input.editable = false
 	decode_button.disabled = true
-	
 	result_label.hide()
 
 	play_answer_flash()
@@ -813,8 +816,10 @@ func show_correct_answer() -> void:
 		SUCCESS_DISPLAY_TIME
 	).timeout
 
+	# Reveal the missing word in the diary.
 	reveal_diary_answer()
 
+	# Hide the puzzle interface while keeping the diary visible.
 	set_right_page_visible(false)
 
 	answer_input.hide()
@@ -840,7 +845,30 @@ func show_correct_answer() -> void:
 	stop_binary_glow()
 	set_binary_text_color(Color("#211710"))
 
-	success_animation_running = false
+	print("DIARY PUZZLE COMPLETED! ANSWER REVEALED: BRIGHTER")
+
+	# Keep the completed diary visible for two seconds.
+	await get_tree().create_timer(
+		FLASHBACK_DELAY
+	).timeout
+
+	# Check the scene path before attempting the transition.
+	if not ResourceLoader.exists(FLASHBACK_SCENE):
+		push_error(
+			"FLASHBACK SCENE NOT FOUND: " + FLASHBACK_SCENE
+		)
+		success_animation_running = false
+		return
+
+	print("LOADING CHAPTER 2 DIARY FLASHBACK...")
+
+	var error := get_tree().change_scene_to_file(FLASHBACK_SCENE)
+
+	if error != OK:
+		push_error(
+			"FAILED TO LOAD DIARY FLASHBACK. ERROR: " + str(error)
+		)
+		success_animation_running = false
 
 
 # ==================================================

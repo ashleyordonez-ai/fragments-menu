@@ -206,11 +206,11 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
-	get_tree().root.set_meta("current_tutorial", "game play")
+	get_tree().root.set_meta("current_tutorial", "chapter completed")
 
 	get_tree().change_scene_to_file(
 		"res://scenes/Maps/Chapter 1_Room.tscn"
-	)
+	)	
 
 
 # =====================================

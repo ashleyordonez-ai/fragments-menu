@@ -4,7 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_q385k"]
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="3_dyo0i"]
 [ext_resource type="Texture2D" uid="uid://byxgafauv8nb1" path="res://assets/maps/Map 2 - Attic/DIARY.png" id="4_7mh2p"]
+[ext_resource type="PackedScene" uid="uid://7gak6fbmfypr" path="res://scenes/Gameplay/Chap 2_Diary.tscn" id="5_01oj5"]
+[ext_resource type="PackedScene" uid="uid://7h36vux1bruh" path="res://scenes/Chapter 2/Chapter 2_TeddyBear-Flashback.tscn" id="5_dyo0i"]
 [ext_resource type="Texture2D" uid="uid://24518o24qybl" path="res://assets/maps/Map 2 - Attic/TEDDY.png" id="5_j6rvh"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="7_7mh2p"]
 
 [node name="Map 2" type="Node2D" unique_id=1367918638]
 
@@ -37,8 +40,9 @@ polygon = PackedVector2Array(782, 628, 546, 630, 543, 566, 370, 562, 358, 410, 4
 
 [node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("3_dyo0i")]
 object_texture = ExtResource("4_7mh2p")
+interaction_scene = ExtResource("5_01oj5")
 
-[node name="CollisionShape2D" parent="InteractableObject" index="1" unique_id=1575614360]
+[node name="CollisionShape2D" parent="InteractableObject" index="2" unique_id=1575614360]
 position = Vector2(458, 573)
 
 [node name="CollisionShape2D" parent="InteractableObject/InteractionRange" parent_id_path=PackedInt32Array(1942715826, 846547108) index="0" unique_id=957297124]
@@ -46,12 +50,17 @@ position = Vector2(457, 570)
 
 [node name="InteractableObject2" parent="." unique_id=787898084 instance=ExtResource("3_dyo0i")]
 object_texture = ExtResource("5_j6rvh")
+interaction_scene = ExtResource("5_dyo0i")
 
-[node name="CollisionShape2D" parent="InteractableObject2" index="1" unique_id=1575614360]
+[node name="CollisionShape2D" parent="InteractableObject2" index="2" unique_id=1575614360]
 position = Vector2(542, 215)
 
 [node name="CollisionShape2D" parent="InteractableObject2/InteractionRange" parent_id_path=PackedInt32Array(787898084, 846547108) index="0" unique_id=957297124]
 position = Vector2(539, 220)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=787395820]
+stream = ExtResource("7_7mh2p")
+autoplay = true
 
 [editable path="InteractableObject"]
 [editable path="InteractableObject2"]

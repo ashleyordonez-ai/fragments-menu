@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://7h36vux1bruh"]
+
+[ext_resource type="Script" uid="uid://co0n2s7euyqqc" path="res://script/chapter_2_teddy_bear_flashback.gd" id="1_1e2d4"]
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_fhupx"]
+[ext_resource type="AudioStream" uid="uid://bmt6ay2vm65h0" path="res://assets/music/Sad-Fam.mp3" id="3_nmw25"]
+[ext_resource type="AudioStream" uid="uid://djjm2ogke4b7i" path="res://assets/sound effects/Angry Man SFX.mp3" id="4_wlf03"]
+[ext_resource type="AudioStream" uid="uid://xe2xbfidk3v4" path="res://assets/sound effects/Crying SFX.mp3" id="5_spxfc"]
+
+[node name="Main" type="Control" unique_id=1353202078]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1e2d4")
+
+[node name="Background" type="TextureRect" parent="." unique_id=79179272]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_fhupx")]
+layout_mode = 1
+
+[node name="Bg music" type="AudioStreamPlayer" parent="." unique_id=215310654]
+stream = ExtResource("3_nmw25")
+autoplay = true
+
+[node name="Angry" type="AudioStreamPlayer" parent="." unique_id=1930481379]
+stream = ExtResource("4_wlf03")
+autoplay = true
+
+[node name="Crying" type="AudioStreamPlayer" parent="." unique_id=1583081592]
+stream = ExtResource("5_spxfc")

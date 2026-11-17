@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://drm1jw0uam42r"]
+
+[ext_resource type="Script" uid="uid://coopfukyras27" path="res://script/chapter_2_opening_dialogue.gd" id="1_7x3mt"]
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_rlblh"]
+[ext_resource type="Texture2D" uid="uid://baoladij1kfbb" path="res://assets/Illustrations/Dialogue Backgrounds/Attic-Dialogue BG.png" id="2_7ybvi"]
+
+[node name="Main" type="Control" unique_id=1216583298]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7x3mt")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1446152207]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_7ybvi")
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_rlblh")]
+layout_mode = 1

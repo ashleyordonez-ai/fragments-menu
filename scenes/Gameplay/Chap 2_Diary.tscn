@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://5nmkywavqsxs" path="res://assets/fonts/I-pixel-u.ttf" id="7_okgkm"]
 [ext_resource type="Script" uid="uid://6mo4f4kf2nuw" path="res://scenes/code.gd" id="8_gylf3"]
 [ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="9_2sgb2"]
+[ext_resource type="AudioStream" uid="uid://bwnc1nvpsjpkm" path="res://assets/music/bright.mp3" id="10_a0mjj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("6_rlmxo")
@@ -632,6 +633,10 @@ offset_top = 135.0
 offset_right = -177.0
 offset_bottom = 135.0
 scale = Vector2(0.40085968, 0.5574321)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1979965121]
+stream = ExtResource("10_a0mjj")
+autoplay = true
 
 [connection signal="gui_input" from="AnswerInput" to="." method="_on_answer_input_gui_input"]
 [connection signal="pressed" from="ViewMoreButton" to="." method="_on_view_more_button_pressed"]

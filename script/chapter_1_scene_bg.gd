@@ -8,13 +8,8 @@ extends Control
 @onready var background = get_node_or_null("Background")
 @onready var dialogue_box = get_node_or_null("DialogueBox")
 
-@onready var next_button: Button = dialogue_box.find_child(
-	"NextButton", true, false
-) as Button
-
-@onready var skip_button: Button = dialogue_box.find_child(
-	"SkipButton", true, false
-) as Button
+var next_button: Button
+var skip_button: Button
 
 
 # =====================================
@@ -28,7 +23,7 @@ var dialogues = [
 		"text": "Huh? Where am I?",
 		"expression": "default",
 		"position": "left",
-		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
 	{
@@ -36,7 +31,7 @@ var dialogues = [
 		"text": "Why am I here?",
 		"expression": "default",
 		"position": "left",
-		"background": "res://assets/illustrations/Dialogue Backrgounds/Leonore's Room - DAY (Dialogue BG).png"
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	}
 ]
 
@@ -56,11 +51,6 @@ func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
 
-	print("Background: ", background)
-	print("DialogueBox: ", dialogue_box)
-	print("NextButton: ", next_button)
-	print("SkipButton: ", skip_button)
-
 	if background == null:
 		push_error("Background node could not be found!")
 		return
@@ -68,6 +58,15 @@ func _ready() -> void:
 	if dialogue_box == null:
 		push_error("DialogueBox could not be found!")
 		return
+
+	# Find buttons safely
+	next_button = dialogue_box.find_child(
+		"NextButton", true, false
+	) as Button
+
+	skip_button = dialogue_box.find_child(
+		"SkipButton", true, false
+	) as Button
 
 	if next_button == null:
 		push_error("NextButton could not be found!")
@@ -77,11 +76,15 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
+	# Connect buttons
 	if not next_button.pressed.is_connected(show_next_dialogue):
 		next_button.pressed.connect(show_next_dialogue)
 
 	if not skip_button.pressed.is_connected(skip_dialogue):
 		skip_button.pressed.connect(skip_dialogue)
+
+	print("BACKGROUND FOUND: ", background)
+	print("DIALOGUE BOX FOUND: ", dialogue_box)
 
 	show_current_dialogue()
 
@@ -95,7 +98,6 @@ func show_current_dialogue() -> void:
 	if dialogue_index >= dialogues.size():
 
 		print("ALL DIALOGUES COMPLETED")
-
 		go_to_map()
 		return
 
@@ -113,12 +115,12 @@ func show_current_dialogue() -> void:
 	change_background(background_path)
 
 	# DISPLAY CHARACTER AND DIALOGUE
+	# Keep the original FOUR arguments.
 	dialogue_box.show_dialogue(
 		character,
 		dialogue_text,
 		expression,
-		position,
-		background_path
+		position
 	)
 
 
@@ -129,7 +131,6 @@ func show_current_dialogue() -> void:
 func show_next_dialogue() -> void:
 
 	dialogue_index += 1
-
 	show_current_dialogue()
 
 
@@ -140,7 +141,6 @@ func show_next_dialogue() -> void:
 func skip_dialogue() -> void:
 
 	print("DIALOGUE SKIPPED")
-
 	go_to_map()
 
 
@@ -182,7 +182,7 @@ func change_background(path: String) -> void:
 		push_error("Background file does not exist: " + path)
 		return
 
-	var texture = load(path) as Texture2D
+	var texture := load(path) as Texture2D
 
 	if texture == null:
 		push_error("Could not load background: " + path)

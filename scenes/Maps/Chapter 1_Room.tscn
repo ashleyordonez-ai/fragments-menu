@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cngkabcrombim" path="res://script/chapter_1_room.gd" id="1_ex3bw"]
 [ext_resource type="Texture2D" uid="uid://eeuvg3e4lg3x" path="res://assets/maps/Map 1 - Room/MAP 1 with F and C.png" id="1_w16ud"]
 [ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_4sx00"]
+[ext_resource type="PackedScene" uid="uid://d1jhacesx1oc4" path="res://scenes/Maps/Interactable Objects/interactable_object.tscn" id="4_bprgf"]
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="4_ex3bw"]
 [ext_resource type="Texture2D" uid="uid://ck4t27fd4s2u4" path="res://assets/maps/Map 1 - Room/C (CLOCK).png" id="5_dpcbn"]
 [ext_resource type="Shader" uid="uid://b0o7iab3a5xsk" path="res://gdshader/object_glow.gdshader" id="5_tcgf0"]
@@ -55,6 +56,8 @@ polygon = PackedVector2Array(43, 21, 40, 384, 82, 379, 82, 335, 130, 334, 176, 3
 [node name="Bottom Line (Wall)" type="CollisionShape2D" parent="StaticBody2D" unique_id=795091223]
 position = Vector2(289, 519)
 shape = SubResource("SegmentShape2D_aoshd")
+
+[node name="InteractableObject3" parent="StaticBody2D" unique_id=2000656038 instance=ExtResource("4_bprgf")]
 
 [node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("4_ex3bw")]
 material = SubResource("ShaderMaterial_bprgf")

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://5o5kw3prsh2c"
+path="res://.godot/imported/Joyful humming.mp3-33fb1e8acea6c5cb732ed394c550d225.mp3str"
+
+[deps]
+
+source_file="res://scenes/Chapter 2/Joyful humming.mp3"
+dest_files=["res://.godot/imported/Joyful humming.mp3-33fb1e8acea6c5cb732ed394c550d225.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

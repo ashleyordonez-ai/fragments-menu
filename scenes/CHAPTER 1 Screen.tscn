@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_22lce"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_5g12g"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="2_gvvuf"]
-[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="4_5g12g"]
+[ext_resource type="AudioStream" uid="uid://5d52ywntp1ft" path="res://assets/music/Bundle of Joy.mp3" id="4_5g12g"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3

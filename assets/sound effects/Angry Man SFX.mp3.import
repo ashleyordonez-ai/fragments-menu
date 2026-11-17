@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://djjm2ogke4b7i"
+path="res://.godot/imported/Angry Man SFX.mp3-bba6a5376c7a27cc49e7f87957a56d6b.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/Angry Man SFX.mp3"
+dest_files=["res://.godot/imported/Angry Man SFX.mp3-bba6a5376c7a27cc49e7f87957a56d6b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
