@@ -7,6 +7,9 @@ extends Control
 @export var hold_duration: float = 5.0
 @export var fade_duration: float = 0.75
 
+# Next scene
+const NEXT_SCENE := "res://scenes/Chapter 4/Chapter 4_Fruit Basket-Scene.tscn"
+
 var mechanism_glow: ColorRect
 var fade_overlay: ColorRect
 var dust_particles: GPUParticles2D
@@ -17,15 +20,17 @@ func _ready() -> void:
 	_create_mechanism_glow()
 	_create_fade_overlay()
 
-	# Reveal MusicBoxPlaying from black.
+	# Reveal the scene from black.
 	await _fade_from_black()
 
-	# Let the scene appear and the glow pulse for a few seconds.
+	# Let the scene appear and the glow pulse.
 	await get_tree().create_timer(hold_duration).timeout
 
 	# Fade the entire screen to black.
 	await _fade_to_black()
 
+	# Wait until the fade is complete, then open the next scene.
+	get_tree().change_scene_to_file(NEXT_SCENE)
 
 
 func _create_dust_particles() -> void:
@@ -33,11 +38,8 @@ func _create_dust_particles() -> void:
 	dust_particles.name = "DustParticles"
 
 	var viewport_size = get_viewport_rect().size
-
-	# Position the particle emitter at the center.
 	dust_particles.position = viewport_size / 2.0
 
-	# Particle settings
 	dust_particles.amount = 45
 	dust_particles.lifetime = 8.0
 	dust_particles.preprocess = 8.0
@@ -45,7 +47,6 @@ func _create_dust_particles() -> void:
 	dust_particles.randomness = 0.8
 	dust_particles.emitting = true
 
-	# Keep particles visible across the screen.
 	dust_particles.visibility_rect = Rect2(
 		-viewport_size.x / 2.0,
 		-viewport_size.y / 2.0,
@@ -53,7 +54,6 @@ func _create_dust_particles() -> void:
 		viewport_size.y
 	)
 
-	# Create a soft circular particle texture.
 	var particle_image = Image.create(
 		32,
 		32,
@@ -85,7 +85,6 @@ func _create_dust_particles() -> void:
 
 	dust_particles.texture = particle_texture
 
-	# Configure particle movement.
 	var particle_material = ParticleProcessMaterial.new()
 
 	particle_material.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_BOX
@@ -96,31 +95,23 @@ func _create_dust_particles() -> void:
 		1.0
 	)
 
-	# Gentle upward movement with some horizontal variation.
 	particle_material.direction = Vector3(0.0, -1.0, 0.0)
 	particle_material.spread = 35.0
 
-	# Vary the speed so particles don't move identically.
 	particle_material.initial_velocity_min = 4.0
 	particle_material.initial_velocity_max = 10.0
 
-	# Very light upward force.
 	particle_material.gravity = Vector3(0.0, -0.5, 0.0)
 
-	# Different particle sizes.
 	particle_material.scale_min = 0.50
 	particle_material.scale_max = 1.00
 
-	# Warm champagne-gold color.
 	particle_material.color = Color(1.0, 0.88, 0.72, 0.65)
 
 	dust_particles.process_material = particle_material
-
-	# Keep particles above the music box but below the glow.
 	dust_particles.z_index = 5
 
 	add_child(dust_particles)
-
 
 
 func _create_mechanism_glow() -> void:
@@ -133,6 +124,7 @@ func _create_mechanism_glow() -> void:
 	mechanism_glow.z_index = 10
 
 	var glow_shader := Shader.new()
+
 	glow_shader.code = """
 shader_type canvas_item;
 
@@ -169,13 +161,11 @@ func _create_fade_overlay() -> void:
 	fade_overlay = ColorRect.new()
 	fade_overlay.name = "FadeOverlay"
 
-	# Start completely black.
 	fade_overlay.color = Color(0, 0, 0, 1)
 	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	fade_overlay.z_index = 100
 	fade_overlay.z_as_relative = false
 
-	# Make the overlay cover the full screen.
 	fade_overlay.set_anchors_and_offsets_preset(
 		Control.PRESET_FULL_RECT
 	)

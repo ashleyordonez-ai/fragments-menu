@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dtepnrf2q4b66" path="res://assets/png/gear.png" id="10_k7r00"]
 [ext_resource type="Script" uid="uid://dxd0nfbhchhx4" path="res://script/scratch_cover.gd" id="11_ha2cr"]
 [ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="12_3mysl"]
+[ext_resource type="AudioStream" uid="uid://ceurifbh8vg61" path="res://assets/music/Fruit basket game music.mp3" id="13_loprb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gxpki"]
 shader = ExtResource("4_v4jch")
@@ -534,6 +535,10 @@ offset_top = 106.0
 offset_right = -173.0
 offset_bottom = 106.0
 scale = Vector2(0.37788793, 0.61547494)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=11600331]
+stream = ExtResource("13_loprb")
+autoplay = true
 
 [connection signal="mouse_entered" from="PuzzleArea/FruitContainer/Apple" to="." method="_on_apple_mouse_entered"]
 [connection signal="mouse_exited" from="PuzzleArea/FruitContainer/Apple" to="." method="_on_apple_mouse_exited"]

@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cub7nwv2t2vex" path="res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn" id="7_511ic"]
 [ext_resource type="PackedScene" uid="uid://cbm8og4cptek6" path="res://scenes/Tutorial/tutorial_popup.tscn" id="8_8dkfe"]
 [ext_resource type="PackedScene" uid="uid://qvc6gsclhe32" path="res://scenes/Gameplay/Chap 1_Flower Frame.tscn" id="9_tcgf0"]
+[ext_resource type="PackedScene" uid="uid://6824x1liick0" path="res://scenes/CHAPTER 2 Screen.tscn" id="12_2gbsu"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="12_bprgf"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_aoshd"]
@@ -77,6 +78,7 @@ position = Vector2(707, 283)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1244516228]
 
 [node name="TutorialPopup" parent="CanvasLayer" unique_id=1593059378 instance=ExtResource("8_8dkfe")]
+chapter_completed_next_scene = ExtResource("12_2gbsu")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=124791002]
 stream = ExtResource("12_bprgf")

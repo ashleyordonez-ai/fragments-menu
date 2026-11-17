@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d0lyy36alb84p" path="res://script/music_box_playing.gd" id="1_2wei6"]
 [ext_resource type="Texture2D" uid="uid://btuabh0rxhoh3" path="res://assets/png/background4MB.jpg" id="1_keiwh"]
 [ext_resource type="Texture2D" uid="uid://b11fn4ia0oes8" path="res://assets/png/MusicBox.png" id="2_q851q"]
+[ext_resource type="AudioStream" uid="uid://jhrr5iuq1ofh" path="res://assets/music/music box.mp3" id="4_2wei6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("1_keiwh")
@@ -41,3 +42,7 @@ offset_bottom = 659.5022
 scale = Vector2(1.0247595, 0.9670799)
 texture = ExtResource("2_q851q")
 expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1046252008]
+stream = ExtResource("4_2wei6")
+autoplay = true

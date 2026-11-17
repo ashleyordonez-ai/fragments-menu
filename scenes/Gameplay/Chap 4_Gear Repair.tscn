@@ -10,6 +10,7 @@
 [ext_resource type="Shader" uid="uid://bqvkf7nm62uim" path="res://scenes/missing_gear_ring.gdshader" id="8_tn35o"]
 [ext_resource type="Texture2D" uid="uid://ch2xw4i7ymd2c" path="res://assets/png/musicboxasset.png" id="10_nsvoo"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="11_b0qtj"]
+[ext_resource type="AudioStream" uid="uid://5d52ywntp1ft" path="res://assets/music/Bundle of Joy.mp3" id="11_m0ua0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jre5i"]
 shader = ExtResource("7_yrhe4")
@@ -227,3 +228,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2010630755]
+stream = ExtResource("11_m0ua0")

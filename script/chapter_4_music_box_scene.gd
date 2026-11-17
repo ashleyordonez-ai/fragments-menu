@@ -201,7 +201,7 @@ func go_to_map() -> void:
 
 	print("LOADING CHAPTER 4 SCREEN...")
 		#redirect to fruit basket gameplay
-	var next_scene := "res://scenes/Chapter 4 Screen.tscn"
+	var next_scene := "res://scenes/Gameplay/Chap 4_Fruit Basket.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)

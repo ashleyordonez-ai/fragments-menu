@@ -37,6 +37,7 @@ func _ready() -> void:
 
 	hide()
 
+	# Check node references
 	if title_label == null:
 		push_error("WelcomeText Label not found!")
 		return
@@ -49,28 +50,36 @@ func _ready() -> void:
 		push_error("OkayButton not found!")
 		return
 
+	# Connect Okay Button
 	if not okay_button.pressed.is_connected(_on_okay_button_pressed):
 		okay_button.pressed.connect(_on_okay_button_pressed)
 
-	current_tutorial_id = get_tree().root.get_meta(
-		"current_tutorial",
-		""
+	# Get tutorial ID
+	current_tutorial_id = str(
+		get_tree().root.get_meta("current_tutorial", "")
 	)
 
-	print("CURRENT TUTORIAL: ", current_tutorial_id)
+	# Normalize tutorial ID
+	current_tutorial_id = current_tutorial_id.to_lower().strip_edges()
+	current_tutorial_id = current_tutorial_id.replace("_", " ")
 
+	print("================================")
+	print("CURRENT TUTORIAL: ", current_tutorial_id)
+	print("================================")
+
+	# Display the correct tutorial
 	match current_tutorial_id:
 
 		"movement":
 			show_tutorial(
 				"Movement Tutorial",
-				"Use the WASD keys to move your character around.
+				"""Use the WASD keys to move your character around.
 
 Walk around the map and find the fragments to unlock the story.
 
 Clues for interactable objects are on the dialogues.
 
-Enjoy the game!"
+Enjoy the game!"""
 			)
 
 		"interaction":
@@ -88,22 +97,24 @@ Enjoy the game!"
 		"game play":
 			show_tutorial(
 				"Game Play Tutorial",
-				"In each of the chapter, there are 2 objects that you need to find.
+				"""In each of the chapters, there are 2 objects that you need to find.
 
-Proceed to the next fragment to unlock another part of the story."
+Proceed to the next fragment to unlock another part of the story."""
 			)
 
 		"chapter completed":
 			show_tutorial(
-				"Chapter 1 Completed",
-				"Congratulations on completing chapter 1!
+				"Chapter Completed",
+				"Congratulations on completing Chapter 1!
 
-You can now proceed to the next chapter."
+				You can now proceed to the next chapter."
 			)
 
 		_:
+			push_warning("No matching tutorial found: " + current_tutorial_id)
 			hide_tutorial()
 
+	# Remove metadata after retrieving it
 	if get_tree().root.has_meta("current_tutorial"):
 		get_tree().root.remove_meta("current_tutorial")
 
@@ -154,7 +165,10 @@ func _on_okay_button_pressed() -> void:
 	if is_transitioning:
 		return
 
+	print("================================")
+	print("OKAY BUTTON PRESSED!")
 	print("TUTORIAL COMPLETED: ", current_tutorial_id)
+	print("================================")
 
 	match current_tutorial_id:
 
@@ -171,7 +185,12 @@ func _on_okay_button_pressed() -> void:
 			hide_tutorial()
 
 		"chapter completed":
+			print("CHAPTER COMPLETED POPUP DETECTED!")
 			load_next_scene(chapter_completed_next_scene)
+
+		_:
+			push_warning("No scene transition assigned for: " + current_tutorial_id)
+			hide_tutorial()
 
 
 # =====================================
@@ -183,7 +202,7 @@ func load_next_scene(scene: PackedScene) -> void:
 	print("ATTEMPTING TO LOAD NEXT SCENE...")
 
 	if scene == null:
-		push_error("Next Scene has not been assigned!")
+		push_error("Next Scene has not been assigned in the Inspector!")
 		return
 
 	print("SCENE TO LOAD: ", scene.resource_path)
@@ -191,13 +210,13 @@ func load_next_scene(scene: PackedScene) -> void:
 	is_transitioning = true
 	okay_button.disabled = true
 
-	var error = get_tree().change_scene_to_packed(scene)
+	var error: Error = get_tree().change_scene_to_packed(scene)
 
 	print("SCENE CHANGE RESULT: ", error)
 
 	if error != OK:
 
-		push_error("Failed to load the next scene!")
+		push_error("Failed to load the next scene! Error: " + str(error))
 
 		is_transitioning = false
 		okay_button.disabled = false

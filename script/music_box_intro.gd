@@ -93,6 +93,7 @@ const BUTTON_PRESSED_TEXT_COLOR := Color("#D8C4A3")
 # =========================================================
 
 var second_panel_glow: Panel
+
 var sequence_running := false
 var transition_started := false
 
@@ -102,31 +103,118 @@ var transition_started := false
 # =========================================================
 
 func _ready() -> void:
-	print("Button visible: ", continue_button.is_visible_in_tree())
-	print("Button disabled: ", continue_button.disabled)
-	print("Button rect: ", continue_button.get_global_rect())
 
-	continue_button.mouse_entered.connect(func():
-		print("BUTTON MOUSE ENTERED")
-	)
+	# CHECK NODE REFERENCES
 
-	continue_button.gui_input.connect(func(event):
-		if event is InputEventMouseButton:
-			print("BUTTON GUI INPUT: ", event)
-	)
+	if continue_button == null:
+		push_error("ContinueButton was not found!")
+		return
 
-	var parent_control = continue_button.get_parent()
+	if second_panel == null:
+		push_error("SecondInstruction panel was not found!")
+		return
 
-	print("Button parent: ", parent_control.name)
-	print("Parent mouse filter: ", parent_control.mouse_filter)
-	print("Button mouse filter: ", continue_button.mouse_filter)
-	print("Button mouse position: ", continue_button.get_global_mouse_position())
+	if missing_gear_glow == null:
+		push_error("MissingGearGlow was not found!")
+		return
+
+	if dim_overlay == null:
+		push_error("DimOverlay was not found!")
+		return
+
+	if first_panel == null or first_label == null:
+		push_error("First instruction panel or label was not found!")
+		return
+
+	if second_heading == null or second_label == null:
+		push_error("Second instruction heading or text was not found!")
+		return
+
+	print("================================")
+	print("ALL REQUIRED NODES FOUND!")
+	print("================================")
+
+	# INITIALIZE UI
 
 	setup_ui()
 	setup_second_panel_glow()
 	setup_continue_button()
 
+	# CONNECT BUTTON SIGNAL ONCE
+
+	if not continue_button.pressed.is_connected(
+		_on_continue_button_pressed
+	):
+		continue_button.pressed.connect(
+			_on_continue_button_pressed
+		)
+
+	# DEBUG INFORMATION
+
+	print("BUTTON INITIALIZED")
+	print("Button visible: ", continue_button.is_visible_in_tree())
+	print("Button disabled: ", continue_button.disabled)
+	print("Button rect: ", continue_button.get_global_rect())
+	print("Button mouse filter: ", continue_button.mouse_filter)
+
+	continue_button.mouse_entered.connect(
+		func():
+			print("BUTTON MOUSE ENTERED")
+	)
+
+	continue_button.gui_input.connect(
+		func(event):
+			if event is InputEventMouseButton:
+				print("BUTTON GUI INPUT: ", event)
+	)
+
+	# START INTRO
+
 	start_intro_sequence()
+
+
+# =========================================================
+# BACKUP MOUSE INPUT — CONTINUE BUTTON
+# =========================================================
+
+func _input(event: InputEvent) -> void:
+
+	if not is_instance_valid(continue_button):
+		return
+
+	# Only accept clicks when the button is visible.
+	if not continue_button.is_visible_in_tree():
+		return
+
+	if continue_button.disabled or transition_started:
+		return
+
+	# Detect left mouse click.
+	if event is InputEventMouseButton:
+
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+
+			# Calculate the button's actual viewport position.
+			var button_transform := continue_button.get_global_transform_with_canvas()
+
+			var button_rect: Rect2 = button_transform * Rect2(
+				Vector2.ZERO,
+				continue_button.size
+			)
+
+			# Check whether the click is inside the button.
+			if button_rect.has_point(event.position):
+
+				print("================================")
+				print("BACKUP MOUSE CLICK DETECTED!")
+				print("CONTINUE BUTTON CLICKED!")
+				print("================================")
+
+				# Prevent other controls from handling this click.
+				get_viewport().set_input_as_handled()
+
+				# Trigger the existing scene transition.
+				_on_continue_button_pressed()
 
 
 # =========================================================
@@ -135,9 +223,7 @@ func _ready() -> void:
 
 func setup_ui() -> void:
 
-	# -----------------------------------------------------
 	# DIM OVERLAY
-	# -----------------------------------------------------
 
 	dim_overlay.set_anchors_and_offsets_preset(
 		Control.PRESET_FULL_RECT
@@ -148,10 +234,7 @@ func setup_ui() -> void:
 	dim_overlay.modulate.a = 0.0
 	dim_overlay.hide()
 
-
-	# -----------------------------------------------------
 	# FIRST INSTRUCTION PANEL
-	# -----------------------------------------------------
 
 	first_panel.hide()
 	first_panel.modulate.a = 0.0
@@ -159,24 +242,19 @@ func setup_ui() -> void:
 	first_label.text = FIRST_INSTRUCTION
 	first_label.visible_characters = 0
 
-
-	# -----------------------------------------------------
 	# SECOND INSTRUCTION PANEL
-	# -----------------------------------------------------
 
 	second_panel.hide()
 	second_panel.modulate.a = 0.0
 
-	# Keep the text you already set in the Inspector.
-	second_label.visible_characters = 0
+	second_panel.mouse_filter = Control.MOUSE_FILTER_PASS
 
+	second_label.visible_characters = 0
 	second_heading.modulate.a = 0.0
 
-
-	# -----------------------------------------------------
 	# MISSING GEAR GLOW
-	# -----------------------------------------------------
 
+	missing_gear_glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	missing_gear_glow.hide()
 
 
@@ -191,7 +269,6 @@ func setup_second_panel_glow() -> void:
 	second_panel_glow.name = "SecondInstructionGlow"
 	second_panel_glow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
-	# Slightly larger than the instruction panel.
 	second_panel_glow.position = Vector2(-6, -6)
 	second_panel_glow.size = second_panel.size + Vector2(12, 12)
 
@@ -266,7 +343,6 @@ func setup_second_panel_glow() -> void:
 
 	second_panel_glow.material = glow_material
 
-	# Keep the traveling light behind the panel's existing children.
 	second_panel.add_child(second_panel_glow)
 
 	second_panel.move_child(
@@ -281,11 +357,13 @@ func setup_second_panel_glow() -> void:
 # CONTINUE BUTTON STYLE
 # =========================================================
 
-func setup_continue_button():
-	# Keep the button's text, size, and position from the editor.
+func setup_continue_button() -> void:
 
-	# NORMAL STYLE
-	var normal_style = StyleBoxFlat.new()
+	continue_button.mouse_filter = Control.MOUSE_FILTER_STOP
+	continue_button.disabled = false
+
+	var normal_style := StyleBoxFlat.new()
+
 	normal_style.bg_color = Color("#702F46")
 	normal_style.border_color = Color("#B99A68")
 	normal_style.set_border_width_all(2)
@@ -294,8 +372,8 @@ func setup_continue_button():
 	normal_style.shadow_size = 4
 	normal_style.shadow_offset = Vector2(0, 3)
 
-	# HOVER STYLE
-	var hover_style = StyleBoxFlat.new()
+	var hover_style := StyleBoxFlat.new()
+
 	hover_style.bg_color = Color("#91445D")
 	hover_style.border_color = Color("#E2C18A")
 	hover_style.set_border_width_all(2)
@@ -304,8 +382,8 @@ func setup_continue_button():
 	hover_style.shadow_size = 6
 	hover_style.shadow_offset = Vector2(0, 3)
 
-	# PRESSED STYLE
-	var pressed_style = StyleBoxFlat.new()
+	var pressed_style := StyleBoxFlat.new()
+
 	pressed_style.bg_color = Color("#542235")
 	pressed_style.border_color = Color("#A88758")
 	pressed_style.set_border_width_all(2)
@@ -314,31 +392,32 @@ func setup_continue_button():
 	pressed_style.shadow_size = 1
 	pressed_style.shadow_offset = Vector2(0, 1)
 
-	# APPLY STYLES
-	continue_button.add_theme_stylebox_override("normal", normal_style)
-	continue_button.add_theme_stylebox_override("hover", hover_style)
-	continue_button.add_theme_stylebox_override("pressed", pressed_style)
+	continue_button.add_theme_stylebox_override(
+		"normal", normal_style
+	)
 
-	# TEXT COLORS
-	continue_button.add_theme_color_override("font_color", Color("#F2E8D8"))
-	continue_button.add_theme_color_override("font_hover_color", Color("#FFF4D8"))
-	continue_button.add_theme_color_override("font_pressed_color", Color("#D8C4A3"))
+	continue_button.add_theme_stylebox_override(
+		"hover", hover_style
+	)
 
-	# HIDE UNTIL THE INTRO REVEALS IT
+	continue_button.add_theme_stylebox_override(
+		"pressed", pressed_style
+	)
+
+	continue_button.add_theme_color_override(
+		"font_color", Color("#F2E8D8")
+	)
+
+	continue_button.add_theme_color_override(
+		"font_hover_color", Color("#FFF4D8")
+	)
+
+	continue_button.add_theme_color_override(
+		"font_pressed_color", Color("#D8C4A3")
+	)
+
 	continue_button.hide()
 	continue_button.modulate.a = 0.0
-
-	# CONNECT BUTTON SIGNAL
-	if not continue_button.pressed.is_connected(_on_continue_button_pressed):
-		continue_button.pressed.connect(_on_continue_button_pressed)
-
-	continue_button.mouse_entered.connect(func():
-		print("BUTTON HOVERED")
-	)
-
-	continue_button.mouse_exited.connect(func():
-		print("BUTTON HOVER EXITED")
-	)
 
 
 # =========================================================
@@ -352,29 +431,21 @@ func start_intro_sequence() -> void:
 
 	sequence_running = true
 
-
-	# =====================================================
 	# 1. GEARS GLITCHING — NO UI
-	# =====================================================
 
 	await get_tree().create_timer(
 		GEAR_GLITCH_WAIT
 	).timeout
 
-
-	# =====================================================
 	# 2. FIRST INSTRUCTION + DIM
-	# =====================================================
 
 	first_panel.show()
-
 	first_panel.modulate.a = 0.0
 
 	first_label.visible_characters = 0
 
 	dim_overlay.show()
 	dim_overlay.modulate.a = 0.0
-
 
 	var first_appear_tween := create_tween()
 
@@ -396,19 +467,13 @@ func start_intro_sequence() -> void:
 
 	await first_appear_tween.finished
 
-
-	# TYPE FIRST INSTRUCTION
 	await type_label(first_label)
-
 
 	await get_tree().create_timer(
 		FIRST_PANEL_HOLD
 	).timeout
 
-
-	# =====================================================
 	# 3. FIRST PANEL FADE OUT
-	# =====================================================
 
 	var first_disappear_tween := create_tween()
 
@@ -430,19 +495,14 @@ func start_intro_sequence() -> void:
 
 	await first_disappear_tween.finished
 
-
 	first_panel.hide()
 	dim_overlay.hide()
-
 
 	await get_tree().create_timer(
 		BETWEEN_PANELS_WAIT
 	).timeout
 
-
-	# =====================================================
 	# 4. SECOND INSTRUCTION + DIM
-	# =====================================================
 
 	second_panel.show()
 	second_panel.modulate.a = 0.0
@@ -454,7 +514,6 @@ func start_intro_sequence() -> void:
 
 	dim_overlay.show()
 	dim_overlay.modulate.a = 0.0
-
 
 	var second_appear_tween := create_tween()
 
@@ -476,10 +535,7 @@ func start_intro_sequence() -> void:
 
 	await second_appear_tween.finished
 
-
-	# =====================================================
 	# 5. HEADING APPEARS
-	# =====================================================
 
 	var heading_tween := create_tween()
 
@@ -492,34 +548,23 @@ func start_intro_sequence() -> void:
 
 	await heading_tween.finished
 
-
-	# =====================================================
 	# 6. TYPE EXISTING INSTRUCTION TEXT
-	# =====================================================
 
 	await type_instruction_text()
-
 
 	await get_tree().create_timer(
 		SECOND_PANEL_HOLD_AFTER_TYPING
 	).timeout
 
-
-	# =====================================================
-	# 7. MISSING GEAR GLOW APPEARS — STILL DIMMED
-	# =====================================================
+	# 7. MISSING GEAR GLOW APPEARS
 
 	missing_gear_glow.show()
-
 
 	await get_tree().create_timer(
 		MISSING_GEAR_GLOW_HOLD
 	).timeout
 
-
-	# =====================================================
 	# 8. DIM OVERLAY DISAPPEARS
-	# =====================================================
 
 	var restore_tween := create_tween()
 
@@ -534,14 +579,16 @@ func start_intro_sequence() -> void:
 
 	dim_overlay.hide()
 
-
-	# =====================================================
 	# 9. CONTINUE BUTTON APPEARS
-	# =====================================================
 
 	continue_button.show()
+	continue_button.disabled = false
 	continue_button.modulate.a = 0.0
 
+	print("CONTINUE BUTTON IS NOW VISIBLE")
+
+	print("BUTTON GLOBAL RECT: ", continue_button.get_global_rect())
+	print("BUTTON VIEWPORT RECT: ", continue_button.get_global_transform_with_canvas() * Rect2(Vector2.ZERO, continue_button.size))
 
 	var button_tween := create_tween()
 
@@ -553,7 +600,6 @@ func start_intro_sequence() -> void:
 	)
 
 	await button_tween.finished
-
 
 	sequence_running = false
 
@@ -597,7 +643,6 @@ func type_instruction_text() -> void:
 			TYPE_SPEED
 		).timeout
 
-
 	second_label.visible_characters = -1
 
 
@@ -607,26 +652,49 @@ func type_instruction_text() -> void:
 
 func _on_continue_button_pressed() -> void:
 
+	print("================================")
+	print("CONTINUE BUTTON CLICKED!")
+	print("================================")
+
 	# Prevent multiple clicks.
 	if transition_started:
+		print("SCENE TRANSITION ALREADY STARTED.")
 		return
 
 	transition_started = true
 	continue_button.disabled = true
 
-	print("Continue button pressed — loading Chapter 4 Music Box Scene.")
+	# Print next scene path.
+	print("NEXT SCENE: ", NEXT_SCENE_PATH)
 
 	# Check whether the scene exists.
-	if ResourceLoader.exists(NEXT_SCENE_PATH):
+	if not ResourceLoader.exists(NEXT_SCENE_PATH):
 
-		var result := get_tree().change_scene_to_file(NEXT_SCENE_PATH)
+		push_error(
+			"NEXT SCENE DOES NOT EXIST: " + NEXT_SCENE_PATH
+		)
 
-		if result != OK:
-			push_error("Failed to load the next scene: " + NEXT_SCENE_PATH)
-			continue_button.disabled = false
-			transition_started = false
-
-	else:
-		push_error("Scene file not found: " + NEXT_SCENE_PATH)
 		continue_button.disabled = false
 		transition_started = false
+		return
+
+	print("SCENE FOUND: ", NEXT_SCENE_PATH)
+
+	# Change scene.
+	var error := get_tree().change_scene_to_file(
+		NEXT_SCENE_PATH
+	)
+
+	print("SCENE CHANGE ERROR CODE: ", error)
+
+	if error != OK:
+
+		push_error(
+			"FAILED TO LOAD NEXT SCENE. ERROR CODE: " + str(error)
+		)
+
+		continue_button.disabled = false
+		transition_started = false
+		return
+
+	print("SCENE CHANGE REQUEST SUCCESSFUL!")
