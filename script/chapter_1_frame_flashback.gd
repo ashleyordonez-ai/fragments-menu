@@ -1,14 +1,8 @@
 
 extends Control
 
-# =====================================
-# NODE REFERENCES
-# =====================================
-
-# Removed strict TextureRect type to prevent null casting
-@onready var background = get_node_or_null("Background")
-
-@onready var dialogue_box = get_node_or_null("DialogueBox")
+@onready var background: TextureRect = $Background
+@onready var dialogue_box = $DialogueBox
 
 @onready var next_button: Button = dialogue_box.find_child(
 	"NextButton", true, false
@@ -37,9 +31,10 @@ var dialogues = [
 	# DIALOGUE 2 - MAX
 	{
 		"character": "Max",
-		"text": "Stop it already, Leonore. You know we already ended. Sheena wanted to give this to you; she said you love these flowers.",
+		"text": "Stop it already, Leonore. You know we already ended. 
+		Sheena wanted to give this to you; she said you love these flowers.",
 		"expression": "angry",
-		"position": "right",
+		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
@@ -57,14 +52,15 @@ var dialogues = [
 		"character": "Max",
 		"text": "I'm just dropping by to check on you. I know that you're alone.",
 		"expression": "default",
-		"position": "right",
+		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
 	# DIALOGUE 5 - LEONORE
 	{
 		"character": "Leonore",
-		"text": "Check on me? For what? You left, remember? You really want to see me suffer, do you?",
+		"text": "Check on me? For what? You left, remember? You really want 
+		to see me suffer, do you?",
 		"expression": "crying",
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
@@ -74,8 +70,8 @@ var dialogues = [
 	{
 		"character": "Max",
 		"text": "If making me the bad guy helps you heal, so be it. Goodbye, Leonore.",
-		"expression": "default",
-		"position": "right",
+		"expression": "angry",
+		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
@@ -113,24 +109,20 @@ var dialogue_index: int = 0
 
 func _ready() -> void:
 
-	print("FRAME FLASHBACK STARTED")
-
+	print("MAIN SCENE STARTED")
 	print("Background: ", background)
 	print("DialogueBox: ", dialogue_box)
 	print("NextButton: ", next_button)
 	print("SkipButton: ", skip_button)
 
-	# CHECK BACKGROUND
 	if background == null:
 		push_error("Background node could not be found!")
 		return
 
-	# CHECK DIALOGUE BOX
 	if dialogue_box == null:
 		push_error("DialogueBox node could not be found!")
 		return
 
-	# CHECK BUTTONS
 	if next_button == null:
 		push_error("NextButton could not be found!")
 		return
@@ -139,16 +131,12 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
-	# CONNECT BUTTONS
 	if not next_button.pressed.is_connected(show_next_dialogue):
 		next_button.pressed.connect(show_next_dialogue)
 
 	if not skip_button.pressed.is_connected(skip_dialogue):
 		skip_button.pressed.connect(skip_dialogue)
 
-	print("FRAME FLASHBACK INITIALIZED SUCCESSFULLY")
-
-	# START DIALOGUE
 	show_current_dialogue()
 
 
@@ -160,7 +148,7 @@ func show_current_dialogue() -> void:
 
 	if dialogue_index >= dialogues.size():
 
-		print("ALL FRAME FLASHBACK DIALOGUES COMPLETED")
+		print("ALL DIALOGUES COMPLETED")
 
 		go_to_map()
 		return
@@ -173,23 +161,14 @@ func show_current_dialogue() -> void:
 	var position: String = current.get("position", "")
 	var background_path: String = current.get("background", "")
 
-	print("--------------------------------")
-	print("DIALOGUE NUMBER: ", dialogue_index + 1)
-	print("CHARACTER: ", character)
-	print("EXPRESSION: ", expression)
-	print("POSITION: ", position)
-	print("DIALOGUE: ", dialogue_text)
+	print("SHOWING DIALOGUE: ", dialogue_text)
+	print("CHARACTER: ", character if character != "" else "HIDDEN / UNKNOWN")
 
-	# =====================================
 	# CHANGE BACKGROUND
-	# =====================================
-
 	change_background(background_path)
 
-	# =====================================
-	# DISPLAY DIALOGUE AND PORTRAIT
-	# =====================================
-
+	# DISPLAY DIALOGUE
+	# Empty character names are intentionally preserved.
 	dialogue_box.show_dialogue(
 		character,
 		dialogue_text,
@@ -216,7 +195,7 @@ func show_next_dialogue() -> void:
 
 func skip_dialogue() -> void:
 
-	print("FRAME FLASHBACK SKIPPED")
+	print("DIALOGUE SKIPPED")
 
 	go_to_map()
 
@@ -242,10 +221,6 @@ func change_background(path: String) -> void:
 
 	print("CHANGING BACKGROUND: ", path)
 
-	if path == "":
-		push_warning("No background path provided!")
-		return
-
 	if not ResourceLoader.exists(path):
 		push_error("Background file does not exist: " + path)
 		return
@@ -256,17 +231,6 @@ func change_background(path: String) -> void:
 		push_error("Could not load background: " + path)
 		return
 
-	# SUPPORT TEXTURERECT AND SPRITE2D
-	if background is TextureRect or background is Sprite2D:
-
-		background.set("texture", texture)
-
-	else:
-
-		push_error(
-			"Background node must be a TextureRect or Sprite2D. Actual type: "
-			+ background.get_class()
-		)
-		return
+	background.texture = texture
 
 	print("BACKGROUND CHANGED SUCCESSFULLY!")

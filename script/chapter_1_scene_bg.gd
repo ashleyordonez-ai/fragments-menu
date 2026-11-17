@@ -1,11 +1,20 @@
 
 extends Control
 
-@onready var background: TextureRect = $Background
-@onready var dialogue_box = $DialogueBox
+# =====================================
+# NODE REFERENCES
+# =====================================
 
-@onready var next_button: Button = dialogue_box.find_child("NextButton", true, false) as Button
-@onready var skip_button: Button = dialogue_box.find_child("SkipButton", true, false) as Button
+@onready var background = get_node_or_null("Background")
+@onready var dialogue_box = get_node_or_null("DialogueBox")
+
+@onready var next_button: Button = dialogue_box.find_child(
+	"NextButton", true, false
+) as Button
+
+@onready var skip_button: Button = dialogue_box.find_child(
+	"SkipButton", true, false
+) as Button
 
 
 # =====================================
@@ -13,6 +22,7 @@ extends Control
 # =====================================
 
 var dialogues = [
+
 	{
 		"character": "Leonore",
 		"text": "Huh? Where am I?",
@@ -45,9 +55,15 @@ var dialogue_index: int = 0
 func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
+
+	print("Background: ", background)
 	print("DialogueBox: ", dialogue_box)
 	print("NextButton: ", next_button)
 	print("SkipButton: ", skip_button)
+
+	if background == null:
+		push_error("Background node could not be found!")
+		return
 
 	if dialogue_box == null:
 		push_error("DialogueBox could not be found!")
@@ -61,8 +77,11 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
-	next_button.pressed.connect(show_next_dialogue)
-	skip_button.pressed.connect(skip_dialogue)
+	if not next_button.pressed.is_connected(show_next_dialogue):
+		next_button.pressed.connect(show_next_dialogue)
+
+	if not skip_button.pressed.is_connected(skip_dialogue):
+		skip_button.pressed.connect(skip_dialogue)
 
 	show_current_dialogue()
 
@@ -82,17 +101,24 @@ func show_current_dialogue() -> void:
 
 	var current = dialogues[dialogue_index]
 
-	print("SHOWING DIALOGUE: ", current["text"])
+	var character: String = current.get("character", "")
+	var dialogue_text: String = current.get("text", "")
+	var expression: String = current.get("expression", "")
+	var position: String = current.get("position", "")
+	var background_path: String = current.get("background", "")
 
-	# Change background directly
-	change_background(current["background"])
+	print("SHOWING DIALOGUE: ", dialogue_text)
 
-	# Display character portrait and dialogue
+	# CHANGE BACKGROUND
+	change_background(background_path)
+
+	# DISPLAY CHARACTER AND DIALOGUE
 	dialogue_box.show_dialogue(
-		current["character"],
-		current["text"],
-		current["expression"],
-		current["position"]
+		character,
+		dialogue_text,
+		expression,
+		position,
+		background_path
 	)
 
 
@@ -128,12 +154,13 @@ func go_to_map() -> void:
 
 	get_tree().root.set_meta("current_tutorial", "movement")
 
-	print("TUTORIAL ID SET: ",
+	print(
+		"TUTORIAL ID SET: ",
 		get_tree().root.get_meta("current_tutorial", "")
 	)
 
 	get_tree().change_scene_to_file(
-        "res://scenes/Maps/Chapter 1_Room.tscn"
+		"res://scenes/Maps/Chapter 1_Room.tscn"
 	)
 
 
@@ -144,11 +171,33 @@ func go_to_map() -> void:
 func change_background(path: String) -> void:
 
 	if path.is_empty():
+		push_warning("Background path is empty!")
+		return
+
+	if background == null:
+		push_error("Background node is missing!")
+		return
+
+	if not ResourceLoader.exists(path):
+		push_error("Background file does not exist: " + path)
 		return
 
 	var texture = load(path) as Texture2D
 
-	if texture:
+	if texture == null:
+		push_error("Could not load background: " + path)
+		return
+
+	if background is TextureRect or background is Sprite2D:
+
 		background.texture = texture
+
 	else:
-		push_error("Background not found: " + path)
+
+		push_error(
+			"Unsupported Background node type: "
+			+ background.get_class()
+		)
+		return
+
+	print("BACKGROUND CHANGED SUCCESSFULLY!")

@@ -15,10 +15,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ygwyv")
 
-[node name="Backrgound" type="TextureRect" parent="." unique_id=1621442580]
+[node name="Background" type="TextureRect" parent="." unique_id=1621442580]
+z_index = -1
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_qfyqt")]
 layout_mode = 1
