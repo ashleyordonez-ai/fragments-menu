@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://h4irj7lerc0i" path="res://assets/png/Background_Blurred.png" id="1_r6h2c"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_vmn6f"]
 [ext_resource type="Shader" uid="uid://bwhecssxna16c" path="res://scenes/outro.gdshader" id="4_vmn6f"]
+[ext_resource type="AudioStream" uid="uid://dynhtak67ki0i" path="res://assets/music/End music.mp3" id="5_ydlee"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("1_r6h2c")
@@ -86,3 +87,7 @@ BUT HOPE IS NEVER OUT OF REACH."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1356724454]
+stream = ExtResource("5_ydlee")
+autoplay = true

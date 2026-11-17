@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dynhtak67ki0i"
+path="res://.godot/imported/End music.mp3-3e6bbcedff5e29a687de365d4068a617.mp3str"
+
+[deps]
+
+source_file="res://assets/music/End music.mp3"
+dest_files=["res://.godot/imported/End music.mp3-3e6bbcedff5e29a687de365d4068a617.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

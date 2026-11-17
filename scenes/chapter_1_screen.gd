@@ -1,11 +1,11 @@
 
 extends Control
 
-@onready var chapter_label: Label = $chap5
+@onready var chapter_label: Label = $chap1
 @onready var subtitle_label: Label = $Subtitle
 @onready var continue_button: Button = $ContinueButton
 
-const NEXT_SCENE := "res://scenes/Chapter 4/tscn"
+const NEXT_SCENE := "res://scenes/Chapter 1/Chapter 1_SceneBG.tscn"
 
 func _ready() -> void:
 		continue_button.pressed.connect(_on_continue_pressed)

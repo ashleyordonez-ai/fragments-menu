@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://cov16rjyd1yq3"]
 
-[ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_gdtbn"]
+[ext_resource type="Script" uid="uid://c75noa0xdqnq0" path="res://script/chapter_5_screen.gd" id="1_gdtbn"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_bdcu2"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_6ujdm"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="4_bdcu2"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3
@@ -59,3 +60,7 @@ theme_override_fonts/font = ExtResource("3_6ujdm")
 theme_override_font_sizes/font_size = 25
 text = "continue"
 flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=706880401]
+stream = ExtResource("4_bdcu2")
+autoplay = true

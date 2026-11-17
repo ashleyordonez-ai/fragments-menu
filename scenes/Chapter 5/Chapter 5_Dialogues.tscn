@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://dn1lg51x7kwtb"]
+
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_3dgol"]
+[ext_resource type="Script" uid="uid://b5oe7xtfcn0jg" path="res://script/chapter_5_dialogues.gd" id="1_6ks7f"]
+[ext_resource type="Texture2D" uid="uid://dhld6viua7coo" path="res://assets/Illustrations/Objects/Teddy Bear.png" id="3_lnert"]
+[ext_resource type="Texture2D" uid="uid://bi2hf87o5qm8r" path="res://assets/Illustrations/Objects/Clock.png" id="3_mraay"]
+[ext_resource type="Texture2D" uid="uid://dyr31mkdxy8us" path="res://assets/Illustrations/Objects/Diary.png" id="4_x7nri"]
+[ext_resource type="Texture2D" uid="uid://w4yw8trgtamw" path="res://assets/Illustrations/Objects/Flower.png" id="5_d3k2k"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="5_qqo7a"]
+[ext_resource type="Texture2D" uid="uid://v4gxyf2fwdrt" path="res://assets/Illustrations/Objects/music box.png" id="6_l5tp4"]
+[ext_resource type="AudioStream" uid="uid://dj80k4awwfutf" path="res://assets/sound effects/Door sfx.MP3" id="9_d3k2k"]
+
+[node name="Chapter5Dialogues" type="Control" unique_id=139455843]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6ks7f")
+
+[node name="Background" type="TextureRect" parent="." unique_id=474059399]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Clock" type="TextureRect" parent="." unique_id=1473035630]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_mraay")
+
+[node name="Teddy" type="TextureRect" parent="." unique_id=970032803]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_lnert")
+
+[node name="Diary" type="TextureRect" parent="." unique_id=1464564209]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_x7nri")
+
+[node name="Flower" type="TextureRect" parent="." unique_id=50328966]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("5_d3k2k")
+
+[node name="Music Box" type="TextureRect" parent="." unique_id=240195108]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_l5tp4")
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_3dgol")]
+layout_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=494789290]
+stream = ExtResource("5_qqo7a")
+autoplay = true
+
+[node name="KnockingSound" type="AudioStreamPlayer" parent="." unique_id=2124382643]
+stream = ExtResource("9_d3k2k")
