@@ -1,4 +1,12 @@
+
 extends Control
+
+# =====================================
+# TUTORIAL POPUP
+# =====================================
+
+@export var tutorial_popup_scene: PackedScene
+
 
 # =====================================
 # NODE REFERENCES
@@ -89,8 +97,6 @@ func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
 
-	# CHECK MAIN NODES
-
 	if background == null:
 		push_error("Background node could not be found!")
 		return
@@ -99,7 +105,7 @@ func _ready() -> void:
 		push_error("DialogueBox node could not be found!")
 		return
 
-	# FIND BUTTONS INSIDE DIALOGUE BOX
+	# FIND BUTTONS
 
 	next_button = dialogue_box.find_child(
 		"NextButton", true, false
@@ -148,20 +154,16 @@ func show_current_dialogue() -> void:
 
 	if dialogue_index >= dialogues.size():
 
-		print("ALL DIALOGUES COMPLETED")
+		print("ALL CHAPTER 3 DIALOGUES COMPLETED")
 
-		go_to_map()
+		show_chapter_completion_popup()
 		return
 
 	var current = dialogues[dialogue_index]
 
 	print("SHOWING DIALOGUE: ", current["text"])
 
-	# CHANGE BACKGROUND
-
 	change_background(current["background"])
-
-	# DISPLAY CHARACTER AND DIALOGUE
 
 	dialogue_box.show_dialogue(
 		current["character"],
@@ -229,12 +231,92 @@ func skip_dialogue() -> void:
 	if transition_running:
 		return
 
-	print("DIALOGUE SKIPPED")
+	print("CHAPTER 3 DIALOGUE SKIPPED")
 
 	# STOP MEDICINE SOUND IF STILL PLAYING
 
 	if medicine_bottle_sound != null:
 		medicine_bottle_sound.stop()
+
+	show_chapter_completion_popup()
+
+
+# =====================================
+# CHAPTER COMPLETION POPUP
+# =====================================
+
+func show_chapter_completion_popup() -> void:
+
+	if transition_running:
+		return
+
+	print("SHOWING CHAPTER 3 COMPLETION POPUP")
+
+	if tutorial_popup_scene == null:
+		push_error("TutorialPopup scene has not been assigned!")
+		return
+
+	# PREVENT REPEATED BUTTON PRESSES
+
+	transition_running = true
+
+	if next_button != null:
+		next_button.disabled = true
+
+	if skip_button != null:
+		skip_button.disabled = true
+
+	# CREATE EXISTING TUTORIAL POPUP
+
+	var popup = tutorial_popup_scene.instantiate()
+
+	# CONFIGURE POPUP
+
+	popup.set("show_chapter_completed_on_start", true)
+
+	popup.set(
+		"chapter_completed_title",
+		"Chapter 3 Completed"
+	)
+
+	popup.set(
+		"chapter_completed_description",
+		"You have completed Chapter 3!"
+	)
+
+	# CONNECT OKAY BUTTON CONFIRMATION SIGNAL
+
+	if not popup.has_signal("chapter_completed_confirmed"):
+
+		push_error(
+			"TutorialPopup is missing the chapter_completed_confirmed signal!"
+		)
+
+		popup.queue_free()
+		transition_running = false
+		return
+
+	popup.connect(
+		"chapter_completed_confirmed",
+		_on_chapter_completed_confirmed
+	)
+
+	# DISPLAY POPUP
+
+	add_child(popup)
+
+
+# =====================================
+# POPUP OKAY BUTTON
+# =====================================
+
+func _on_chapter_completed_confirmed() -> void:
+
+	print("CHAPTER 3 COMPLETION CONFIRMED")
+
+	# ALLOW THE SCENE TRANSITION FUNCTION TO RUN
+
+	transition_running = false
 
 	go_to_map()
 
@@ -246,6 +328,7 @@ func skip_dialogue() -> void:
 func fade_to_black() -> void:
 
 	var fade_overlay := ColorRect.new()
+
 	fade_overlay.name = "TransitionFade"
 	fade_overlay.color = Color(0, 0, 0, 0)
 	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -291,8 +374,6 @@ func go_to_map() -> void:
 		return
 
 	transition_running = true
-
-	# DISABLE BUTTONS DURING TRANSITION
 
 	if next_button != null:
 		next_button.disabled = true

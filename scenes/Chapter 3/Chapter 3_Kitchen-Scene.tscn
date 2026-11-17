@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://cgx6yl5ccyfw" path="res://assets/sound effects/Pill bottle sfx.mp3" id="4_vt34f"]
 [ext_resource type="AudioStream" uid="uid://xe2xbfidk3v4" path="res://assets/sound effects/Crying SFX.mp3" id="5_rb0i6"]
 [ext_resource type="AudioStream" uid="uid://b5fijgj7f8wdr" path="res://assets/sound effects/Ambulance.mp3" id="6_m6bvc"]
+[ext_resource type="PackedScene" uid="uid://cbm8og4cptek6" path="res://scenes/Tutorial/tutorial_popup.tscn" id="7_6v8b5"]
 
 [node name="Main" type="Control" unique_id=237188476]
 layout_mode = 3
@@ -15,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_yrkik")
+tutorial_popup_scene = ExtResource("7_6v8b5")
 
 [node name="Background" type="TextureRect" parent="." unique_id=364362536]
 layout_mode = 0
@@ -38,3 +40,6 @@ autoplay = true
 
 [node name="AmbulanceSound" type="AudioStreamPlayer" parent="." unique_id=1139492978]
 stream = ExtResource("6_m6bvc")
+
+[node name="TutorialPopup" parent="." unique_id=1593059378 instance=ExtResource("7_6v8b5")]
+layout_mode = 1
