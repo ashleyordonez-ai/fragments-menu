@@ -8,9 +8,15 @@ extends Control
 @onready var background: TextureRect = get_node_or_null("Background") as TextureRect
 @onready var dialogue_box = get_node_or_null("DialogueBox")
 
-# Search the entire scene for buttons
 @onready var next_button: Button = find_child("NextButton", true, false) as Button
 @onready var skip_button: Button = find_child("SkipButton", true, false) as Button
+
+
+# =====================================
+# TUTORIAL POPUP
+# =====================================
+
+@export var tutorial_popup_scene: PackedScene
 
 
 # =====================================
@@ -28,7 +34,6 @@ var transition_running: bool = false
 
 var dialogues = [
 
-	# 1. MAX
 	{
 		"character": "Max",
 		"text": "Leonore, I really like you. Ever since I first saw you haha…",
@@ -37,7 +42,6 @@ var dialogues = [
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 2. LEONORE
 	{
 		"character": "Leonore",
 		"text": "Huh… why me?",
@@ -46,7 +50,6 @@ var dialogues = [
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 3. MAX
 	{
 		"character": "Max",
 		"text": """I don't know, because it's you. I just like you, Leonore.
@@ -56,7 +59,6 @@ If I'm given a chance, I will court you. Can I?""",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 4. LEONORE
 	{
 		"character": "Leonore",
 		"text": "To be honest, I also want us to try. Maybe we can try.",
@@ -65,7 +67,6 @@ If I'm given a chance, I will court you. Can I?""",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 5. MAX
 	{
 		"character": "Max",
 		"text": "Is that a yes?",
@@ -74,7 +75,6 @@ If I'm given a chance, I will court you. Can I?""",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 6. LEONORE
 	{
 		"character": "Leonore",
 		"text": "Yes, Max, it's a yes.",
@@ -83,7 +83,6 @@ If I'm given a chance, I will court you. Can I?""",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
-	# 7. LEONORE
 	{
 		"character": "Leonore",
 		"text": """How can I forget these wonderful memories? Someone saved
@@ -110,31 +109,25 @@ func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
 
-	# CHECK BACKGROUND
 	if background == null:
 		push_error("Background node could not be found!")
 		return
 
-	# CHECK DIALOGUE BOX
 	if dialogue_box == null:
 		push_error("DialogueBox node could not be found!")
 		return
 
-	# CHECK NEXT BUTTON
 	if next_button == null:
-		push_error("NextButton could not be found! Check its node name and location.")
+		push_error("NextButton could not be found!")
 		return
 
-	# CHECK SKIP BUTTON
 	if skip_button == null:
-		push_error("SkipButton could not be found! Check its node name and location.")
+		push_error("SkipButton could not be found!")
 		return
 
-	# CONNECT NEXT BUTTON
 	if not next_button.pressed.is_connected(show_next_dialogue):
 		next_button.pressed.connect(show_next_dialogue)
 
-	# CONNECT SKIP BUTTON
 	if not skip_button.pressed.is_connected(skip_dialogue):
 		skip_button.pressed.connect(skip_dialogue)
 
@@ -153,7 +146,7 @@ func show_current_dialogue() -> void:
 
 		print("ALL DIALOGUES COMPLETED")
 
-		go_to_map()
+		show_chapter_completion_popup()
 		return
 
 	var current = dialogues[dialogue_index]
@@ -170,10 +163,8 @@ func show_current_dialogue() -> void:
 	print("EXPRESSION: ", expression)
 	print("POSITION: ", position)
 
-	# CHANGE BACKGROUND
 	change_background(background_path)
 
-	# DISPLAY DIALOGUE AND CHARACTER
 	if dialogue_box.has_method("show_dialogue"):
 
 		dialogue_box.show_dialogue(
@@ -214,7 +205,73 @@ func skip_dialogue() -> void:
 
 	print("DIALOGUE SKIPPED")
 
-	go_to_map()
+	show_chapter_completion_popup()
+
+
+# =====================================
+# SHOW CHAPTER COMPLETION POPUP
+# =====================================
+
+func show_chapter_completion_popup() -> void:
+
+	if transition_running:
+		return
+
+	if tutorial_popup_scene == null:
+		push_error("TutorialPopup scene has not been assigned in the Inspector!")
+		return
+
+	transition_running = true
+
+	# Create an instance of the existing TutorialPopup.
+	var popup := tutorial_popup_scene.instantiate()
+
+	if popup == null:
+		push_error("Could not instantiate TutorialPopup!")
+		transition_running = false
+		return
+
+	# Configure the popup before adding it to the scene.
+	popup.set("show_chapter_completed_on_start", true)
+
+	popup.set(
+		"chapter_completed_title",
+		"Chapter 2 Completed"
+	)
+
+	popup.set(
+		"chapter_completed_description",
+		"""Congratulations on completing Chapter 2!
+
+You can now proceed to the next chapter."""
+	)
+
+	# Connect the Okay button confirmation signal.
+	if not popup.has_signal("chapter_completed_confirmed"):
+		push_error("TutorialPopup is missing its completion signal!")
+		popup.queue_free()
+		transition_running = false
+		return
+
+	popup.connect(
+		"chapter_completed_confirmed",
+		_on_chapter_completed_confirmed
+	)
+
+	add_child(popup)
+
+	print("CHAPTER 2 COMPLETION POPUP DISPLAYED!")
+
+
+# =====================================
+# CHAPTER COMPLETION CONFIRMED
+# =====================================
+
+func _on_chapter_completed_confirmed() -> void:
+
+	print("CHAPTER 2 COMPLETION CONFIRMED!")
+
+	await go_to_chapter_selection()
 
 
 # =====================================
@@ -254,21 +311,19 @@ func fade_to_black() -> void:
 
 
 # =====================================
-# GO TO CHAPTER 3
+# GO TO CHAPTER SELECTION 3
 # =====================================
 
-func go_to_map() -> void:
+func go_to_chapter_selection() -> void:
 
-	if transition_running:
-		return
+	if not transition_running:
+		transition_running = true
 
 	var next_scene := "res://scenes/Chapter Selection/ChapterSelection3.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)
 		return
-
-	transition_running = true
 
 	await fade_to_black()
 

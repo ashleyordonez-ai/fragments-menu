@@ -1,6 +1,9 @@
 
 extends Control
 
+signal chapter_completed_confirmed
+
+
 # =====================================
 # NODE REFERENCES
 # =====================================
@@ -15,7 +18,19 @@ extends Control
 # =====================================
 
 @export var movement_next_scene: PackedScene
-@export var chapter_completed_next_scene: PackedScene
+
+
+# =====================================
+# CHAPTER COMPLETION SETTINGS
+# =====================================
+
+@export var show_chapter_completed_on_start: bool = false
+
+@export var chapter_completed_title: String = "Chapter Completed"
+
+@export_multiline var chapter_completed_description: String = """Congratulations on completing Chapter 2!
+
+You can now proceed to the next chapter."""
 
 
 # =====================================
@@ -37,7 +52,6 @@ func _ready() -> void:
 
 	hide()
 
-	# Check node references
 	if title_label == null:
 		push_error("WelcomeText Label not found!")
 		return
@@ -50,24 +64,28 @@ func _ready() -> void:
 		push_error("OkayButton not found!")
 		return
 
-	# Connect Okay Button
 	if not okay_button.pressed.is_connected(_on_okay_button_pressed):
 		okay_button.pressed.connect(_on_okay_button_pressed)
 
-	# Get tutorial ID
-	current_tutorial_id = str(
-		get_tree().root.get_meta("current_tutorial", "")
-	)
 
-	# Normalize tutorial ID
+	# GET TUTORIAL ID
+
+	if show_chapter_completed_on_start:
+		current_tutorial_id = "chapter completed"
+
+	else:
+		current_tutorial_id = str(
+			get_tree().root.get_meta("current_tutorial", "")
+		)
+
 	current_tutorial_id = current_tutorial_id.to_lower().strip_edges()
 	current_tutorial_id = current_tutorial_id.replace("_", " ")
 
-	print("================================")
 	print("CURRENT TUTORIAL: ", current_tutorial_id)
-	print("================================")
 
-	# Display the correct tutorial
+
+	# DISPLAY TUTORIAL
+
 	match current_tutorial_id:
 
 		"movement":
@@ -104,19 +122,20 @@ Proceed to the next fragment to unlock another part of the story."""
 
 		"chapter completed":
 			show_tutorial(
-				"Chapter Completed",
-				"Congratulations on completing Chapter 1!
-
-				You can now proceed to the next chapter."
+				chapter_completed_title,
+				chapter_completed_description
 			)
 
 		_:
 			push_warning("No matching tutorial found: " + current_tutorial_id)
 			hide_tutorial()
 
-	# Remove metadata after retrieving it
-	if get_tree().root.has_meta("current_tutorial"):
-		get_tree().root.remove_meta("current_tutorial")
+
+	# REMOVE METADATA ONLY FOR THE ORIGINAL TUTORIAL SYSTEM
+
+	if not show_chapter_completed_on_start:
+		if get_tree().root.has_meta("current_tutorial"):
+			get_tree().root.remove_meta("current_tutorial")
 
 
 # =====================================
@@ -165,31 +184,28 @@ func _on_okay_button_pressed() -> void:
 	if is_transitioning:
 		return
 
-	print("================================")
 	print("OKAY BUTTON PRESSED!")
 	print("TUTORIAL COMPLETED: ", current_tutorial_id)
-	print("================================")
 
 	match current_tutorial_id:
 
 		"movement":
 			load_next_scene(movement_next_scene)
 
-		"interaction":
-			hide_tutorial()
-
-		"inspection":
-			hide_tutorial()
-
-		"game play":
+		"interaction", "inspection", "game play":
 			hide_tutorial()
 
 		"chapter completed":
-			print("CHAPTER COMPLETED POPUP DETECTED!")
-			load_next_scene(chapter_completed_next_scene)
+			print("CHAPTER COMPLETED POPUP CONFIRMED!")
+
+			is_transitioning = true
+			okay_button.disabled = true
+
+			chapter_completed_confirmed.emit()
+
+			hide_tutorial()
 
 		_:
-			push_warning("No scene transition assigned for: " + current_tutorial_id)
 			hide_tutorial()
 
 
@@ -199,23 +215,16 @@ func _on_okay_button_pressed() -> void:
 
 func load_next_scene(scene: PackedScene) -> void:
 
-	print("ATTEMPTING TO LOAD NEXT SCENE...")
-
 	if scene == null:
 		push_error("Next Scene has not been assigned in the Inspector!")
 		return
 
-	print("SCENE TO LOAD: ", scene.resource_path)
-
 	is_transitioning = true
 	okay_button.disabled = true
 
-	var error: Error = get_tree().change_scene_to_packed(scene)
-
-	print("SCENE CHANGE RESULT: ", error)
+	var error := get_tree().change_scene_to_packed(scene)
 
 	if error != OK:
-
 		push_error("Failed to load the next scene! Error: " + str(error))
 
 		is_transitioning = false
