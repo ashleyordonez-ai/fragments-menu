@@ -208,7 +208,7 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
-	var next_scene := "res://scenes/CHAPTER 3 Screen.tscn"
+	var next_scene := "res://scenes/Chapter Selection/ChapterSelection3.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)
