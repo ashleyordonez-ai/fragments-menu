@@ -1,3 +1,4 @@
+
 extends Control
 
 # =====================================
@@ -9,6 +10,15 @@ extends Control
 
 var next_button: Button
 var skip_button: Button
+
+var chapter_completed_popup: Node
+
+
+# =====================================
+# POPUP SETTINGS
+# =====================================
+
+@export var tutorial_popup_scene: PackedScene
 
 
 # =====================================
@@ -115,7 +125,7 @@ func show_current_dialogue() -> void:
 
 		print("ALL DIALOGUES COMPLETED")
 
-		go_to_map()
+		show_chapter_completed_popup()
 		return
 
 	var current = dialogues[dialogue_index]
@@ -145,17 +155,15 @@ func show_next_dialogue() -> void:
 	if transition_running:
 		return
 
-	# MEDICINE BOTTLE SOUND AFTER FIRST DIALOGUE
+	# FIRST DIALOGUE COMPLETED
 
 	if dialogue_index == 0:
-
 		print("FIRST DIALOGUE COMPLETED!")
 
+	# SECOND DIALOGUE COMPLETED
+
 	if dialogue_index == 1:
-
 		print("SECOND DIALOGUE COMPLETED!")
-
-	#if dialogue_index == 2:
 
 	# MOVE TO NEXT DIALOGUE
 
@@ -175,7 +183,68 @@ func skip_dialogue() -> void:
 
 	print("DIALOGUE SKIPPED")
 
-	# STOP MEDICINE SOUND IF STILL PLAYING
+	show_chapter_completed_popup()
+
+
+# =====================================
+# SHOW CHAPTER COMPLETED POPUP
+# =====================================
+
+func show_chapter_completed_popup() -> void:
+
+	if transition_running:
+		return
+
+	print("SHOWING CHAPTER 4 COMPLETED POPUP...")
+
+	if tutorial_popup_scene == null:
+		push_error("Tutorial Popup Scene has not been assigned!")
+		return
+
+	transition_running = true
+
+	# INSTANTIATE EXISTING POPUP
+
+	chapter_completed_popup = tutorial_popup_scene.instantiate()
+
+	# CONFIGURE CHAPTER COMPLETION MESSAGE
+
+	chapter_completed_popup.set(
+		"show_chapter_completed_on_start",
+		true
+	)
+
+	chapter_completed_popup.set(
+		"chapter_completed_title",
+		"Chapter 4 Completed"
+	)
+
+	chapter_completed_popup.set(
+		"chapter_completed_description",
+		"You have completed Chapter 4!"
+	)
+
+	# CONNECT POPUP CONFIRMATION SIGNAL
+
+	chapter_completed_popup.connect(
+		"chapter_completed_confirmed",
+		_on_chapter_completed_confirmed
+	)
+
+	# DISPLAY POPUP
+
+	add_child(chapter_completed_popup)
+
+
+# =====================================
+# CHAPTER COMPLETED - OKAY BUTTON
+# =====================================
+
+func _on_chapter_completed_confirmed() -> void:
+
+	print("CHAPTER 4 COMPLETED!")
+
+	transition_running = false
 
 	go_to_map()
 
@@ -192,6 +261,7 @@ func fade_to_black() -> void:
 	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 
 	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+
 	fade_overlay.offset_left = 0
 	fade_overlay.offset_top = 0
 	fade_overlay.offset_right = 0

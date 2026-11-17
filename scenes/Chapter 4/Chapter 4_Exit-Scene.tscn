@@ -4,8 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://b8ckigfmif77i" path="res://assets/Illustrations/Hospital with Objects.png" id="1_ekh1w"]
 [ext_resource type="Script" uid="uid://dfy6mlq1bpeav" path="res://script/chapter_4_exit_scene.gd" id="1_tv1tu"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="3_to1gj"]
+[ext_resource type="PackedScene" uid="uid://cbm8og4cptek6" path="res://scenes/Tutorial/tutorial_popup.tscn" id="5_ofrmm"]
 
-[node name="Control" type="Control" unique_id=1054249837]
+[node name="Control5" type="Control" unique_id=1054249837]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tv1tu")
+tutorial_popup_scene = ExtResource("5_ofrmm")
 
 [node name="Background" type="TextureRect" parent="." unique_id=1657921557]
 layout_mode = 0
@@ -25,3 +27,6 @@ layout_mode = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1028917100]
 stream = ExtResource("3_to1gj")
+
+[node name="TutorialPopup" parent="." unique_id=1593059378 instance=ExtResource("5_ofrmm")]
+layout_mode = 1
