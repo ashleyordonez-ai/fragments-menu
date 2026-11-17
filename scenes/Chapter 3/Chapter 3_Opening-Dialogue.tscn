@@ -1,5 +1,10 @@
 [gd_scene format=3 uid="uid://bm2dp5ulvlv4"]
 
+[ext_resource type="Script" uid="uid://b5cedryhem4ue" path="res://script/chapter_3_opening_dialogue.gd" id="1_tc45a"]
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_vqnxh"]
+[ext_resource type="AudioStream" uid="uid://bpivc0qukm6aw" path="res://assets/music/Chap 3 music.mp3" id="2_tc45a"]
+[ext_resource type="AudioStream" uid="uid://boqleewmxt53j" path="res://assets/sound effects/Glass Shattering.mp3" id="4_rhivq"]
+
 [node name="Main" type="Control" unique_id=1466724758]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +12,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_tc45a")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1052918001]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_vqnxh")]
+layout_mode = 1
+
+[node name="Main BGM" type="AudioStreamPlayer" parent="." unique_id=475056638]
+stream = ExtResource("2_tc45a")
+autoplay = true
+
+[node name="SFX" type="AudioStreamPlayer" parent="." unique_id=1086938458]
+stream = ExtResource("4_rhivq")
+volume_db = -15.91
+autoplay = true

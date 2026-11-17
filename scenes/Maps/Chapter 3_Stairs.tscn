@@ -28,7 +28,7 @@ polygon = PackedVector2Array(1158, 237, 917, 242, 619, 554, 0, 551, 2, 647, 1157
 [node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("3_y0rxn")]
 object_texture = ExtResource("4_75h57")
 
-[node name="CollisionShape2D" parent="InteractableObject" index="1" unique_id=1575614360]
+[node name="CollisionShape2D" parent="InteractableObject" index="2" unique_id=1575614360]
 position = Vector2(329, 339)
 
 [node name="CollisionShape2D" parent="InteractableObject/InteractionRange" parent_id_path=PackedInt32Array(1942715826, 846547108) index="0" unique_id=957297124]

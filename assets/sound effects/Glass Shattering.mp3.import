@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://boqleewmxt53j"
+path="res://.godot/imported/Glass Shattering.mp3-755368f17eee87f581e43a9033f546d5.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/Glass Shattering.mp3"
+dest_files=["res://.godot/imported/Glass Shattering.mp3-755368f17eee87f581e43a9033f546d5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cd5651vi512hu" path="res://script/chapter_3_screen.gd" id="1_nmy8n"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_h6610"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_0n5k5"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="4_h6610"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3
@@ -58,3 +59,7 @@ theme_override_fonts/font = ExtResource("3_0n5k5")
 theme_override_font_sizes/font_size = 25
 text = "continue"
 flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1129756922]
+stream = ExtResource("4_h6610")
+autoplay = true
