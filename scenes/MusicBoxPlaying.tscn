@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://cm1r6avsov7w7"]
+[gd_scene format=3 uid="uid://cnj3ixsk15hep"]
+
+[ext_resource type="AudioStream" uid="uid://jhrr5iuq1ofh" path="res://assets/music/music box.mp3" id="1_8mugv"]
 
 [node name="MusicBoxPlaying" type="Control" unique_id=1893995751]
 layout_mode = 3
@@ -7,3 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1691618452]
+stream = ExtResource("1_8mugv")
+autoplay = true

@@ -231,3 +231,4 @@ mouse_filter = 2
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2010630755]
 stream = ExtResource("11_m0ua0")
+autoplay = true

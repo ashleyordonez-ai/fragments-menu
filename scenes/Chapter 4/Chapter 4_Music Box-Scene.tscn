@@ -25,3 +25,4 @@ layout_mode = 1
 
 [node name="MusicBox" type="AudioStreamPlayer" parent="." unique_id=166226538]
 stream = ExtResource("2_35oaj")
+autoplay = true
