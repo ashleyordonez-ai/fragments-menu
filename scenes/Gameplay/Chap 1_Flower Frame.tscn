@@ -17,6 +17,10 @@
 [sub_resource type="GDScript" id="GDScript_2k86a"]
 script/source = "extends Control
 
+# Scene to load after the flower puzzle is completed.
+# Update this path if the scene is inside a folder.
+const FLASHBACK_SCENE := \"res://scenes/Chapter 1/Chapter 1_Frame-Flashback.tscn\"
+
 # ==========================================
 # NODE REFERENCES
 # ==========================================
@@ -1320,6 +1324,17 @@ func play_completion_animation():
 	await gold_fade_tween.finished
 
 	print(\"Final word displayed: LEONORE!\")
+
+	# ======================================
+	# TRANSITION TO CHAPTER 1 FRAME FLASHBACK
+	# ======================================
+
+	await get_tree().create_timer(0.5).timeout
+
+	var error := get_tree().change_scene_to_file(FLASHBACK_SCENE)
+
+	if error != OK:
+		push_error(\"Failed to load flashback scene: \" + FLASHBACK_SCENE)
 
 
 # ==========================================

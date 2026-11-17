@@ -27,46 +27,19 @@ func show_dialogue(
 
 	print("SHOW_DIALOGUE CALLED")
 	print("Character: ", character_name)
-	print("Dialogue: ", dialogue)
-
-	name_label.text = character_name
-	dialogue_text.text = dialogue
-
-	if position == "left":
-		left_portrait.show_character(
-			character_name,
-			expression + "-left"
-		)
-
-		right_portrait.hide_character()
-		left_portrait.show()
-
-	elif position == "right":
-		right_portrait.show_character(
-			character_name,
-			expression + "-right"
-		)
-
-		left_portrait.hide_character()
-		right_portrait.show()
-
-	else:
-		left_portrait.hide_character()
-		right_portrait.hide()
-
-	print("SHOW_DIALOGUE CALLED")
-	print("Character: ", character_name)
 	print("Expression: ", expression)
 	print("Position: ", position)
 	print("Dialogue: ", dialogue)
 
+	# DISPLAY TEXT
 	name_label.text = character_name
 	dialogue_text.text = dialogue
 
-	# =====================================
-	# DISPLAY CHARACTER EXPRESSION
-	# =====================================
+	# HIDE BOTH PORTRAITS FIRST
+	left_portrait.hide_character()
+	right_portrait.hide_character()
 
+	# DISPLAY THE CORRECT CHARACTER
 	if character_name != "" and expression != "":
 
 		if position == "left":
@@ -76,7 +49,7 @@ func show_dialogue(
 				expression + "-left"
 			)
 
-			right_portrait.hide_character()
+			left_portrait.show()
 
 		elif position == "right":
 
@@ -85,18 +58,7 @@ func show_dialogue(
 				expression + "-right"
 			)
 
-			left_portrait.hide_character()
-
-		else:
-			left_portrait.hide_character()
-			right_portrait.hide_character()
-
-	else:
-		# Hide both portraits for narration
-		# or dialogue from an off-screen character.
-
-		left_portrait.hide_character()
-		right_portrait.hide_character()
+			right_portrait.show()
 
 	# =====================================
 	# BACKGROUND

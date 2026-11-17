@@ -159,6 +159,7 @@ func show_character(
 	# Assign image
 	portrait.texture = texture
 
+	portrait.show()
 	show()
 
 	print("CHARACTER IMAGE LOADED SUCCESSFULLY: ", image_path)
