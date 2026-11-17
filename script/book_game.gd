@@ -47,6 +47,9 @@ const CORRECT_ANSWER := "BRIGHTER"
 const FLASHBACK_SCENE := "res://scenes/Chapter 2/Chapter 2_Diary-Flashback.tscn"
 const FLASHBACK_DELAY := 2.0
 
+# BLACK FADE TRANSITION
+const FADE_DURATION := 0.8
+
 const TEXT_COLOR := Color("#4A2D22")
 const PLACEHOLDER_COLOR := Color("#92745F")
 const AMBER_COLOR := Color("#F2A65A")
@@ -792,6 +795,41 @@ func play_answer_flash() -> void:
 
 
 # ==================================================
+# FADE SCREEN TO BLACK
+# ==================================================
+
+func fade_to_black() -> void:
+	var fade_overlay := ColorRect.new()
+
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color(0, 0, 0, 0)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 4096
+
+	add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color",
+		Color.BLACK,
+		FADE_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await fade_tween.finished
+
+
+# ==================================================
 # CORRECT ANSWER
 # ==================================================
 
@@ -859,6 +897,9 @@ func show_correct_answer() -> void:
 		)
 		success_animation_running = false
 		return
+
+	# Fade the screen to black before changing scenes.
+	await fade_to_black()
 
 	print("LOADING CHAPTER 2 DIARY FLASHBACK...")
 

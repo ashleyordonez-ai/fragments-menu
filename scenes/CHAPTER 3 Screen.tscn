@@ -26,34 +26,13 @@ grow_vertical = 2
 texture = ExtResource("2_h6610")
 expand_mode = 1
 
-[node name="chap3" type="Label" parent="." unique_id=2061875958]
-layout_mode = 0
-offset_left = 57.0
-offset_top = 182.0
-offset_right = 1094.0
-offset_bottom = 386.0
-theme_override_fonts/font = ExtResource("3_0n5k5")
-theme_override_font_sizes/font_size = 200
-text = "CHAPTER THREE:"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Subtitle" type="Label" parent="." unique_id=1509349141]
-layout_mode = 0
-offset_left = 399.0
-offset_top = 365.0
-offset_right = 748.0
-offset_bottom = 465.0
-theme_override_fonts/font = ExtResource("3_0n5k5")
-theme_override_font_sizes/font_size = 100
-text = "Connection"
-
 [node name="ContinueButton" type="Button" parent="." unique_id=1513054615]
 layout_mode = 0
-offset_left = 537.0
-offset_top = 504.0
-offset_right = 614.0
-offset_bottom = 537.0
+offset_left = 507.0
+offset_top = 506.0
+offset_right = 584.0
+offset_bottom = 539.0
+scale = Vector2(1.638384, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_0n5k5")
 theme_override_font_sizes/font_size = 25
@@ -63,3 +42,28 @@ flat = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1129756922]
 stream = ExtResource("4_h6610")
 autoplay = true
+
+[node name="chap3" type="Label" parent="." unique_id=60922876]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 281.0
+offset_right = 1147.0
+offset_bottom = 485.0
+scale = Vector2(0.91696674, 0.45287642)
+theme_override_fonts/font = ExtResource("3_0n5k5")
+theme_override_font_sizes/font_size = 203
+text = "CHAPTER THREE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=894530190]
+layout_mode = 0
+offset_left = 227.99997
+offset_top = 377.0
+offset_right = 904.0
+offset_bottom = 482.0
+scale = Vector2(0.9906173, 0.54301226)
+theme_override_fonts/font = ExtResource("3_0n5k5")
+theme_override_font_sizes/font_size = 100
+text = "Connection"
+horizontal_alignment = 1

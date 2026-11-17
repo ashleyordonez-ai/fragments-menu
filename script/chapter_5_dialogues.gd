@@ -11,6 +11,15 @@ extends Control
 var next_button: Button
 var skip_button: Button
 
+
+# =====================================
+# FADE TRANSITIONS
+# =====================================
+
+const FADE_IN_DURATION: float = 1.1
+const FADE_OUT_DURATION: float = 0.8
+
+
 # =====================================
 # TEXTURE REACTIONS
 # =====================================
@@ -20,6 +29,7 @@ var skip_button: Button
 @onready var diary: TextureRect = $Diary
 @onready var flower: TextureRect = $Flower
 @onready var music_box: TextureRect = $"Music Box"
+
 
 # =====================================
 # KNOCKING SOUND
@@ -153,8 +163,6 @@ func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
 
-	# CHECK MAIN NODES
-
 	if background == null:
 		push_error("Background node could not be found!")
 		return
@@ -209,6 +217,86 @@ func _ready() -> void:
 
 	show_current_dialogue()
 
+	# PLAY FADE-IN
+
+	await fade_from_black()
+
+
+# =====================================
+# FADE-IN TRANSITION
+# =====================================
+
+func fade_from_black() -> void:
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.name = "FadeInLayer"
+	fade_layer.layer = 128
+
+	add_child(fade_layer)
+
+	var fade_overlay := ColorRect.new()
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color.BLACK
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_layer.add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color:a",
+		0.0,
+		FADE_IN_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	await fade_tween.finished
+
+	fade_layer.queue_free()
+
+
+# =====================================
+# FADE-OUT TRANSITION
+# =====================================
+
+func fade_to_black() -> void:
+
+	var fade_layer := CanvasLayer.new()
+	fade_layer.name = "FadeOutLayer"
+	fade_layer.layer = 128
+
+	add_child(fade_layer)
+
+	var fade_overlay := ColorRect.new()
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color(0, 0, 0, 0)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_layer.add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color",
+		Color.BLACK,
+		FADE_OUT_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await fade_tween.finished
+
 
 # =====================================
 # DISPLAY CURRENT DIALOGUE
@@ -251,15 +339,11 @@ func show_current_dialogue() -> void:
 
 func update_texture_reaction() -> void:
 
-	# HIDE ALL TEXTURES FIRST
-
 	clock.hide()
 	teddy.hide()
 	diary.hide()
 	flower.hide()
 	music_box.hide()
-
-	# SHOW TEXTURE BASED ON DIALOGUE INDEX
 
 	match dialogue_index:
 
@@ -290,66 +374,45 @@ func update_texture_reaction() -> void:
 
 func show_next_dialogue() -> void:
 
-	# PREVENT MULTIPLE CLICKS DURING TRANSITION
-
 	if is_transitioning:
 		return
 
 	print("NEXT BUTTON PRESSED")
 
-	# FIRST DIALOGUE COMPLETED
-
 	if dialogue_index == 0:
 		print("FIRST DIALOGUE COMPLETED!")
-
-	# SECOND DIALOGUE COMPLETED
 
 	if dialogue_index == 1:
 		print("SECOND DIALOGUE COMPLETED!")
 
-	# MOVE TO NEXT DIALOGUE
-
 	dialogue_index += 1
 
-	# PLAY KNOCKING SOUND ONLY BEFORE TERESA'S FIRST DIALOGUE
-	# DIALOGUE INDEX 8 = TERESA'S FIRST DIALOGUE
+	# PLAY KNOCKING SOUND BEFORE TERESA'S FIRST DIALOGUE
 
 	if dialogue_index == 8:
 
 		print("TERESA'S FIRST DIALOGUE DETECTED")
-
-		# PREVENT MULTIPLE CLICKS
 
 		is_transitioning = true
 
 		next_button.disabled = true
 		skip_button.disabled = true
 
-		# PLAY KNOCKING SOUND
-
 		print("KNOCKING SOUND STARTED")
 
 		knocking_sound.play()
 
-		# WAIT UNTIL SOUND FINISHES
-
 		await knocking_sound.finished
-
-		# CHECK IF SCENE STILL EXISTS
 
 		if not is_inside_tree():
 			return
 
 		print("KNOCKING SOUND FINISHED")
 
-		# RE-ENABLE BUTTONS
-
 		next_button.disabled = false
 		skip_button.disabled = false
 
 		is_transitioning = false
-
-	# DISPLAY NEXT DIALOGUE
 
 	show_current_dialogue()
 
@@ -365,8 +428,6 @@ func skip_dialogue() -> void:
 
 	print("DIALOGUE SKIPPED")
 
-	# STOP KNOCKING SOUND IF PLAYING
-
 	if knocking_sound.playing:
 		knocking_sound.stop()
 
@@ -379,13 +440,35 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
+	# PREVENT MULTIPLE TRANSITIONS
+
+	if is_transitioning:
+		return
+
+	is_transitioning = true
+
 	print("LOADING OUTRO SCENE...")
 
 	var next_scene := "res://scenes/outro.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)
+		is_transitioning = false
 		return
+
+	# DISABLE BUTTONS
+
+	if next_button != null:
+		next_button.disabled = true
+
+	if skip_button != null:
+		skip_button.disabled = true
+
+	# FADE OUT BEFORE LOADING OUTRO
+
+	await fade_to_black()
+
+	print("FADE OUT COMPLETED. LOADING OUTRO...")
 
 	var error := get_tree().change_scene_to_file(next_scene)
 

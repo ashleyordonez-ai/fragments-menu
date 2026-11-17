@@ -26,35 +26,13 @@ grow_vertical = 2
 texture = ExtResource("2_bdcu2")
 expand_mode = 1
 
-[node name="chap5" type="Label" parent="." unique_id=808332296]
-layout_mode = 0
-offset_left = 127.0
-offset_top = 182.0
-offset_right = 1028.0
-offset_bottom = 386.0
-theme_override_fonts/font = ExtResource("3_6ujdm")
-theme_override_font_sizes/font_size = 203
-text = "CHAPTER FIVE:"
-
-[node name="Subtitle" type="Label" parent="." unique_id=1499275483]
-layout_mode = 0
-offset_left = 224.0
-offset_top = 365.0
-offset_right = 932.0
-offset_bottom = 568.0
-theme_override_fonts/font = ExtResource("3_6ujdm")
-theme_override_font_sizes/font_size = 100
-text = "Becoming Whole Again
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="ContinueButton" type="Button" parent="." unique_id=443073034]
 layout_mode = 0
-offset_left = 538.0
+offset_left = 509.0
 offset_top = 504.0
-offset_right = 615.0
+offset_right = 586.0
 offset_bottom = 537.0
+scale = Vector2(1.6893861, 0.8525452)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_6ujdm")
 theme_override_font_sizes/font_size = 25
@@ -64,3 +42,28 @@ flat = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=706880401]
 stream = ExtResource("4_bdcu2")
 autoplay = true
+
+[node name="chap5" type="Label" parent="." unique_id=1078851221]
+layout_mode = 0
+offset_left = 111.0
+offset_top = 278.0
+offset_right = 1148.0
+offset_bottom = 482.0
+scale = Vector2(0.91696674, 0.45287642)
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 203
+text = "CHAPTER FIVE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=678163597]
+layout_mode = 0
+offset_left = 226.99998
+offset_top = 369.0
+offset_right = 935.0
+offset_bottom = 474.0
+scale = Vector2(0.9906173, 0.54301226)
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 100
+text = "Becoming Whole Again"
+horizontal_alignment = 1

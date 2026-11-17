@@ -28,10 +28,11 @@ expand_mode = 1
 
 [node name="chap1" type="Label" parent="." unique_id=1269097426]
 layout_mode = 0
-offset_left = 144.0
-offset_top = 182.0
-offset_right = 1005.0
-offset_bottom = 386.0
+offset_left = 193.0
+offset_top = 268.0
+offset_right = 1054.0
+offset_bottom = 472.0
+scale = Vector2(0.91696674, 0.45287642)
 theme_override_fonts/font = ExtResource("2_gvvuf")
 theme_override_font_sizes/font_size = 203
 text = "CHAPTER ONE:"
@@ -44,6 +45,7 @@ offset_left = 320.0
 offset_top = 365.0
 offset_right = 830.0
 offset_bottom = 470.0
+scale = Vector2(0.9906173, 0.54301226)
 theme_override_fonts/font = ExtResource("2_gvvuf")
 theme_override_font_sizes/font_size = 100
 text = "Where am I?"
@@ -55,10 +57,11 @@ autoplay = true
 
 [node name="ContinueButton" type="Button" parent="." unique_id=1596284289]
 layout_mode = 0
-offset_left = 538.0
-offset_top = 504.0
-offset_right = 615.0
-offset_bottom = 537.0
+offset_left = 511.00006
+offset_top = 502.0
+offset_right = 588.00006
+offset_bottom = 535.0
+scale = Vector2(1.5786754, 0.8094269)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_gvvuf")
 theme_override_font_sizes/font_size = 25

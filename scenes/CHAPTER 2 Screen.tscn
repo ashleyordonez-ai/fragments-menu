@@ -26,40 +26,44 @@ grow_vertical = 2
 texture = ExtResource("2_6lgee")
 expand_mode = 1
 
-[node name="chap2" type="Label" parent="." unique_id=1692259409]
-layout_mode = 0
-offset_left = 105.0
-offset_top = 182.0
-offset_right = 1050.0
-offset_bottom = 386.0
-theme_override_fonts/font = ExtResource("3_q23n0")
-theme_override_font_sizes/font_size = 203
-text = "CHAPTER TWO:"
-
-[node name="Subtitle" type="Label" parent="." unique_id=235752892]
-layout_mode = 0
-offset_left = 239.0
-offset_top = 365.0
-offset_right = 915.0
-offset_bottom = 465.0
-theme_override_fonts/font = ExtResource("3_q23n0")
-theme_override_font_sizes/font_size = 100
-text = "Glimpse of Happiness"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=363542305]
 stream = ExtResource("4_6lgee")
 autoplay = true
 
 [node name="ContinueButton" type="Button" parent="." unique_id=2094914207]
 layout_mode = 0
-offset_left = 534.0
-offset_top = 504.0
-offset_right = 611.0
-offset_bottom = 537.0
+offset_left = 506.0
+offset_top = 502.0
+offset_right = 583.0
+offset_bottom = 535.0
+scale = Vector2(1.76, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_q23n0")
 theme_override_font_sizes/font_size = 25
 text = "continue"
 flat = true
+
+[node name="chap2" type="Label" parent="." unique_id=747992021]
+layout_mode = 0
+offset_left = 159.0
+offset_top = 267.0
+offset_right = 1104.0
+offset_bottom = 471.0
+scale = Vector2(0.91696674, 0.45287642)
+theme_override_fonts/font = ExtResource("3_q23n0")
+theme_override_font_sizes/font_size = 203
+text = "CHAPTER TWO:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=660726801]
+layout_mode = 0
+offset_left = 255.0
+offset_top = 357.0
+offset_right = 931.0
+offset_bottom = 462.0
+scale = Vector2(0.9906173, 0.54301226)
+theme_override_fonts/font = ExtResource("3_q23n0")
+theme_override_font_sizes/font_size = 100
+text = "Glimpse of Happiness"
+horizontal_alignment = 1

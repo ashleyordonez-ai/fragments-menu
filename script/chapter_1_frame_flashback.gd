@@ -1,4 +1,3 @@
-
 extends Control
 
 @onready var background: TextureRect = $Background
@@ -11,6 +10,13 @@ extends Control
 @onready var skip_button: Button = dialogue_box.find_child(
 	"SkipButton", true, false
 ) as Button
+
+
+# =====================================
+# FADE TRANSITION SETTINGS
+# =====================================
+
+const FADE_DURATION := 0.8
 
 
 # =====================================
@@ -101,6 +107,7 @@ var dialogues = [
 # =====================================
 
 var dialogue_index: int = 0
+var transition_running: bool = false
 
 
 # =====================================
@@ -184,6 +191,9 @@ func show_current_dialogue() -> void:
 
 func show_next_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	dialogue_index += 1
 
 	show_current_dialogue()
@@ -195,9 +205,48 @@ func show_next_dialogue() -> void:
 
 func skip_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	print("DIALOGUE SKIPPED")
 
 	go_to_map()
+
+
+# =====================================
+# FADE OUT TO BLACK
+# =====================================
+
+func fade_to_black() -> void:
+
+	var fade_overlay := ColorRect.new()
+
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color(0, 0, 0, 0)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 4096
+
+	add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color",
+		Color.BLACK,
+		FADE_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await fade_tween.finished
 
 
 # =====================================
@@ -206,11 +255,18 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
+	if transition_running:
+		return
+
+	transition_running = true
+
 	get_tree().root.set_meta("current_tutorial", "chapter completed")
+
+	await fade_to_black()
 
 	get_tree().change_scene_to_file(
 		"res://scenes/Maps/Chapter 1_Room.tscn"
-	)	
+	)
 
 
 # =====================================

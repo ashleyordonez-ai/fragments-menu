@@ -14,6 +14,15 @@ extends Control
 
 
 # =====================================
+# FADE OUT SETTINGS
+# =====================================
+
+const FADE_DURATION := 0.8
+
+var transition_running: bool = false
+
+
+# =====================================
 # DIALOGUE ENTRIES
 # =====================================
 
@@ -40,8 +49,8 @@ var dialogues = [
 	# 3. MAX
 	{
 		"character": "Max",
-		"text": "I don't know, because it's you. I just like you, Leonore. 
-		If I'm given a chance, I will court you. Can I?",
+		"text": """I don't know, because it's you. I just like you, Leonore.
+If I'm given a chance, I will court you. Can I?""",
 		"expression": "smiling",
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
@@ -77,8 +86,8 @@ var dialogues = [
 	# 7. LEONORE
 	{
 		"character": "Leonore",
-		"text": "How can I forget these wonderful memories? Someone saved 
-		me from loneliness. They made me feel so loved.",
+		"text": """How can I forget these wonderful memories? Someone saved
+me from loneliness. They made me feel so loved.""",
 		"expression": "default",
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Attic-Dialogue BG.png"
@@ -185,6 +194,9 @@ func show_current_dialogue() -> void:
 
 func show_next_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	if dialogue_index < dialogues.size():
 		dialogue_index += 1
 
@@ -197,9 +209,48 @@ func show_next_dialogue() -> void:
 
 func skip_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	print("DIALOGUE SKIPPED")
 
 	go_to_map()
+
+
+# =====================================
+# FADE OUT TO BLACK
+# =====================================
+
+func fade_to_black() -> void:
+
+	var fade_overlay := ColorRect.new()
+
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color(0, 0, 0, 0)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 4096
+
+	add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color",
+		Color.BLACK,
+		FADE_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await fade_tween.finished
 
 
 # =====================================
@@ -208,11 +259,18 @@ func skip_dialogue() -> void:
 
 func go_to_map() -> void:
 
+	if transition_running:
+		return
+
 	var next_scene := "res://scenes/Chapter Selection/ChapterSelection3.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)
 		return
+
+	transition_running = true
+
+	await fade_to_black()
 
 	var error := get_tree().change_scene_to_file(next_scene)
 

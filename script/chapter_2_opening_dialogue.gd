@@ -9,6 +9,13 @@ extends Control
 
 
 # =====================================
+# FADE IN SETTINGS
+# =====================================
+
+const FADE_DURATION := 1.1
+
+
+# =====================================
 # DIALOGUE ENTRIES
 # =====================================
 
@@ -62,6 +69,47 @@ func _ready() -> void:
 
 	# Display the first dialogue
 	show_current_dialogue()
+
+	# Fade in after dialogue is initialized.
+	await fade_from_black()
+
+
+# =====================================
+# FADE IN FROM BLACK
+# =====================================
+
+func fade_from_black() -> void:
+
+	var fade_overlay := ColorRect.new()
+
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color.BLACK
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 4096
+
+	add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color:a",
+		0.0,
+		FADE_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	await fade_tween.finished
+
+	fade_overlay.queue_free()
 
 
 # =====================================

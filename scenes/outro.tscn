@@ -72,6 +72,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [node name="quote3" type="Label" parent="." unique_id=2145580098]
+visible = false
 material = SubResource("ShaderMaterial_a6ogt")
 layout_mode = 0
 offset_left = 109.0

@@ -1,4 +1,3 @@
-
 extends Control
 
 # =====================================
@@ -10,6 +9,15 @@ extends Control
 
 var next_button: Button
 var skip_button: Button
+
+
+# =====================================
+# FADE SETTINGS
+# =====================================
+
+const FADE_DURATION: float = 0.8
+
+var transition_running: bool = false
 
 
 # =====================================
@@ -134,6 +142,9 @@ func show_current_dialogue() -> void:
 
 func show_next_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	# MEDICINE BOTTLE SOUND AFTER FIRST DIALOGUE
 
 	if dialogue_index == 0:
@@ -159,6 +170,9 @@ func show_next_dialogue() -> void:
 
 func skip_dialogue() -> void:
 
+	if transition_running:
+		return
+
 	print("DIALOGUE SKIPPED")
 
 	# STOP MEDICINE SOUND IF STILL PLAYING
@@ -167,12 +181,49 @@ func skip_dialogue() -> void:
 
 
 # =====================================
-# GO TO CHAPTER 4 SCREEN
+# FADE-OUT TRANSITION
+# =====================================
+
+func fade_to_black() -> void:
+
+	var fade_overlay := ColorRect.new()
+	fade_overlay.name = "TransitionFade"
+	fade_overlay.color = Color(0, 0, 0, 0)
+	fade_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+
+	fade_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
+	fade_overlay.offset_left = 0
+	fade_overlay.offset_top = 0
+	fade_overlay.offset_right = 0
+	fade_overlay.offset_bottom = 0
+
+	fade_overlay.z_as_relative = false
+	fade_overlay.z_index = 4096
+
+	add_child(fade_overlay)
+
+	var fade_tween := create_tween()
+
+	fade_tween.tween_property(
+		fade_overlay,
+		"color",
+		Color.BLACK,
+		FADE_DURATION
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+	await fade_tween.finished
+
+
+# =====================================
+# GO TO CHAPTER 5 SCREEN
 # =====================================
 
 func go_to_map() -> void:
 
-	print("LOADING CHAPTER 4 SCREEN...")
+	if transition_running:
+		return
+
+	print("LOADING CHAPTER 5 SCREEN...")
 
 	var next_scene := "res://scenes/Chapter Selection/ChapterSelection5.tscn"
 
@@ -180,10 +231,27 @@ func go_to_map() -> void:
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)
 		return
 
+	transition_running = true
+
+	# DISABLE BUTTONS DURING TRANSITION
+
+	if next_button != null:
+		next_button.disabled = true
+
+	if skip_button != null:
+		skip_button.disabled = true
+
+	# FADE TO BLACK
+
+	await fade_to_black()
+
+	# CHANGE SCENE
+
 	var error := get_tree().change_scene_to_file(next_scene)
 
 	if error != OK:
-		push_error("FAILED TO LOAD CHAPTER 4 SCREEN: " + str(error))
+		push_error("FAILED TO LOAD CHAPTER 5 SCREEN: " + str(error))
+
 
 # =====================================
 # CHANGE BACKGROUND

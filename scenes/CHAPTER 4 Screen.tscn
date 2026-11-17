@@ -26,32 +26,13 @@ grow_vertical = 2
 texture = ExtResource("2_bdcu2")
 expand_mode = 1
 
-[node name="chap4" type="Label" parent="." unique_id=955794637]
-layout_mode = 0
-offset_left = 116.0
-offset_top = 182.0
-offset_right = 1038.0
-offset_bottom = 382.0
-theme_override_fonts/font = ExtResource("3_6ujdm")
-theme_override_font_sizes/font_size = 200
-text = "CHAPTER FOUR:"
-
-[node name="Subtitle" type="Label" parent="." unique_id=219015654]
-layout_mode = 0
-offset_left = 467.0
-offset_top = 365.0
-offset_right = 687.0
-offset_bottom = 465.0
-theme_override_fonts/font = ExtResource("3_6ujdm")
-theme_override_font_sizes/font_size = 100
-text = "Healing"
-
 [node name="ContinueButton" type="Button" parent="." unique_id=79442481]
 layout_mode = 0
-offset_left = 541.0
-offset_top = 504.0
-offset_right = 618.0
-offset_bottom = 537.0
+offset_left = 505.0
+offset_top = 509.0
+offset_right = 582.0
+offset_bottom = 542.0
+scale = Vector2(1.8000019, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_6ujdm")
 theme_override_font_sizes/font_size = 25
@@ -61,3 +42,28 @@ flat = true
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1977433787]
 stream = ExtResource("4_ce5cq")
 autoplay = true
+
+[node name="chap4" type="Label" parent="." unique_id=2053202096]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 273.0
+offset_right = 1134.0
+offset_bottom = 477.0
+scale = Vector2(0.91696674, 0.45287642)
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 203
+text = "CHAPTER FOUR:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=499178253]
+layout_mode = 0
+offset_left = 223.99997
+offset_top = 367.0
+offset_right = 900.0
+offset_bottom = 472.0
+scale = Vector2(0.9906173, 0.54301226)
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 100
+text = "Healing"
+horizontal_alignment = 1
