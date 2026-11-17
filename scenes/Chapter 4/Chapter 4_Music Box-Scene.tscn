@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dc7ya8xyfdjxi"]
+
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_b28ub"]
+[ext_resource type="Script" uid="uid://cae6ntmq4gwqm" path="res://script/chapter_4_music_box_scene.gd" id="1_r7jrx"]
+[ext_resource type="Texture2D" uid="uid://b8ckigfmif77i" path="res://assets/Illustrations/Hospital with Objects.png" id="2_2vbxb"]
+[ext_resource type="AudioStream" uid="uid://jhrr5iuq1ofh" path="res://assets/music/music box.mp3" id="2_35oaj"]
+
+[node name="Main" type="Control" unique_id=363789263]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r7jrx")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1864226872]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_2vbxb")
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_b28ub")]
+layout_mode = 1
+
+[node name="MusicBox" type="AudioStreamPlayer" parent="." unique_id=166226538]
+stream = ExtResource("2_35oaj")

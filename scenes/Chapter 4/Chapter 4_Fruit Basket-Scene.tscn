@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c2rxwv77eykib"]
+
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_hkhlj"]
+[ext_resource type="Script" uid="uid://d2koifp7uc3hs" path="res://script/chapter_4_fruit_basket_scene.gd" id="1_r3njf"]
+[ext_resource type="Texture2D" uid="uid://b8ckigfmif77i" path="res://assets/Illustrations/Hospital with Objects.png" id="2_tlbgc"]
+
+[node name="Control" type="Control" unique_id=349569227]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r3njf")
+
+[node name="Background" type="TextureRect" parent="." unique_id=732923483]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_tlbgc")
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_hkhlj")]
+layout_mode = 1

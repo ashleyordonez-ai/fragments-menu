@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://vpjbxgo8etnh"]
+
+[ext_resource type="Texture2D" uid="uid://b8ckigfmif77i" path="res://assets/Illustrations/Hospital with Objects.png" id="1_01kbn"]
+[ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="2_01kbn"]
+[ext_resource type="Texture2D" uid="uid://dk7jnxpd1gbia" path="res://assets/Illustrations/FRUIT BOWL.png" id="3_1agdl"]
+[ext_resource type="PackedScene" uid="uid://c2rxwv77eykib" path="res://scenes/Chapter 4/Chapter 4_Fruit Basket-Scene.tscn" id="4_1agdl"]
+[ext_resource type="Texture2D" uid="uid://dtxb3fn2c6d0i" path="res://assets/Illustrations/MUSIC BOX.png" id="5_golhw"]
+[ext_resource type="PackedScene" uid="uid://dc7ya8xyfdjxi" path="res://scenes/Chapter 4/Chapter 4_Music Box-Scene.tscn" id="6_vs2ii"]
+
+[node name="Node2D" type="Node2D" unique_id=1557215656]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1968986201]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_01kbn")
+
+[node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("2_01kbn")]
+position = Vector2(434, -73)
+object_texture = ExtResource("3_1agdl")
+interaction_scene = ExtResource("4_1agdl")
+
+[node name="InteractableObject2" parent="." unique_id=117444037 instance=ExtResource("2_01kbn")]
+position = Vector2(521, -59)
+object_texture = ExtResource("5_golhw")
+interaction_scene = ExtResource("6_vs2ii")

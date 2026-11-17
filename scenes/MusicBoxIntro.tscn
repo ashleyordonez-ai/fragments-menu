@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dyfh4a4j6rxi1" path="res://scenes/gear_2.gd" id="5_62qms"]
 [ext_resource type="Script" uid="uid://dneqoyur1hnix" path="res://scenes/gear_3.gd" id="5_e3slv"]
 [ext_resource type="Texture2D" uid="uid://ch2xw4i7ymd2c" path="res://assets/png/musicboxasset.png" id="8_107pm"]
+[ext_resource type="AudioStream" uid="uid://5d52ywntp1ft" path="res://assets/music/Bundle of Joy.mp3" id="12_x2ajv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jre5i"]
 shader = ExtResource("3_hfw1t")
@@ -230,3 +231,7 @@ offset_bottom = 453.8783
 theme_override_fonts/font = ExtResource("3_fplff")
 theme_override_font_sizes/font_size = 18
 text = "CONTINUE "
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1088062296]
+stream = ExtResource("12_x2ajv")
+autoplay = true

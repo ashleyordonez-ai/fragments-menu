@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://duia33r7bfbd3"]
 
-[ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_gdtbn"]
+[ext_resource type="Script" uid="uid://cwrwvnbhfijan" path="res://script/chapter_4_screen.gd" id="1_1l146"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_bdcu2"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_6ujdm"]
+[ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="4_ce5cq"]
 
 [node name="Control" type="Control" unique_id=1299854961]
 layout_mode = 3
@@ -11,9 +12,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_gdtbn")
-metadata/_edit_vertical_guides_ = [-38.0]
-metadata/_edit_horizontal_guides_ = [727.0]
+script = ExtResource("1_1l146")
+metadata/_edit_vertical_guides_ = [577.0]
+metadata/_edit_horizontal_guides_ = [326.0]
 
 [node name="background" type="TextureRect" parent="." unique_id=2132083076]
 layout_mode = 1
@@ -25,14 +26,38 @@ grow_vertical = 2
 texture = ExtResource("2_bdcu2")
 expand_mode = 1
 
-[node name="chap1" type="Label" parent="." unique_id=1683196603]
+[node name="chap4" type="Label" parent="." unique_id=955794637]
 layout_mode = 0
-offset_left = 198.0
-offset_top = 306.00003
-offset_right = 1078.0
-offset_bottom = 504.00003
-scale = Vector2(0.86760676, 0.39381862)
-theme_override_colors/font_color = Color(0.7501647, 0.6424119, 0.92748904, 1)
+offset_left = 116.0
+offset_top = 182.0
+offset_right = 1038.0
+offset_bottom = 382.0
 theme_override_fonts/font = ExtResource("3_6ujdm")
-theme_override_font_sizes/font_size = 197
-text = "CHAPTER FOUR"
+theme_override_font_sizes/font_size = 200
+text = "CHAPTER FOUR:"
+
+[node name="Subtitle" type="Label" parent="." unique_id=219015654]
+layout_mode = 0
+offset_left = 467.0
+offset_top = 365.0
+offset_right = 687.0
+offset_bottom = 465.0
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 100
+text = "Healing"
+
+[node name="ContinueButton" type="Button" parent="." unique_id=79442481]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 504.0
+offset_right = 618.0
+offset_bottom = 537.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_6ujdm")
+theme_override_font_sizes/font_size = 25
+text = "continue"
+flat = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1977433787]
+stream = ExtResource("4_ce5cq")
+autoplay = true

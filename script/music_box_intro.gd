@@ -1,3 +1,4 @@
+
 extends Control
 
 
@@ -28,6 +29,13 @@ extends Control
 
 @onready var missing_gear_glow: Control = \
 	$MissingGearLayer/MissingGearGlow
+
+
+# =========================================================
+# NEXT SCENE
+# =========================================================
+
+const NEXT_SCENE_PATH := "res://scenes/Chapter 4/Chapter 4_Music Box-Scene.tscn"
 
 
 # =========================================================
@@ -86,6 +94,7 @@ const BUTTON_PRESSED_TEXT_COLOR := Color("#D8C4A3")
 
 var second_panel_glow: Panel
 var sequence_running := false
+var transition_started := false
 
 
 # =========================================================
@@ -593,11 +602,31 @@ func type_instruction_text() -> void:
 
 
 # =========================================================
-# CONTINUE BUTTON — TEST ONLY
+# CONTINUE BUTTON — LOAD NEXT SCENE
 # =========================================================
 
 func _on_continue_button_pressed() -> void:
 
-	print(
-		"Continue button pressed — hospital transition not connected yet."
-	)
+	# Prevent multiple clicks.
+	if transition_started:
+		return
+
+	transition_started = true
+	continue_button.disabled = true
+
+	print("Continue button pressed — loading Chapter 4 Music Box Scene.")
+
+	# Check whether the scene exists.
+	if ResourceLoader.exists(NEXT_SCENE_PATH):
+
+		var result := get_tree().change_scene_to_file(NEXT_SCENE_PATH)
+
+		if result != OK:
+			push_error("Failed to load the next scene: " + NEXT_SCENE_PATH)
+			continue_button.disabled = false
+			transition_started = false
+
+	else:
+		push_error("Scene file not found: " + NEXT_SCENE_PATH)
+		continue_button.disabled = false
+		transition_started = false

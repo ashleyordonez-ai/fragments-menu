@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://6ijok6b5q7md" path="res://assets/png/gears_blurred.jpg" id="1_uklcv"]
 [ext_resource type="Texture2D" uid="uid://ch2xw4i7ymd2c" path="res://assets/png/musicboxasset.png" id="2_jllwx"]
 [ext_resource type="FontFile" uid="uid://b7xkepavbojyi" path="res://assets/fonts/Old Typewriter2.0.ttf" id="3_qhu0m"]
+[ext_resource type="AudioStream" uid="uid://5d52ywntp1ft" path="res://assets/music/Bundle of Joy.mp3" id="5_qhu0m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("2_jllwx")
@@ -17,7 +18,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jllwx")
-gameplay_scene_path = "uid://ck2g7wp5psm6e"
 
 [node name="background" type="TextureRect" parent="." unique_id=1235039625]
 layout_mode = 1
@@ -63,3 +63,7 @@ theme_override_font_sizes/font_size = 18
 text = "Discover what's missing from the music box and bring its melody back to life."
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=324135720]
+stream = ExtResource("5_qhu0m")
+autoplay = true
