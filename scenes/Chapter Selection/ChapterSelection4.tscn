@@ -218,3 +218,4 @@ text = "CHOOSE YOUR CHAPTER"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1723574109]
 stream = ExtResource("9_iaufc")
+autoplay = true
