@@ -1,6 +1,10 @@
 
 extends Control
 
+# =====================================
+# NODE REFERENCES
+# =====================================
+
 @onready var background: TextureRect = $Background
 @onready var dialogue_box = $DialogueBox
 
@@ -19,11 +23,11 @@ extends Control
 
 var dialogues = [
 
-	# DIALOGUE 1
+	# DIALOGUE 1 - LEONORE
 	{
 		"character": "Leonore",
-		"text": "Dear diary, I'm really, really glad someone approached me. 
-		Her name is Sheena. She said that I looked lonely so she wanted to be 
+		"text": "Dear diary, I'm really, really glad someone approached me. Her 
+		name is Sheena. She said that I looked lonely so she wanted to be 
 		with me. She also had a friend named Max with her earlier. 
 		He was really shy…",
 		"expression": "default",
@@ -31,50 +35,94 @@ var dialogues = [
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
 
+	# DIALOGUE 2 - LEONORE
 	{
 		"character": "Leonore",
-		"text": "Hi diary. Today, Sheena and I went to the school cafeteria 
-		together. We ate and talked about A LOT of things. I feel so light when 
-		I'm with her, she's my twin! I really enjoyed her company, I hope we 
-		can be friends forever. I'm so happy with her!",
+		"text": "Hi diary. Today, Sheena and I went to the school 
+		cafeteria together. We ate and talked about A LOT of things. 
+		I feel so light when I'm with her, she's my twin! I really enjoyed 
+		her company, I hope we can be friends forever. I'm so happy with her!",
 		"expression": "default",
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Leonore's Room - DAY (Dialogue BG).png"
 	},
-	
+
+	# DIALOGUE 3 - SHEENA
 	{
-		"character": "Arthur",
-		"text": "Shut up! If it weren't for you, Teresa would be here beside me! 
-		We would be happy, just the two of us. ",
-		"expression": "angry",
+		"character": "Sheena",
+		"text": "Leonore! Come here, let's go and eat our lunch!",
+		"expression": "happy",
 		"position": "left",
-		"background": "res://assets/Illustrations/Dialogue Backgrounds/Living Room.png"
-	},
-	
-	{
-		"character": "Leonore",
-		"text": "Please don't leave me… Dad… Please.",
-		"expression": "crying",
-		"position": "left",
-		"background": "res://assets/Illustrations/Dialogue Backgrounds/Living Room.png"
-	},
-	
-	{
-		"character": "Leonore",
-		"text": "Huh? What was that?",
-		"expression": "default",
-		"position": "left",
-		"background": "res://assets/Illustrations/Dialogue Backgrounds/Attic-Dialogue BG.png"
-	},
-	
-	{
-		"character": "Leonore",
-		"text": "Nevermind. I'll just explore this room more.",
-		"expression": "default",
-		"position": "left",
-		"background": "res://assets/Illustrations/Dialogue Backgrounds/Attic-Dialogue BG.png"
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
 	},
 
+	# DIALOGUE 4 - MAX
+	{
+		"character": "Max",
+		"text": "H-hey, Leonore… I'm Max. Um… I guess I'll be joining 
+		you for lunch today. Hehe…",
+		"expression": "smiling",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 5 - SHEENA
+	{
+		"character": "Sheena",
+		"text": "Leonore, I'm sorry, but something urgent came up. 
+		Max will stay here and keep you company, okay? I have to go now. Bye!",
+		"expression": "smiling",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 6 - MAX
+	{
+		"character": "Max",
+		"text": "So do you have plans after class?",
+		"expression": "blushing",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 7 - LEONORE
+	{
+		"character": "Leonore",
+		"text": "Uhh, yes, the usual. Lock myself in my bedroom, read, 
+		do my assignments, sleep, repeat.",
+		"expression": "shy",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 8 - MAX
+	{
+		"character": "Max",
+		"text": "Aw, you don't have to do that anymore. I'm– I mean we're 
+		here to add some thrill to your life. Just call us whenever 
+		you want to go out.",
+		"expression": "smiling",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 9 - LEONORE
+	{
+		"character": "Leonore",
+		"text": "Are you sure?",
+		"expression": "shy",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	},
+
+	# DIALOGUE 10 - MAX
+	{
+		"character": "Max",
+		"text": "Yup. I really want to spend more time with you, you know.",
+		"expression": "blushing",
+		"position": "left",
+		"background": "res://assets/Illustrations/Dialogue Backgrounds/Canteen-Dialogue BG.png"
+	}
 ]
 
 
@@ -92,10 +140,6 @@ var dialogue_index: int = 0
 func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
-	print("Background: ", background)
-	print("DialogueBox: ", dialogue_box)
-	print("NextButton: ", next_button)
-	print("SkipButton: ", skip_button)
 
 	if background == null:
 		push_error("Background node could not be found!")
@@ -131,7 +175,6 @@ func show_current_dialogue() -> void:
 	if dialogue_index >= dialogues.size():
 
 		print("ALL DIALOGUES COMPLETED")
-
 		go_to_map()
 		return
 
@@ -140,17 +183,19 @@ func show_current_dialogue() -> void:
 	var character: String = current.get("character", "")
 	var dialogue_text: String = current.get("text", "")
 	var expression: String = current.get("expression", "")
-	var position: String = current.get("position", "")
+	var position: String = "left"
 	var background_path: String = current.get("background", "")
 
-	print("SHOWING DIALOGUE: ", dialogue_text)
-	print("CHARACTER: ", character if character != "" else "HIDDEN / UNKNOWN")
+	print("--------------------------------")
+	print("DIALOGUE NUMBER: ", dialogue_index + 1)
+	print("CHARACTER: ", character)
+	print("EXPRESSION: ", expression)
+	print("POSITION: ", position)
 
 	# CHANGE BACKGROUND
 	change_background(background_path)
 
-	# DISPLAY DIALOGUE
-	# Empty character names are intentionally preserved.
+	# DISPLAY DIALOGUE AND CHARACTER
 	dialogue_box.show_dialogue(
 		character,
 		dialogue_text,
@@ -167,7 +212,6 @@ func show_current_dialogue() -> void:
 func show_next_dialogue() -> void:
 
 	dialogue_index += 1
-
 	show_current_dialogue()
 
 
@@ -178,18 +222,17 @@ func show_next_dialogue() -> void:
 func skip_dialogue() -> void:
 
 	print("DIALOGUE SKIPPED")
-
 	go_to_map()
 
 
 # =====================================
-# GO TO MAP SCENE
+# GO TO NEXT SCENE
 # =====================================
 
 func go_to_map() -> void:
 
 	get_tree().change_scene_to_file(
-		"res://scenes/Maps/Chapter 2_Attic.tscn"
+		"res://scenes/Chapter 2/Chapter 2_Diary-Flashback-Part 2.tscn"
 	)
 
 

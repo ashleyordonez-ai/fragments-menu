@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dqmhqhi8sth8m"]
 
-[ext_resource type="Script" uid="uid://b8gha7wnwmmqc" path="res://scenes/chapter_1_screen.gd" id="1_nmy8n"]
+[ext_resource type="Script" uid="uid://cd5651vi512hu" path="res://script/chapter_3_screen.gd" id="1_nmy8n"]
 [ext_resource type="Texture2D" uid="uid://br5mj80ogh3qj" path="res://assets/png/room_blurred.png" id="2_h6610"]
 [ext_resource type="FontFile" uid="uid://co87bv8wdefxi" path="res://assets/fonts/ArexaDemo-Regular.otf" id="3_0n5k5"]
 
@@ -12,8 +12,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_nmy8n")
-metadata/_edit_vertical_guides_ = [-38.0]
-metadata/_edit_horizontal_guides_ = [727.0]
+metadata/_edit_vertical_guides_ = [575.0]
+metadata/_edit_horizontal_guides_ = [727.0, 323.0]
 
 [node name="background" type="TextureRect" parent="." unique_id=2132083076]
 layout_mode = 1
@@ -25,14 +25,36 @@ grow_vertical = 2
 texture = ExtResource("2_h6610")
 expand_mode = 1
 
-[node name="chap1" type="Label" parent="." unique_id=1683196603]
+[node name="chap3" type="Label" parent="." unique_id=2061875958]
 layout_mode = 0
-offset_left = 149.0
-offset_top = 306.00003
-offset_right = 1127.0
-offset_bottom = 504.00003
-scale = Vector2(0.86760676, 0.39381862)
-theme_override_colors/font_color = Color(0.7501647, 0.6424119, 0.92748904, 1)
+offset_left = 57.0
+offset_top = 182.0
+offset_right = 1094.0
+offset_bottom = 386.0
 theme_override_fonts/font = ExtResource("3_0n5k5")
-theme_override_font_sizes/font_size = 197
-text = "CHAPTER THREE"
+theme_override_font_sizes/font_size = 200
+text = "CHAPTER THREE:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Subtitle" type="Label" parent="." unique_id=1509349141]
+layout_mode = 0
+offset_left = 399.0
+offset_top = 365.0
+offset_right = 748.0
+offset_bottom = 465.0
+theme_override_fonts/font = ExtResource("3_0n5k5")
+theme_override_font_sizes/font_size = 100
+text = "Connection"
+
+[node name="ContinueButton" type="Button" parent="." unique_id=1513054615]
+layout_mode = 0
+offset_left = 537.0
+offset_top = 504.0
+offset_right = 614.0
+offset_bottom = 537.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_0n5k5")
+theme_override_font_sizes/font_size = 25
+text = "continue"
+flat = true

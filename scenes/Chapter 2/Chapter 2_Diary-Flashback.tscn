@@ -23,6 +23,6 @@ layout_mode = 1
 
 [node name="SFX" type="AudioStreamPlayer" parent="." unique_id=880839982]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=918304809]
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=918304809]
 stream = ExtResource("3_raipt")
 autoplay = true

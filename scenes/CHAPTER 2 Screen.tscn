@@ -28,13 +28,13 @@ expand_mode = 1
 
 [node name="chap2" type="Label" parent="." unique_id=1692259409]
 layout_mode = 0
-offset_left = 117.0
+offset_left = 105.0
 offset_top = 182.0
-offset_right = 1034.0
+offset_right = 1050.0
 offset_bottom = 386.0
 theme_override_fonts/font = ExtResource("3_q23n0")
 theme_override_font_sizes/font_size = 203
-text = "CHAPTER TWO"
+text = "CHAPTER TWO:"
 
 [node name="Subtitle" type="Label" parent="." unique_id=235752892]
 layout_mode = 0
