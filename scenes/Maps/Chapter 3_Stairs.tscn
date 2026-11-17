@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="3_y0rxn"]
 [ext_resource type="Texture2D" uid="uid://cdgkf4408y36w" path="res://assets/maps/Map 3 - Strairs/PIC FRAME.png" id="4_75h57"]
 [ext_resource type="PackedScene" uid="uid://phbjonen8fvq" path="res://scene/FramePuzzle.tscn" id="5_75h57"]
+[ext_resource type="AudioStream" uid="uid://f05es1lo22mq" path="res://assets/music/sad music.mp3" id="6_si8e3"]
 
 [node name="Map 3" type="Node2D" unique_id=1560438035]
 
@@ -35,5 +36,9 @@ position = Vector2(329, 339)
 
 [node name="CollisionShape2D" parent="InteractableObject/InteractionRange" parent_id_path=PackedInt32Array(1942715826, 846547108) index="0" unique_id=957297124]
 position = Vector2(330, 340)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=963683973]
+stream = ExtResource("6_si8e3")
+autoplay = true
 
 [editable path="InteractableObject"]
