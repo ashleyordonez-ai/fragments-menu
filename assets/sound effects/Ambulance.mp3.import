@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b5fijgj7f8wdr"
+path="res://.godot/imported/Ambulance.mp3-289224a90237279d469f5cbcf3aafb79.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/Ambulance.mp3"
+dest_files=["res://.godot/imported/Ambulance.mp3-289224a90237279d469f5cbcf3aafb79.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

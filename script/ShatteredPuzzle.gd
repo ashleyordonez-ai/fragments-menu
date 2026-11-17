@@ -1,9 +1,16 @@
+
 extends Control
 
 @export var portrait_path: NodePath = "../PortraitPicture"
 
 const COLUMNS := 4
 const ROWS := 4
+
+# =====================================
+# NEXT SCENE
+# =====================================
+
+const NEXT_SCENE := "res://scenes/Chapter 3/Chapter 3_Present-Scene.tscn"
 
 # How visibly separated the pieces should look
 const OFFSET_AMOUNT := 18.0
@@ -24,6 +31,9 @@ var can_drag: bool = false
 var piece_correct_positions: Dictionary = {}
 var locked_pieces: Array[Node2D] = []
 
+# Prevent multiple completion transitions
+var puzzle_completed: bool = false
+
 var completion_glow_tween: Tween
 
 @export var dialogue_delay: float = 2.5
@@ -36,11 +46,17 @@ var completion_glow_tween: Tween
 # SANITY UI
 @onready var sanity_ui: Control = $"../SanityUI"
 
+
+# =====================================
+# INITIALIZE
+# =====================================
+
 func _ready() -> void:
+
 	rng.randomize()
 	create_shattered_picture()
 
-	# Keep the sanity bar hidden until the player starts building.
+	# Keep sanity bar hidden until player starts building
 	sanity_ui.hide()
 
 	if dialogue_panel == null:
@@ -51,7 +67,7 @@ func _ready() -> void:
 		push_error("Cannot find InstructionUI!")
 		return
 
-	# Connect to the GotItButton
+	# Connect GotItButton
 	var got_it_button := instruction_ui.get_node_or_null(
 		"InstructionPanel/GotItButton"
 	) as Button
@@ -60,7 +76,8 @@ func _ready() -> void:
 		push_error("Cannot find GotItButton!")
 		return
 
-	got_it_button.pressed.connect(_on_instruction_dismissed)
+	if not got_it_button.pressed.is_connected(_on_instruction_dismissed):
+		got_it_button.pressed.connect(_on_instruction_dismissed)
 
 	dialogue_panel.hide()
 
@@ -68,8 +85,9 @@ func _ready() -> void:
 
 	await dialogue_panel.play_popup()
 
-	# Make the dialogue panel disappear
+	# Make dialogue panel disappear
 	var fade_tween := create_tween()
+
 	fade_tween.tween_property(
 		dialogue_panel,
 		"modulate:a",
@@ -78,19 +96,25 @@ func _ready() -> void:
 	)
 
 	await fade_tween.finished
+
 	dialogue_panel.hide()
 
-	# Scatter the picture pieces
+	# Scatter picture pieces
 	await scatter_pieces()
 
-	# Give the player time to see the scattered pieces
+	# Give player time to see scattered pieces
 	await get_tree().create_timer(0.4).timeout
 
 	# Show instruction popup
 	instruction_ui.show_instruction()
 
 
+# =====================================
+# CREATE SHATTERED PICTURE
+# =====================================
+
 func create_shattered_picture() -> void:
+
 	portrait = get_node_or_null(portrait_path) as TextureRect
 
 	if portrait == null or portrait.texture == null:
@@ -123,18 +147,22 @@ func create_shattered_picture() -> void:
 
 	for y in range(ROWS + 1):
 		var row_signs := []
+
 		for x in range(COLUMNS):
 			row_signs.append(
 				1.0 if rng.randi_range(0, 1) == 0 else -1.0
 			)
+
 		horizontal_signs.append(row_signs)
 
 	for y in range(ROWS):
 		var row_signs := []
+
 		for x in range(COLUMNS + 1):
 			row_signs.append(
 				1.0 if rng.randi_range(0, 1) == 0 else -1.0
 			)
+
 		vertical_signs.append(row_signs)
 
 	# Generate all 16 pieces
@@ -151,15 +179,21 @@ func create_shattered_picture() -> void:
 				vertical_signs
 			)
 
-	# Hide the original portrait
+	# Hide original portrait
 	portrait.hide()
 
 
+# =====================================
+# GET PORTRAIT REGION TEXTURE
+# =====================================
+
 func get_portrait_region_texture(source_texture: Texture2D) -> Texture2D:
+
 	var image: Image
 
 	# If using AtlasTexture, extract ONLY its selected region
 	if source_texture is AtlasTexture:
+
 		var atlas_texture := source_texture as AtlasTexture
 
 		if atlas_texture.atlas == null:
@@ -175,6 +209,7 @@ func get_portrait_region_texture(source_texture: Texture2D) -> Texture2D:
 		image = atlas_image.get_region(atlas_texture.region)
 
 	else:
+
 		# Support ordinary textures too
 		image = source_texture.get_image()
 
@@ -182,9 +217,12 @@ func get_portrait_region_texture(source_texture: Texture2D) -> Texture2D:
 		push_error("The portrait image is empty!")
 		return null
 
-	# Create a new texture containing only the extracted image
 	return ImageTexture.create_from_image(image)
 
+
+# =====================================
+# CREATE PUZZLE PIECE
+# =====================================
 
 func create_piece(
 	texture: Texture2D,
@@ -249,9 +287,9 @@ func create_piece(
 	var uvs := PackedVector2Array()
 
 	for point in points:
+
 		local_points.append(point - center)
 
-		# Map each point to the extracted portrait texture
 		uvs.append(Vector2(
 			point.x / portrait.size.x * texture_size.x,
 			point.y / portrait.size.y * texture_size.y
@@ -260,7 +298,7 @@ func create_piece(
 	var piece := Node2D.new()
 	piece.name = "Piece_%d_%d" % [x, y]
 
-	# Save the correct position of this piece
+	# Save correct position
 	var correct_position := portrait.position + center
 
 	# Slightly shift and rotate each piece
@@ -287,6 +325,10 @@ func create_piece(
 	piece.add_child(polygon)
 
 
+# =====================================
+# JIGSAW EDGE POINTS
+# =====================================
+
 func edge_points(
 	start: Vector2,
 	finish: Vector2,
@@ -302,10 +344,12 @@ func edge_points(
 	var tab_size := minf(edge_length * 0.20, 17.0)
 
 	for i in range(samples + 1):
+
 		var t := float(i) / samples
 		var point := start.lerp(finish, t)
 
 		if has_tab:
+
 			var profile := pow(sin(PI * t), 2.0)
 			var displacement := sign * tab_size * profile
 
@@ -316,7 +360,12 @@ func edge_points(
 	return result
 
 
+# =====================================
+# SCATTER PUZZLE PIECES
+# =====================================
+
 func scatter_pieces() -> void:
+
 	var pieces := get_children()
 
 	var portrait_rect := Rect2(portrait.position, portrait.size)
@@ -328,11 +377,11 @@ func scatter_pieces() -> void:
 
 	var screen_height: float = get_viewport_rect().size.y
 
-	# Animate all pieces simultaneously
 	var scatter_tween := create_tween()
 	scatter_tween.set_parallel(true)
 
 	for i in range(pieces.size()):
+
 		var piece = pieces[i]
 
 		if not piece is Node2D:
@@ -341,26 +390,27 @@ func scatter_pieces() -> void:
 		var target_position: Vector2
 
 		if i < 14:
-			# 7 pieces on the left, 7 on the right
+
 			var side_index: int = int(i / 2)
 
-			# Spread pieces vertically with gaps
 			var target_y: float = screen_height * (side_index + 1) / 8.0
 
 			if i % 2 == 0:
-				# Left side, outside the frame
+
 				target_position = Vector2(
 					portrait_rect.position.x - piece_width * 1.25,
 					target_y
 				)
+
 			else:
-				# Right side, outside the frame
+
 				target_position = Vector2(
 					portrait_rect.end.x + piece_width * 1.25,
 					target_y
 				)
+
 		else:
-			# Only 2 pieces below the frame
+
 			var bottom_index: int = i - 14
 
 			target_position = Vector2(
@@ -386,47 +436,62 @@ func scatter_pieces() -> void:
 			0.35
 		)
 
-	# Wait until all pieces finish scattering
 	await scatter_tween.finished
 
 
-# Enable dragging after the player clicks Got it!
+# =====================================
+# INSTRUCTION POPUP
+# =====================================
+
 func _on_instruction_dismissed() -> void:
+
 	can_drag = true
 
 
-# Handle mouse input
+# =====================================
+# MOUSE INPUT
+# =====================================
+
 func _input(event: InputEvent) -> void:
-	if not can_drag:
+
+	if not can_drag or puzzle_completed:
 		return
 
 	if event is InputEventMouseButton:
+
 		if event.button_index == MOUSE_BUTTON_LEFT:
+
 			if event.pressed:
 				start_drag()
 			else:
 				stop_drag()
 
 	elif event is InputEventMouseMotion:
+
 		if selected_piece != null:
+
 			selected_piece.global_position = (
 				get_global_mouse_position() + drag_offset
 			)
+
 			get_viewport().set_input_as_handled()
 
 
-# Find and select the clicked puzzle piece
+# =====================================
+# START DRAGGING
+# =====================================
+
 func start_drag() -> void:
+
 	var mouse_position: Vector2 = get_global_mouse_position()
 
-	# Check pieces from front to back
 	for i in range(get_child_count() - 1, -1, -1):
+
 		var piece := get_child(i) as Node2D
 
 		if piece == null:
 			continue
 
-		# Do not select pieces that are already placed
 		if piece in locked_pieces:
 			continue
 
@@ -441,43 +506,56 @@ func start_drag() -> void:
 			local_mouse_position,
 			polygon.polygon
 		):
+
 			selected_piece = piece
 			drag_offset = piece.global_position - mouse_position
 
-			# Show the sanity bar when the player starts building.
+			# Show sanity bar
 			sanity_ui.show()
 
-			# Bring selected piece to the front
 			selected_piece.z_index = 100
 
 			get_viewport().set_input_as_handled()
 			return
 
 
-# Release the selected puzzle piece
+# =====================================
+# STOP DRAGGING
+# =====================================
+
 func stop_drag() -> void:
+
 	if selected_piece == null:
 		return
 
 	var correct_position: Vector2 = piece_correct_positions[selected_piece]
 
 	if selected_piece.position.distance_to(correct_position) <= SNAP_DISTANCE:
+
 		snap_piece_into_place(selected_piece)
+
 	else:
-		# Deduct 5 sanity points for an incorrect placement.
+
+		# Deduct 4 sanity points
 		SanityManager.decrease_sanity(4)
 
 		selected_piece.z_index = 0
 
 	selected_piece = null
+
 	get_viewport().set_input_as_handled()
 
 
-# Snap a piece into its correct position
+# =====================================
+# SNAP PIECE INTO PLACE
+# =====================================
+
 func snap_piece_into_place(piece: Node2D) -> void:
+
 	var correct_position: Vector2 = piece_correct_positions[piece]
 
 	var snap_tween := create_tween()
+
 	snap_tween.tween_property(
 		piece,
 		"position",
@@ -489,14 +567,29 @@ func snap_piece_into_place(piece: Node2D) -> void:
 
 	piece.rotation_degrees = 0
 	piece.z_index = 0
+
 	locked_pieces.append(piece)
 
-	if locked_pieces.size() == COLUMNS * ROWS:
+	print("PUZZLE PIECES COMPLETED: ", locked_pieces.size())
+
+	# CHECK IF ALL 16 PIECES ARE COMPLETED
+	if locked_pieces.size() == COLUMNS * ROWS and not puzzle_completed:
+
+		puzzle_completed = true
+
+		print("PUZZLE SOLVED!")
+
 		play_golden_transition()
 
 
-# Expanding golden light transition
+# =====================================
+# GOLDEN LIGHT TRANSITION
+# =====================================
+
 func play_golden_transition() -> void:
+
+	print("STARTING GOLDEN TRANSITION...")
+
 	var golden := get_parent().get_node_or_null(
 		"GoldenTransition"
 	) as ColorRect
@@ -511,8 +604,14 @@ func play_golden_transition() -> void:
 		push_error("GoldenTransition has no ShaderMaterial!")
 		return
 
-	# Get the portrait's actual screen-space corners
+	# CHECK PORTRAIT
+	if portrait == null:
+		push_error("Portrait node is missing!")
+		return
+
+	# GET PORTRAIT SCREEN POSITION
 	var viewport_size := get_viewport_rect().size
+
 	var portrait_transform := portrait.get_global_transform_with_canvas()
 
 	var top_left := portrait_transform * Vector2.ZERO
@@ -520,7 +619,7 @@ func play_golden_transition() -> void:
 	var bottom_left := portrait_transform * Vector2(0, portrait.size.y)
 	var bottom_right := portrait_transform * portrait.size
 
-	# Convert corner positions into normalized screen coordinates
+	# CONVERT TO NORMALIZED SCREEN COORDINATES
 	shader_material.set_shader_parameter(
 		"corner_top_left",
 		top_left / viewport_size
@@ -546,8 +645,9 @@ func play_golden_transition() -> void:
 		viewport_size.x / viewport_size.y
 	)
 
-	# Start the golden light expansion
+	# START GOLDEN LIGHT ANIMATION
 	shader_material.set_shader_parameter("progress", 0.0)
+
 	golden.visible = true
 
 	var tween := create_tween()
@@ -560,4 +660,31 @@ func play_golden_transition() -> void:
 		5.0
 	)
 
+	# WAIT FOR GOLDEN TRANSITION TO FINISH
 	await tween.finished
+
+	print("GOLDEN TRANSITION COMPLETED!")
+
+	# SMALL DELAY BEFORE SCENE CHANGE
+	await get_tree().create_timer(0.5).timeout
+
+	# CHECK NEXT SCENE
+	if not ResourceLoader.exists(NEXT_SCENE):
+
+		push_error("NEXT SCENE NOT FOUND: " + NEXT_SCENE)
+		return
+
+	# LOAD CHAPTER 3 PRESENT SCENE
+	print("LOADING CHAPTER 3 PRESENT SCENE...")
+
+	var error := get_tree().change_scene_to_file(NEXT_SCENE)
+
+	if error != OK:
+
+		push_error(
+			"FAILED TO LOAD CHAPTER 3 PRESENT SCENE: " + str(error)
+		)
+
+	else:
+
+		print("CHAPTER 3 PRESENT SCENE LOADED SUCCESSFULLY!")

@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://bjm7oes4k67a5" path="res://script/instruction_ui.gd" id="9_i6c4f"]
 [ext_resource type="Shader" uid="uid://db1ginytqvslp" path="res://gdshader/FramePuzzle.gdshader" id="10_4csnn"]
 [ext_resource type="PackedScene" uid="uid://cwg0yv1ousxgb" path="res://scene/sanity.tscn" id="11_5flgc"]
+[ext_resource type="AudioStream" uid="uid://c4rr2wmwb3uup" path="res://assets/music/Tension.mp3" id="12_aanw2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bjqgx"]
 atlas = ExtResource("1_gq0hs")
@@ -212,3 +213,8 @@ offset_top = 100.0
 offset_right = -200.0
 offset_bottom = 100.0
 scale = Vector2(0.41088194, 0.6895525)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1786804214]
+stream = ExtResource("12_aanw2")
+volume_db = -10.865
+autoplay = true

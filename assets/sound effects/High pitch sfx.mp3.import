@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b8e0q2m12cupg"
+path="res://.godot/imported/High pitch sfx.mp3-a5cc3f8f73ae116a3366efc28948c177.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/High pitch sfx.mp3"
+dest_files=["res://.godot/imported/High pitch sfx.mp3-a5cc3f8f73ae116a3366efc28948c177.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

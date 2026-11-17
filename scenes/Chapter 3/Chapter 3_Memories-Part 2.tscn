@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://bcjgbnb22soyj"]
+
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_af367"]
+[ext_resource type="Script" uid="uid://df7806qgxrtb8" path="res://script/chapter_3_memories_part_2.gd" id="1_f3t3h"]
+[ext_resource type="AudioStream" uid="uid://blwyd2iwf1lam" path="res://assets/music/Heartbreak.mp3" id="2_f3t3h"]
+[ext_resource type="AudioStream" uid="uid://bjc4t6b3nonru" path="res://assets/sound effects/Heavy Rain.mp3" id="4_6rsge"]
+[ext_resource type="AudioStream" uid="uid://xe2xbfidk3v4" path="res://assets/sound effects/Crying SFX.mp3" id="5_ar80e"]
+
+[node name="Control" type="Control" unique_id=760271900]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_f3t3h")
+
+[node name="Background" type="TextureRect" parent="." unique_id=73969215]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_af367")]
+layout_mode = 1
+
+[node name="Heartbreak BGM" type="AudioStreamPlayer" parent="." unique_id=1730028697]
+stream = ExtResource("2_f3t3h")
+autoplay = true
+
+[node name="HeavyRainSound" type="AudioStreamPlayer" parent="." unique_id=1126115181]
+stream = ExtResource("4_6rsge")
+volume_db = -0.5
+
+[node name="CryingSound" type="AudioStreamPlayer" parent="." unique_id=384734078]
+stream = ExtResource("5_ar80e")

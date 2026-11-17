@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://p71v83pppjrw"]
+
+[ext_resource type="Script" uid="uid://jh3315qd33li" path="res://script/chapter_3_memories.gd" id="1_bxsk0"]
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="2_btbg8"]
+[ext_resource type="AudioStream" uid="uid://b8e0q2m12cupg" path="res://assets/sound effects/High pitch sfx.mp3" id="3_btbg8"]
+[ext_resource type="AudioStream" uid="uid://dl6ksao22ow2f" path="res://assets/sound effects/heartbeat racing.mp3" id="4_u8e5c"]
+[ext_resource type="AudioStream" uid="uid://wscylmjh71nx" path="res://assets/sound effects/Beating sfx.MP3" id="5_51a8y"]
+[ext_resource type="AudioStream" uid="uid://bmt6ay2vm65h0" path="res://assets/music/Sad-Fam.mp3" id="6_smrmu"]
+
+[node name="Control" type="Control" unique_id=1227944044]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bxsk0")
+
+[node name="Background" type="TextureRect" parent="." unique_id=391423316]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("2_btbg8")]
+layout_mode = 1
+
+[node name="High pitch sfx" type="AudioStreamPlayer" parent="." unique_id=612822010]
+stream = ExtResource("3_btbg8")
+
+[node name="Heartbeat" type="AudioStreamPlayer" parent="." unique_id=218314246]
+stream = ExtResource("4_u8e5c")
+volume_db = 20.0
+autoplay = true
+
+[node name="BeatingSound" type="AudioStreamPlayer" parent="." unique_id=790114945]
+stream = ExtResource("5_51a8y")
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=634471961]
+stream = ExtResource("6_smrmu")
+volume_db = -9.701
+autoplay = true

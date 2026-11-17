@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://ixvedbmub2c"]
+
+[ext_resource type="PackedScene" uid="uid://mbb8jyparyol" path="res://scenes/Dialogue/DialogueBox.tscn" id="1_hpg5b"]
+[ext_resource type="Script" uid="uid://ugbbmi7bxguv" path="res://script/chapter_3_kitchen_scene.gd" id="1_yrkik"]
+[ext_resource type="AudioStream" uid="uid://bmt6ay2vm65h0" path="res://assets/music/Sad-Fam.mp3" id="3_vt34f"]
+[ext_resource type="AudioStream" uid="uid://cgx6yl5ccyfw" path="res://assets/sound effects/Pill bottle sfx.mp3" id="4_vt34f"]
+[ext_resource type="AudioStream" uid="uid://xe2xbfidk3v4" path="res://assets/sound effects/Crying SFX.mp3" id="5_rb0i6"]
+[ext_resource type="AudioStream" uid="uid://b5fijgj7f8wdr" path="res://assets/sound effects/Ambulance.mp3" id="6_m6bvc"]
+
+[node name="Main" type="Control" unique_id=237188476]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yrkik")
+
+[node name="Background" type="TextureRect" parent="." unique_id=364362536]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="DialogueBox" parent="." unique_id=749907097 instance=ExtResource("1_hpg5b")]
+layout_mode = 1
+
+[node name="BGM" type="AudioStreamPlayer" parent="." unique_id=1791201496]
+stream = ExtResource("3_vt34f")
+volume_db = -8.925
+autoplay = true
+
+[node name="PillBottleSound" type="AudioStreamPlayer" parent="." unique_id=1261183752]
+stream = ExtResource("4_vt34f")
+
+[node name="Crying SFX" type="AudioStreamPlayer" parent="." unique_id=828361059]
+stream = ExtResource("5_rb0i6")
+autoplay = true
+
+[node name="AmbulanceSound" type="AudioStreamPlayer" parent="." unique_id=1139492978]
+stream = ExtResource("6_m6bvc")

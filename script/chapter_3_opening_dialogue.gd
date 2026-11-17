@@ -1,10 +1,20 @@
+
 extends Control
+
+# =====================================
+# NODE REFERENCES
+# =====================================
 
 @onready var background: TextureRect = $Background
 @onready var dialogue_box = $DialogueBox
 
-@onready var next_button: Button = dialogue_box.find_child("NextButton", true, false) as Button
-@onready var skip_button: Button = dialogue_box.find_child("SkipButton", true, false) as Button
+@onready var next_button: Button = dialogue_box.find_child(
+	"NextButton", true, false
+) as Button
+
+@onready var skip_button: Button = dialogue_box.find_child(
+	"SkipButton", true, false
+) as Button
 
 
 # =====================================
@@ -12,6 +22,7 @@ extends Control
 # =====================================
 
 var dialogues = [
+
 	{
 		"character": "Leonore",
 		"text": "Huh? What was that? I need to go down.",
@@ -19,7 +30,7 @@ var dialogues = [
 		"position": "left",
 		"background": "res://assets/Illustrations/Dialogue Backgrounds/Stairs-Dialogue BG.png"
 	}
-	
+
 ]
 
 
@@ -37,9 +48,19 @@ var dialogue_index: int = 0
 func _ready() -> void:
 
 	print("MAIN SCENE STARTED")
+
+	print("Background: ", background)
 	print("DialogueBox: ", dialogue_box)
 	print("NextButton: ", next_button)
 	print("SkipButton: ", skip_button)
+
+	if background == null:
+		push_error("Background node could not be found!")
+		return
+
+	if dialogue_box == null:
+		push_error("DialogueBox node could not be found!")
+		return
 
 	if next_button == null:
 		push_error("NextButton could not be found!")
@@ -49,10 +70,17 @@ func _ready() -> void:
 		push_error("SkipButton could not be found!")
 		return
 
-	next_button.pressed.connect(show_next_dialogue)
-	skip_button.pressed.connect(skip_dialogue)
+	# CONNECT NEXT BUTTON
+	if not next_button.pressed.is_connected(show_next_dialogue):
+		next_button.pressed.connect(show_next_dialogue)
 
-	# Display the first dialogue
+	# CONNECT SKIP BUTTON
+	if not skip_button.pressed.is_connected(skip_dialogue):
+		skip_button.pressed.connect(skip_dialogue)
+
+	print("DIALOGUE BUTTONS CONNECTED SUCCESSFULLY!")
+
+	# DISPLAY FIRST DIALOGUE
 	show_current_dialogue()
 
 
@@ -67,13 +95,17 @@ func show_current_dialogue() -> void:
 		print("ALL DIALOGUES COMPLETED")
 
 		go_to_map()
-
 		return
 
 	var current = dialogues[dialogue_index]
 
 	print("SHOWING DIALOGUE: ", current["text"])
 
+	# CHANGE BACKGROUND FIRST
+	change_background(current["background"])
+
+	# DISPLAY CHARACTER AND DIALOGUE
+	# PRESERVE THE ORIGINAL FIVE ARGUMENTS
 	dialogue_box.show_dialogue(
 		current["character"],
 		current["text"],
@@ -106,14 +138,23 @@ func skip_dialogue() -> void:
 
 
 # =====================================
-# GO TO MAP SCENE
+# GO TO CHAPTER 3 STAIRS
 # =====================================
 
 func go_to_map() -> void:
 
-	get_tree().change_scene_to_file(
-		"res://scenes/Maps/Chapter 3_Stairs.tscn"
-	)
+	print("LOADING CHAPTER 3 STAIRS...")
+
+	var next_scene := "res://scenes/Maps/Chapter 3_Stairs.tscn"
+
+	if not ResourceLoader.exists(next_scene):
+		push_error("NEXT SCENE NOT FOUND: " + next_scene)
+		return
+
+	var error := get_tree().change_scene_to_file(next_scene)
+
+	if error != OK:
+		push_error("FAILED TO LOAD CHAPTER 3 STAIRS: " + str(error))
 
 
 # =====================================
@@ -122,9 +163,25 @@ func go_to_map() -> void:
 
 func change_background(path: String) -> void:
 
-	var texture = load(path)
+	print("CHANGING BACKGROUND: ", path)
 
-	if texture:
-		background.texture = texture
-	else:
-		print("Background not found: ", path)
+	# CHECK IF FILE EXISTS
+	if not ResourceLoader.exists(path):
+		push_error("BACKGROUND FILE NOT FOUND: " + path)
+		return
+
+	# LOAD BACKGROUND TEXTURE
+	var texture := load(path) as Texture2D
+
+	if texture == null:
+		push_error("FAILED TO LOAD BACKGROUND TEXTURE: " + path)
+		return
+
+	# ASSIGN BACKGROUND
+	background.texture = texture
+
+	# MAKE SURE BACKGROUND IS VISIBLE
+	background.show()
+
+	print("BACKGROUND LOADED SUCCESSFULLY!")
+	print("BACKGROUND TEXTURE: ", background.texture)

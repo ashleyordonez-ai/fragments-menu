@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cgx6yl5ccyfw"
+path="res://.godot/imported/Pill bottle sfx.mp3-7a628831b621a509d2cb2804e722fcb2.mp3str"
+
+[deps]
+
+source_file="res://assets/sound effects/Pill bottle sfx.mp3"
+dest_files=["res://.godot/imported/Pill bottle sfx.mp3-7a628831b621a509d2cb2804e722fcb2.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
