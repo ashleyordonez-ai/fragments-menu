@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_bwkvv"]
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="3_y0rxn"]
 [ext_resource type="Texture2D" uid="uid://cdgkf4408y36w" path="res://assets/maps/Map 3 - Strairs/PIC FRAME.png" id="4_75h57"]
-[ext_resource type="PackedScene" uid="uid://phbjonen8fvq" path="res://scene/FramePuzzle.tscn" id="5_75h57"]
+[ext_resource type="PackedScene" uid="uid://barmfo2mr518w" path="res://scenes/gameplay_intro/chap3_intro.tscn" id="5_si8e3"]
 [ext_resource type="AudioStream" uid="uid://f05es1lo22mq" path="res://assets/music/sad music.mp3" id="6_si8e3"]
 
 [node name="Map 3" type="Node2D" unique_id=1560438035]
@@ -29,7 +29,7 @@ polygon = PackedVector2Array(1158, 237, 917, 242, 619, 554, 0, 551, 2, 647, 1157
 
 [node name="InteractableObject" parent="." unique_id=1942715826 instance=ExtResource("3_y0rxn")]
 object_texture = ExtResource("4_75h57")
-interaction_scene = ExtResource("5_75h57")
+interaction_scene = ExtResource("5_si8e3")
 
 [node name="CollisionShape2D" parent="InteractableObject" index="2" unique_id=1575614360]
 position = Vector2(329, 339)

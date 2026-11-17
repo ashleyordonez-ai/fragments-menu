@@ -178,7 +178,7 @@ func go_to_map() -> void:
 
 	print("LOADING CHAPTER 4 SCREEN...")
 
-	var next_scene := "res://scenes/MusicBoxIntro.tscn"
+	var next_scene := "res://scenes/gameplay_intro/chap4musicbox_intro.tscn"
 
 	if not ResourceLoader.exists(next_scene):
 		push_error("NEXT SCENE NOT FOUND: " + next_scene)

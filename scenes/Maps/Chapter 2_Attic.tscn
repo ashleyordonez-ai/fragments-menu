@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://4beaovfu0odk" path="res://scenes/Maps/player.tscn" id="2_q385k"]
 [ext_resource type="PackedScene" uid="uid://trtne7lwaifx" path="res://scenes/Maps/interactable_object.tscn" id="3_dyo0i"]
 [ext_resource type="Texture2D" uid="uid://byxgafauv8nb1" path="res://assets/maps/Map 2 - Attic/DIARY.png" id="4_7mh2p"]
-[ext_resource type="PackedScene" uid="uid://7gak6fbmfypr" path="res://scenes/Gameplay/Chap 2_Diary.tscn" id="5_01oj5"]
+[ext_resource type="PackedScene" uid="uid://dfxjkqqgqrvow" path="res://scenes/gameplay_intro/chap2_intro.tscn" id="5_01oj5"]
 [ext_resource type="PackedScene" uid="uid://7h36vux1bruh" path="res://scenes/Chapter 2/Chapter 2_TeddyBear-Flashback.tscn" id="5_dyo0i"]
 [ext_resource type="Texture2D" uid="uid://24518o24qybl" path="res://assets/maps/Map 2 - Attic/TEDDY.png" id="5_j6rvh"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="7_7mh2p"]

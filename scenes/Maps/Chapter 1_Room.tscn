@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://r8eat1j263ld" path="res://assets/maps/Map 1 - Room/F (FRAME).png" id="6_3gyyy"]
 [ext_resource type="PackedScene" uid="uid://cub7nwv2t2vex" path="res://scenes/Chapter 1/Chaper 1_Clock-Flashback.tscn" id="7_511ic"]
 [ext_resource type="PackedScene" uid="uid://cbm8og4cptek6" path="res://scenes/Tutorial/tutorial_popup.tscn" id="8_8dkfe"]
-[ext_resource type="PackedScene" uid="uid://qvc6gsclhe32" path="res://scenes/Gameplay/Chap 1_Flower Frame.tscn" id="9_tcgf0"]
+[ext_resource type="PackedScene" uid="uid://blxg400qhjwoo" path="res://scenes/gameplay_intro/chap1_intro.tscn" id="10_2gbsu"]
 [ext_resource type="PackedScene" uid="uid://37hr6cben6ug" path="res://scenes/Chapter Selection/ChapterSelection2.tscn" id="12_2gbsu"]
 [ext_resource type="AudioStream" uid="uid://ddjd62sp2ug63" path="res://assets/music/atlasaudio-nostalgic-piano-520047.mp3" id="12_bprgf"]
 
@@ -67,7 +67,7 @@ interaction_scene = ExtResource("7_511ic")
 
 [node name="InteractableObject2" parent="." unique_id=1462997316 instance=ExtResource("4_ex3bw")]
 object_texture = ExtResource("6_3gyyy")
-interaction_scene = ExtResource("9_tcgf0")
+interaction_scene = ExtResource("10_2gbsu")
 
 [node name="CollisionShape2D" parent="InteractableObject2" index="2" unique_id=1575614360]
 position = Vector2(705, 284)
